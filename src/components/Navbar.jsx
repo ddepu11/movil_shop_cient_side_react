@@ -7,7 +7,7 @@ import { BiCart } from "react-icons/bi";
 const Navbar = () => {
   return (
     <Wrapper>
-      <div className="nav_top flex">
+      <div className="nav_top flex w-960">
         <div className="contact">
           <ul className="flex">
             <li>
@@ -32,7 +32,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbar">
-        <div className="nav_bottom flex">
+        <div className="nav_bottom flex w-960">
           <Link to="/">
             <img src={logo} alt="" />
           </Link>
@@ -70,8 +70,6 @@ const Wrapper = styled.nav`
   .nav_top {
     justify-content: space-between;
     padding: 30px 5px;
-    max-width: 960px;
-    margin: 0 auto;
 
     ul li span,
     a {
@@ -94,9 +92,7 @@ const Wrapper = styled.nav`
   }
   .nav_bottom {
     justify-content: space-between;
-    padding: 30px 0 100px 0;
-    max-width: 960px;
-    margin: 0 auto;
+    padding: 30px 0 70px 0;
 
     .nav_links {
       width: 40%;

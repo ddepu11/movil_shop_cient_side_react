@@ -8,19 +8,13 @@
 }
 
 .card {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  background-image: linear-gradient(
-    to right top,
-    #8492ed,
-    #c176d8,
-    #ed52a8,
-    #fd3a65,
-    #eb4b12
-  );
-  padding: 10px 25px;
-  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 1px;
+  transition: transform 0.4s ease-in;
 }
-
+.card:hover {
+  transform: translateY(-3px) scale(1.05);
+  cursor: pointer;
+}
 * {
   margin: 0;
   padding: 0;
@@ -55,4 +49,13 @@ input {
 button:focus,
 input:focus {
   outline: 0;
+}
+.w-960 {
+  width: 960px;
+  margin: 0 auto;
+}
+.btn {
+  background-color: #fd3a65;
+  padding: 10px 20px;
+  color: white;
 }
