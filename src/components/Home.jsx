@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import HeroImg from "../assests/home_hero_img.jpg";
-import Product from "./Product";
+import { Product, Services } from "./";
+
 const Home = () => {
   return (
     <Wrapper>
@@ -31,7 +32,7 @@ const Home = () => {
           All Products
         </Link>
       </div>
-      
+      <Services />
     </Wrapper>
   );
 };
