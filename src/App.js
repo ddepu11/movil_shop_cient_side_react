@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar } from "./components";
+import { Navbar, Home } from "./components";
 import styled from "styled-components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -8,13 +8,18 @@ const App = () => {
     <Wrapper>
       <Router>
         <Navbar />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+        </Switch>
       </Router>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 `;
 

@@ -29,18 +29,15 @@
 }
 body {
   min-height: 100vh;
-  background: linear-gradient(to right, #000000, #434343);
-  color: white;
 }
 .container {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
 a {
   display: inline-block;
   text-decoration: none;
-  color: white;
 }
 ul {
   list-style-type: none;
