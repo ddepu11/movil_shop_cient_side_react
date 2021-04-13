@@ -38,17 +38,19 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="f_lover flex">
-        <div className="left">
-          <p>
-            &copy;{new Date().getFullYear()} MovilShop LTD - Proud Supporter of
-            Humenkindness{" "}
-          </p>
-        </div>
-        <div className="right">
-          <span>Terms</span>
-          <span>Privacy</span>
-          <span>Security</span>
+      <div className="fotter_fw">
+        <div className="f_lover flex">
+          <div className="left">
+            <p>
+              &copy;{new Date().getFullYear()} MovilShop LTD - Proud Supporter
+              of Humenkindness{" "}
+            </p>
+          </div>
+          <div className="right">
+            <span>Terms</span>
+            <span>Privacy</span>
+            <span>Security</span>
+          </div>
         </div>
       </div>
     </Wrapper>
@@ -57,11 +59,13 @@ const Footer = () => {
 
 const Wrapper = styled.footer`
   background-color: #c7c7c7;
-  padding: 50px 60px;
+  padding: 00px 0px;
   .f_upper {
     justify-content: space-around;
     width: 1200px;
     margin: auto;
+    padding: 50px 0px;
+
     .left {
       width: 60%;
       justify-content: space-between;
@@ -91,6 +95,27 @@ const Wrapper = styled.footer`
         padding: 10px 20px;
         font-size: 1.2em;
         color: #333;
+      }
+    }
+  }
+  .fotter_fw {
+    background-color: #6d6d6d;
+    padding: 20px 0;
+  }
+  .f_lover {
+    justify-content: space-between;
+    width: 1200px;
+    margin: auto;
+    .left {
+      p {
+        font-size: 1.1em;
+        letter-spacing: 1px;
+      }
+    }
+    .right {
+      span {
+        margin-left: 15px;
+        font-size: 1em;
       }
     }
   }
