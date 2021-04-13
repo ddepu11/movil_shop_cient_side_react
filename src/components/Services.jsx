@@ -48,7 +48,7 @@ const Services = () => {
 
 const Wrapper = styled.section`
   text-align: center;
-  padding: 10px;
+  padding: 10px 0 40px;
 
   h1 {
     padding: 10px;
@@ -60,15 +60,15 @@ const Wrapper = styled.section`
   .grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(250px, 250px));
-    gap: 60px;
+    gap: 80px;
   }
 
   .service {
     width: 250px;
     padding: 70px 20px;
     position: relative;
-    border-radius: 10px;
-    background: #80b3ff;
+    border-radius: 5px;
+    background: #c7c7c7;
     .s_logo {
       position: absolute;
       top: -40px;

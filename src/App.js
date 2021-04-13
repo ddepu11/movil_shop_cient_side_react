@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Home } from "./components";
+import { Navbar, Home, Footer } from "./components";
 import styled from "styled-components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -13,6 +13,7 @@ const App = () => {
             <Home />
           </Route>
         </Switch>
+        <Footer />
       </Router>
     </Wrapper>
   );
