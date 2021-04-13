@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Footer = () => {
   return (
     <Wrapper>
-      <div className="f_upper flex ">
+      <div className="f_upper flex">
         <div className="left flex">
           <div className="c">
             <h2>Getting Started</h2>
@@ -35,6 +35,20 @@ const Footer = () => {
           <label htmlFor="news_letter">Join our news letter</label>
           <input type="text" id="news_letter" />
           <button type="btn">Join</button>
+        </div>
+      </div>
+
+      <div className="f_lover flex">
+        <div className="left">
+          <p>
+            &copy;{new Date().getFullYear()} MovilShop LTD - Proud Supporter of
+            Humenkindness{" "}
+          </p>
+        </div>
+        <div className="right">
+          <span>Terms</span>
+          <span>Privacy</span>
+          <span>Security</span>
         </div>
       </div>
     </Wrapper>
