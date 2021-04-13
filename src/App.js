@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Home, Footer } from "./components";
+import { Navbar, Home, Footer, About } from "./components";
 import styled from "styled-components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -11,6 +11,9 @@ const App = () => {
         <Switch>
           <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path="/about">
+            <About />
           </Route>
         </Switch>
         <Footer />

@@ -72,11 +72,11 @@ const Wrapper = styled.footer`
       .c {
         h2 {
           margin-bottom: 14px;
-          color: #333;
+          color: #555;
         }
         h3 {
-          margin-bottom: 5px;
-          color: #111;
+          margin-bottom: 8px;
+          color: #333;
         }
       }
     }
@@ -110,6 +110,7 @@ const Wrapper = styled.footer`
       p {
         font-size: 1.1em;
         letter-spacing: 1px;
+        color: #111;
       }
     }
     .right {

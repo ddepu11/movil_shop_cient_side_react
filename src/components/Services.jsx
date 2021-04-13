@@ -86,6 +86,10 @@ const Wrapper = styled.section`
       font-size: 1.5em;
       letter-spacing: 2px;
       margin-bottom: 10px;
+      color: #222;
+    }
+    p {
+      color: #444;
     }
   }
 `;
