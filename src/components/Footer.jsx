@@ -77,6 +77,7 @@ const Wrapper = styled.footer`
         h3 {
           margin-bottom: 8px;
           color: #333;
+          font-weight: 500;
         }
       }
     }
@@ -99,18 +100,18 @@ const Wrapper = styled.footer`
     }
   }
   .fotter_fw {
-    background-color: #6d6d6d;
+    background-color: #555;
     padding: 20px 0;
   }
   .f_lover {
     justify-content: space-between;
     width: 1200px;
     margin: auto;
+    color: white;
     .left {
       p {
         font-size: 1.1em;
         letter-spacing: 1px;
-        color: #111;
       }
     }
     .right {

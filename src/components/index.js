@@ -5,5 +5,6 @@ import Products from "./Products";
 import Product from "./Product";
 import Services from "./Services";
 import Footer from "./Footer";
+import Hero from "./Hero";
 
-export { Navbar, Home, About, Products, Product, Services, Footer };
+export { Navbar, Home, About, Products, Product, Services, Footer, Hero };

@@ -1,86 +1,92 @@
 import React from "react";
 import styled from "styled-components";
+import { Hero } from ".";
 
 const About = () => {
   return (
-    <Wrapper>
-      <h2>About Us</h2>
-      <p>Lorem ipsum dolor sit amet.</p>
-      <div className="vision flex">
-        <div className="left">
-          <h1>Our Vision</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Consectetur, dignissimos sunt est fugit dolor in sequi, doloribus
-            illo omnis molestias impedit incidunt inventore quos dolores officia
-            ea recusandae possimus repudiandae laudantium. Sed culpa porro earum
-          </p>
-          <p>
-            beatae magni reprehenderit at quia, aliquid earum amet. Rem quas
-            officiis fugiat et possimus illo sed suscipit aperiam ipsum officia
-            praesentium quibusdam accusantium, blanditiis nam repellendus
-          </p>
-          <p>
-            beatae magni reprehenderit at quia, aliquid earum amet. Rem quas
-            praesentium quibusdam accusantium, blanditiis nam repellendus sint
-            doloremque.
-          </p>
+    <>
+      <Hero title="about" />
+      <Wrapper>
+        <h2>About Us</h2>
+        <p>Lorem ipsum dolor sit amet.</p>
+        <div className="vision flex">
+          <div className="left">
+            <h1>Our Vision</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Consectetur, dignissimos sunt est fugit dolor in sequi, doloribus
+              illo omnis molestias impedit incidunt inventore quos dolores
+              officia ea recusandae possimus repudiandae laudantium. Sed culpa
+              porro earum
+            </p>
+            <p>
+              beatae magni reprehenderit at quia, aliquid earum amet. Rem quas
+              officiis fugiat et possimus illo sed suscipit aperiam ipsum
+              officia praesentium quibusdam accusantium, blanditiis nam
+              repellendus
+            </p>
+            <p>
+              beatae magni reprehenderit at quia, aliquid earum amet. Rem quas
+              praesentium quibusdam accusantium, blanditiis nam repellendus sint
+              doloremque.
+            </p>
+          </div>
+          <img
+            src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1093&q=80"
+            alt=""
+          />
         </div>
-        <img
-          src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1093&q=80"
-          alt=""
-        />
-      </div>
-      <div className="approach flex">
-        <img
-          src="https://images.unsplash.com/photo-1580783226135-9cbcae976a18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-          alt=""
-        />
-        <div className="right">
-          <h1>Our Approach</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Consectetur, dignissimos sunt est fugit dolor in sequi, doloribus
-          </p>
-          <p>
-            beatae magni reprehenderit at quia, aliquid earum amet. Rem quas
-            officiis fugiat et possimus illo sed suscipit aperiam ipsum officia
-            officiis fugiat et possimus illo sed suscipit aperiam ipsum officia
-            sint doloremque.
-          </p>
-          <p>
-            beatae magni reprehenderit at quia, aliquid earum amet. Rem quas
-            delectus omnis, asperiores nulla tempora? Dolor sit perspiciatis
-            sint doloremque.
-          </p>
+        <div className="approach flex">
+          <img
+            src="https://images.unsplash.com/photo-1580783226135-9cbcae976a18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+            alt=""
+          />
+          <div className="right">
+            <h1>Our Approach</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Consectetur, dignissimos sunt est fugit dolor in sequi, doloribus
+            </p>
+            <p>
+              beatae magni reprehenderit at quia, aliquid earum amet. Rem quas
+              officiis fugiat et possimus illo sed suscipit aperiam ipsum
+              officia officiis fugiat et possimus illo sed suscipit aperiam
+              ipsum officia sint doloremque.
+            </p>
+            <p>
+              beatae magni reprehenderit at quia, aliquid earum amet. Rem quas
+              delectus omnis, asperiores nulla tempora? Dolor sit perspiciatis
+              sint doloremque.
+            </p>
+          </div>
         </div>
-      </div>
-      <div className="vision flex">
-        <div className="left">
-          <h1>Our Process</h1>
-          <p>
-            olestias impedit incidunt inventore quos dolores officia ea
-            recusandae possimus repudiandae laudantium. Sed culpa porro earum
-            consequuntur nesciunt, sapiente ipsam sequi id mollitia veritatis
-          </p>
-          <p>
-            beatae magni reprehenderit at quia, aliquid earum amet. Rem quas
-            officiis fugiat et possimus illo sed suscipit aperiam ipsum officia
-            sint doloremque.
-          </p>
-          <p>
-            beatae magni reprehenderit at quia, aliquid earum amet. Rem quas
-            officiis fugiat et possimus illo sed suscipit aperiam ipsum officia
-            delectus omnis, asperiores nulla tempora? Dolor sit perspiciatis
-            sint doloremque.
-          </p>
+        <div className="vision flex">
+          <div className="left">
+            <h1>Our Process</h1>
+            <p>
+              olestias impedit incidunt inventore quos dolores officia ea
+              recusandae possimus repudiandae laudantium. Sed culpa porro earum
+              consequuntur nesciunt, sapiente ipsam sequi id mollitia veritatis
+            </p>
+            <p>
+              beatae magni reprehenderit at quia, aliquid earum amet. Rem quas
+              officiis fugiat et possimus illo sed suscipit aperiam ipsum
+              officia sint doloremque.
+            </p>
+            <p>
+              beatae magni reprehenderit at quia, aliquid earum amet. Rem quas
+              officiis fugiat et possimus illo sed suscipit aperiam ipsum
+              officia delectus omnis, asperiores nulla tempora? Dolor sit
+              perspiciatis sint doloremque.
+            </p>
+          </div>
+          <img
+            src="https://images.unsplash.com/photo-1587440871875-191322ee64b0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80"
+            alt=""
+          />
         </div>
-        <img
-          src="https://images.unsplash.com/photo-1587440871875-191322ee64b0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80"
-          alt=""
-        />
-      </div>
-    </Wrapper>
+      </Wrapper>
+    </>
   );
 };
 const Wrapper = styled.main`
