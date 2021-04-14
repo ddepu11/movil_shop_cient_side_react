@@ -30,7 +30,8 @@ const Wrapper = styled.div`
   }
 
   img {
-    width: 100%;
+    width: 300px;
+    height: 180px;
     object-fit: cover;
   }
   .info {

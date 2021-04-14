@@ -12,7 +12,7 @@ const Services = () => {
           <div className="s_logo">
             <AiOutlineShoppingCart />
           </div>
-          <h1>Service One</h1>
+          <h1>Fast Delivery</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
             aperiam? Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -23,7 +23,7 @@ const Services = () => {
           <div className="s_logo">
             <AiFillSetting />
           </div>
-          <h1>Service One</h1>
+          <h1>24*7 Customer Support</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
             aperiam? Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -34,7 +34,7 @@ const Services = () => {
           <div className="s_logo">
             <FiRefreshCcw />
           </div>
-          <h1>Service One</h1>
+          <h1>Easy Returns</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
             aperiam? Lorem ipsum dolor sit amet consectetur adipisicing elit.

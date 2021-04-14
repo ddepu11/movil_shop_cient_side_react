@@ -33,7 +33,7 @@ const Footer = () => {
         </div>
         <div className="right">
           <label htmlFor="news_letter">Join our news letter</label>
-          <input type="text" id="news_letter" />
+          <input type="email" id="news_letter" placeholder="Enter your email" />
           <button type="btn">Join</button>
         </div>
       </div>
