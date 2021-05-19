@@ -1,7 +1,7 @@
 import React from "react";
-import style from "styled-components";
+import styled from "styled-components";
 import { Hero } from ".";
-import { FcGoogle } from "react-icons/fc";
+import { AiOutlineGoogle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 const Login = () => {
@@ -11,17 +11,17 @@ const Login = () => {
 
   return (
     <>
-      <Hero title="about" />
-      <Wrapper className="w-960">
+      <Hero title="login" />
+      <Wrapper className="w-960 flex">
         <div>
           <h2>Sign in to Movil Shop</h2>
-          <button>
-            <FcGoogle />
-            Sign in with Google
+          <button className="google-btn flex">
+            <AiOutlineGoogle className="google" />
+            <span>Sign in with Google</span>
           </button>
-          <div className="or">
+          <div className="or flex">
             <div className="left"></div>
-            <span>or</span>
+            <span>Or</span>
             <div className="right"></div>
           </div>
           <form onSubmit={handleSubmit}>
@@ -30,7 +30,7 @@ const Login = () => {
               <input type="email" id="username" />
             </div>
             <div className="form-control">
-              <div className="pwd-label">
+              <div className="pwd-label flex">
                 <label htmlFor="password">Password</label>
                 <Link to="/forget-password">Forget Password?</Link>
               </div>
@@ -44,5 +44,62 @@ const Login = () => {
   );
 };
 
-const Wrapper = style.main``;
+const Wrapper = styled.main`
+  padding: 40px 0;
+  h2 {
+    font-size: 2.2em;
+    padding: 15px 0;
+  }
+  .google-btn {
+    font-size: 1em;
+    background: #3284ff;
+    color: white;
+    padding: 10px 60px 10px 12px;
+    border-radius: 5px;
+    .google {
+      font-size: 1.8em;
+    }
+    span {
+      margin-left: 25px;
+    }
+  }
+  .or {
+    padding: 15px 0;
+    color: #555;
+    justify-content: space-between;
+    .left,
+    .right {
+      height: 1.6px;
+      width: 44%;
+      background-color: #888;
+      border-radius: 5px;
+    }
+  }
+  form {
+    .form-control {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      label {
+        font-size: 1.2em;
+        padding: 8px 0;
+      }
+      input {
+        background: #e2dcdc;
+        padding: 15px 5px;
+        border-radius: 5px;
+      }
+      .pwd-label {
+        justify-content: space-between;
+      }
+    }
+    .sign-in-btn {
+      padding: 10px 40px;
+      font-size: 1.2em;
+      background-color: #222222;
+      color: white;
+      margin-top: 10px;
+    }
+  }
+`;
 export default Login;
