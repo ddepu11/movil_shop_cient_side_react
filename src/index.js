@@ -4,10 +4,18 @@ import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
 import createAStore from "./redux/redux";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 ReactDOM.render(
-  <Provider store={createAStore()}>
-    <App />
-  </Provider>,
+  <Auth0Provider
+    domain={process.env.REACT_APP_AUTH_DOMAIN}
+    clientId={process.env.REACT_APP_CLIENT_ID}
+    redirectUri={window.location.origin}
+  >
+    <Provider store={createAStore()}>
+      <App />
+    </Provider>
+  </Auth0Provider>,
+
   document.getElementById("root")
 );
