@@ -10,8 +10,6 @@ const Navbar = () => {
   const { logout } = useAuth0();
   const { hasUserLoggedIn } = useSelector((state) => state.user);
 
-  console.log(hasUserLoggedIn);
-
   return (
     <Wrapper>
       <div className="nav_top flex w-960">
@@ -33,11 +31,7 @@ const Navbar = () => {
             </li>
             <li>
               {hasUserLoggedIn ? (
-                <button
-                  onClick={() => logout({ returnTo: window.location.origin })}
-                >
-                  Log Out
-                </button>
+                <button onClick={() => logout()}>Log Out</button>
               ) : (
                 <Link to="/log-in">LogIn</Link>
               )}
