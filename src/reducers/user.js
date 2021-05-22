@@ -1,12 +1,16 @@
-const initialState = {
-  user: "Deepanshu",
+import { SET_LOADING } from "../actions/constant";
+
+const initialUser = {
+  hasUserLoggedIn: false,
 };
 
-const user = (state = initialState, action) => {
+export default (user = initialUser, action) => {
   switch (action.type) {
+    case SET_LOADING:
+      return {
+        ...user,
+      };
     default:
-      return state;
+      return user;
   }
 };
-
-export default user;
