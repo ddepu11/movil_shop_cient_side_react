@@ -3,8 +3,12 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import HeroImg from "../assests/home_hero_img.jpg";
 import { Product, Services } from "./";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch } from "react-redux";
 
 const Home = () => {
+  const { user, isAuthenticated, isLoading } = useAuth0();
+
   return (
     <Wrapper>
       <div className="hero">

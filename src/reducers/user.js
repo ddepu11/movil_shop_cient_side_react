@@ -1,7 +1,9 @@
 import { SET_LOADING } from "../actions/constant";
 
 const initialUser = {
+  userInfo: {},
   hasUserLoggedIn: false,
+  authenticationLoading: false,
 };
 
 export default (user = initialUser, action) => {

@@ -3,8 +3,15 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import logo from "../assests/logo.svg";
 import { BiCart } from "react-icons/bi";
+import { useSelector } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
+  const { logout } = useAuth0();
+  const { hasUserLoggedIn } = useSelector((state) => state.user);
+
+  console.log(hasUserLoggedIn);
+
   return (
     <Wrapper>
       <div className="nav_top flex w-960">
@@ -25,7 +32,16 @@ const Navbar = () => {
               <Link to="/account">Account</Link>
             </li>
             <li>
-              <Link to="/log-in">LogIn</Link>
+              {hasUserLoggedIn ? (
+                <button
+                  onClick={() => logout({ returnTo: window.location.origin })}
+                >
+                  Log Out
+                </button>
+              ) : (
+                <Link to="/log-in">LogIn</Link>
+              )}
+              {/* <Link to="/log-in">LogIn</Link> */}
             </li>
           </ul>
         </div>

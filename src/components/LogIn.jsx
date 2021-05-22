@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Login = () => {
+  const { loginWithRedirect } = useAuth0();
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -16,7 +18,10 @@ const Login = () => {
       <Wrapper className="w-960 flex">
         <div>
           <h2>Sign in to Movil Shop</h2>
-          <button className="google-btn flex">
+          <button
+            onClick={() => loginWithRedirect()}
+            className="google-btn flex"
+          >
             <AiOutlineGoogle className="google" />
             <span>Sign in with Google</span>
           </button>
