@@ -10,16 +10,14 @@ import {
 } from "./components";
 import styled from "styled-components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const App = () => {
-  const { authenticationLoading } = useSelector((state) => state.user);
-
-  console.log(authenticationLoading);
+  const { isLoading } = useAuth0();
 
   return (
     <Wrapper>
-      {authenticationLoading ? (
+      {isLoading ? (
         <Loading />
       ) : (
         <Router>
