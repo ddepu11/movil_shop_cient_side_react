@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import Hero from "./Hero";
 import LogIn from "./LogIn";
 import Loading from "./Loading";
+import SignUp from "./SignUp";
 
 export {
   Navbar,
@@ -20,4 +21,5 @@ export {
   Hero,
   LogIn,
   Loading,
+  SignUp,
 };

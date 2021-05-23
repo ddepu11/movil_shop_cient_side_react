@@ -77,7 +77,7 @@ const Login = () => {
             <span>Or</span>
             <div className="right"></div>
           </div>
-          <Link className="sign-up-btn">
+          <Link className="sign-up-btn" to="/sign-up">
             Don't have an account? Sign Up Now !
           </Link>
         </div>
@@ -148,11 +148,10 @@ const Wrapper = styled.main`
   .sign-up-btn {
     padding: 10px 40px;
     font-size: 1.2em;
-    background-color: #00c040;
-    color: #0c0b0b;
+    background-color: #2a5be2;
+    color: #ffffff;
     margin-top: 12px;
     width: 100%;
-    font-weight: 700;
   }
 `;
 

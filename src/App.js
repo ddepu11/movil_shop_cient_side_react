@@ -7,6 +7,7 @@ import {
   Products,
   LogIn,
   Loading,
+  SignUp,
 } from "./components";
 import styled from "styled-components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -31,6 +32,9 @@ const App = () => {
             </Route>
             <Route exact path="/log-in">
               <LogIn />
+            </Route>
+            <Route exact path="/sign-up">
+              <SignUp />
             </Route>
             <Route exact path="/products">
               <Products />
