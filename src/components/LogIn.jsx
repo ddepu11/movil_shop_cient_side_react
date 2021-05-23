@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Hero } from ".";
 import { AiOutlineGoogle } from "react-icons/ai";
@@ -8,8 +8,18 @@ import { useAuth0 } from "@auth0/auth0-react";
 const Login = () => {
   const { loginWithRedirect } = useAuth0();
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleInput = (e) => {
+    const { value, name } = e.target;
+    name === "email" ? setEmail(value) : setPassword(value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    console.log(email, password);
   };
 
   return (
@@ -33,14 +43,26 @@ const Login = () => {
           <form onSubmit={handleSubmit}>
             <div className="form-control">
               <label htmlFor="username">Email Address</label>
-              <input type="email" id="username" />
+              <input
+                value={email}
+                onChange={handleInput}
+                type="email"
+                name="email"
+                id="username"
+              />
             </div>
             <div className="form-control">
               <div className="pwd-label flex">
                 <label htmlFor="password">Password</label>
                 <Link to="/forget-password">Forget Password?</Link>
               </div>
-              <input type="password" id="password" />
+              <input
+                value={password}
+                onChange={handleInput}
+                type="password"
+                name="password"
+                id="password"
+              />
             </div>
             <button className="sign-in-btn">Sign In</button>
           </form>
@@ -87,13 +109,14 @@ const Wrapper = styled.main`
       flex-direction: column;
       margin-bottom: 20px;
       label {
-        font-size: 1.2em;
+        font-size: 1.3em;
         padding: 8px 0;
       }
       input {
         background: #e2dcdc;
-        padding: 15px 5px;
+        padding: 10px 5px;
         border-radius: 5px;
+        font-size: 1.2em;
       }
       .pwd-label {
         justify-content: space-between;
