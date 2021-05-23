@@ -1,4 +1,4 @@
-import { SET_USER_LOGGED_IN, USER_LOGGED_OUT } from "../actions/constant";
+import { SET_USER_LOGGED_IN } from "../actions/constant";
 
 const initialUser = {
   userInfo: {},
@@ -13,12 +13,7 @@ const user = (user = initialUser, action) => {
         hasUserLoggedIn: true,
         userInfo: action.payload,
       };
-    case USER_LOGGED_OUT:
-      return {
-        ...user,
-        hasUserLoggedIn: false,
-        userInfo: {},
-      };
+
     default:
       return user;
   }

@@ -1,11 +1,7 @@
-import { SET_USER_LOGGED_IN, USER_LOGGED_OUT } from "./constant";
+import { SET_USER_LOGGED_IN } from "./constant";
 
-const userLoggedIn = (user) => (dispatch) => {
+const userAuthLoggedIn = (user) => (dispatch) => {
   dispatch({ type: SET_USER_LOGGED_IN, payload: user });
 };
 
-const userLoggedOut = () => (dispatch) => {
-  dispatch({ type: USER_LOGGED_OUT });
-};
-
-export { userLoggedIn, userLoggedOut };
+export { userAuthLoggedIn };

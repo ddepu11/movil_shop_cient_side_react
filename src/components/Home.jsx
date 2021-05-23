@@ -5,7 +5,7 @@ import HeroImg from "../assests/home_hero_img.jpg";
 import { Product, Services } from "./";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch } from "react-redux";
-import { userLoggedIn } from "../actions/user_actions";
+import { userAuthLoggedIn } from "../actions/user_actions";
 
 const Home = () => {
   const { user, isAuthenticated } = useAuth0();
@@ -14,7 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch(userLoggedIn(user));
+      dispatch(userAuthLoggedIn(user));
     }
   }, [user]);
 
