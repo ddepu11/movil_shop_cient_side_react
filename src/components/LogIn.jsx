@@ -23,6 +23,8 @@ const Login = () => {
     e.preventDefault();
     if (email && password) {
       dispatch(customUserLogin(email, password));
+      setEmail("");
+      setPassword("");
     }
   };
 
