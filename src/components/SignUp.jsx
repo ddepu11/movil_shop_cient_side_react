@@ -43,6 +43,7 @@ const SignUp = () => {
               <input type="password" id="confirm_password" />
             </div>
           </div>
+          <button className="sign-up-btn">Create Account</button>
         </form>
       </Wrapper>
     </>
@@ -78,6 +79,14 @@ const Wrapper = styled.main`
           width: 65%;
         }
       }
+    }
+    .sign-up-btn {
+      padding: 8px 10px;
+      font-size: 1.2em;
+      background-color: #e73306;
+      color: white;
+      margin-top: 12px;
+      width: 30%;
     }
   }
 `;
