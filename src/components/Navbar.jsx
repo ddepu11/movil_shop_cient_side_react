@@ -31,7 +31,9 @@ const Navbar = () => {
             </li>
             <li>
               {hasUserLoggedIn ? (
-                <button onClick={() => logout()}>Log Out</button>
+                <button className="log-out-btn" onClick={() => logout()}>
+                  Log Out
+                </button>
               ) : (
                 <Link to="/log-in">LogIn</Link>
               )}
@@ -95,6 +97,11 @@ const Wrapper = styled.nav`
 
     .links {
       width: 15%;
+      .log-out-btn {
+        background: #d41919;
+        color: white;
+        padding: 5px 10px;
+      }
     }
   }
   .navbar {
