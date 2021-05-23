@@ -9,6 +9,7 @@ const setAuthLoading = () => (dispatch) => {
 };
 
 const userLoggedIn = (user) => (dispatch) => {
+  dispatch({ type: SET_AUTH_LOADING });
   dispatch({ type: SET_USER_LOGGED_IN, payload: user });
 };
 

@@ -5,19 +5,18 @@ import HeroImg from "../assests/home_hero_img.jpg";
 import { Product, Services } from "./";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch } from "react-redux";
-import { setAuthLoading, userLoggedIn } from "../actions/user_actions";
+import { userLoggedIn } from "../actions/user_actions";
 
 const Home = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    isLoading && dispatch(setAuthLoading());
-
     if (isAuthenticated) {
       dispatch(userLoggedIn(user));
     }
-  });
+  }, [user]);
 
   return (
     <Wrapper>

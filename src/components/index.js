@@ -7,6 +7,7 @@ import Services from "./Services";
 import Footer from "./Footer";
 import Hero from "./Hero";
 import LogIn from "./LogIn";
+import Loading from "./Loading";
 
 export {
   Navbar,
@@ -18,4 +19,5 @@ export {
   Footer,
   Hero,
   LogIn,
+  Loading,
 };
