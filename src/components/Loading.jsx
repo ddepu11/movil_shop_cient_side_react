@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Loading = () => {
   return (
-    <Wrapper  >
+    <Wrapper>
       <h1>Loading please wait...</h1>
     </Wrapper>
   );
