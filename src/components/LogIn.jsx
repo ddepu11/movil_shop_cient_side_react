@@ -4,9 +4,12 @@ import { Hero } from ".";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch } from "react-redux";
+import { customUserLogin } from "../actions/user_actions";
 
 const Login = () => {
   const { loginWithRedirect } = useAuth0();
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +21,9 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (email && password) {
+      dispatch(customUserLogin(email, password));
+    }
   };
 
   return (
