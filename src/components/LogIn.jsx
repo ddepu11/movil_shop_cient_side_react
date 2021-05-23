@@ -72,6 +72,14 @@ const Login = () => {
             </div>
             <button className="sign-in-btn">Sign In</button>
           </form>
+          <div className="or flex">
+            <div className="left"></div>
+            <span>Or</span>
+            <div className="right"></div>
+          </div>
+          <Link className="sign-up-btn">
+            Don't have an account? Sign Up Now !
+          </Link>
         </div>
       </Wrapper>
     </>
@@ -133,8 +141,18 @@ const Wrapper = styled.main`
       font-size: 1.2em;
       background-color: #222222;
       color: white;
-      margin-top: 10px;
+      margin-top: 12px;
+      width: 100%;
     }
+  }
+  .sign-up-btn {
+    padding: 10px 40px;
+    font-size: 1.2em;
+    background-color: #00c040;
+    color: #0c0b0b;
+    margin-top: 12px;
+    width: 100%;
+    font-weight: 700;
   }
 `;
 
