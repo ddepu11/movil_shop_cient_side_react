@@ -26,33 +26,103 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (signUpCredentials.firstName === "") {
+    // Form validation
+
+    // First name validation
+    let firstName = signUpCredentials.firstName;
+
+    firstName.length > 20 &&
+      showMessage(firstNameRef, "first name is too lengthy", "error");
+
+    firstName.length < 2 &&
+      showMessage(firstNameRef, "first name is too short", "error");
+
+    firstName === "" &&
       showMessage(firstNameRef, "first name cannot be empty", "error");
-    }
 
-    if (signUpCredentials.lastName === "") {
+    // **************** FN Validation ends  **********************
+
+    // lastName validation
+    let lastName = signUpCredentials.lastName;
+
+    lastName.length > 20 &&
+      showMessage(lastNameRef, "last name is too lengthy", "error");
+
+    lastName.length < 2 &&
+      showMessage(lastNameRef, "last name is too short", "error");
+
+    lastName === "" &&
       showMessage(lastNameRef, "last name cannot be empty", "error");
-    }
 
-    if (signUpCredentials.phoneNumber === "") {
+    // **************** LN Validation ends  **********************
+
+    // Phone Number Validation
+    let phoneNumber = signUpCredentials.phoneNumber;
+
+    phoneNumber.length > 10 &&
+      showMessage(phoneNumberRef, "Only 10 digits allowed", "error");
+
+    !/^\d+$/.test(phoneNumber) &&
+      showMessage(phoneNumberRef, "Only numeric values allowed", "error");
+
+    phoneNumber === "" &&
       showMessage(phoneNumberRef, "phone number cannot be empty", "error");
+
+    // **************** PN Validation ends  **********************
+
+    // Email address validation
+
+    let email = signUpCredentials.email;
+
+    function validateEmail(email) {
+      const re =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
     }
 
-    if (signUpCredentials.email === "") {
-      showMessage(emailRef, "email cannot be empty", "error");
-    }
+    !validateEmail(email) &&
+      showMessage(emailRef, "Invalid email address", "error");
 
-    if (signUpCredentials.password === "") {
+    email === "" && showMessage(emailRef, "email cannot be empty", "error");
+
+    // **************** Email Validation ends  **********************
+
+    // Password  validation
+    let password = signUpCredentials.password;
+
+    password.length > 20 &&
+      showMessage(
+        passwordRef,
+        "password's length cant be greater then 20 ",
+        "error"
+      );
+
+    password.length < 6 &&
+      showMessage(
+        passwordRef,
+        "password's length cant be less then 6 ",
+        "error"
+      );
+
+    password === "" &&
       showMessage(passwordRef, "password cannot be empty", "error");
-    }
+    // **************** Password Validation ends  **********************
 
-    if (signUpCredentials.confirmPassword === "") {
+    // Confirm Password  validation
+    let confirmPassword = signUpCredentials.confirmPassword;
+
+    confirmPassword !== password &&
+      showMessage(confirmPasswordRef, "Password did not match", "error");
+
+    confirmPassword === password &&
+      showMessage(confirmPasswordRef, "Password match successfully", "success");
+
+    confirmPassword === "" &&
       showMessage(
         confirmPasswordRef,
         "confirm password cannot be empty",
         "error"
       );
-    }
   };
 
   const showMessage = (ref, message, className) => {
@@ -112,7 +182,7 @@ const SignUp = () => {
               <input
                 value={signUpCredentials.email}
                 onChange={handleInput}
-                type="email"
+                type="text"
                 id="email"
                 name="email"
               />
@@ -182,6 +252,10 @@ const Wrapper = styled.main`
         }
         .message.error {
           color: red;
+          font-size: 1.2em;
+        }
+        .message.success {
+          color: green;
           font-size: 1.2em;
         }
       }
