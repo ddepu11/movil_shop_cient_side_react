@@ -18,6 +18,8 @@ const SignUp = () => {
     confirmPassword: "",
   });
 
+  let erroFlag = true;
+
   const handleInput = (e) => {
     const { value, name } = e.target;
     setSignUpCredentials({ ...signUpCredentials, [name]: value });
@@ -28,42 +30,59 @@ const SignUp = () => {
     // First name validation
     let firstName = signUpCredentials.firstName;
 
-    firstName.length > 20 &&
+    if (firstName.length > 20) {
       showMessage(firstNameRef, "first name is too lengthy", "error");
+    } else {
+    }
 
-    firstName.length < 2 &&
+    if (firstName.length < 2) {
       showMessage(firstNameRef, "first name is too short", "error");
+    } else {
+    }
 
-    firstName === "" &&
+    if (firstName === "") {
       showMessage(firstNameRef, "first name cannot be empty", "error");
+    } else {
+    }
 
     // **************** FN Validation ends  **********************
 
     // lastName validation
     let lastName = signUpCredentials.lastName;
 
-    lastName.length > 20 &&
+    if (lastName.length > 20) {
       showMessage(lastNameRef, "last name is too lengthy", "error");
+    } else {
+    }
 
-    lastName.length < 2 &&
+    if (lastName.length < 2) {
       showMessage(lastNameRef, "last name is too short", "error");
+    } else {
+    }
 
-    lastName === "" &&
+    if (lastName === "") {
       showMessage(lastNameRef, "last name cannot be empty", "error");
+    } else {
+    }
 
     // **************** LN Validation ends  **********************
 
     // Phone Number Validation
     let phoneNumber = signUpCredentials.phoneNumber;
 
-    phoneNumber.length > 10 &&
-      showMessage(phoneNumberRef, "Only 10 digits allowed", "error");
+    if (phoneNumber.length > 10 || phoneNumber.length < 10) {
+      showMessage(phoneNumberRef, "Min and Maximum 10 digits allowed", "error");
+    } else {
+    }
 
-    !/^\d+$/.test(phoneNumber) &&
+    if (!/^\d+$/.test(phoneNumber)) {
       showMessage(phoneNumberRef, "Only numeric values allowed", "error");
+    } else {
+    }
 
-    phoneNumber === "" &&
+    if (phoneNumber === "") {
       showMessage(phoneNumberRef, "phone number cannot be empty", "error");
+    }
 
     // **************** PN Validation ends  **********************
 
