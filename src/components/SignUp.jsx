@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 
 const SignUp = () => {
@@ -18,10 +18,6 @@ const SignUp = () => {
     confirmPassword: "",
   });
 
-  useEffect(() => {
-    
-  }, []);
-
   const handleInput = (e) => {
     const { value, name } = e.target;
     setSignUpCredentials({ ...signUpCredentials, [name]: value });
@@ -30,7 +26,43 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(firstNameRef);
+    if (signUpCredentials.firstName === "") {
+      showMessage(firstNameRef, "first name cannot be empty", "error");
+    }
+
+    if (signUpCredentials.lastName === "") {
+      showMessage(lastNameRef, "last name cannot be empty", "error");
+    }
+
+    if (signUpCredentials.phoneNumber === "") {
+      showMessage(phoneNumberRef, "phone number cannot be empty", "error");
+    }
+
+    if (signUpCredentials.email === "") {
+      showMessage(emailRef, "email cannot be empty", "error");
+    }
+
+    if (signUpCredentials.password === "") {
+      showMessage(passwordRef, "password cannot be empty", "error");
+    }
+
+    if (signUpCredentials.confirmPassword === "") {
+      showMessage(
+        confirmPasswordRef,
+        "confirm password cannot be empty",
+        "error"
+      );
+    }
+  };
+
+  const showMessage = (ref, message, className) => {
+    ref.current.innerText = message;
+    ref.current.classList.add(className);
+
+    setTimeout(() => {
+      ref.current.innerText = "";
+      ref.current.classList.remove(className);
+    }, 4000);
   };
 
   return (
@@ -48,9 +80,7 @@ const SignUp = () => {
                 id="first_name"
                 name="firstName"
               />
-              <p ref={firstNameRef} className="message">
-                sas as
-              </p>
+              <p ref={firstNameRef} className="message"></p>
             </div>
             <div className="form-control">
               <label htmlFor="last_name">Last Name</label>
@@ -133,7 +163,7 @@ const Wrapper = styled.main`
   form {
     .row {
       justify-content: space-between;
-      margin: 50px 0;
+      margin: 20px 0;
       .form-control {
         display: flex;
         flex-direction: column;
@@ -150,7 +180,9 @@ const Wrapper = styled.main`
           font-size: 1.1em;
           width: 65%;
         }
-        .message {
+        .message.error {
+          color: red;
+          font-size: 1.2em;
         }
       }
     }
