@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const SignUp = () => {
+  const [signUpCredentials, setSignUpCredentials] = useState({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleInput = (e) => {
+    const { value, name } = e.target;
+    setSignUpCredentials({ ...signUpCredentials, [name]: value });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -14,34 +28,66 @@ const SignUp = () => {
           <div className="row flex">
             <div className="form-control ">
               <label htmlFor="first_name">First Name</label>
-              <input type="text" id="first_name" name="firstName" />
+              <input
+                value={signUpCredentials.firstName}
+                onChange={handleInput}
+                type="text"
+                id="first_name"
+                name="firstName"
+              />
             </div>
             <div className="form-control">
               <label htmlFor="last_name">Last Name</label>
-              <input type="text" id="last_name" name="lastName" />
+              <input
+                value={signUpCredentials.lastName}
+                onChange={handleInput}
+                type="text"
+                id="last_name"
+                name="lastName"
+              />
             </div>
           </div>
 
           <div className="row flex">
             <div className="form-control">
               <label htmlFor="phone_number">Phone Number</label>
-              <input type="text" id="phone_number" name="phoneNumber" />
+              <input
+                value={signUpCredentials.phoneNumber}
+                onChange={handleInput}
+                type="text"
+                id="phone_number"
+                name="phoneNumber"
+              />
             </div>
             <div className="form-control">
               <label htmlFor="email">Email Address</label>
-              <input type="email" id="email" name="email" />
+              <input
+                value={signUpCredentials.email}
+                onChange={handleInput}
+                type="email"
+                id="email"
+                name="email"
+              />
             </div>
           </div>
 
           <div className="row flex">
             <div className="form-control">
               <label htmlFor="password">Password</label>
-              <input type="password" id="password" name="password" />
+              <input
+                value={signUpCredentials.password}
+                onChange={handleInput}
+                type="password"
+                id="password"
+                name="password"
+              />
             </div>
 
             <div className="form-control">
               <label htmlFor="confirm_password">Confirm Password</label>
               <input
+                value={signUpCredentials.confirmPassword}
+                onChange={handleInput}
                 type="password"
                 id="confirm_password"
                 name="confirmPassword"
