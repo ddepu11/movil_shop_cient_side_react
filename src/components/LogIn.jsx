@@ -18,6 +18,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState(false);
 
   const handleInput = (e) => {
     const { value, name } = e.target;
@@ -28,7 +29,6 @@ const Login = () => {
   // Form validation
   const formValidation = () => {
     // Email address validation
-
     let email = userCredentials.email;
 
     function validateEmail(email) {
@@ -37,33 +37,43 @@ const Login = () => {
       return re.test(String(email).toLowerCase());
     }
 
-    !validateEmail(email) &&
+    if (!validateEmail(email)) {
       showMessage(emailRef, "Invalid email address", "error");
+      setError(true);
+    }
 
-    email === "" && showMessage(emailRef, "email cannot be empty", "error");
+    if (email === "") {
+      showMessage(emailRef, "email cannot be empty", "error");
+      setError(true);
+    }
 
     // **************** Email Validation ends  **********************
 
     // Password  validation
     let password = userCredentials.password;
 
-    password.length > 20 &&
+    if (password.length > 20) {
       showMessage(
         passwordRef,
         "password's length cant be greater then 20 ",
         "error"
       );
+      setError(true);
+    }
 
-    password.length < 6 &&
+    if (password.length < 6) {
       showMessage(
         passwordRef,
         "password's length cant be less then 6 ",
         "error"
       );
+      setError(true);
+    }
 
-    password === "" &&
+    if (password === "") {
       showMessage(passwordRef, "password cannot be empty", "error");
-    // **************** Password Validation ends  **********************
+      setError(true);
+    }
   };
 
   // Shows error or success message
@@ -82,7 +92,8 @@ const Login = () => {
 
     const { email, password } = userCredentials;
     formValidation();
-    if (email && password) {
+
+    if (error) {
       dispatch(customUserLogin(email, password));
       setUserCredentials({ password: "", email: "" });
     }
