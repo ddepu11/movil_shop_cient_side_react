@@ -11,20 +11,25 @@ const Login = () => {
   const { loginWithRedirect } = useAuth0();
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userCredentials, setUserCredentials] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleInput = (e) => {
     const { value, name } = e.target;
-    name === "email" ? setEmail(value) : setPassword(value);
+
+    setUserCredentials({ ...userCredentials, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const { email, password } = userCredentials;
+
     if (email && password) {
       dispatch(customUserLogin(email, password));
-      setEmail("");
-      setPassword("");
+      setUserCredentials({ password: "", email: "" });
     }
   };
 
@@ -50,7 +55,7 @@ const Login = () => {
             <div className="form-control">
               <label htmlFor="username">Email Address</label>
               <input
-                value={email}
+                value={userCredentials.email}
                 onChange={handleInput}
                 type="email"
                 name="email"
@@ -63,7 +68,7 @@ const Login = () => {
                 <Link to="/forget-password">Forget Password?</Link>
               </div>
               <input
-                value={password}
+                value={userCredentials.password}
                 onChange={handleInput}
                 type="password"
                 name="password"
