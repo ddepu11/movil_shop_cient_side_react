@@ -5,6 +5,7 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
   return (
     <>
       <Wrapper className="w-960 ">
@@ -13,34 +14,38 @@ const SignUp = () => {
           <div className="row flex">
             <div className="form-control ">
               <label htmlFor="first_name">First Name</label>
-              <input type="text" id="first_name" />
+              <input type="text" id="first_name" name="firstName" />
             </div>
             <div className="form-control">
               <label htmlFor="last_name">Last Name</label>
-              <input type="text" id="last_name" />
+              <input type="text" id="last_name" name="lastName" />
             </div>
           </div>
 
           <div className="row flex">
             <div className="form-control">
               <label htmlFor="phone_number">Phone Number</label>
-              <input type="text" id="phone_number" />
+              <input type="text" id="phone_number" name="phoneNumber" />
             </div>
             <div className="form-control">
               <label htmlFor="email">Email Address</label>
-              <input type="email" id="email" />
+              <input type="email" id="email" name="email" />
             </div>
           </div>
 
           <div className="row flex">
             <div className="form-control">
               <label htmlFor="password">Password</label>
-              <input type="password" id="password" />
+              <input type="password" id="password" name="password" />
             </div>
 
             <div className="form-control">
               <label htmlFor="confirm_password">Confirm Password</label>
-              <input type="password" id="confirm_password" />
+              <input
+                type="password"
+                id="confirm_password"
+                name="confirmPassword"
+              />
             </div>
           </div>
           <button className="sign-up-btn">Create Account</button>
@@ -83,7 +88,7 @@ const Wrapper = styled.main`
     .sign-up-btn {
       padding: 8px 10px;
       font-size: 1.2em;
-      background-color: #e73306;
+      background-color: #2a5be2;
       color: white;
       margin-top: 12px;
       width: 30%;
