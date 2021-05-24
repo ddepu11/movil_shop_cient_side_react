@@ -18,7 +18,7 @@ const SignUp = () => {
     confirmPassword: "",
   });
 
-  let erroFlag = true;
+  let erroFlag = false;
 
   const handleInput = (e) => {
     const { value, name } = e.target;
@@ -33,22 +33,16 @@ const SignUp = () => {
     if (firstName.length > 20) {
       showMessage(firstNameRef, "first name is too lengthy", "error");
       erroFlag = true;
-    } else {
-      erroFlag = false;
     }
 
     if (firstName.length < 2) {
       showMessage(firstNameRef, "first name is too short", "error");
       erroFlag = true;
-    } else {
-      erroFlag = false;
     }
 
     if (firstName === "") {
       showMessage(firstNameRef, "first name cannot be empty", "error");
       erroFlag = true;
-    } else {
-      erroFlag = false;
     }
 
     // **************** FN Validation ends  **********************
@@ -59,22 +53,16 @@ const SignUp = () => {
     if (lastName.length > 20) {
       showMessage(lastNameRef, "last name is too lengthy", "error");
       erroFlag = true;
-    } else {
-      erroFlag = false;
     }
 
     if (lastName.length < 2) {
       showMessage(lastNameRef, "last name is too short", "error");
       erroFlag = true;
-    } else {
-      erroFlag = false;
     }
 
     if (lastName === "") {
       showMessage(lastNameRef, "last name cannot be empty", "error");
       erroFlag = true;
-    } else {
-      erroFlag = false;
     }
 
     // **************** LN Validation ends  **********************
@@ -85,22 +73,16 @@ const SignUp = () => {
     if (phoneNumber.length > 10 || phoneNumber.length < 10) {
       showMessage(phoneNumberRef, "Min and Maximum 10 digits allowed", "error");
       erroFlag = true;
-    } else {
-      erroFlag = false;
     }
 
     if (!/^\d+$/.test(phoneNumber)) {
       showMessage(phoneNumberRef, "Only numeric values allowed", "error");
       erroFlag = true;
-    } else {
-      erroFlag = false;
     }
 
     if (phoneNumber === "") {
       showMessage(phoneNumberRef, "phone number cannot be empty", "error");
       erroFlag = true;
-    } else {
-      erroFlag = false;
     }
 
     // **************** PN Validation ends  **********************
@@ -115,18 +97,14 @@ const SignUp = () => {
       return re.test(String(email).toLowerCase());
     }
 
-    if (!validateEmail(email)) {
-      showMessage(emailRef, "Invalid email address", "error");
-      erroFlag = true;
-    } else {
-      erroFlag = false;
-    }
-
     if (email === "") {
       showMessage(emailRef, "email cannot be empty", "error");
       erroFlag = true;
-    } else {
-      erroFlag = false;
+    }
+
+    if (!validateEmail(email)) {
+      showMessage(emailRef, "Invalid email address", "error");
+      erroFlag = true;
     }
 
     // **************** Email Validation ends  **********************
@@ -141,8 +119,6 @@ const SignUp = () => {
         "error"
       );
       erroFlag = true;
-    } else {
-      erroFlag = false;
     }
 
     if (password.length < 6) {
@@ -152,17 +128,12 @@ const SignUp = () => {
         "error"
       );
       erroFlag = true;
-    } else {
-      erroFlag = false;
     }
 
     if (password === "") {
       showMessage(passwordRef, "password cannot be empty", "error");
       erroFlag = true;
-    } else {
-      erroFlag = false;
     }
-
     // **************** Password Validation ends  **********************
 
     // Confirm Password  validation
@@ -171,8 +142,6 @@ const SignUp = () => {
     if (confirmPassword !== password) {
       showMessage(confirmPasswordRef, "Password did not match", "error");
       erroFlag = true;
-    } else {
-      erroFlag = false;
     }
 
     if (
@@ -182,9 +151,6 @@ const SignUp = () => {
       confirmPassword.length >= 6
     ) {
       showMessage(confirmPasswordRef, "Password match successfully", "success");
-      erroFlag = true;
-    } else {
-      erroFlag = false;
     }
 
     if (confirmPassword.length > 20) {
@@ -194,8 +160,6 @@ const SignUp = () => {
         "error"
       );
       erroFlag = true;
-    } else {
-      erroFlag = false;
     }
 
     if (confirmPassword.length < 6) {
@@ -205,8 +169,6 @@ const SignUp = () => {
         "error"
       );
       erroFlag = true;
-    } else {
-      erroFlag = false;
     }
 
     if (confirmPassword === "") {
@@ -216,8 +178,6 @@ const SignUp = () => {
         "error"
       );
       erroFlag = true;
-    } else {
-      erroFlag = false;
     }
   };
 
@@ -227,6 +187,8 @@ const SignUp = () => {
 
     if (erroFlag) {
       console.log("there is a error");
+    } else {
+      console.log("there is no error");
     }
   };
 
