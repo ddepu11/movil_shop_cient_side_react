@@ -18,6 +18,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+
   let error = false;
 
   const handleInput = (e) => {
@@ -40,15 +41,11 @@ const Login = () => {
     if (!validateEmail(email)) {
       showMessage(emailRef, "Invalid email address", "error");
       error = true;
-    } else {
-      error = false;
     }
 
     if (email === "") {
       showMessage(emailRef, "email cannot be empty", "error");
       error = true;
-    } else {
-      error = false;
     }
 
     // **************** Email Validation ends  **********************
@@ -63,8 +60,6 @@ const Login = () => {
         "error"
       );
       error = true;
-    } else {
-      error = false;
     }
 
     if (password.length < 6) {
@@ -74,15 +69,11 @@ const Login = () => {
         "error"
       );
       error = true;
-    } else {
-      error = false;
     }
 
     if (password === "") {
       showMessage(passwordRef, "password cannot be empty", "error");
       error = true;
-    } else {
-      error = false;
     }
   };
 
@@ -107,7 +98,10 @@ const Login = () => {
       console.log("No Error");
       dispatch(customUserLogin(email, password));
       setUserCredentials({ password: "", email: "" });
+    } else {
+      console.log("There was an error");
     }
+    
   };
 
   return (
