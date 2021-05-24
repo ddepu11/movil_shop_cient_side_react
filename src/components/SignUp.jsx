@@ -185,10 +185,10 @@ const SignUp = () => {
     e.preventDefault();
     formValidation();
 
-    if (erroFlag) {
-      console.log("there is a error");
-    } else {
+    if (!erroFlag) {
       console.log("there is no error");
+    } else {
+      console.log("there is a error");
     }
   };
 
