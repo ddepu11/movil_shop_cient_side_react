@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 
 const SignUp = () => {
+  const firstNameRef = useRef(null);
+  const lastNameRef = useRef(null);
+  const phoneNumberRef = useRef(null);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const confirmPasswordRef = useRef(null);
+
   const [signUpCredentials, setSignUpCredentials] = useState({
     firstName: "",
     lastName: "",
@@ -11,6 +18,10 @@ const SignUp = () => {
     confirmPassword: "",
   });
 
+  useEffect(() => {
+    
+  }, []);
+
   const handleInput = (e) => {
     const { value, name } = e.target;
     setSignUpCredentials({ ...signUpCredentials, [name]: value });
@@ -18,6 +29,8 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    console.log(firstNameRef);
   };
 
   return (
@@ -35,6 +48,9 @@ const SignUp = () => {
                 id="first_name"
                 name="firstName"
               />
+              <p ref={firstNameRef} className="message">
+                sas as
+              </p>
             </div>
             <div className="form-control">
               <label htmlFor="last_name">Last Name</label>
@@ -45,6 +61,7 @@ const SignUp = () => {
                 id="last_name"
                 name="lastName"
               />
+              <p ref={lastNameRef} className="message"></p>
             </div>
           </div>
 
@@ -58,6 +75,7 @@ const SignUp = () => {
                 id="phone_number"
                 name="phoneNumber"
               />
+              <p ref={phoneNumberRef} className="message"></p>
             </div>
             <div className="form-control">
               <label htmlFor="email">Email Address</label>
@@ -68,6 +86,7 @@ const SignUp = () => {
                 id="email"
                 name="email"
               />
+              <p ref={emailRef} className="message"></p>
             </div>
           </div>
 
@@ -81,6 +100,7 @@ const SignUp = () => {
                 id="password"
                 name="password"
               />
+              <p ref={passwordRef} className="message"></p>
             </div>
 
             <div className="form-control">
@@ -92,6 +112,7 @@ const SignUp = () => {
                 id="confirm_password"
                 name="confirmPassword"
               />
+              <p ref={confirmPasswordRef} className="message"></p>
             </div>
           </div>
           <button className="sign-up-btn">Create Account</button>
@@ -128,6 +149,8 @@ const Wrapper = styled.main`
           border-radius: 5px;
           font-size: 1.1em;
           width: 65%;
+        }
+        .message {
         }
       }
     }
