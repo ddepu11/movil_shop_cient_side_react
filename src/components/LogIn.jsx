@@ -18,7 +18,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const [error, setError] = useState(false);
+  let error = false;
 
   const handleInput = (e) => {
     const { value, name } = e.target;
@@ -39,12 +39,16 @@ const Login = () => {
 
     if (!validateEmail(email)) {
       showMessage(emailRef, "Invalid email address", "error");
-      setError(true);
+      error = true;
+    } else {
+      error = false;
     }
 
     if (email === "") {
       showMessage(emailRef, "email cannot be empty", "error");
-      setError(true);
+      error = true;
+    } else {
+      error = false;
     }
 
     // **************** Email Validation ends  **********************
@@ -58,7 +62,9 @@ const Login = () => {
         "password's length cant be greater then 20 ",
         "error"
       );
-      setError(true);
+      error = true;
+    } else {
+      error = false;
     }
 
     if (password.length < 6) {
@@ -67,12 +73,16 @@ const Login = () => {
         "password's length cant be less then 6 ",
         "error"
       );
-      setError(true);
+      error = true;
+    } else {
+      error = false;
     }
 
     if (password === "") {
       showMessage(passwordRef, "password cannot be empty", "error");
-      setError(true);
+      error = true;
+    } else {
+      error = false;
     }
   };
 
@@ -93,7 +103,8 @@ const Login = () => {
     const { email, password } = userCredentials;
     formValidation();
 
-    if (error) {
+    if (!error) {
+      console.log("No Error");
       dispatch(customUserLogin(email, password));
       setUserCredentials({ password: "", email: "" });
     }
