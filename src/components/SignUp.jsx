@@ -147,6 +147,7 @@ const SignUp = () => {
     formValidation();
   };
 
+  // Shows error or success message
   const showMessage = (ref, message, className) => {
     ref.current.innerText = message;
     ref.current.classList.add(className);

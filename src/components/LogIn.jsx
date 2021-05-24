@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { Hero } from ".";
 import { AiOutlineGoogle } from "react-icons/ai";
@@ -8,6 +8,9 @@ import { useDispatch } from "react-redux";
 import { customUserLogin } from "../actions/user_actions";
 
 const Login = () => {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
   const { loginWithRedirect } = useAuth0();
   const dispatch = useDispatch();
 
@@ -22,11 +25,63 @@ const Login = () => {
     setUserCredentials({ ...userCredentials, [name]: value });
   };
 
+  // Form validation
+  const formValidation = () => {
+    // Email address validation
+
+    let email = userCredentials.email;
+
+    function validateEmail(email) {
+      const re =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    !validateEmail(email) &&
+      showMessage(emailRef, "Invalid email address", "error");
+
+    email === "" && showMessage(emailRef, "email cannot be empty", "error");
+
+    // **************** Email Validation ends  **********************
+
+    // Password  validation
+    let password = userCredentials.password;
+
+    password.length > 20 &&
+      showMessage(
+        passwordRef,
+        "password's length cant be greater then 20 ",
+        "error"
+      );
+
+    password.length < 6 &&
+      showMessage(
+        passwordRef,
+        "password's length cant be less then 6 ",
+        "error"
+      );
+
+    password === "" &&
+      showMessage(passwordRef, "password cannot be empty", "error");
+    // **************** Password Validation ends  **********************
+  };
+
+  // Shows error or success message
+  const showMessage = (ref, message, className) => {
+    ref.current.innerText = message;
+    ref.current.classList.add(className);
+
+    setTimeout(() => {
+      ref.current.innerText = "";
+      ref.current.classList.remove(className);
+    }, 4000);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const { email, password } = userCredentials;
-
+    formValidation();
     if (email && password) {
       dispatch(customUserLogin(email, password));
       setUserCredentials({ password: "", email: "" });
@@ -38,13 +93,13 @@ const Login = () => {
       <Hero title="login" />
       <Wrapper className="w-960 flex">
         <div>
-          <h2>Sign in to Movil Shop</h2>
+          <h2>Logn in to Movil Shop</h2>
           <button
             onClick={() => loginWithRedirect()}
             className="google-btn flex"
           >
             <AiOutlineGoogle className="google" />
-            <span>Sign in with Google</span>
+            <span>Log in with Google</span>
           </button>
           <div className="or flex">
             <div className="left"></div>
@@ -57,10 +112,11 @@ const Login = () => {
               <input
                 value={userCredentials.email}
                 onChange={handleInput}
-                type="email"
+                type="text"
                 name="email"
                 id="username"
               />
+              <p ref={emailRef} className="message"></p>
             </div>
             <div className="form-control">
               <div className="pwd-label flex">
@@ -74,8 +130,9 @@ const Login = () => {
                 name="password"
                 id="password"
               />
+              <p ref={passwordRef} className="message"></p>
             </div>
-            <button className="sign-in-btn">Sign In</button>
+            <button className="sign-in-btn">Log In</button>
           </form>
           <div className="or flex">
             <div className="left"></div>
@@ -139,6 +196,14 @@ const Wrapper = styled.main`
       }
       .pwd-label {
         justify-content: space-between;
+      }
+      .message.error {
+        color: red;
+        font-size: 1.2em;
+      }
+      .message.success {
+        color: green;
+        font-size: 1.2em;
       }
     }
     .sign-in-btn {
