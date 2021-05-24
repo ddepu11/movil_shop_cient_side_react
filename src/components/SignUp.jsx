@@ -23,11 +23,8 @@ const SignUp = () => {
     setSignUpCredentials({ ...signUpCredentials, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Form validation
-
+  // Form validation
+  const formValidation = () => {
     // First name validation
     let firstName = signUpCredentials.firstName;
 
@@ -114,8 +111,28 @@ const SignUp = () => {
     confirmPassword !== password &&
       showMessage(confirmPasswordRef, "Password did not match", "error");
 
-    confirmPassword === password &&
+    if (
+      confirmPassword === password &&
+      confirmPassword !== "" &&
+      confirmPassword.length <= 20 &&
+      confirmPassword.length >= 6
+    ) {
       showMessage(confirmPasswordRef, "Password match successfully", "success");
+    }
+
+    confirmPassword.length > 20 &&
+      showMessage(
+        confirmPasswordRef,
+        "password's length cant be greater then 20 ",
+        "error"
+      );
+
+    confirmPassword.length < 6 &&
+      showMessage(
+        confirmPasswordRef,
+        "password's length cant be less then 6 ",
+        "error"
+      );
 
     confirmPassword === "" &&
       showMessage(
@@ -123,6 +140,11 @@ const SignUp = () => {
         "confirm password cannot be empty",
         "error"
       );
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    formValidation();
   };
 
   const showMessage = (ref, message, className) => {
