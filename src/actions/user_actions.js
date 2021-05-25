@@ -25,19 +25,16 @@ const customUserLogin = (email, password) => async (dispatch) => {
   }
 };
 
-const signUpUser =
-  ({ firstName, lastName, phoneNumber, email, password, confirmPassword }) =>
-  async (dispatch) => {
-    
-    
-    console.log({
-      firstName,
-      lastName,
-      phoneNumber,
-      email,
-      password,
-      confirmPassword,
-    });
-  };
+const signUpUser = (userCredentials) => async (dispatch) => {
+  dispatch({ type: USER_LOG_IN_BEGIN });
+
+  try {
+    const { data } = await user.signUp({ ...userCredentials });
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: USER_LOG_IN_ERROR });
+  }
+};
 
 export { userAuthLoggedIn, customUserLogin, signUpUser };
