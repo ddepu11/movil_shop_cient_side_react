@@ -4,6 +4,7 @@ import {
   USER_LOG_IN_ERROR,
   USER_SIGN_UP_BEGIN,
   USER_SIGN_UP_ERROR,
+  USER_SIGN_UP_SUCCESS,
 } from "./constant";
 import * as user from "../api/user_api.js";
 
@@ -28,15 +29,16 @@ const customUserLogin = (email, password) => async (dispatch) => {
 };
 
 const signUpUser = (userCredentials) => async (dispatch) => {
-  // dispatch({ type: USER_SIGN_UP_BEGIN });
+  dispatch({ type: USER_SIGN_UP_BEGIN });
 
   try {
-    const res = await user.signUp(userCredentials);
-    console.log(res);
+    const { data } = await user.signUp(userCredentials);
+    console.log(data);
+    dispatch({ type: USER_SIGN_UP_SUCCESS });
   } catch (error) {
     console.log(error);
 
-    // dispatch({ type: USER_SIGN_UP_ERROR });
+    dispatch({ type: USER_SIGN_UP_ERROR });
   }
 };
 
