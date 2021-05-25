@@ -20,4 +20,5 @@ const signUp = ({
     confirmPassword,
   });
 };
+
 export { logIn, signUp };

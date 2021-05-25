@@ -1,7 +1,12 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { signUpUser } from "../actions/user_actions";
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+
+  // Referene for messages
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const phoneNumberRef = useRef(null);
@@ -187,6 +192,7 @@ const SignUp = () => {
 
     if (!erroFlag) {
       console.log("there is no error");
+      dispatch(signUpUser(signUpCredentials));
     } else {
       console.log("there is a error");
     }

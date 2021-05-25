@@ -25,4 +25,19 @@ const customUserLogin = (email, password) => async (dispatch) => {
   }
 };
 
-export { userAuthLoggedIn, customUserLogin };
+const signUpUser =
+  ({ firstName, lastName, phoneNumber, email, password, confirmPassword }) =>
+  async (dispatch) => {
+    
+    
+    console.log({
+      firstName,
+      lastName,
+      phoneNumber,
+      email,
+      password,
+      confirmPassword,
+    });
+  };
+
+export { userAuthLoggedIn, customUserLogin, signUpUser };
