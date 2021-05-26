@@ -1,9 +1,10 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "../actions/user_actions";
 
 const SignUp = () => {
+  const { userMsg } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   // Referene for messages

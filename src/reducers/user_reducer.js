@@ -55,7 +55,7 @@ const user = (user = initialUser, action) => {
         ...user,
         userLoading: false,
         hasUserError: true,
-        userErrorMsg: action.payload,
+        userMsg: action.payload,
       };
     default:
       return user;
