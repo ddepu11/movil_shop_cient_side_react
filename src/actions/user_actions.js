@@ -36,12 +36,13 @@ const signUpUser = (userCredentials) => async (dispatch) => {
 
   try {
     const { data } = await user.signUp(userCredentials);
-    console.log(data);
+
     if (data) {
-      dispatch({ type: USER_SIGN_UP_SUCCESS });
+      dispatch({ type: USER_SIGN_UP_SUCCESS, payload: data.msg });
     }
   } catch (err) {
     const { msg } = err.response.data;
+    console.log(msg);
     dispatch({ type: USER_SIGN_UP_ERROR, payload: msg });
   }
 };

@@ -12,7 +12,7 @@ const initialUser = {
   hasUserLoggedIn: false,
   userLoading: false,
   hasUserError: false,
-  userErrorMsg: {},
+  userMsg: "",
 };
 
 const user = (user = initialUser, action) => {
@@ -35,7 +35,7 @@ const user = (user = initialUser, action) => {
       return {
         ...user,
         hasUserError: true,
-        userErrorMsg: action.payload,
+        userMsg: action.payload,
       };
     //Sign-Up State handling
     case USER_SIGN_UP_BEGIN:
@@ -48,7 +48,7 @@ const user = (user = initialUser, action) => {
       return {
         ...user,
         userLoading: false,
-        hasUserError: false,
+        userMsg: action.payload,
       };
     case USER_SIGN_UP_ERROR:
       return {
