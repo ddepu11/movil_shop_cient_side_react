@@ -41,8 +41,8 @@ const signUpUser = (userCredentials) => async (dispatch) => {
       dispatch({ type: USER_SIGN_UP_SUCCESS });
     }
   } catch (err) {
-    console.log(err.response);
-    dispatch({ type: USER_SIGN_UP_ERROR });
+    const { msg } = err.response.data;
+    dispatch({ type: USER_SIGN_UP_ERROR, payload: msg });
   }
 };
 
