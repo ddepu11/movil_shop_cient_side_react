@@ -37,10 +37,11 @@ const signUpUser = (userCredentials) => async (dispatch) => {
   try {
     const { data } = await user.signUp(userCredentials);
     console.log(data);
-    dispatch({ type: USER_SIGN_UP_SUCCESS });
-  } catch (error) {
-    console.log(error);
-
+    if (data) {
+      dispatch({ type: USER_SIGN_UP_SUCCESS });
+    }
+  } catch (err) {
+    console.log(err.response);
     dispatch({ type: USER_SIGN_UP_ERROR });
   }
 };
