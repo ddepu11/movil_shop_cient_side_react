@@ -5,5 +5,5 @@ const logIn = (email, password) =>
 
 const signUp = (userCredentials) =>
   axios.post("http://localhost:5000/user/sign-up", { ...userCredentials });
-  
+
 export { logIn, signUp };

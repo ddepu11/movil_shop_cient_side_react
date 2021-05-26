@@ -8,10 +8,12 @@ import {
 } from "./constant";
 import * as user from "../api/user_api.js";
 
+//Auth0  User Login
 const userAuthLoggedIn = (user) => (dispatch) => {
   dispatch({ type: SET_USER_LOGGED_IN, payload: user });
 };
 
+//Custom User Login
 const customUserLogin = (email, password) => async (dispatch) => {
   dispatch({ type: USER_LOG_IN_BEGIN });
 
@@ -28,6 +30,7 @@ const customUserLogin = (email, password) => async (dispatch) => {
   }
 };
 
+// Sign Up Action
 const signUpUser = (userCredentials) => async (dispatch) => {
   dispatch({ type: USER_SIGN_UP_BEGIN });
 
