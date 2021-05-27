@@ -1,4 +1,5 @@
 import {
+  CLEAR_USER_MESSAGE,
   SET_USER_LOGGED_IN,
   USER_LOG_IN_BEGIN,
   USER_LOG_IN_ERROR,
@@ -46,5 +47,9 @@ const signUpUser = (userCredentials) => async (dispatch) => {
     dispatch({ type: USER_SIGN_UP_ERROR, payload: msg });
   }
 };
+// Clears users messages
+const clearUserMessage = () => (dispatch) => {
+  dispatch({ type: CLEAR_USER_MESSAGE });
+};
 
-export { userAuthLoggedIn, customUserLogin, signUpUser };
+export { userAuthLoggedIn, customUserLogin, signUpUser, clearUserMessage };

@@ -1,4 +1,5 @@
 import {
+  CLEAR_USER_MESSAGE,
   SET_USER_LOGGED_IN,
   USER_LOG_IN_BEGIN,
   USER_LOG_IN_ERROR,
@@ -57,6 +58,13 @@ const user = (user = initialUser, action) => {
         hasUserError: true,
         userMsg: action.payload,
       };
+    case CLEAR_USER_MESSAGE:
+      return {
+        ...user,
+        userMsg: "",
+        hasUserError: false,
+      };
+
     default:
       return user;
   }
