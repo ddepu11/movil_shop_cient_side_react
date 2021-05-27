@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "../actions/user_actions";
 
 const SignUp = () => {
-  const { userMsg } = useSelector((state) => state.user);
+  const { userMsg, userLoading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   // Referene for messages
@@ -212,87 +212,91 @@ const SignUp = () => {
 
   return (
     <>
-      <Wrapper className="w-960 ">
-        <h1>Get your free MovilShop account now</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="row flex">
-            <div className="form-control ">
-              <label htmlFor="first_name">First Name</label>
-              <input
-                value={signUpCredentials.firstName}
-                onChange={handleInput}
-                type="text"
-                id="first_name"
-                name="firstName"
-              />
-              <p ref={firstNameRef} className="message"></p>
-            </div>
-            <div className="form-control">
-              <label htmlFor="last_name">Last Name</label>
-              <input
-                value={signUpCredentials.lastName}
-                onChange={handleInput}
-                type="text"
-                id="last_name"
-                name="lastName"
-              />
-              <p ref={lastNameRef} className="message"></p>
-            </div>
-          </div>
-
-          <div className="row flex">
-            <div className="form-control">
-              <label htmlFor="phone_number">Phone Number</label>
-              <input
-                value={signUpCredentials.phoneNumber}
-                onChange={handleInput}
-                type="text"
-                id="phone_number"
-                name="phoneNumber"
-              />
-              <p ref={phoneNumberRef} className="message"></p>
-            </div>
-            <div className="form-control">
-              <label htmlFor="email">Email Address</label>
-              <input
-                value={signUpCredentials.email}
-                onChange={handleInput}
-                type="text"
-                id="email"
-                name="email"
-              />
-              <p ref={emailRef} className="message"></p>
-            </div>
-          </div>
-
-          <div className="row flex">
-            <div className="form-control">
-              <label htmlFor="password">Password</label>
-              <input
-                value={signUpCredentials.password}
-                onChange={handleInput}
-                type="password"
-                id="password"
-                name="password"
-              />
-              <p ref={passwordRef} className="message"></p>
+      {userLoading ? (
+        <Loading />
+      ) : (
+        <Wrapper className="w-960 ">
+          <h1>Get your free MovilShop account now</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="row flex">
+              <div className="form-control ">
+                <label htmlFor="first_name">First Name</label>
+                <input
+                  value={signUpCredentials.firstName}
+                  onChange={handleInput}
+                  type="text"
+                  id="first_name"
+                  name="firstName"
+                />
+                <p ref={firstNameRef} className="message"></p>
+              </div>
+              <div className="form-control">
+                <label htmlFor="last_name">Last Name</label>
+                <input
+                  value={signUpCredentials.lastName}
+                  onChange={handleInput}
+                  type="text"
+                  id="last_name"
+                  name="lastName"
+                />
+                <p ref={lastNameRef} className="message"></p>
+              </div>
             </div>
 
-            <div className="form-control">
-              <label htmlFor="confirm_password">Confirm Password</label>
-              <input
-                value={signUpCredentials.confirmPassword}
-                onChange={handleInput}
-                type="password"
-                id="confirm_password"
-                name="confirmPassword"
-              />
-              <p ref={confirmPasswordRef} className="message"></p>
+            <div className="row flex">
+              <div className="form-control">
+                <label htmlFor="phone_number">Phone Number</label>
+                <input
+                  value={signUpCredentials.phoneNumber}
+                  onChange={handleInput}
+                  type="text"
+                  id="phone_number"
+                  name="phoneNumber"
+                />
+                <p ref={phoneNumberRef} className="message"></p>
+              </div>
+              <div className="form-control">
+                <label htmlFor="email">Email Address</label>
+                <input
+                  value={signUpCredentials.email}
+                  onChange={handleInput}
+                  type="text"
+                  id="email"
+                  name="email"
+                />
+                <p ref={emailRef} className="message"></p>
+              </div>
             </div>
-          </div>
-          <button className="sign-up-btn">Create Account</button>
-        </form>
-      </Wrapper>
+
+            <div className="row flex">
+              <div className="form-control">
+                <label htmlFor="password">Password</label>
+                <input
+                  value={signUpCredentials.password}
+                  onChange={handleInput}
+                  type="password"
+                  id="password"
+                  name="password"
+                />
+                <p ref={passwordRef} className="message"></p>
+              </div>
+
+              <div className="form-control">
+                <label htmlFor="confirm_password">Confirm Password</label>
+                <input
+                  value={signUpCredentials.confirmPassword}
+                  onChange={handleInput}
+                  type="password"
+                  id="confirm_password"
+                  name="confirmPassword"
+                />
+                <p ref={confirmPasswordRef} className="message"></p>
+              </div>
+            </div>
+            <button className="sign-up-btn">Create Account</button>
+          </form>
+        </Wrapper>
+      )}
     </>
   );
 };
