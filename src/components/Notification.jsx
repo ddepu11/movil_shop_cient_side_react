@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import { clearUserMessage } from "../actions/user_actions";
 
 const Notification = ({ msg }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setTimeout(() => {
-      dispatch();
+    const removeNotification = setTimeout(() => {
+      dispatch(clearUserMessage());
     }, 4000);
 
     return () => {
-      clearTimeout(setTimeout);
+      clearTimeout(removeNotification);
     };
   }, [msg]);
 
@@ -35,5 +36,6 @@ const Wrapper = styled.div`
   letter-spacing: 2px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+  transition: all 1s ease-in;
 `;
 export default Notification;

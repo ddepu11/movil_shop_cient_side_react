@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { Hero } from ".";
 import { AiOutlineGoogle } from "react-icons/ai";
@@ -10,6 +10,7 @@ import { customUserLogin } from "../actions/user_actions";
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const setTORefId = useRef();
 
   const { loginWithRedirect } = useAuth0();
   const dispatch = useDispatch();
@@ -18,6 +19,17 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    // Clearing all the timeouts while unmounting the components
+    return () => {
+      clearTimeout(setTORefId.current);
+      while (setTORefId.current--) {
+        console.log(setTORefId.current);
+        clearTimeout(setTORefId.current);
+      }
+    };
+  }, []);
 
   let error = false;
 
@@ -82,10 +94,10 @@ const Login = () => {
     ref.current.innerText = message;
     ref.current.classList.add(className);
 
-    setTimeout(() => {
+    setTORefId.current = setTimeout(() => {
       ref.current.innerText = "";
       ref.current.classList.remove(className);
-    }, 4000);
+    }, 3000);
   };
 
   const handleSubmit = (e) => {
@@ -101,7 +113,6 @@ const Login = () => {
     } else {
       console.log("There was an error");
     }
-    
   };
 
   return (

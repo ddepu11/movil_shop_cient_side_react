@@ -1,11 +1,17 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "../actions/user_actions";
 import Loading from "./Loading";
 
 const SignUp = () => {
-  const { userMsg, userLoading } = useSelector((state) => state.user);
+  useEffect(() => {
+    return () => {
+      clearTimeout(clearValidationMessages);
+    };
+  });
+
+  const { userLoading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   // Referene for messages
@@ -201,11 +207,12 @@ const SignUp = () => {
   };
 
   // Shows error or success message
+  let clearValidationMessages;
   const showMessage = (ref, message, className) => {
     ref.current.innerText = message;
     ref.current.classList.add(className);
 
-    setTimeout(() => {
+    clearValidationMessages = setTimeout(() => {
       ref.current.innerText = "";
       ref.current.classList.remove(className);
     }, 4000);
