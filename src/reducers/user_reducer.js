@@ -49,7 +49,8 @@ const user = (user = initialUser, action) => {
       return {
         ...user,
         userLoading: false,
-        userMsg: action.payload,
+        userMsg: action.payload.msg,
+        userInfo: action.payload.user,
       };
     case USER_SIGN_UP_ERROR:
       return {

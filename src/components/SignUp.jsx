@@ -9,6 +9,7 @@ const SignUp = () => {
 
   useEffect(() => {
     // Clearing all the setTimeouts while unmounting the components
+
     return () => {
       clearTimeout(setTORefId.current);
       while (setTORefId.current--) {
@@ -228,7 +229,7 @@ const SignUp = () => {
       {userLoading ? (
         <Loading />
       ) : (
-        <Wrapper className="w-960 ">
+        <Wrapper className="w-960">
           <h1>Get your free MovilShop account now</h1>
           <form onSubmit={handleSubmit}>
             <div className="row flex">
