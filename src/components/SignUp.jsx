@@ -5,11 +5,17 @@ import { signUpUser } from "../actions/user_actions";
 import Loading from "./Loading";
 
 const SignUp = () => {
+  const setTORefId = useRef();
+
   useEffect(() => {
+    // Clearing all the setTimeouts while unmounting the components
     return () => {
-      clearTimeout(clearValidationMessages);
+      clearTimeout(setTORefId.current);
+      while (setTORefId.current--) {
+        clearTimeout(setTORefId.current);
+      }
     };
-  });
+  }, []);
 
   const { userLoading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -207,12 +213,11 @@ const SignUp = () => {
   };
 
   // Shows error or success message
-  let clearValidationMessages;
   const showMessage = (ref, message, className) => {
     ref.current.innerText = message;
     ref.current.classList.add(className);
 
-    clearValidationMessages = setTimeout(() => {
+    setTORefId.current = setTimeout(() => {
       ref.current.innerText = "";
       ref.current.classList.remove(className);
     }, 4000);

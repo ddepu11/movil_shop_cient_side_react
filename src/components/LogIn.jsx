@@ -21,11 +21,10 @@ const Login = () => {
   });
 
   useEffect(() => {
-    // Clearing all the timeouts while unmounting the components
+    // Clearing all the setTimeouts while unmounting the components
     return () => {
       clearTimeout(setTORefId.current);
       while (setTORefId.current--) {
-        console.log(setTORefId.current);
         clearTimeout(setTORefId.current);
       }
     };
