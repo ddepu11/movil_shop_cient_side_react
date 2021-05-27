@@ -12,9 +12,12 @@ import {
 import styled from "styled-components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import Notification from "./components/Notification";
+import { useSelector } from "react-redux";
 
 const App = () => {
   const { isLoading } = useAuth0();
+  const { userMsg, userLoading } = useSelector((state) => state.user);
 
   return (
     <Wrapper>
@@ -22,6 +25,7 @@ const App = () => {
         <Loading />
       ) : (
         <Router>
+          {userMsg && <Notification msg={userMsg} />}
           <Navbar />
           <Switch>
             <Route exact path="/">

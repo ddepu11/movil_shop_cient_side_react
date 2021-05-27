@@ -9,6 +9,7 @@ import Hero from "./Hero";
 import LogIn from "./LogIn";
 import Loading from "./Loading";
 import SignUp from "./SignUp";
+import Notification from "./Notification";
 
 export {
   Navbar,
@@ -22,4 +23,5 @@ export {
   LogIn,
   Loading,
   SignUp,
+  Notification,
 };

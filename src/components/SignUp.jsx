@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "../actions/user_actions";
+import Loading from "./Loading";
 
 const SignUp = () => {
   const { userMsg, userLoading } = useSelector((state) => state.user);
