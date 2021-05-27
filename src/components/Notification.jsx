@@ -3,21 +3,21 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { clearUserMessage } from "../actions/user_actions";
 
-const Notification = ({ msg }) => {
+const Notification = ({ msg, color }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const removeNotification = setTimeout(() => {
+    setTimeout(() => {
       dispatch(clearUserMessage());
-    }, 4000);
+    }, 5000);
 
-    return () => {
-      clearTimeout(removeNotification);
-    };
+    // return () => {
+    //   clearTimeout(removeNotification);
+    // };
   }, [msg]);
 
   return (
-    <Wrapper>
+    <Wrapper style={{ background: color }}>
       <h2>{msg}</h2>
     </Wrapper>
   );
@@ -29,13 +29,14 @@ const Wrapper = styled.div`
   left: 0;
   width: auto;
   margin: 0 auto;
-  background: #757e86;
-  color: black;
+  color: #fdfdfd;
   text-align: center;
   padding: 6px 20px;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  transition: all 1s ease-in;
+  h2 {
+    font-size: 1.2em;
+  }
 `;
 export default Notification;

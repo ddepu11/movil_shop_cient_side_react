@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 
 const App = () => {
   const { isLoading } = useAuth0();
-  const { userMsg, userLoading } = useSelector((state) => state.user);
+  const { userMsg, hasUserError } = useSelector((state) => state.user);
 
   return (
     <Wrapper>
@@ -25,7 +25,12 @@ const App = () => {
         <Loading />
       ) : (
         <Router>
-          {userMsg && <Notification msg={userMsg} />}
+          {userMsg && (
+            <Notification
+              msg={userMsg}
+              color={hasUserError ? "#c52525" : "#25c555"}
+            />
+          )}
           <Navbar />
           <Switch>
             <Route exact path="/">
