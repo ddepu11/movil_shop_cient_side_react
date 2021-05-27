@@ -1,5 +1,6 @@
 import {
   CLEAR_USER_MESSAGE,
+  CLEAR_USER_SIGNUP_SUCCESS,
   SET_USER_LOGGED_IN,
   USER_LOG_IN_BEGIN,
   USER_LOG_IN_ERROR,
@@ -41,7 +42,7 @@ const signUpUser = (userCredentials) => async (dispatch) => {
     if (data) {
       dispatch({
         type: USER_SIGN_UP_SUCCESS,
-        payload: { msg: data.msg, user: data.user },
+        payload: data.msg,
       });
     }
   } catch (err) {
@@ -55,4 +56,14 @@ const clearUserMessage = () => (dispatch) => {
   dispatch({ type: CLEAR_USER_MESSAGE });
 };
 
-export { userAuthLoggedIn, customUserLogin, signUpUser, clearUserMessage };
+const clearUserSignUpSuccess = () => (dispatch) => {
+  dispatch({ type: CLEAR_USER_SIGNUP_SUCCESS });
+};
+
+export {
+  userAuthLoggedIn,
+  customUserLogin,
+  signUpUser,
+  clearUserMessage,
+  clearUserSignUpSuccess,
+};

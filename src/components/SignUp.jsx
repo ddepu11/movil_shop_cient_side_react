@@ -3,13 +3,15 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "../actions/user_actions";
 import Loading from "./Loading";
+import { Redirect } from "react-router-dom";
 
 const SignUp = () => {
+  const { userSignUpSuccess } = useSelector((state) => state.user);
   const setTORefId = useRef();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // Clearing all the setTimeouts while unmounting the components
-
     return () => {
       clearTimeout(setTORefId.current);
       while (setTORefId.current--) {
@@ -19,7 +21,6 @@ const SignUp = () => {
   }, []);
 
   const { userLoading } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
   // Referene for messages
   const firstNameRef = useRef(null);
@@ -37,6 +38,18 @@ const SignUp = () => {
     password: "",
     confirmPassword: "",
   });
+
+  // if (userSignUpSuccess) {
+  //   setSignUpCredentials({
+  //     firstName: "",
+  //     lastName: "",
+  //     phoneNumber: "",
+  //     email: "",
+  //     password: "",
+  //     confirmPassword: "",
+  //   });
+  //   dispatch(clearUserSignUpSuccess());
+  // }
 
   let erroFlag = false;
 
@@ -228,6 +241,8 @@ const SignUp = () => {
     <>
       {userLoading ? (
         <Loading />
+      ) : userSignUpSuccess ? (
+        <Redirect to="/log-in" />
       ) : (
         <Wrapper className="w-960">
           <h1>Get your free MovilShop account now</h1>

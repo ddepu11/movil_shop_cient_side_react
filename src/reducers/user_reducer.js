@@ -1,5 +1,6 @@
 import {
   CLEAR_USER_MESSAGE,
+  CLEAR_USER_SIGNUP_SUCCESS,
   SET_USER_LOGGED_IN,
   USER_LOG_IN_BEGIN,
   USER_LOG_IN_ERROR,
@@ -14,6 +15,7 @@ const initialUser = {
   userLoading: false,
   hasUserError: false,
   userMsg: "",
+  userSignUpSuccess: false,
 };
 
 const user = (user = initialUser, action) => {
@@ -48,9 +50,9 @@ const user = (user = initialUser, action) => {
     case USER_SIGN_UP_SUCCESS:
       return {
         ...user,
+        userSignUpSuccess: true,
         userLoading: false,
-        userMsg: action.payload.msg,
-        userInfo: action.payload.user,
+        userMsg: action.payload,
       };
     case USER_SIGN_UP_ERROR:
       return {
@@ -65,7 +67,11 @@ const user = (user = initialUser, action) => {
         userMsg: "",
         hasUserError: false,
       };
-
+    case CLEAR_USER_SIGNUP_SUCCESS:
+      return {
+        ...user,
+        userSignUpSuccess: false,
+      };
     default:
       return user;
   }
