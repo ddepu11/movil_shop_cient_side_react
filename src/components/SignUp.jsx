@@ -39,18 +39,6 @@ const SignUp = () => {
     confirmPassword: "",
   });
 
-  // if (userSignUpSuccess) {
-  //   setSignUpCredentials({
-  //     firstName: "",
-  //     lastName: "",
-  //     phoneNumber: "",
-  //     email: "",
-  //     password: "",
-  //     confirmPassword: "",
-  //   });
-  //   dispatch(clearUserSignUpSuccess());
-  // }
-
   let erroFlag = false;
 
   const handleInput = (e) => {

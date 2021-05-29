@@ -10,10 +10,6 @@ const Notification = ({ msg, color }) => {
     setTimeout(() => {
       dispatch(clearUserMessage());
     }, 5000);
-
-    // return () => {
-    //   clearTimeout(removeNotification);
-    // };
   }, [msg]);
 
   return (

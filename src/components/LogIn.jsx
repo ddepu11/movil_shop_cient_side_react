@@ -1,12 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import { Hero } from ".";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { customUserLogin } from "../actions/user_actions";
-import { clearUserSignUpSuccess } from "../actions/user_actions";
 
 const Login = () => {
   const emailRef = useRef();
@@ -15,12 +13,6 @@ const Login = () => {
 
   const { loginWithRedirect } = useAuth0();
   const dispatch = useDispatch();
-
-  const { userSignUpSuccess } = useSelector((state) => state.user);
-
-  if (userSignUpSuccess) {
-    dispatch(clearUserSignUpSuccess());
-  }
 
   const [userCredentials, setUserCredentials] = useState({
     email: "",
