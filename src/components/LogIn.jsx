@@ -4,7 +4,10 @@ import { AiOutlineGoogle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch } from "react-redux";
-import { customUserLogin } from "../actions/user_actions";
+import {
+  clearUserSignUpSuccess,
+  customUserLogin,
+} from "../actions/user_actions";
 
 const Login = () => {
   const emailRef = useRef();
@@ -20,6 +23,7 @@ const Login = () => {
   });
 
   useEffect(() => {
+    dispatch(clearUserSignUpSuccess());
     // Clearing all the setTimeouts while unmounting the components
     return () => {
       clearTimeout(setTORefId.current);
