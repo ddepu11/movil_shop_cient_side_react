@@ -1,5 +1,6 @@
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
 const logIn = (email, password) =>
   axios.post("http://localhost:5000/user/login", { email, password });
 

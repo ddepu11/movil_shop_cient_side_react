@@ -4,6 +4,7 @@ import {
   SET_USER_LOGGED_IN,
   USER_LOG_IN_BEGIN,
   USER_LOG_IN_ERROR,
+  USER_LOG_IN_SUCCESS,
   USER_SIGN_UP_BEGIN,
   USER_SIGN_UP_ERROR,
   USER_SIGN_UP_SUCCESS,
@@ -25,10 +26,10 @@ const customUserLogin = (email, password) => async (dispatch) => {
     console.log(data);
 
     // Handle this
-    // dispatch({type:USER_LOG_IN_SUCCESS})
+    dispatch({ type: USER_LOG_IN_SUCCESS, payload: data });
   } catch (err) {
-    console.log(err);
-    dispatch({ type: USER_LOG_IN_ERROR, payload: err.message });
+    const { msg } = err.response.data;
+    dispatch({ type: USER_LOG_IN_ERROR, payload: msg });
   }
 };
 
@@ -51,6 +52,7 @@ const signUpUser = (userCredentials) => async (dispatch) => {
     dispatch({ type: USER_SIGN_UP_ERROR, payload: msg });
   }
 };
+
 // Clears users messages
 const clearUserMessage = () => (dispatch) => {
   dispatch({ type: CLEAR_USER_MESSAGE });

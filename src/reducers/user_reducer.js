@@ -4,6 +4,7 @@ import {
   SET_USER_LOGGED_IN,
   USER_LOG_IN_BEGIN,
   USER_LOG_IN_ERROR,
+  USER_LOG_IN_SUCCESS,
   USER_SIGN_UP_BEGIN,
   USER_SIGN_UP_ERROR,
   USER_SIGN_UP_SUCCESS,
@@ -33,6 +34,11 @@ const user = (user = initialUser, action) => {
         ...user,
         userLoading: true,
         hasUserError: false,
+      };
+    case USER_LOG_IN_SUCCESS:
+      return {
+        ...user,
+        userMsg: action.payload.msg,
       };
     case USER_LOG_IN_ERROR:
       return {
