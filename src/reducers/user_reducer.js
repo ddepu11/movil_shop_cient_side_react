@@ -41,6 +41,7 @@ const user = (user = initialUser, action) => {
         userMsg: action.payload.msg,
         hasUserLoggedIn: true,
         userInfo: action.payload.user,
+        userLoading: false,
       };
     case USER_LOG_IN_ERROR:
       return {
