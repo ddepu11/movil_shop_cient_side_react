@@ -92,8 +92,7 @@ const user = (user = initialUser, action) => {
     case ACCOUNT_INFO_SUCCESS:
       return {
         ...user,
-        userInfo: action.payload.user,
-        userMsg: action.payload.msg,
+        userInfo: action.payload,
         userLoading: false,
       };
     case ACCOUNT_INFO_ERROR:
