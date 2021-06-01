@@ -26,8 +26,6 @@ const customUserLogin = (email, password) => async (dispatch) => {
   try {
     const { data } = await user.logIn(email, password);
 
-    console.log(data);
-
     // Handle this
     dispatch({ type: USER_LOG_IN_SUCCESS, payload: data });
   } catch (err) {
@@ -72,12 +70,16 @@ const getAccountInfo = () => async (dispatch) => {
   try {
     const { data } = await user.accountInfo();
 
-    console.log(data);
     dispatch({ type: ACCOUNT_INFO_SUCCESS, payload: data });
   } catch (err) {
-    dispatch({ type: ACCOUNT_INFO_ERROR, payload: err.message });
+    dispatch({
+      type: ACCOUNT_INFO_ERROR,
+      payload: "Unautherized user,please log in !!!",
+    });
   }
 };
+
+const logOutUser = () => {};
 
 export {
   loggedInUsingAuth,

@@ -15,6 +15,7 @@ const Navbar = () => {
       logout();
       //clear states
     } else if (hasUserLoggedIn) {
+      
       //clear states
     }
   };

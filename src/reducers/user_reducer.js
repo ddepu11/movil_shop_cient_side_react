@@ -8,6 +8,9 @@ import {
   USER_LOG_IN_BEGIN,
   USER_LOG_IN_ERROR,
   USER_LOG_IN_SUCCESS,
+  USER_LOG_OUT_BEGIN,
+  USER_LOG_OUT_ERROR,
+  USER_LOG_OUT_SUCCESS,
   USER_SIGN_UP_BEGIN,
   USER_SIGN_UP_ERROR,
   USER_SIGN_UP_SUCCESS,
@@ -103,7 +106,26 @@ const user = (user = initialUser, action) => {
         ...user,
         userLoading: false,
         userMsg: action.payload,
+        hasUserError: true,
       };
+    case USER_LOG_OUT_BEGIN:
+      return {
+        ...user,
+        userLoading: true,
+      };
+    case USER_LOG_OUT_SUCCESS:
+      return {
+        ...user,
+        userLoading: false,
+        userMsg: action.payload,
+      };
+    case USER_LOG_OUT_ERROR:
+      return {
+        ...user,
+        hasUserError: true,
+        userMsg: action.payload,
+      };
+
     default:
       return user;
   }
