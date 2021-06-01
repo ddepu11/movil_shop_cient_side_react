@@ -9,4 +9,7 @@ const signUp = (userCredentials) =>
   axios.post("/user/sign-up", { ...userCredentials });
 
 const accountInfo = () => axios.get("/user/account");
-export { logIn, signUp, accountInfo };
+
+const logOut = () => axios.get("/user/log-out");
+
+export { logIn, signUp, accountInfo, logOut };

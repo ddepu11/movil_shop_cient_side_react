@@ -8,6 +8,9 @@ import {
   USER_LOG_IN_BEGIN,
   USER_LOG_IN_ERROR,
   USER_LOG_IN_SUCCESS,
+  USER_LOG_OUT_BEGIN,
+  USER_LOG_OUT_ERROR,
+  USER_LOG_OUT_SUCCESS,
   USER_SIGN_UP_BEGIN,
   USER_SIGN_UP_ERROR,
   USER_SIGN_UP_SUCCESS,
@@ -49,7 +52,7 @@ const signUpUser = (userCredentials) => async (dispatch) => {
     }
   } catch (err) {
     const { msg } = err.response.data;
-    console.log(msg);
+
     dispatch({ type: USER_SIGN_UP_ERROR, payload: msg });
   }
 };
@@ -79,7 +82,20 @@ const getAccountInfo = () => async (dispatch) => {
   }
 };
 
-const logOutUser = () => {};
+const logOutUser = () => async (dispatch) => {
+  dispatch({ type: USER_LOG_OUT_BEGIN });
+
+  try {
+    await user.logOut();
+
+    dispatch({
+      type: USER_LOG_OUT_SUCCESS,
+      payload: "User logged out successfully!!!",
+    });
+  } catch (error) {
+    dispatch({ type: USER_LOG_OUT_ERROR, payload: "An error occured!!!" });
+  }
+};
 
 export {
   loggedInUsingAuth,
@@ -88,4 +104,5 @@ export {
   clearUserMessage,
   clearUserSignUpSuccess,
   getAccountInfo,
+  logOutUser,
 };

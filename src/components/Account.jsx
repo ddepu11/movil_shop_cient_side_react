@@ -7,9 +7,9 @@ import { useHistory } from "react-router-dom";
 const Account = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { hasUserError } = useSelector((state) => state.user);
+  const { hasUserError, hasUserLoggedIn } = useSelector((state) => state.user);
 
-  if (hasUserError) {
+  if (hasUserError || !hasUserLoggedIn) {
     history.push("/log-in");
   }
 

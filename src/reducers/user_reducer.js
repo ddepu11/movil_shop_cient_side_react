@@ -118,6 +118,8 @@ const user = (user = initialUser, action) => {
         ...user,
         userLoading: false,
         userMsg: action.payload,
+        hasUserLoggedIn: false,
+        userInfo: {},
       };
     case USER_LOG_OUT_ERROR:
       return {

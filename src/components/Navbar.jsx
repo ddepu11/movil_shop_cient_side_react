@@ -3,20 +3,22 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import logo from "../assests/logo.svg";
 import { BiCart } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
+import { logOutUser } from "../actions/user_actions";
 
 const Navbar = () => {
   const { logout } = useAuth0();
   const { hasUserLoggedIn, authLogin } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const handleLogOut = () => {
     if (authLogin) {
       logout();
       //clear states
     } else if (hasUserLoggedIn) {
-      
       //clear states
+      dispatch(logOutUser());
     }
   };
   return (
