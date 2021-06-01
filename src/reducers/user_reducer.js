@@ -4,7 +4,7 @@ import {
   ACCOUNT_INFO_SUCCESS,
   CLEAR_USER_MESSAGE,
   CLEAR_USER_SIGNUP_SUCCESS,
-  SET_USER_LOGGED_IN,
+  USER_LOGGED_ID_USING_AUTH,
   USER_LOG_IN_BEGIN,
   USER_LOG_IN_ERROR,
   USER_LOG_IN_SUCCESS,
@@ -20,15 +20,18 @@ const initialUser = {
   hasUserError: false,
   userMsg: "",
   userSignUpSuccess: false,
+  // For Loggin In Using Auth
+  authLogin: false,
+  authUserInfo: {},
 };
 
 const user = (user = initialUser, action) => {
   switch (action.type) {
-    case SET_USER_LOGGED_IN:
+    case USER_LOGGED_ID_USING_AUTH:
       return {
         ...user,
-        hasUserLoggedIn: true,
-        userInfo: action.payload,
+        authLogin: true,
+        authUserInfo: action.payload,
       };
 
     //Login State handling
@@ -99,7 +102,7 @@ const user = (user = initialUser, action) => {
       return {
         ...user,
         userLoading: false,
-        userMsg: action.payload.msg,
+        userMsg: action.payload,
       };
     default:
       return user;

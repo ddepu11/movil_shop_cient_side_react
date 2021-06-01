@@ -8,8 +8,16 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
   const { logout } = useAuth0();
-  const { hasUserLoggedIn } = useSelector((state) => state.user);
+  const { hasUserLoggedIn, authLogin } = useSelector((state) => state.user);
 
+  const handleLogOut = () => {
+    if (authLogin) {
+      logout();
+      //clear states
+    } else if (hasUserLoggedIn) {
+      //clear states
+    }
+  };
   return (
     <Wrapper>
       <div className="nav_top flex w-960">
@@ -30,14 +38,13 @@ const Navbar = () => {
               <Link to="/account">Account</Link>
             </li>
             <li>
-              {hasUserLoggedIn ? (
-                <button className="log-out-btn" onClick={() => logout()}>
+              {hasUserLoggedIn || authLogin ? (
+                <button className="log-out-btn" onClick={handleLogOut}>
                   Log Out
                 </button>
               ) : (
                 <Link to="/log-in">LogIn</Link>
               )}
-              {/* <Link to="/log-in">LogIn</Link> */}
             </li>
           </ul>
         </div>

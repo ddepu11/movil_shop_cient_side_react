@@ -4,7 +4,7 @@ import {
   ACCOUNT_INFO_SUCCESS,
   CLEAR_USER_MESSAGE,
   CLEAR_USER_SIGNUP_SUCCESS,
-  SET_USER_LOGGED_IN,
+  USER_LOGGED_ID_USING_AUTH,
   USER_LOG_IN_BEGIN,
   USER_LOG_IN_ERROR,
   USER_LOG_IN_SUCCESS,
@@ -15,8 +15,8 @@ import {
 import * as user from "../api/user_api.js";
 
 //Auth0  User Login
-const userAuthLoggedIn = (user) => (dispatch) => {
-  dispatch({ type: SET_USER_LOGGED_IN, payload: user });
+const loggedInUsingAuth = (user) => (dispatch) => {
+  dispatch({ type: USER_LOGGED_ID_USING_AUTH, payload: user });
 };
 
 //Custom User Login
@@ -75,12 +75,12 @@ const getAccountInfo = () => async (dispatch) => {
     console.log(data);
     dispatch({ type: ACCOUNT_INFO_SUCCESS, payload: data });
   } catch (err) {
-    dispatch({ type: ACCOUNT_INFO_ERROR, msg: err.message });
+    dispatch({ type: ACCOUNT_INFO_ERROR, payload: err.message });
   }
 };
 
 export {
-  userAuthLoggedIn,
+  loggedInUsingAuth,
   customUserLogin,
   signUpUser,
   clearUserMessage,
