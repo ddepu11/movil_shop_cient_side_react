@@ -10,6 +10,7 @@ import LogIn from "./LogIn";
 import Loading from "./Loading";
 import SignUp from "./SignUp";
 import Notification from "./Notification";
+import Account from "./Account";
 
 export {
   Navbar,
@@ -24,4 +25,5 @@ export {
   Loading,
   SignUp,
   Notification,
+  Account,
 };
