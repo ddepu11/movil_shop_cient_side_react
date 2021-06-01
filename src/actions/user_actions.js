@@ -1,4 +1,7 @@
 import {
+  ACCOUNT_INFO_BEGIN,
+  ACCOUNT_INFO_ERROR,
+  ACCOUNT_INFO_SUCCESS,
   CLEAR_USER_MESSAGE,
   CLEAR_USER_SIGNUP_SUCCESS,
   SET_USER_LOGGED_IN,
@@ -58,8 +61,22 @@ const clearUserMessage = () => (dispatch) => {
   dispatch({ type: CLEAR_USER_MESSAGE });
 };
 
+// assigns false to hasUseSignedUp flag
 const clearUserSignUpSuccess = () => (dispatch) => {
   dispatch({ type: CLEAR_USER_SIGNUP_SUCCESS });
+};
+
+const getAccountInfo = () => async (dispatch) => {
+  dispatch({ type: ACCOUNT_INFO_BEGIN });
+
+  try {
+    const { data } = await user.accountInfo();
+
+    console.log(data);
+    dispatch({ type: ACCOUNT_INFO_SUCCESS, payload: data });
+  } catch (err) {
+    dispatch({ type: ACCOUNT_INFO_ERROR, msg: err.message });
+  }
 };
 
 export {
@@ -68,4 +85,5 @@ export {
   signUpUser,
   clearUserMessage,
   clearUserSignUpSuccess,
+  getAccountInfo,
 };
