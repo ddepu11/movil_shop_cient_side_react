@@ -1,15 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { AiOutlineGoogle } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   clearUserSignUpSuccess,
   customUserLogin,
 } from "../actions/user_actions";
 
 const Login = () => {
+  const { hasUserLoggedIn } = useSelector((state) => state.user);
   const emailRef = useRef();
   const passwordRef = useRef();
   const setTORefId = useRef();
@@ -119,6 +120,7 @@ const Login = () => {
 
   return (
     <>
+      {hasUserLoggedIn && <Redirect to="/account" />}
       <Wrapper className="w-960 flex">
         <div>
           <h2>Logn in to Movil Shop</h2>
