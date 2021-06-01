@@ -1,4 +1,7 @@
 import {
+  ACCOUNT_INFO_BEGIN,
+  ACCOUNT_INFO_ERROR,
+  ACCOUNT_INFO_SUCCESS,
   CLEAR_USER_MESSAGE,
   CLEAR_USER_SIGNUP_SUCCESS,
   SET_USER_LOGGED_IN,
@@ -79,6 +82,25 @@ const user = (user = initialUser, action) => {
       return {
         ...user,
         userSignUpSuccess: false,
+      };
+
+    case ACCOUNT_INFO_BEGIN:
+      return {
+        ...user,
+        userLoading: true,
+      };
+    case ACCOUNT_INFO_SUCCESS:
+      return {
+        ...user,
+        userInfo: action.payload.user,
+        userMsg: action.payload.msg,
+        userLoading: false,
+      };
+    case ACCOUNT_INFO_ERROR:
+      return {
+        ...user,
+        userLoading: false,
+        userMsg: action.payload.msg,
       };
     default:
       return user;
