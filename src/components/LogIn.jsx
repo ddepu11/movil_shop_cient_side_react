@@ -24,7 +24,8 @@ const Login = () => {
   });
 
   useEffect(() => {
-    dispatch(clearUserSignUpSuccess());
+    hasUserLoggedIn && dispatch(clearUserSignUpSuccess());
+
     // Clearing all the setTimeouts while unmounting the components
     return () => {
       clearTimeout(setTORefId.current);

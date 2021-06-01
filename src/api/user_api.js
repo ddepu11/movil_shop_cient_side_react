@@ -8,4 +8,5 @@ const logIn = (email, password) =>
 const signUp = (userCredentials) =>
   axios.post("/user/sign-up", { ...userCredentials });
 
-export { logIn, signUp };
+const accountInfo = () => axios.get("/user/account");
+export { logIn, signUp, accountInfo };

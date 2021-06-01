@@ -40,7 +40,6 @@ const user = (user = initialUser, action) => {
         ...user,
         userMsg: action.payload.msg,
         hasUserLoggedIn: true,
-        userInfo: action.payload.user,
         userLoading: false,
       };
     case USER_LOG_IN_ERROR:
