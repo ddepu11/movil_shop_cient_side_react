@@ -22,6 +22,11 @@ const loggedInUsingAuth = (user) => (dispatch) => {
   dispatch({ type: USER_LOGGED_IN_USING_AUTH, payload: user });
 };
 
+//  check if given email is registered??
+const isUserRegisteredWithThisEmail = (email) => (dispatch) => {
+  
+};
+
 //Custom User Login
 const customUserLogin = (email, password) => async (dispatch) => {
   dispatch({ type: USER_LOG_IN_BEGIN });
@@ -105,4 +110,5 @@ export {
   clearUserSignUpSuccess,
   getAccountInfo,
   logOutUser,
+  isUserRegisteredWithThisEmail,
 };
