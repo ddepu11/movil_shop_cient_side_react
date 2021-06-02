@@ -4,21 +4,17 @@ import { Link } from "react-router-dom";
 import HeroImg from "../assests/home_hero_img.jpg";
 import { Product, Services } from "./";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useDispatch } from "react-redux";
-import {
-  loggedInUsingAuth,
-  isUserRegisteredWithThisEmail,
-} from "../actions/user_actions";
+import { useDispatch, useSelector } from "react-redux";
+import { isUserRegisteredWithThisEmail } from "../actions/user_actions";
 
 const Home = () => {
   const { user, isAuthenticated } = useAuth0();
-
+  const { hasUserLoggedIn } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && !hasUserLoggedIn) {
       dispatch(isUserRegisteredWithThisEmail(user.email));
-      // dispatch(loggedInUsingAuth(user));
     }
   }, [user]);
 

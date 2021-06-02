@@ -8,14 +8,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { logOutUser } from "../actions/user_actions";
 
 const Navbar = () => {
-  const { logout } = useAuth0();
-  const { hasUserLoggedIn, authLogin, userInfo } = useSelector(
-    (state) => state.user
-  );
+  const { logout, isAuthenticated } = useAuth0();
+  const { hasUserLoggedIn, userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
-    if (authLogin) {
+    if (isAuthenticated) {
+      dispatch(logOutUser());
       logout();
       //clear states
     } else if (hasUserLoggedIn) {
@@ -43,9 +42,7 @@ const Navbar = () => {
               <Link to="/account">Account</Link>
             </li>
             <li>
-              {hasUserLoggedIn ||
-              authLogin ||
-              Object.keys(userInfo).length !== 0 ? (
+              {hasUserLoggedIn || Object.keys(userInfo).length !== 0 ? (
                 <button className="log-out-btn" onClick={handleLogOut}>
                   Log Out
                 </button>

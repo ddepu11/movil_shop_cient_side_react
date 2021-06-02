@@ -25,9 +25,6 @@ const initialUser = {
   hasUserError: false,
   userMsg: "",
   userSignUpSuccess: false,
-  // For Loggin In Using Auth
-  authLogin: false,
-  authUserInfo: {},
 };
 
 const user = (user = initialUser, action) => {
@@ -40,8 +37,8 @@ const user = (user = initialUser, action) => {
     case IS_EMAIL_REGISTERED_SUCCESS:
       return {
         ...user,
-        authLogin: true,
-        authUserInfo: action.payload.user,
+        hasUserLoggedIn: true,
+        userInfo: action.payload.user,
         userMsg: action.payload.msg,
         userLoading: false,
         hasUserError: false,

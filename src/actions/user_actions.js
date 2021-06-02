@@ -20,19 +20,13 @@ import {
 } from "./constant";
 import * as user from "../api/user_api.js";
 
-//Auth0  User Login
-const loggedInUsingAuth = (user) => (dispatch) => {
-  dispatch({ type: USER_LOGGED_IN_USING_AUTH, payload: user });
-};
-
-//  check if given email is registered??
+//  check if given email is registered while loggijng in using google??
 const isUserRegisteredWithThisEmail = (email) => async (dispatch) => {
   dispatch({ type: IS_EMAIL_REGISTERED_BEGIN });
 
   try {
     const { data } = await user.checkIsEmailRegistered(email);
 
-    console.log(data.user);
     dispatch({
       type: IS_EMAIL_REGISTERED_SUCCESS,
       payload: { user: data.user, msg: "User Logged In Successfully!!!" },
@@ -121,7 +115,6 @@ const logOutUser = () => async (dispatch) => {
 };
 
 export {
-  loggedInUsingAuth,
   customUserLogin,
   signUpUser,
   clearUserMessage,
