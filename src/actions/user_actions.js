@@ -4,6 +4,9 @@ import {
   ACCOUNT_INFO_SUCCESS,
   CLEAR_USER_MESSAGE,
   CLEAR_USER_SIGNUP_SUCCESS,
+  IS_EMAIL_REGISTERED_BEGIN,
+  IS_EMAIL_REGISTERED_ERROR,
+  IS_EMAIL_REGISTERED_SUCCESS,
   USER_LOGGED_IN_USING_AUTH,
   USER_LOG_IN_BEGIN,
   USER_LOG_IN_ERROR,
@@ -23,8 +26,22 @@ const loggedInUsingAuth = (user) => (dispatch) => {
 };
 
 //  check if given email is registered??
-const isUserRegisteredWithThisEmail = (email) => (dispatch) => {
-  
+const isUserRegisteredWithThisEmail = (email) => async (dispatch) => {
+  dispatch({ type: IS_EMAIL_REGISTERED_BEGIN });
+
+  try {
+    await user.checkIsEmailRegistered(email);
+
+    dispatch({
+      type: IS_EMAIL_REGISTERED_SUCCESS,
+      payload: "User login successfull!!!",
+    });
+  } catch (error) {
+    dispatch({
+      type: IS_EMAIL_REGISTERED_ERROR,
+      payload: "User was not registered!!!",
+    });
+  }
 };
 
 //Custom User Login

@@ -4,6 +4,9 @@ import {
   ACCOUNT_INFO_SUCCESS,
   CLEAR_USER_MESSAGE,
   CLEAR_USER_SIGNUP_SUCCESS,
+  IS_EMAIL_REGISTERED_BEGIN,
+  IS_EMAIL_REGISTERED_ERROR,
+  IS_EMAIL_REGISTERED_SUCCESS,
   USER_LOGGED_IN_USING_AUTH,
   USER_LOG_IN_BEGIN,
   USER_LOG_IN_ERROR,
@@ -37,6 +40,26 @@ const user = (user = initialUser, action) => {
         authUserInfo: action.payload,
         userLoading: false,
         hasUserError: false,
+      };
+    case IS_EMAIL_REGISTERED_BEGIN:
+      return {
+        ...user,
+        userLoading: true,
+      };
+    case IS_EMAIL_REGISTERED_SUCCESS:
+      return {
+        ...user,
+        authLogin: true,
+        authUserInfo: action.payload.user,
+        userLoading: false,
+        hasUserError: false,
+      };
+    case IS_EMAIL_REGISTERED_ERROR:
+      return {
+        ...user,
+        userLoading: false,
+        hasUserError: true,
+        userMsg: action.payload,
       };
 
     //Login State handling

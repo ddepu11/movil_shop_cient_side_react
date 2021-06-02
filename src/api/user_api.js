@@ -12,4 +12,7 @@ const accountInfo = () => axios.get("/user/account");
 
 const logOut = () => axios.get("/user/log-out");
 
-export { logIn, signUp, accountInfo, logOut };
+const checkIsEmailRegistered = (email) =>
+  axios.post("/user/is-email-registered", { email });
+
+export { logIn, signUp, accountInfo, logOut, checkIsEmailRegistered };
