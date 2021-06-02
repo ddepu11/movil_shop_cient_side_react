@@ -4,7 +4,7 @@ import {
   ACCOUNT_INFO_SUCCESS,
   CLEAR_USER_MESSAGE,
   CLEAR_USER_SIGNUP_SUCCESS,
-  USER_LOGGED_ID_USING_AUTH,
+  USER_LOGGED_IN_USING_AUTH,
   USER_LOG_IN_BEGIN,
   USER_LOG_IN_ERROR,
   USER_LOG_IN_SUCCESS,
@@ -19,7 +19,7 @@ import * as user from "../api/user_api.js";
 
 //Auth0  User Login
 const loggedInUsingAuth = (user) => (dispatch) => {
-  dispatch({ type: USER_LOGGED_ID_USING_AUTH, payload: user });
+  dispatch({ type: USER_LOGGED_IN_USING_AUTH, payload: user });
 };
 
 //Custom User Login

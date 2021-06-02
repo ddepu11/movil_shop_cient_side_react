@@ -8,9 +8,10 @@ import {
   clearUserSignUpSuccess,
   customUserLogin,
 } from "../actions/user_actions";
+import { Loading } from ".";
 
 const Login = () => {
-  const { hasUserLoggedIn } = useSelector((state) => state.user);
+  const { hasUserLoggedIn, userLoading } = useSelector((state) => state.user);
   const emailRef = useRef();
   const passwordRef = useRef();
   const setTORefId = useRef();
@@ -123,59 +124,63 @@ const Login = () => {
   return (
     <>
       {hasUserLoggedIn && <Redirect to="/account" />}
-      <Wrapper className="w-960 flex">
-        <div>
-          <h2>Logn in to Movil Shop</h2>
-          <button
-            onClick={() => loginWithRedirect()}
-            className="google-btn flex"
-          >
-            <AiOutlineGoogle className="google" />
-            <span>Log in with Google</span>
-          </button>
-          <div className="or flex">
-            <div className="left"></div>
-            <span>Or</span>
-            <div className="right"></div>
-          </div>
-          <form onSubmit={handleSubmit}>
-            <div className="form-control">
-              <label htmlFor="username">Email Address</label>
-              <input
-                value={userCredentials.email}
-                onChange={handleInput}
-                type="text"
-                name="email"
-                id="username"
-              />
-              <p ref={emailRef} className="message"></p>
+      {userLoading ? (
+        <Loading />
+      ) : (
+        <Wrapper className="w-960 flex">
+          <div>
+            <h2>Logn in to Movil Shop</h2>
+            <button
+              onClick={() => loginWithRedirect()}
+              className="google-btn flex"
+            >
+              <AiOutlineGoogle className="google" />
+              <span>Log in with Google</span>
+            </button>
+            <div className="or flex">
+              <div className="left"></div>
+              <span>Or</span>
+              <div className="right"></div>
             </div>
-            <div className="form-control">
-              <div className="pwd-label flex">
-                <label htmlFor="password">Password</label>
-                <Link to="/forget-password">Forget Password?</Link>
+            <form onSubmit={handleSubmit}>
+              <div className="form-control">
+                <label htmlFor="username">Email Address</label>
+                <input
+                  value={userCredentials.email}
+                  onChange={handleInput}
+                  type="text"
+                  name="email"
+                  id="username"
+                />
+                <p ref={emailRef} className="message"></p>
               </div>
-              <input
-                value={userCredentials.password}
-                onChange={handleInput}
-                type="password"
-                name="password"
-                id="password"
-              />
-              <p ref={passwordRef} className="message"></p>
+              <div className="form-control">
+                <div className="pwd-label flex">
+                  <label htmlFor="password">Password</label>
+                  <Link to="/forget-password">Forget Password?</Link>
+                </div>
+                <input
+                  value={userCredentials.password}
+                  onChange={handleInput}
+                  type="password"
+                  name="password"
+                  id="password"
+                />
+                <p ref={passwordRef} className="message"></p>
+              </div>
+              <button className="sign-in-btn">Log In</button>
+            </form>
+            <div className="or flex">
+              <div className="left"></div>
+              <span>Or</span>
+              <div className="right"></div>
             </div>
-            <button className="sign-in-btn">Log In</button>
-          </form>
-          <div className="or flex">
-            <div className="left"></div>
-            <span>Or</span>
-            <div className="right"></div>
+            <Link className="sign-up-btn" to="/sign-up">
+              Don't have an account? Sign Up Now !
+            </Link>
           </div>
-          <Link className="sign-up-btn" to="/sign-up">
-            Don't have an account? Sign Up Now !
-          </Link>
-        </div>
-      </Wrapper>
+        </Wrapper>
+      )}
     </>
   );
 };

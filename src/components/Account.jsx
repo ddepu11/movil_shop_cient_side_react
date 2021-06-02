@@ -7,17 +7,25 @@ import { useHistory } from "react-router-dom";
 const Account = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { hasUserError, hasUserLoggedIn } = useSelector((state) => state.user);
 
-  if (hasUserError || !hasUserLoggedIn) {
-    history.push("/log-in");
-  }
+  const { hasUserError, hasUserLoggedIn, userInfo } = useSelector(
+    (state) => state.user
+  );
 
   useEffect(() => {
     dispatch(getAccountInfo());
   }, []);
 
-  return <Wrapper className="w-960">Hello</Wrapper>;
+  return (
+    <>
+      {hasUserError ||
+      (!hasUserLoggedIn && Object.keys(userInfo).length === 0) ? (
+        history.push("/log-in")
+      ) : (
+        <Wrapper className="w-960">Hello</Wrapper>
+      )}
+    </>
+  );
 };
 
 const Wrapper = styled.main``;

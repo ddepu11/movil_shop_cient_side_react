@@ -4,7 +4,7 @@ import {
   ACCOUNT_INFO_SUCCESS,
   CLEAR_USER_MESSAGE,
   CLEAR_USER_SIGNUP_SUCCESS,
-  USER_LOGGED_ID_USING_AUTH,
+  USER_LOGGED_IN_USING_AUTH,
   USER_LOG_IN_BEGIN,
   USER_LOG_IN_ERROR,
   USER_LOG_IN_SUCCESS,
@@ -30,11 +30,13 @@ const initialUser = {
 
 const user = (user = initialUser, action) => {
   switch (action.type) {
-    case USER_LOGGED_ID_USING_AUTH:
+    case USER_LOGGED_IN_USING_AUTH:
       return {
         ...user,
         authLogin: true,
         authUserInfo: action.payload,
+        userLoading: false,
+        hasUserError: false,
       };
 
     //Login State handling
@@ -56,6 +58,7 @@ const user = (user = initialUser, action) => {
         ...user,
         hasUserError: true,
         userMsg: action.payload,
+        userLoading: false,
       };
     //Sign-Up State handling
     case USER_SIGN_UP_BEGIN:
@@ -98,15 +101,16 @@ const user = (user = initialUser, action) => {
     case ACCOUNT_INFO_SUCCESS:
       return {
         ...user,
-        userInfo: action.payload,
         userLoading: false,
+        userInfo: action.payload,
+        hasUserLoggedIn: true,
       };
     case ACCOUNT_INFO_ERROR:
       return {
         ...user,
         userLoading: false,
-        userMsg: action.payload,
         hasUserError: true,
+        userMsg: action.payload,
       };
     case USER_LOG_OUT_BEGIN:
       return {
@@ -126,6 +130,7 @@ const user = (user = initialUser, action) => {
         ...user,
         hasUserError: true,
         userMsg: action.payload,
+        userLoading: false,
       };
 
     default:
