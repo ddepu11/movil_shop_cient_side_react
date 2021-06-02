@@ -7,7 +7,6 @@ import {
   IS_EMAIL_REGISTERED_BEGIN,
   IS_EMAIL_REGISTERED_ERROR,
   IS_EMAIL_REGISTERED_SUCCESS,
-  USER_LOGGED_IN_USING_AUTH,
   USER_LOG_IN_BEGIN,
   USER_LOG_IN_ERROR,
   USER_LOG_IN_SUCCESS,
@@ -33,14 +32,6 @@ const initialUser = {
 
 const user = (user = initialUser, action) => {
   switch (action.type) {
-    case USER_LOGGED_IN_USING_AUTH:
-      return {
-        ...user,
-        authLogin: true,
-        authUserInfo: action.payload,
-        userLoading: false,
-        hasUserError: false,
-      };
     case IS_EMAIL_REGISTERED_BEGIN:
       return {
         ...user,
@@ -51,6 +42,7 @@ const user = (user = initialUser, action) => {
         ...user,
         authLogin: true,
         authUserInfo: action.payload.user,
+        userMsg: action.payload.msg,
         userLoading: false,
         hasUserError: false,
       };

@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      // dispatch(isUserRegisteredWithThisEmail(user.email));
+      dispatch(isUserRegisteredWithThisEmail(user.email));
       // dispatch(loggedInUsingAuth(user));
     }
   }, [user]);

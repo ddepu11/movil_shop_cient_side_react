@@ -30,11 +30,12 @@ const isUserRegisteredWithThisEmail = (email) => async (dispatch) => {
   dispatch({ type: IS_EMAIL_REGISTERED_BEGIN });
 
   try {
-    await user.checkIsEmailRegistered(email);
+    const { data } = await user.checkIsEmailRegistered(email);
 
+    console.log(data.user);
     dispatch({
       type: IS_EMAIL_REGISTERED_SUCCESS,
-      payload: "User login successfull!!!",
+      payload: { user: data.user, msg: "User Logged In Successfully!!!" },
     });
   } catch (error) {
     dispatch({

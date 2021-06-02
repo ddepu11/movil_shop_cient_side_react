@@ -20,6 +20,7 @@ const Notification = ({ msg, color }) => {
 };
 
 const Wrapper = styled.div`
+  z-index: 1;
   position: absolute;
   top: 29%;
   left: 0;
