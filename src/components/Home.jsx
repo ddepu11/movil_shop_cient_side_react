@@ -16,7 +16,7 @@ const Home = () => {
     if (isAuthenticated && !hasUserLoggedIn) {
       dispatch(isUserRegisteredWithThisEmail(user.email));
     }
-  }, [user]);
+  }, [user, dispatch, isAuthenticated, hasUserLoggedIn]);
 
   return (
     <Wrapper>

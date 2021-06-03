@@ -207,10 +207,7 @@ const SignUp = () => {
     formValidation();
 
     if (!erroFlag) {
-      console.log("there is no error");
       dispatch(signUpUser(signUpCredentials));
-    } else {
-      console.log("there is a error");
     }
   };
 

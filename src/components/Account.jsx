@@ -14,6 +14,7 @@ const Account = () => {
 
   useEffect(() => {
     dispatch(getAccountInfo());
+    // eslint-disable-next-line
   }, []);
 
   return (

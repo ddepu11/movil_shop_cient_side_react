@@ -35,7 +35,7 @@ const Login = () => {
         clearTimeout(setTORefId.current);
       }
     };
-  }, []);
+  }, [hasUserLoggedIn, dispatch]);
 
   let error = false;
 
@@ -113,11 +113,8 @@ const Login = () => {
     formValidation();
 
     if (!error) {
-      console.log("No Error");
       dispatch(customUserLogin(email, password));
       setUserCredentials({ password: "", email: "" });
-    } else {
-      console.log("There was an error");
     }
   };
 
