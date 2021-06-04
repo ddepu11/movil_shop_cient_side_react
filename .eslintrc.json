@@ -11,7 +11,10 @@
   "rules": {
     "prettier/prettier": ["warn", { "endOfLine": "auto" }],
     "spaced-comment": "warn",
-    "no-underscore-dangle": "warn",
+    "no-underscore-dangle": [
+      "error",
+      { "allow": ["__REDUX_DEVTOOLS_EXTENSION__"] }
+    ],
     "jsx-a11y/label-has-associated-control": [
       2,
       {

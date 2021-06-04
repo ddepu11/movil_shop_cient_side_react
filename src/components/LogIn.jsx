@@ -168,7 +168,7 @@ const Login = () => {
                 />
                 <p ref={passwordRef} className="message" />
               </div>
-              <button type="button" className="sign-in-btn">
+              <button type="submit" className="sign-in-btn">
                 Log In
               </button>
             </form>

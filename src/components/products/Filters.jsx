@@ -72,10 +72,13 @@ const Filters = () => (
             <button type="button" className="all_color flex ">
               All
             </button>
+            {/* <button type="button" className="c" />
+
             <button type="button" className="c" />
+
             <button type="button" className="c" />
-            <button type="button" className="c" />
-            <button type="button" className="c" />
+            
+            <button type="button" className="c" /> */}
           </div>
         </div>
         <div className="form-control">
