@@ -222,21 +222,29 @@ const SignUp = () => {
     }
   };
 
+  // Appending signup credentials to formData object
+  const appendDataTo = (fd) => {
+    const k = Object.keys(signUpCredentials);
+    const v = Object.values(signUpCredentials);
+    for (let a = 0; a < k.length; a += 1) {
+      fd.append(k[a].toString().trim(), v[a]);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     formValidation();
+
     const formData = new FormData();
     formData.append('dp', dp);
 
     if (!erroFlag) {
-      const keys = Object.keys(signUpCredentials);
-      const values = Object.values(signUpCredentials);
-
-      keys.forEach((k) => {
-        values.forEach((v) => {
-          formData.append(k.toString().trim(), v);
-        });
-      });
+      appendDataTo(formData);
+      // keys.forEach((k) => {
+      //   values.forEach((v) => {
+      //     formData.append(k.toString().trim(), v);
+      //   });
+      // });
 
       dispatch(signUpUser(formData));
     }

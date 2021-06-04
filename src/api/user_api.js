@@ -5,6 +5,7 @@ import axios from 'axios';
 const logIn = (email, password) =>
   axios.post('/user/login', { email, password });
 
+// Signing up with credentials and an image
 const signUp = (formData) =>
   axios.post('/user/sign-up', formData, {
     headers: {
