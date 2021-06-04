@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Hero } from '../';
-import Product from '../Product';
-import Filters from './Filters';
 import { BsGrid3X3Gap } from 'react-icons/bs';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
+import Product from '../Product';
+import Filters from './Filters';
+import Hero from '../Hero';
 
 const Products = () => (
   <>

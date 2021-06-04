@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { clearUserMessage } from '../actions/user_actions';
 
 const Notification = ({ msg, color }) => {
@@ -17,6 +18,10 @@ const Notification = ({ msg, color }) => {
       <h2>{msg}</h2>
     </Wrapper>
   );
+};
+Notification.propTypes = {
+  msg: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 const Wrapper = styled.div`

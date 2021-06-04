@@ -1,5 +1,6 @@
-import styled from 'styled-components';
 import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Hero = ({ title }) => (
   <Wrapper>
@@ -8,6 +9,9 @@ const Hero = ({ title }) => (
     </div>
   </Wrapper>
 );
+Hero.propTypes = {
+  title: PropTypes.string.isRequired,
+};
 
 const Wrapper = styled.main`
   background: #555;

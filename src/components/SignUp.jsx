@@ -14,8 +14,10 @@ const SignUp = () => {
     () =>
       // Clearing all the setTimeouts while unmounting the components
       () => {
-        clearTimeout(setTORefId.current);
-        while (setTORefId.current--) {
+        let refId = setTORefId.current;
+        clearTimeout(refId);
+        refId -= 1;
+        while (refId) {
           clearTimeout(setTORefId.current);
         }
       },
@@ -48,10 +50,21 @@ const SignUp = () => {
     setSignUpCredentials({ ...signUpCredentials, [name]: value });
   };
 
+  // Shows error or success message
+  const showMessage = (ref, message, className) => {
+    ref.current.innerText = message;
+    ref.current.classList.add(className);
+
+    setTORefId.current = setTimeout(() => {
+      ref.current.innerText = '';
+      ref.current.classList.remove(className);
+    }, 4000);
+  };
+
   // Form validation
   const formValidation = () => {
     // First name validation
-    let firstName = signUpCredentials.firstName;
+    const { firstName } = signUpCredentials;
 
     if (firstName.length > 20) {
       showMessage(firstNameRef, 'first name is too lengthy', 'error');
@@ -71,7 +84,7 @@ const SignUp = () => {
     // **************** FN Validation ends  **********************
 
     // lastName validation
-    let lastName = signUpCredentials.lastName;
+    const { lastName } = signUpCredentials;
 
     if (lastName.length > 20) {
       showMessage(lastNameRef, 'last name is too lengthy', 'error');
@@ -91,7 +104,7 @@ const SignUp = () => {
     // **************** LN Validation ends  **********************
 
     // Phone Number Validation
-    let phoneNumber = signUpCredentials.phoneNumber;
+    const { phoneNumber } = signUpCredentials;
 
     if (phoneNumber.length > 10 || phoneNumber.length < 10) {
       showMessage(phoneNumberRef, 'Min and Maximum 10 digits allowed', 'error');
@@ -112,9 +125,9 @@ const SignUp = () => {
 
     // Email address validation
 
-    let email = signUpCredentials.email;
+    const { email } = signUpCredentials;
 
-    function validateEmail(email) {
+    function validateEmail() {
       const re =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(String(email).toLowerCase());
@@ -133,7 +146,7 @@ const SignUp = () => {
     // **************** Email Validation ends  **********************
 
     // Password  validation
-    let password = signUpCredentials.password;
+    const { password } = signUpCredentials;
 
     if (password.length > 20) {
       showMessage(
@@ -160,7 +173,7 @@ const SignUp = () => {
     // **************** Password Validation ends  **********************
 
     // Confirm Password  validation
-    let confirmPassword = signUpCredentials.confirmPassword;
+    const { confirmPassword } = signUpCredentials;
 
     if (confirmPassword !== password) {
       showMessage(confirmPasswordRef, 'Password did not match', 'error');
@@ -211,17 +224,6 @@ const SignUp = () => {
     if (!erroFlag) {
       dispatch(signUpUser(signUpCredentials));
     }
-  };
-
-  // Shows error or success message
-  const showMessage = (ref, message, className) => {
-    ref.current.innerText = message;
-    ref.current.classList.add(className);
-
-    setTORefId.current = setTimeout(() => {
-      ref.current.innerText = '';
-      ref.current.classList.remove(className);
-    }, 4000);
   };
 
   return (

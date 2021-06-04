@@ -8,7 +8,7 @@ import {
   clearUserSignUpSuccess,
   customUserLogin,
 } from '../actions/user_actions';
-import { Loading } from '.';
+import Loading from './Loading';
 
 const Login = () => {
   const { hasUserLoggedIn, userLoading } = useSelector((state) => state.user);
@@ -30,8 +30,10 @@ const Login = () => {
 
     // Clearing all the setTimeouts while unmounting the components
     return () => {
-      clearTimeout(setTORefId.current);
-      while (setTORefId.current--) {
+      let refId = setTORefId.current;
+      clearTimeout(refId);
+      refId += 1;
+      while (refId) {
         clearTimeout(setTORefId.current);
       }
     };
@@ -45,12 +47,23 @@ const Login = () => {
     setUserCredentials({ ...userCredentials, [name]: value });
   };
 
+  // Shows error or success message
+  const showMessage = (ref, message, className) => {
+    ref.current.innerText = message;
+    ref.current.classList.add(className);
+
+    setTORefId.current = setTimeout(() => {
+      ref.current.innerText = '';
+      ref.current.classList.remove(className);
+    }, 3000);
+  };
+
   // Form validation
   const formValidation = () => {
     // Email address validation
-    let email = userCredentials.email;
+    const { email } = userCredentials;
 
-    function validateEmail(email) {
+    function validateEmail() {
       const re =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(String(email).toLowerCase());
@@ -69,7 +82,7 @@ const Login = () => {
     // **************** Email Validation ends  **********************
 
     // Password  validation
-    let password = userCredentials.password;
+    const { password } = userCredentials;
 
     if (password.length > 20) {
       showMessage(
@@ -93,17 +106,6 @@ const Login = () => {
       showMessage(passwordRef, 'password cannot be empty', 'error');
       error = true;
     }
-  };
-
-  // Shows error or success message
-  const showMessage = (ref, message, className) => {
-    ref.current.innerText = message;
-    ref.current.classList.add(className);
-
-    setTORefId.current = setTimeout(() => {
-      ref.current.innerText = '';
-      ref.current.classList.remove(className);
-    }, 3000);
   };
 
   const handleSubmit = (e) => {
@@ -176,7 +178,7 @@ const Login = () => {
               <div className="right" />
             </div>
             <Link className="sign-up-btn" to="/sign-up">
-              Don't have an account? Sign Up Now !
+              Don&apos;t have an account? Sign Up Now !
             </Link>
           </div>
         </Wrapper>

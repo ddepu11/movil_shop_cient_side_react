@@ -3,7 +3,7 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["airbnb", "prettier", "plugin:react/recommended"],
+  "extends": ["airbnb", "airbnb/hooks", "prettier", "plugin:react/recommended"],
   "parserOptions": {
     "ecmaVersion": 12
   },
@@ -11,6 +11,23 @@
   "rules": {
     "prettier/prettier": ["warn", { "endOfLine": "auto" }],
     "spaced-comment": "warn",
-    "no-underscore-dangle": "warn"
+    "no-underscore-dangle": "warn",
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelComponents": ["CustomInputLabel"],
+        "labelAttributes": ["label"],
+        "controlComponents": ["CustomInput"],
+        "depth": 3
+      }
+    ],
+    "no-unused-expressions": [
+      "error",
+      { "allowShortCircuit": true, "allowTernary": true }
+    ],
+    "no-param-reassign": [
+      "error",
+      { "props": true, "ignorePropertyModificationsFor": ["ref"] }
+    ]
   }
 }
