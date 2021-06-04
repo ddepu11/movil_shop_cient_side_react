@@ -1,48 +1,46 @@
-import React from "react";
-import styled from "styled-components";
-import { Hero } from "../";
-import Product from "../Product";
-import Filters from "./Filters";
-import { BsGrid3X3Gap } from "react-icons/bs";
-import { AiOutlineUnorderedList } from "react-icons/ai";
+import React from 'react';
+import styled from 'styled-components';
+import { Hero } from '../';
+import Product from '../Product';
+import Filters from './Filters';
+import { BsGrid3X3Gap } from 'react-icons/bs';
+import { AiOutlineUnorderedList } from 'react-icons/ai';
 
-const Products = () => {
-  return (
-    <>
-      <Hero title="products" />
-      <Wrapper className="w-960">
-        <Filters />
+const Products = () => (
+  <>
+    <Hero title="products" />
+    <Wrapper className="w-960">
+      <Filters />
 
-        <section className="display_products">
-          <header className="header flex">
-            <h2>1200 products found</h2>
+      <section className="display_products">
+        <header className="header flex">
+          <h2>1200 products found</h2>
 
-            <div className="sort_by">
-              <label htmlFor="sort">Sort By: </label>
-              <select name="sort_by" id="sort">
-                <option value="">Price (lowest)</option>
-                <option value="">Price (heighest)</option>
-                <option value="">Name (A - Z)</option>
-                <option value="">Name (Z - A)</option>
-              </select>
-            </div>
-            <div className="view_by flex">
-              <span>View</span>
-              <button>
-                <BsGrid3X3Gap />
-              </button>
-              <button>
-                <AiOutlineUnorderedList />
-              </button>
-            </div>
-          </header>
+          <div className="sort_by">
+            <label htmlFor="sort">Sort By: </label>
+            <select name="sort_by" id="sort">
+              <option value="">Price (lowest)</option>
+              <option value="">Price (heighest)</option>
+              <option value="">Name (A - Z)</option>
+              <option value="">Name (Z - A)</option>
+            </select>
+          </div>
+          <div className="view_by flex">
+            <span>View</span>
+            <button type="button">
+              <BsGrid3X3Gap />
+            </button>
+            <button type="button">
+              <AiOutlineUnorderedList />
+            </button>
+          </div>
+        </header>
 
-          <Product />
-        </section>
-      </Wrapper>
-    </>
-  );
-};
+        <Product />
+      </section>
+    </Wrapper>
+  </>
+);
 
 const Wrapper = styled.main`
   padding: 40px 0;

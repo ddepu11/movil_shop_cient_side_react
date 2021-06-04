@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import HeroImg from "../assests/home_hero_img.jpg";
-import { Product, Services } from "./";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useDispatch, useSelector } from "react-redux";
-import { isUserRegisteredWithThisEmail } from "../actions/user_actions";
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import HeroImg from '../assests/home_hero_img.jpg';
+import { useDispatch, useSelector } from 'react-redux';
+import { Product, Services } from '.';
+import { isUserRegisteredWithThisEmail } from '../actions/user_actions';
 
 const Home = () => {
   const { user, isAuthenticated } = useAuth0();

@@ -16,14 +16,14 @@ import {
   USER_SIGN_UP_BEGIN,
   USER_SIGN_UP_ERROR,
   USER_SIGN_UP_SUCCESS,
-} from "../actions/constant";
+} from '../actions/constant';
 
 const initialUser = {
   userInfo: {},
   hasUserLoggedIn: false,
   userLoading: false,
   hasUserError: false,
-  userMsg: "",
+  userMsg: '',
   userSignUpSuccess: false,
 };
 
@@ -51,7 +51,7 @@ const user = (user = initialUser, action) => {
         userMsg: action.payload,
       };
 
-    //Login State handling
+    // Login State handling
     case USER_LOG_IN_BEGIN:
       return {
         ...user,
@@ -72,7 +72,7 @@ const user = (user = initialUser, action) => {
         userMsg: action.payload,
         userLoading: false,
       };
-    //Sign-Up State handling
+    // Sign-Up State handling
     case USER_SIGN_UP_BEGIN:
       return {
         ...user,
@@ -96,7 +96,7 @@ const user = (user = initialUser, action) => {
     case CLEAR_USER_MESSAGE:
       return {
         ...user,
-        userMsg: "",
+        userMsg: '',
         hasUserError: false,
       };
     case CLEAR_USER_SIGNUP_SUCCESS:

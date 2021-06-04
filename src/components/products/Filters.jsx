@@ -1,92 +1,95 @@
-import styled from "styled-components";
-import { AiFillStar } from "react-icons/ai";
+import React from 'react';
+import styled from 'styled-components';
+import { AiFillStar } from 'react-icons/ai';
 
-const Filters = () => {
-  return (
-    <Wrapper>
-      <div className="filters_div">
-        <form>
-          <div className="form-control">
-            <input type="text" className="search" placeholder="search" />
-          </div>
+const Filters = () => (
+  <Wrapper>
+    <div className="filters_div">
+      <form>
+        <div className="form-control">
+          <input type="text" className="search" placeholder="search" />
+        </div>
 
-          <div className="form-control">
-            <h5>Brand</h5>
-            <select name="brand" id="brand">
-              <option value="all">All</option>
-              <option value="">Nokia</option>
-              <option value="">Redmi</option>
-              <option value="">Oneplus</option>
-              <option value="">Realme</option>
-              <option value="">Motorola</option>
-              <option value="">Oppo</option>
-              <option value="">Lenovo</option>
-            </select>
-          </div>
-          <div className="form-control">
-            <h5>Customer Ratings</h5>
-            <ul>
-              <li>
-                <button>
-                  4 <AiFillStar /> and above
-                </button>
-              </li>
-              <li>
-                <button>
-                  3 <AiFillStar /> and above
-                </button>
-              </li>
-              <li>
-                <button>
-                  2 <AiFillStar /> and above
-                </button>
-              </li>
-              <li>
-                <button>
-                  1 <AiFillStar /> and above
-                </button>
-              </li>
-            </ul>
-          </div>
+        <div className="form-control">
+          <h5>Brand</h5>
+          <select name="brand" id="brand">
+            <option value="all">All</option>
+            <option value="">Nokia</option>
+            <option value="">Redmi</option>
+            <option value="">Oneplus</option>
+            <option value="">Realme</option>
+            <option value="">Motorola</option>
+            <option value="">Oppo</option>
+            <option value="">Lenovo</option>
+          </select>
+        </div>
+        <div className="form-control">
+          <h5>Customer Ratings</h5>
+          <ul>
+            <li>
+              <button type="button">
+                4 <AiFillStar /> and above
+              </button>
+            </li>
+            <li>
+              <button type="button">
+                3 <AiFillStar /> and above
+              </button>
+            </li>
+            <li>
+              <button type="button">
+                2 <AiFillStar /> and above
+              </button>
+            </li>
+            <li>
+              <button type="button">
+                1 <AiFillStar /> and above
+              </button>
+            </li>
+          </ul>
+        </div>
 
-          <div className="form-control">
-            <h5>Price</h5>
-            <input type="range" min="0" max="4222" />
-            <p>Range: 0 - 422</p>
-          </div>
+        <div className="form-control">
+          <h5>Price</h5>
+          <input type="range" min="0" max="4222" />
+          <p>Range: 0 - 422</p>
+        </div>
 
-          <div className="form-control">
-            <h5>Internal Memory</h5>
-            <div className="internal_storage">
-              <input type="radio" id="16gb" name="internal_memory" />
-              <label htmlFor="16gb">16gb</label>
-            </div>
-            <div className="internal_storage">
-              <input type="radio" id="8gb" name="internal_memory" />
-              <label htmlFor="8gb">8gb</label>
-            </div>
+        <div className="form-control">
+          <h5>Internal Memory</h5>
+          <div className="internal_storage">
+            <input type="radio" id="16gb" name="internal_memory" />
+            <label htmlFor="16gb">16gb</label>
           </div>
-          <div className="form-control">
-            <h5>Color</h5>
-            <div className="colors flex">
-              <button className="all_color flex ">All</button>
-              <button className="c "></button>
-              <button className="c "></button>
-              <button className="c "></button>
-              <button className="c "></button>
-            </div>
+          <div className="internal_storage">
+            <input type="radio" id="8gb" name="internal_memory" />
+            <label htmlFor="8gb">8gb</label>
           </div>
-          <div className="form-control">
-            <h5 className="assured">MovilShop Assured</h5>
-            <input type="checkbox" />
+        </div>
+        <div className="form-control">
+          <h5>Color</h5>
+          <div className="colors flex">
+            <button type="button" className="all_color flex ">
+              All
+            </button>
+            <button type="button" className="c" />
+            <button type="button" className="c" />
+            <button type="button" className="c" />
+            <button type="button" className="c" />
           </div>
+        </div>
+        <div className="form-control">
+          <h5 className="assured">MovilShop Assured</h5>
+          <input type="checkbox" />
+        </div>
 
-          <button className="clear_filters">Clear Filters</button>
-        </form>
-      </div>
-    </Wrapper>
-  );
-};
+        <button type="button" className="clear_filters">
+          Clear Filters
+        </button>
+      </form>
+    </div>
+  </Wrapper>
+);
 
 const Wrapper = styled.aside`
   .filters_div {

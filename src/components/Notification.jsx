@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { clearUserMessage } from "../actions/user_actions";
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { clearUserMessage } from '../actions/user_actions';
 
 const Notification = ({ msg, color }) => {
   const dispatch = useDispatch();

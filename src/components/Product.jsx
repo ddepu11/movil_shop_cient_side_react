@@ -1,24 +1,22 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const Product = () => {
-  return (
-    <Wrapper className="card">
-      <Link to={`/products/`}>
-        <img src="https://i.pravatar.cc/350" alt="" />
-        <div className="info">
-          <h2>Product Name</h2>
-          <h4>260rs</h4>
-          <div className="ava_sold flex">
-            <p>Sold: 25</p>
-            <p>Available: 25</p>
-          </div>
+const Product = () => (
+  <Wrapper className="card">
+    <Link to="/products/">
+      <img src="https://i.pravatar.cc/350" alt="" />
+      <div className="info">
+        <h2>Product Name</h2>
+        <h4>260rs</h4>
+        <div className="ava_sold flex">
+          <p>Sold: 25</p>
+          <p>Available: 25</p>
         </div>
-      </Link>
-    </Wrapper>
-  );
-};
+      </div>
+    </Link>
+  </Wrapper>
+);
 
 const Wrapper = styled.div`
   flex-direction: column;

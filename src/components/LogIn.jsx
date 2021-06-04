@@ -1,14 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
-import styled from "styled-components";
-import { AiOutlineGoogle } from "react-icons/ai";
-import { Link, Redirect } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useRef, useEffect } from 'react';
+import styled from 'styled-components';
+import { AiOutlineGoogle } from 'react-icons/ai';
+import { Link, Redirect } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   clearUserSignUpSuccess,
   customUserLogin,
-} from "../actions/user_actions";
-import { Loading } from ".";
+} from '../actions/user_actions';
+import { Loading } from '.';
 
 const Login = () => {
   const { hasUserLoggedIn, userLoading } = useSelector((state) => state.user);
@@ -21,8 +21,8 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const [userCredentials, setUserCredentials] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   useEffect(() => {
@@ -57,12 +57,12 @@ const Login = () => {
     }
 
     if (!validateEmail(email)) {
-      showMessage(emailRef, "Invalid email address", "error");
+      showMessage(emailRef, 'Invalid email address', 'error');
       error = true;
     }
 
-    if (email === "") {
-      showMessage(emailRef, "email cannot be empty", "error");
+    if (email === '') {
+      showMessage(emailRef, 'email cannot be empty', 'error');
       error = true;
     }
 
@@ -75,7 +75,7 @@ const Login = () => {
       showMessage(
         passwordRef,
         "password's length cant be greater then 20 ",
-        "error"
+        'error'
       );
       error = true;
     }
@@ -84,13 +84,13 @@ const Login = () => {
       showMessage(
         passwordRef,
         "password's length cant be less then 6 ",
-        "error"
+        'error'
       );
       error = true;
     }
 
-    if (password === "") {
-      showMessage(passwordRef, "password cannot be empty", "error");
+    if (password === '') {
+      showMessage(passwordRef, 'password cannot be empty', 'error');
       error = true;
     }
   };
@@ -101,7 +101,7 @@ const Login = () => {
     ref.current.classList.add(className);
 
     setTORefId.current = setTimeout(() => {
-      ref.current.innerText = "";
+      ref.current.innerText = '';
       ref.current.classList.remove(className);
     }, 3000);
   };
@@ -114,7 +114,7 @@ const Login = () => {
 
     if (!error) {
       dispatch(customUserLogin(email, password));
-      setUserCredentials({ password: "", email: "" });
+      setUserCredentials({ password: '', email: '' });
     }
   };
 
@@ -128,6 +128,7 @@ const Login = () => {
           <div>
             <h2>Logn in to Movil Shop</h2>
             <button
+              type="button"
               onClick={() => loginWithRedirect()}
               className="google-btn flex"
             >
@@ -135,9 +136,9 @@ const Login = () => {
               <span>Log in with Google</span>
             </button>
             <div className="or flex">
-              <div className="left"></div>
+              <div className="left" />
               <span>Or</span>
-              <div className="right"></div>
+              <div className="right" />
             </div>
             <form onSubmit={handleSubmit}>
               <div className="form-control">
@@ -149,7 +150,7 @@ const Login = () => {
                   name="email"
                   id="username"
                 />
-                <p ref={emailRef} className="message"></p>
+                <p ref={emailRef} className="message" />
               </div>
               <div className="form-control">
                 <div className="pwd-label flex">
@@ -163,14 +164,16 @@ const Login = () => {
                   name="password"
                   id="password"
                 />
-                <p ref={passwordRef} className="message"></p>
+                <p ref={passwordRef} className="message" />
               </div>
-              <button className="sign-in-btn">Log In</button>
+              <button type="button" className="sign-in-btn">
+                Log In
+              </button>
             </form>
             <div className="or flex">
-              <div className="left"></div>
+              <div className="left" />
               <span>Or</span>
-              <div className="right"></div>
+              <div className="right" />
             </div>
             <Link className="sign-up-btn" to="/sign-up">
               Don't have an account? Sign Up Now !

@@ -1,4 +1,8 @@
-import React from "react";
+import React from 'react';
+import styled from 'styled-components';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useSelector } from 'react-redux';
 import {
   Navbar,
   Home,
@@ -9,12 +13,8 @@ import {
   Loading,
   SignUp,
   Account,
-} from "./components";
-import styled from "styled-components";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-import Notification from "./components/Notification";
-import { useSelector } from "react-redux";
+} from './components';
+import Notification from './components/Notification';
 
 const App = () => {
   const { isLoading } = useAuth0();
@@ -29,7 +29,7 @@ const App = () => {
           {userMsg && (
             <Notification
               msg={userMsg}
-              color={hasUserError ? "#c52525" : "#25c555"}
+              color={hasUserError ? '#c52525' : '#25c555'}
             />
           )}
           <Navbar />

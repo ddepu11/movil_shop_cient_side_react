@@ -1,50 +1,45 @@
-import React from "react";
-import styled from "styled-components";
-import { AiOutlineShoppingCart, AiFillSetting } from "react-icons/ai";
-import { FiRefreshCcw } from "react-icons/fi";
+import React from 'react';
+import styled from 'styled-components';
+import { AiOutlineShoppingCart, AiFillSetting } from 'react-icons/ai';
+import { FiRefreshCcw } from 'react-icons/fi';
 
-const Services = () => {
-  return (
-    <Wrapper className="w-960">
-      <h1>Company Services</h1>
-      <div className="grid">
-        <div className="service">
-          <div className="s_logo">
-            <AiOutlineShoppingCart />
-          </div>
-          <h1>Fast Delivery</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
-            aperiam? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Aut, aperiam?
-          </p>
+const Services = () => (
+  <Wrapper className="w-960">
+    <h1>Company Services</h1>
+    <div className="grid">
+      <div className="service">
+        <div className="s_logo">
+          <AiOutlineShoppingCart />
         </div>
-        <div className="service">
-          <div className="s_logo">
-            <AiFillSetting />
-          </div>
-          <h1>24*7 Customer Support</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
-            aperiam? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Aut, aperiam?
-          </p>
-        </div>
-        <div className="service">
-          <div className="s_logo">
-            <FiRefreshCcw />
-          </div>
-          <h1>Easy Returns</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut,
-            aperiam? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Aut, aperiam?
-          </p>
-        </div>
+        <h1>Fast Delivery</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, aperiam?
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, aperiam?
+        </p>
       </div>
-    </Wrapper>
-  );
-};
+      <div className="service">
+        <div className="s_logo">
+          <AiFillSetting />
+        </div>
+        <h1>24*7 Customer Support</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, aperiam?
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, aperiam?
+        </p>
+      </div>
+      <div className="service">
+        <div className="s_logo">
+          <FiRefreshCcw />
+        </div>
+        <h1>Easy Returns</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, aperiam?
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, aperiam?
+        </p>
+      </div>
+    </div>
+  </Wrapper>
+);
 
 const Wrapper = styled.section`
   text-align: center;

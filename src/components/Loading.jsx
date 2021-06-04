@@ -1,13 +1,11 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-const Loading = () => {
-  return (
-    <Wrapper>
-      <h1>Loading please wait...</h1>
-    </Wrapper>
-  );
-};
+const Loading = () => (
+  <Wrapper>
+    <h1>Loading please wait...</h1>
+  </Wrapper>
+);
 
 const Wrapper = styled.main`
   display: grid;

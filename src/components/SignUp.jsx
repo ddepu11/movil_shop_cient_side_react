@@ -1,24 +1,26 @@
-import React, { useState, useRef, useEffect } from "react";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { signUpUser } from "../actions/user_actions";
-import Loading from "./Loading";
-import { Redirect } from "react-router-dom";
+import React, { useState, useRef, useEffect } from 'react';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import Loading from './Loading';
+import { signUpUser } from '../actions/user_actions';
 
 const SignUp = () => {
   const { userSignUpSuccess } = useSelector((state) => state.user);
   const setTORefId = useRef();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    // Clearing all the setTimeouts while unmounting the components
-    return () => {
-      clearTimeout(setTORefId.current);
-      while (setTORefId.current--) {
+  useEffect(
+    () =>
+      // Clearing all the setTimeouts while unmounting the components
+      () => {
         clearTimeout(setTORefId.current);
-      }
-    };
-  }, []);
+        while (setTORefId.current--) {
+          clearTimeout(setTORefId.current);
+        }
+      },
+    []
+  );
 
   const { userLoading } = useSelector((state) => state.user);
 
@@ -31,12 +33,12 @@ const SignUp = () => {
   const confirmPasswordRef = useRef(null);
 
   const [signUpCredentials, setSignUpCredentials] = useState({
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
 
   let erroFlag = false;
@@ -52,17 +54,17 @@ const SignUp = () => {
     let firstName = signUpCredentials.firstName;
 
     if (firstName.length > 20) {
-      showMessage(firstNameRef, "first name is too lengthy", "error");
+      showMessage(firstNameRef, 'first name is too lengthy', 'error');
       erroFlag = true;
     }
 
     if (firstName.length < 2) {
-      showMessage(firstNameRef, "first name is too short", "error");
+      showMessage(firstNameRef, 'first name is too short', 'error');
       erroFlag = true;
     }
 
-    if (firstName === "") {
-      showMessage(firstNameRef, "first name cannot be empty", "error");
+    if (firstName === '') {
+      showMessage(firstNameRef, 'first name cannot be empty', 'error');
       erroFlag = true;
     }
 
@@ -72,17 +74,17 @@ const SignUp = () => {
     let lastName = signUpCredentials.lastName;
 
     if (lastName.length > 20) {
-      showMessage(lastNameRef, "last name is too lengthy", "error");
+      showMessage(lastNameRef, 'last name is too lengthy', 'error');
       erroFlag = true;
     }
 
     if (lastName.length < 2) {
-      showMessage(lastNameRef, "last name is too short", "error");
+      showMessage(lastNameRef, 'last name is too short', 'error');
       erroFlag = true;
     }
 
-    if (lastName === "") {
-      showMessage(lastNameRef, "last name cannot be empty", "error");
+    if (lastName === '') {
+      showMessage(lastNameRef, 'last name cannot be empty', 'error');
       erroFlag = true;
     }
 
@@ -92,17 +94,17 @@ const SignUp = () => {
     let phoneNumber = signUpCredentials.phoneNumber;
 
     if (phoneNumber.length > 10 || phoneNumber.length < 10) {
-      showMessage(phoneNumberRef, "Min and Maximum 10 digits allowed", "error");
+      showMessage(phoneNumberRef, 'Min and Maximum 10 digits allowed', 'error');
       erroFlag = true;
     }
 
     if (!/^\d+$/.test(phoneNumber)) {
-      showMessage(phoneNumberRef, "Only numeric values allowed", "error");
+      showMessage(phoneNumberRef, 'Only numeric values allowed', 'error');
       erroFlag = true;
     }
 
-    if (phoneNumber === "") {
-      showMessage(phoneNumberRef, "phone number cannot be empty", "error");
+    if (phoneNumber === '') {
+      showMessage(phoneNumberRef, 'phone number cannot be empty', 'error');
       erroFlag = true;
     }
 
@@ -118,13 +120,13 @@ const SignUp = () => {
       return re.test(String(email).toLowerCase());
     }
 
-    if (email === "") {
-      showMessage(emailRef, "email cannot be empty", "error");
+    if (email === '') {
+      showMessage(emailRef, 'email cannot be empty', 'error');
       erroFlag = true;
     }
 
     if (!validateEmail(email)) {
-      showMessage(emailRef, "Invalid email address", "error");
+      showMessage(emailRef, 'Invalid email address', 'error');
       erroFlag = true;
     }
 
@@ -137,7 +139,7 @@ const SignUp = () => {
       showMessage(
         passwordRef,
         "password's length cant be greater then 20 ",
-        "error"
+        'error'
       );
       erroFlag = true;
     }
@@ -146,13 +148,13 @@ const SignUp = () => {
       showMessage(
         passwordRef,
         "password's length cant be less then 6 ",
-        "error"
+        'error'
       );
       erroFlag = true;
     }
 
-    if (password === "") {
-      showMessage(passwordRef, "password cannot be empty", "error");
+    if (password === '') {
+      showMessage(passwordRef, 'password cannot be empty', 'error');
       erroFlag = true;
     }
     // **************** Password Validation ends  **********************
@@ -161,24 +163,24 @@ const SignUp = () => {
     let confirmPassword = signUpCredentials.confirmPassword;
 
     if (confirmPassword !== password) {
-      showMessage(confirmPasswordRef, "Password did not match", "error");
+      showMessage(confirmPasswordRef, 'Password did not match', 'error');
       erroFlag = true;
     }
 
     if (
       confirmPassword === password &&
-      confirmPassword !== "" &&
+      confirmPassword !== '' &&
       confirmPassword.length <= 20 &&
       confirmPassword.length >= 6
     ) {
-      showMessage(confirmPasswordRef, "Password match successfully", "success");
+      showMessage(confirmPasswordRef, 'Password match successfully', 'success');
     }
 
     if (confirmPassword.length > 20) {
       showMessage(
         confirmPasswordRef,
         "password's length cant be greater then 20 ",
-        "error"
+        'error'
       );
       erroFlag = true;
     }
@@ -187,16 +189,16 @@ const SignUp = () => {
       showMessage(
         confirmPasswordRef,
         "password's length cant be less then 6 ",
-        "error"
+        'error'
       );
       erroFlag = true;
     }
 
-    if (confirmPassword === "") {
+    if (confirmPassword === '') {
       showMessage(
         confirmPasswordRef,
-        "confirm password cannot be empty",
-        "error"
+        'confirm password cannot be empty',
+        'error'
       );
       erroFlag = true;
     }
@@ -217,7 +219,7 @@ const SignUp = () => {
     ref.current.classList.add(className);
 
     setTORefId.current = setTimeout(() => {
-      ref.current.innerText = "";
+      ref.current.innerText = '';
       ref.current.classList.remove(className);
     }, 4000);
   };

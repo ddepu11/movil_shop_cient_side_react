@@ -1,15 +1,13 @@
-import styled from "styled-components";
-import React from "react";
+import styled from 'styled-components';
+import React from 'react';
 
-const Hero = ({ title }) => {
-  return (
-    <Wrapper>
-      <div className="w-960">
-        <h1>Home / {title}</h1>
-      </div>
-    </Wrapper>
-  );
-};
+const Hero = ({ title }) => (
+  <Wrapper>
+    <div className="w-960">
+      <h1>Home / {title}</h1>
+    </div>
+  </Wrapper>
+);
 
 const Wrapper = styled.main`
   background: #555;

@@ -16,8 +16,8 @@ import {
   USER_SIGN_UP_BEGIN,
   USER_SIGN_UP_ERROR,
   USER_SIGN_UP_SUCCESS,
-} from "./constant";
-import * as user from "../api/user_api.js";
+} from './constant';
+import * as user from '../api/user_api';
 
 //  check if given email is registered while loggijng in using google??
 const isUserRegisteredWithThisEmail = (email) => async (dispatch) => {
@@ -28,17 +28,17 @@ const isUserRegisteredWithThisEmail = (email) => async (dispatch) => {
 
     dispatch({
       type: IS_EMAIL_REGISTERED_SUCCESS,
-      payload: { user: data.user, msg: "User Logged In Successfully!!!" },
+      payload: { user: data.user, msg: 'User Logged In Successfully!!!' },
     });
   } catch (error) {
     dispatch({
       type: IS_EMAIL_REGISTERED_ERROR,
-      payload: "User was not registered!!!",
+      payload: 'User was not registered!!!',
     });
   }
 };
 
-//Custom User Login
+// Custom User Login
 const customUserLogin = (email, password) => async (dispatch) => {
   dispatch({ type: USER_LOG_IN_BEGIN });
 
@@ -93,7 +93,7 @@ const getAccountInfo = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: ACCOUNT_INFO_ERROR,
-      payload: "Unautherized user,please log in !!!",
+      payload: 'Unautherized user,please log in !!!',
     });
   }
 };
@@ -106,10 +106,10 @@ const logOutUser = () => async (dispatch) => {
 
     dispatch({
       type: USER_LOG_OUT_SUCCESS,
-      payload: "User logged out successfully!!!",
+      payload: 'User logged out successfully!!!',
     });
   } catch (error) {
-    dispatch({ type: USER_LOG_OUT_ERROR, payload: "An error occured!!!" });
+    dispatch({ type: USER_LOG_OUT_ERROR, payload: 'An error occured!!!' });
   }
 };
 

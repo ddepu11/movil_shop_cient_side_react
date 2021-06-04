@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import logo from "../assests/logo.svg";
-import { BiCart } from "react-icons/bi";
-import { useSelector, useDispatch } from "react-redux";
-import { useAuth0 } from "@auth0/auth0-react";
-import { logOutUser } from "../actions/user_actions";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { BiCart } from 'react-icons/bi';
+import { useSelector, useDispatch } from 'react-redux';
+import { useAuth0 } from '@auth0/auth0-react';
+import logo from '../assests/logo.svg';
+import { logOutUser } from '../actions/user_actions';
 
 const Navbar = () => {
   const { logout, isAuthenticated } = useAuth0();
@@ -16,9 +16,9 @@ const Navbar = () => {
     if (isAuthenticated) {
       dispatch(logOutUser());
       logout();
-      //clear states
+      // clear states
     } else if (hasUserLoggedIn) {
-      //clear states
+      // clear states
       dispatch(logOutUser());
     }
   };
@@ -43,7 +43,11 @@ const Navbar = () => {
             </li>
             <li>
               {hasUserLoggedIn || Object.keys(userInfo).length !== 0 ? (
-                <button className="log-out-btn" onClick={handleLogOut}>
+                <button
+                  type="button"
+                  className="log-out-btn"
+                  onClick={handleLogOut}
+                >
                   Log Out
                 </button>
               ) : (
