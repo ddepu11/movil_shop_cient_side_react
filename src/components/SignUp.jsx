@@ -42,12 +42,17 @@ const SignUp = () => {
     password: '',
     confirmPassword: '',
   });
+  const [dp, setDP] = useState('');
 
   let erroFlag = false;
 
   const handleInput = (e) => {
     const { value, name } = e.target;
     setSignUpCredentials({ ...signUpCredentials, [name]: value });
+  };
+
+  const handleDP = (e) => {
+    setDP(e.target.files[0]);
   };
 
   // Shows error or success message
@@ -220,9 +225,20 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     formValidation();
+    const formData = new FormData();
+    formData.append('dp', dp);
 
     if (!erroFlag) {
-      dispatch(signUpUser(signUpCredentials));
+      const keys = Object.keys(signUpCredentials);
+      const values = Object.values(signUpCredentials);
+
+      keys.forEach((k) => {
+        values.forEach((v) => {
+          formData.append(k.toString().trim(), v);
+        });
+      });
+
+      dispatch(signUpUser(formData));
     }
   };
 
@@ -233,7 +249,7 @@ const SignUp = () => {
   if (userSignUpSuccess) {
     return <Redirect to="/log-in" />;
   }
-  var a = 45;
+
   return (
     <Wrapper className="w-960">
       <h1>Get your free MovilShop account now</h1>
@@ -247,6 +263,7 @@ const SignUp = () => {
               type="text"
               id="first_name"
               name="firstName"
+              placeholder="Enter your first name."
             />
             <p ref={firstNameRef} className="message" />
           </div>
@@ -258,6 +275,7 @@ const SignUp = () => {
               type="text"
               id="last_name"
               name="lastName"
+              placeholder="Enter your last name."
             />
             <p ref={lastNameRef} className="message" />
           </div>
@@ -272,6 +290,7 @@ const SignUp = () => {
               type="text"
               id="phone_number"
               name="phoneNumber"
+              placeholder="Enter your phone number."
             />
             <p ref={phoneNumberRef} className="message" />
           </div>
@@ -283,6 +302,7 @@ const SignUp = () => {
               type="text"
               id="email"
               name="email"
+              placeholder="Enter your email address."
             />
             <p ref={emailRef} className="message" />
           </div>
@@ -297,6 +317,7 @@ const SignUp = () => {
               type="password"
               id="password"
               name="password"
+              placeholder="Enter your password."
             />
             <p ref={passwordRef} className="message" />
           </div>
@@ -309,8 +330,28 @@ const SignUp = () => {
               type="password"
               id="confirm_password"
               name="confirmPassword"
+              placeholder="Confirm your password."
             />
             <p ref={confirmPasswordRef} className="message" />
+          </div>
+        </div>
+
+        {/* File Upload */}
+        <div className="row flex">
+          <div className="form-control">
+            <label htmlFor="dp" className="dp-label">
+              Display Picture
+            </label>
+
+            <input
+              type="file"
+              name="dp"
+              id="dp"
+              className="dp"
+              onChange={handleDP}
+            />
+
+            <p ref={passwordRef} className="dp" />
           </div>
         </div>
         <button type="submit" className="sign-up-btn">
@@ -319,98 +360,6 @@ const SignUp = () => {
       </form>
     </Wrapper>
   );
-
-  // return (
-  //   <>
-  //     {userLoading ? (
-  //       <Loading />
-  //     ) : userSignUpSuccess ? (
-  //       <Redirect to="/log-in" />
-  //     ) : (
-  //       <Wrapper className="w-960">
-  //         <h1>Get your free MovilShop account now</h1>
-  //         <form onSubmit={handleSubmit}>
-  //           <div className="row flex">
-  //             <div className="form-control ">
-  //               <label htmlFor="first_name">First Name</label>
-  //               <input
-  //                 value={signUpCredentials.firstName}
-  //                 onChange={handleInput}
-  //                 type="text"
-  //                 id="first_name"
-  //                 name="firstName"
-  //               />
-  //               <p ref={firstNameRef} className="message"></p>
-  //             </div>
-  //             <div className="form-control">
-  //               <label htmlFor="last_name">Last Name</label>
-  //               <input
-  //                 value={signUpCredentials.lastName}
-  //                 onChange={handleInput}
-  //                 type="text"
-  //                 id="last_name"
-  //                 name="lastName"
-  //               />
-  //               <p ref={lastNameRef} className="message"></p>
-  //             </div>
-  //           </div>
-
-  //           <div className="row flex">
-  //             <div className="form-control">
-  //               <label htmlFor="phone_number">Phone Number</label>
-  //               <input
-  //                 value={signUpCredentials.phoneNumber}
-  //                 onChange={handleInput}
-  //                 type="text"
-  //                 id="phone_number"
-  //                 name="phoneNumber"
-  //               />
-  //               <p ref={phoneNumberRef} className="message"></p>
-  //             </div>
-  //             <div className="form-control">
-  //               <label htmlFor="email">Email Address</label>
-  //               <input
-  //                 value={signUpCredentials.email}
-  //                 onChange={handleInput}
-  //                 type="text"
-  //                 id="email"
-  //                 name="email"
-  //               />
-  //               <p ref={emailRef} className="message"></p>
-  //             </div>
-  //           </div>
-
-  //           <div className="row flex">
-  //             <div className="form-control">
-  //               <label htmlFor="password">Password</label>
-  //               <input
-  //                 value={signUpCredentials.password}
-  //                 onChange={handleInput}
-  //                 type="password"
-  //                 id="password"
-  //                 name="password"
-  //               />
-  //               <p ref={passwordRef} className="message"></p>
-  //             </div>
-
-  //             <div className="form-control">
-  //               <label htmlFor="confirm_password">Confirm Password</label>
-  //               <input
-  //                 value={signUpCredentials.confirmPassword}
-  //                 onChange={handleInput}
-  //                 type="password"
-  //                 id="confirm_password"
-  //                 name="confirmPassword"
-  //               />
-  //               <p ref={confirmPasswordRef} className="message"></p>
-  //             </div>
-  //           </div>
-  //           <button className="sign-up-btn">Create Account</button>
-  //         </form>
-  //       </Wrapper>
-  //     )}
-  //   </>
-  // );
 };
 
 const Wrapper = styled.main`
@@ -441,6 +390,9 @@ const Wrapper = styled.main`
           font-size: 1.1em;
           width: 65%;
         }
+        .dp {
+        }
+
         .message.error {
           color: red;
           font-size: 1.2em;

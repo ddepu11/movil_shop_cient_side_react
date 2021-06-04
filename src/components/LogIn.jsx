@@ -151,6 +151,7 @@ const Login = () => {
                   type="text"
                   name="email"
                   id="username"
+                  placeholder="Please enter your email address."
                 />
                 <p ref={emailRef} className="message" />
               </div>
@@ -165,6 +166,7 @@ const Login = () => {
                   type="password"
                   name="password"
                   id="password"
+                  placeholder="Please enter your password."
                 />
                 <p ref={passwordRef} className="message" />
               </div>

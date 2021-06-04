@@ -5,8 +5,12 @@ import axios from 'axios';
 const logIn = (email, password) =>
   axios.post('/user/login', { email, password });
 
-const signUp = (userCredentials) =>
-  axios.post('/user/sign-up', { ...userCredentials });
+const signUp = (formData) =>
+  axios.post('/user/sign-up', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 
 const accountInfo = () => axios.get('/user/account');
 
