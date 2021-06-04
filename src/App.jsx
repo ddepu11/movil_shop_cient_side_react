@@ -26,7 +26,7 @@ const App = () => {
         <Router>
           {userMsg && (
             <Notification
-              msg={userMsg}
+              msg={userMsg.toString()}
               color={hasUserError ? '#c52525' : '#25c555'}
             />
           )}

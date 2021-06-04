@@ -10,18 +10,16 @@ const SignUp = () => {
   const setTORefId = useRef();
   const dispatch = useDispatch();
 
-  useEffect(
-    () =>
-      // Clearing all the setTimeouts while unmounting the components
-      () => {
-        let refId = setTORefId.current;
-        clearTimeout(refId);
+  useEffect(() =>
+    // Clearing all the setTimeouts while unmounting the components
+    () => {
+      let refId = setTORefId.current;
+      clearTimeout(refId);
+      while (refId) {
         refId -= 1;
-        while (refId) {
-          clearTimeout(setTORefId.current);
-        }
-      },
-    []
+        clearTimeout(refId);
+      }
+    }
   );
 
   const { userLoading } = useSelector((state) => state.user);
@@ -223,9 +221,10 @@ const SignUp = () => {
   };
 
   // Appending signup credentials to formData object
-  const appendDataTo = (fd) => {
+  const appendDataToFD = (fd) => {
     const k = Object.keys(signUpCredentials);
     const v = Object.values(signUpCredentials);
+
     for (let a = 0; a < k.length; a += 1) {
       fd.append(k[a].toString().trim(), v[a]);
     }
@@ -239,12 +238,7 @@ const SignUp = () => {
     formData.append('dp', dp);
 
     if (!erroFlag) {
-      appendDataTo(formData);
-      // keys.forEach((k) => {
-      //   values.forEach((v) => {
-      //     formData.append(k.toString().trim(), v);
-      //   });
-      // });
+      appendDataToFD(formData);
 
       dispatch(signUpUser(formData));
     }

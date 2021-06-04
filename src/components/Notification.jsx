@@ -11,7 +11,7 @@ const Notification = ({ msg, color }) => {
     setTimeout(() => {
       dispatch(clearUserMessage());
     }, 5000);
-  }, [msg, dispatch]);
+  });
 
   return (
     <Wrapper style={{ background: color }}>

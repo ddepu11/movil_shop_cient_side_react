@@ -32,12 +32,13 @@ const Login = () => {
     return () => {
       let refId = setTORefId.current;
       clearTimeout(refId);
-      refId += 1;
       while (refId) {
-        clearTimeout(setTORefId.current);
+        refId -= 1;
+        clearTimeout(refId);
       }
     };
-  }, [hasUserLoggedIn, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   let error = false;
 
