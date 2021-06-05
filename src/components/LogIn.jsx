@@ -11,7 +11,10 @@ import {
 import Loading from './Loading';
 
 const Login = () => {
-  const { hasUserLoggedIn, userLoading } = useSelector((state) => state.user);
+  const { hasUserLoggedIn, userLoading, userSignUpSuccess } = useSelector(
+    (state) => state.user
+  );
+
   const emailRef = useRef();
   const passwordRef = useRef();
   const setTORefId = useRef();
@@ -26,7 +29,7 @@ const Login = () => {
   });
 
   useEffect(() => {
-    hasUserLoggedIn && dispatch(clearUserSignUpSuccess());
+    userSignUpSuccess && dispatch(clearUserSignUpSuccess());
 
     hasUserLoggedIn && <Redirect to="/account" />;
 
@@ -40,7 +43,7 @@ const Login = () => {
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasUserLoggedIn]);
+  }, []);
 
   let error = false;
 

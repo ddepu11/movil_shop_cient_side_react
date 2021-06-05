@@ -11,6 +11,7 @@ const SignUp = () => {
   const dispatch = useDispatch();
 
   useEffect(() =>
+    // userSignUpSuccess && dispatch()
     // Clearing all the setTimeouts while unmounting the components
     () => {
       let refId = setTORefId.current;
