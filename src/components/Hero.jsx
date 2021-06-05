@@ -9,6 +9,7 @@ const Hero = ({ title }) => (
     </div>
   </Wrapper>
 );
+
 Hero.propTypes = {
   title: PropTypes.string.isRequired,
 };

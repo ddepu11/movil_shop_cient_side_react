@@ -31,6 +31,7 @@ const SignUp = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
+  const dpRef = useRef(null);
 
   const [signUpCredentials, setSignUpCredentials] = useState({
     firstName: '',
@@ -40,6 +41,7 @@ const SignUp = () => {
     password: '',
     confirmPassword: '',
   });
+
   const [dp, setDP] = useState('');
 
   let erroFlag = false;
@@ -49,6 +51,7 @@ const SignUp = () => {
     setSignUpCredentials({ ...signUpCredentials, [name]: value });
   };
 
+  // Setting the img to the state
   const handleDP = (e) => {
     setDP(e.target.files[0]);
   };
@@ -218,6 +221,15 @@ const SignUp = () => {
       );
       erroFlag = true;
     }
+
+    // File upload validations
+    if (dp === '') {
+      showMessage(dpRef, 'Please select the img', 'error');
+      erroFlag = true;
+    } else if (dp.size > 2097152) {
+      // 2097152 bytes === 2MB
+      showMessage(dpRef, 'Image size should not be greater then 2MB', 'error');
+    }
   };
 
   // Appending signup credentials to formData object
@@ -338,7 +350,7 @@ const SignUp = () => {
           </div>
         </div>
 
-        {/* File Upload */}
+        {/* File Upload  */}
         <div className="row flex">
           <div className="form-control">
             <label htmlFor="dp" className="dp-label">
@@ -351,9 +363,10 @@ const SignUp = () => {
               id="dp"
               className="dp"
               onChange={handleDP}
+              accept=".jpg, .png, .jpeg"
             />
 
-            <p ref={passwordRef} className="dp" />
+            <p ref={dpRef} className="message" />
           </div>
         </div>
         <button type="submit" className="sign-up-btn">
