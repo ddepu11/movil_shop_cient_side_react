@@ -23,7 +23,9 @@ const Account = () => {
       (!hasUserLoggedIn && Object.keys(userInfo).length === 0) ? (
         history.push('/log-in')
       ) : (
-        <Wrapper className="w-960">Hello</Wrapper>
+        <Wrapper className="w-960">
+          <img src={`dp/${userInfo.displayPicture}`} alt="dp" />
+        </Wrapper>
       )}
     </>
   );

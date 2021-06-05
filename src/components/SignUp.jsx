@@ -406,7 +406,11 @@ const Wrapper = styled.main`
           font-size: 1.1em;
           width: 65%;
         }
+        .dp-label {
+          width: 15%;
+        }
         .dp {
+          width: 32.5%;
         }
 
         .message.error {
