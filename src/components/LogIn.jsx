@@ -28,6 +28,8 @@ const Login = () => {
   useEffect(() => {
     hasUserLoggedIn && dispatch(clearUserSignUpSuccess());
 
+    hasUserLoggedIn && <Redirect to="/account" />;
+
     // Clearing all the setTimeouts while unmounting the components
     return () => {
       let refId = setTORefId.current;
@@ -38,7 +40,7 @@ const Login = () => {
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [hasUserLoggedIn]);
 
   let error = false;
 
@@ -123,7 +125,6 @@ const Login = () => {
 
   return (
     <>
-      {hasUserLoggedIn && <Redirect to="/account" />}
       {userLoading ? (
         <Loading />
       ) : (
