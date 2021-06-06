@@ -60,18 +60,21 @@ const Wrapper = styled.footer`
   padding: 00px 0px;
   .f_upper {
     justify-content: space-around;
-    width: 1200px;
-    margin: auto;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 50px 0px;
 
     .left {
       width: 60%;
+      margin: 0 auto;
       justify-content: space-between;
+
       .c {
         h2 {
           margin-bottom: 14px;
           color: #555;
         }
+
         h3 {
           margin-bottom: 8px;
           color: #333;
@@ -79,6 +82,7 @@ const Wrapper = styled.footer`
         }
       }
     }
+
     .right {
       justify-self: start;
       label {
@@ -89,6 +93,7 @@ const Wrapper = styled.footer`
         color: #222;
         padding: 5px 0;
       }
+
       input,
       button {
         padding: 10px 20px;
@@ -97,21 +102,25 @@ const Wrapper = styled.footer`
       }
     }
   }
+
   .fotter_fw {
     background-color: #555;
     padding: 20px 0;
   }
+
   .f_lover {
     justify-content: space-between;
-    width: 1200px;
-    margin: auto;
+    max-width: 1200px;
+    margin: 0 auto;
     color: white;
+
     .left {
       p {
         font-size: 1.1em;
         letter-spacing: 1px;
       }
     }
+
     .right {
       span {
         margin-left: 15px;

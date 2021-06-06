@@ -53,7 +53,7 @@ const Home = () => {
 
 const Wrapper = styled.main`
   .hero {
-    width: 1200px;
+    max-width: 1200px;
     margin: 0 auto;
     background-color: #db7979;
     padding: 20px;
@@ -88,14 +88,18 @@ const Wrapper = styled.main`
     background-color: #c7c7c7;
     padding: 20px;
     text-align: center;
+
     h2 {
       margin-bottom: 50px;
       font-size: 1.8em;
       letter-spacing: 2px;
     }
-    .r_p_div > * {
-      margin-right: 25px;
+
+    .r_p_div {
+      flex-wrap: wrap;
+      gap: 5rem;
     }
+
     .btn {
       margin-top: 30px;
     }

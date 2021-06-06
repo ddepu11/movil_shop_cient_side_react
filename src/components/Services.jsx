@@ -6,7 +6,7 @@ import { FiRefreshCcw } from 'react-icons/fi';
 const Services = () => (
   <Wrapper className="w-960">
     <h1>Company Services</h1>
-    <div className="grid">
+    <div className="flex service_div">
       <div className="service">
         <div className="s_logo">
           <AiOutlineShoppingCart />
@@ -52,10 +52,9 @@ const Wrapper = styled.section`
     margin-bottom: 60px;
   }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(250px, 250px));
-    gap: 80px;
+  .service_div {
+    flex-wrap: wrap;
+    gap: 5rem;
   }
 
   .service {
