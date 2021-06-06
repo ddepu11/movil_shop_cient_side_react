@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { AiOutlineGoogle } from 'react-icons/ai';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -28,10 +28,12 @@ const Login = () => {
     password: '',
   });
 
+  const history = useHistory();
+
   useEffect(() => {
     userSignUpSuccess && dispatch(clearUserSignUpSuccess());
 
-    hasUserLoggedIn && <Redirect to="/account" />;
+    hasUserLoggedIn && history.push('/account');
 
     // Clearing all the setTimeouts while unmounting the components
     return () => {
@@ -42,8 +44,7 @@ const Login = () => {
         clearTimeout(refId);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [hasUserLoggedIn, userSignUpSuccess, dispatch, history]);
 
   let error = false;
 
@@ -133,7 +134,7 @@ const Login = () => {
       ) : (
         <Wrapper className="w-960 flex">
           <div>
-            <h2>Logn in to Movil Shop</h2>
+            <h2>Login in to Movil Shop</h2>
             <button
               type="button"
               onClick={() => loginWithRedirect()}
@@ -195,7 +196,7 @@ const Login = () => {
 };
 
 const Wrapper = styled.main`
-  padding: 40px 0;
+  padding: 10px 0 40px 0;
   h2 {
     font-size: 2.2em;
     padding: 15px 0;

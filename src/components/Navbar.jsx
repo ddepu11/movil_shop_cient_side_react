@@ -124,7 +124,7 @@ const Wrapper = styled.nav`
   }
   .nav_bottom {
     justify-content: space-between;
-    padding: 30px 0 70px 0;
+    padding: 20px 0 60px 0;
 
     .nav_links {
       width: 40%;

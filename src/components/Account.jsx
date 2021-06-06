@@ -13,20 +13,24 @@ const Account = () => {
   );
 
   useEffect(() => {
-    dispatch(getAccountInfo());
+    if (
+      hasUserError ||
+      (!hasUserLoggedIn && Object.keys(userInfo).length === 0)
+    ) {
+      history.push('/log-in');
+    }
+
+    !hasUserLoggedIn && dispatch(getAccountInfo());
+
     // eslint-disable-next-line
-  }, []);
+  }, [hasUserLoggedIn]);
 
   return (
     <>
-      {hasUserError ||
-      (!hasUserLoggedIn && Object.keys(userInfo).length === 0) ? (
-        history.push('/log-in')
-      ) : (
-        <Wrapper className="w-960">
-          <img src={`dp/${userInfo.displayPicture}`} alt="dp" />
-        </Wrapper>
-      )}
+      <Wrapper className="w-960">
+        
+        {/* <img src={`dp/${userInfo.displayPicture}`} alt="dp" /> */}
+      </Wrapper>
     </>
   );
 };

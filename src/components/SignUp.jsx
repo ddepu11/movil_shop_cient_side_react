@@ -41,6 +41,7 @@ const SignUp = () => {
     email: '',
     password: '',
     confirmPassword: '',
+    gender: '',
   });
 
   const [dp, setDP] = useState('');
@@ -49,6 +50,7 @@ const SignUp = () => {
 
   const handleInput = (e) => {
     const { value, name } = e.target;
+
     setSignUpCredentials({ ...signUpCredentials, [name]: value });
   };
 
@@ -282,6 +284,7 @@ const SignUp = () => {
             />
             <p ref={firstNameRef} className="message" />
           </div>
+
           <div className="form-control">
             <label htmlFor="last_name">Last Name</label>
             <input
@@ -294,6 +297,40 @@ const SignUp = () => {
             />
             <p ref={lastNameRef} className="message" />
           </div>
+
+          {/* Gender */}
+          <div className="form-control">
+            <h2 className="gender_heading">Gender</h2>
+
+            <dir className="gender">
+              <div>
+                <label htmlFor="male">Male</label>
+                <input
+                  value="male"
+                  onChange={handleInput}
+                  type="radio"
+                  id="male"
+                  name="gender"
+                  placeholder="Enter your last name."
+                />
+              </div>
+
+              <div>
+                <label htmlFor="female">Female</label>
+                <input
+                  value="female"
+                  onChange={handleInput}
+                  type="radio"
+                  id="female"
+                  name="gender"
+                  placeholder="Enter your last name."
+                />
+              </div>
+            </dir>
+
+            <p ref={lastNameRef} className="message" />
+          </div>
+          {/* Gender Ends */}
         </div>
 
         <div className="row flex">
@@ -357,7 +394,6 @@ const SignUp = () => {
             <label htmlFor="dp" className="dp-label">
               Display Picture
             </label>
-
             <input
               type="file"
               name="dp"
@@ -394,6 +430,11 @@ const Wrapper = styled.main`
         display: flex;
         flex-direction: column;
         width: 100%;
+        .gender_heading {
+          font-size: 1.3em;
+          color: #222;
+          font-weight: 400;
+        }
         label {
           font-size: 1.3em;
           padding: 8px 0;
