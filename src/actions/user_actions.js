@@ -16,8 +16,14 @@ import {
   USER_SIGN_UP_BEGIN,
   USER_SIGN_UP_ERROR,
   USER_SIGN_UP_SUCCESS,
+  AUTHENTICATE_USER,
 } from './constant';
 import * as user from '../api/user_api';
+
+// Authenticate User
+const authenticateUser = () => async (dispatch) => {
+  dispatch({ type: AUTHENTICATE_USER });
+};
 
 //  check if given email is registered while loggijng in using google??
 const isUserRegisteredWithThisEmail = (email) => async (dispatch) => {
@@ -121,4 +127,5 @@ export {
   getAccountInfo,
   logOutUser,
   isUserRegisteredWithThisEmail,
+  authenticateUser,
 };

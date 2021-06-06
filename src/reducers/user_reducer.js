@@ -2,6 +2,7 @@ import {
   ACCOUNT_INFO_BEGIN,
   ACCOUNT_INFO_ERROR,
   ACCOUNT_INFO_SUCCESS,
+  AUTHENTICATE_USER,
   CLEAR_USER_MESSAGE,
   CLEAR_USER_SIGNUP_SUCCESS,
   IS_EMAIL_REGISTERED_BEGIN,
@@ -29,11 +30,19 @@ const initialUser = {
 
 const user = (userState = initialUser, action) => {
   switch (action.type) {
+    case AUTHENTICATE_USER:
+      return {
+        ...userState,
+        hasUserLoggedIn: false,
+        userMsg: action.payload,
+      };
+
     case IS_EMAIL_REGISTERED_BEGIN:
       return {
         ...userState,
         userLoading: true,
       };
+
     case IS_EMAIL_REGISTERED_SUCCESS:
       return {
         ...userState,
@@ -43,6 +52,7 @@ const user = (userState = initialUser, action) => {
         userLoading: false,
         hasUserError: false,
       };
+
     case IS_EMAIL_REGISTERED_ERROR:
       return {
         ...userState,
@@ -58,6 +68,7 @@ const user = (userState = initialUser, action) => {
         userLoading: true,
         hasUserError: false,
       };
+
     case USER_LOG_IN_SUCCESS:
       return {
         ...userState,
@@ -65,6 +76,7 @@ const user = (userState = initialUser, action) => {
         hasUserLoggedIn: true,
         userLoading: false,
       };
+
     case USER_LOG_IN_ERROR:
       return {
         ...userState,
@@ -72,6 +84,7 @@ const user = (userState = initialUser, action) => {
         userMsg: action.payload,
         userLoading: false,
       };
+
     // Sign-Up State handling
     case USER_SIGN_UP_BEGIN:
       return {
@@ -79,6 +92,7 @@ const user = (userState = initialUser, action) => {
         userLoading: true,
         hasUserError: false,
       };
+
     case USER_SIGN_UP_SUCCESS:
       return {
         ...userState,
@@ -86,6 +100,7 @@ const user = (userState = initialUser, action) => {
         userLoading: false,
         userMsg: action.payload,
       };
+
     case USER_SIGN_UP_ERROR:
       return {
         ...userState,
@@ -93,12 +108,14 @@ const user = (userState = initialUser, action) => {
         hasUserError: true,
         userMsg: action.payload,
       };
+
     case CLEAR_USER_MESSAGE:
       return {
         ...userState,
         userMsg: '',
         hasUserError: false,
       };
+
     case CLEAR_USER_SIGNUP_SUCCESS:
       return {
         ...userState,
@@ -110,6 +127,7 @@ const user = (userState = initialUser, action) => {
         ...userState,
         userLoading: true,
       };
+
     case ACCOUNT_INFO_SUCCESS:
       return {
         ...userState,
@@ -117,6 +135,7 @@ const user = (userState = initialUser, action) => {
         userInfo: action.payload,
         hasUserLoggedIn: true,
       };
+
     case ACCOUNT_INFO_ERROR:
       return {
         ...userState,
@@ -124,11 +143,13 @@ const user = (userState = initialUser, action) => {
         hasUserError: true,
         userMsg: action.payload,
       };
+
     case USER_LOG_OUT_BEGIN:
       return {
         ...userState,
         userLoading: true,
       };
+
     case USER_LOG_OUT_SUCCESS:
       return {
         ...userState,
@@ -137,6 +158,7 @@ const user = (userState = initialUser, action) => {
         hasUserLoggedIn: false,
         userInfo: {},
       };
+
     case USER_LOG_OUT_ERROR:
       return {
         ...userState,

@@ -6,6 +6,7 @@ import { getAccountInfo } from '../actions/user_actions';
 
 const Account = () => {
   const dispatch = useDispatch();
+
   const history = useHistory();
 
   const { hasUserError, hasUserLoggedIn, userInfo } = useSelector(
@@ -63,17 +64,24 @@ const Account = () => {
 };
 
 const Wrapper = styled.main`
+  padding: 20px 0;
   display: grid;
   gap: 1.3rem;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  padding: 20px 0;
+  grid-template-columns: repeat(3, minmax(150px, 1fr));
+  grid-template-rows: minmax(180px, auto);
+  grid-template-areas: 'as m m';
+
   aside {
+    grid-area: 'as';
     .dp {
       width: 120px;
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
     }
+  }
+  main {
+    grid-area: 'm';
   }
 `;
 

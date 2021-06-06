@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// axios.defaults.withCredentials = true;
+const authenticate = () => axios.get('/user/authenticate');
 
 const logIn = (email, password) =>
   axios.post('/user/login', { email, password });
