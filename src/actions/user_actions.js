@@ -16,13 +16,18 @@ import {
   USER_SIGN_UP_BEGIN,
   USER_SIGN_UP_ERROR,
   USER_SIGN_UP_SUCCESS,
-  AUTHENTICATE_USER,
+  AUTHENTICATE_USER_SUCCESS,
+  AUTHENTICATE_USER_FAIL,
 } from './constant';
 import * as user from '../api/user_api';
 
 // Authenticate User
 const authenticateUser = () => async (dispatch) => {
-  dispatch({ type: AUTHENTICATE_USER });
+  try {
+    dispatch({ type: AUTHENTICATE_USER_SUCCESS, payload: 'Hello user' });
+  } catch (err) {
+    dispatch({ type: AUTHENTICATE_USER_FAIL, payload: err.message });
+  }
 };
 
 //  check if given email is registered while loggijng in using google??

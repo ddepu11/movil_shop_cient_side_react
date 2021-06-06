@@ -20,4 +20,11 @@ const logOut = () => axios.get('/user/log-out');
 const checkIsEmailRegistered = (email) =>
   axios.post('/user/is-email-registered', { email });
 
-export { logIn, signUp, accountInfo, logOut, checkIsEmailRegistered };
+export {
+  logIn,
+  signUp,
+  accountInfo,
+  logOut,
+  checkIsEmailRegistered,
+  authenticate,
+};

@@ -2,7 +2,6 @@ import {
   ACCOUNT_INFO_BEGIN,
   ACCOUNT_INFO_ERROR,
   ACCOUNT_INFO_SUCCESS,
-  AUTHENTICATE_USER,
   CLEAR_USER_MESSAGE,
   CLEAR_USER_SIGNUP_SUCCESS,
   IS_EMAIL_REGISTERED_BEGIN,
@@ -17,6 +16,8 @@ import {
   USER_SIGN_UP_BEGIN,
   USER_SIGN_UP_ERROR,
   USER_SIGN_UP_SUCCESS,
+  AUTHENTICATE_USER_SUCCESS,
+  AUTHENTICATE_USER_FAIL,
 } from '../actions/constant';
 
 const initialUser = {
@@ -30,11 +31,17 @@ const initialUser = {
 
 const user = (userState = initialUser, action) => {
   switch (action.type) {
-    case AUTHENTICATE_USER:
+    case AUTHENTICATE_USER_SUCCESS:
+      return {
+        ...userState,
+        hasUserLoggedIn: true,
+        userMsg: action.payload,
+      };
+
+    case AUTHENTICATE_USER_FAIL:
       return {
         ...userState,
         hasUserLoggedIn: false,
-        userMsg: action.payload,
       };
 
     case IS_EMAIL_REGISTERED_BEGIN:
