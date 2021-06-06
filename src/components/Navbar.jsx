@@ -38,9 +38,7 @@ const Navbar = () => {
 
         <div className="links">
           <ul className="flex">
-            <li>
-              <Link to="/account">Account</Link>
-            </li>
+            .<li>{hasUserLoggedIn && <Link to="/account">Account</Link>}</li>
             <li>
               {hasUserLoggedIn || Object.keys(userInfo).length !== 0 ? (
                 <button

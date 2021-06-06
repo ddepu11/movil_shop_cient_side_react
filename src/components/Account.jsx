@@ -20,7 +20,7 @@ const Account = () => {
       history.push('/log-in');
     }
 
-    !hasUserLoggedIn && dispatch(getAccountInfo());
+    dispatch(getAccountInfo());
 
     // eslint-disable-next-line
   }, [hasUserLoggedIn]);
@@ -28,8 +28,7 @@ const Account = () => {
   return (
     <>
       <Wrapper className="w-960">
-        
-        {/* <img src={`dp/${userInfo.displayPicture}`} alt="dp" /> */}
+        {/* <img src={`dp /${userInfo.displayPicture}`} alt="dp" /> */}
       </Wrapper>
     </>
   );

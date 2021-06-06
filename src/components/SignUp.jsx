@@ -33,6 +33,7 @@ const SignUp = () => {
   const passwordRef = useRef(null);
   const confirmPasswordRef = useRef(null);
   const dpRef = useRef(null);
+  const genderRef = useRef(null);
 
   const [signUpCredentials, setSignUpCredentials] = useState({
     firstName: '',
@@ -91,6 +92,14 @@ const SignUp = () => {
     }
 
     // **************** FN Validation ends  **********************
+    // Gender validation
+    const { gender } = signUpCredentials;
+    if (gender === '') {
+      showMessage(genderRef, 'Please select your gender!!!', 'error');
+      erroFlag = true;
+    }
+
+    // #############
 
     // lastName validation
     const { lastName } = signUpCredentials;
@@ -328,7 +337,7 @@ const SignUp = () => {
               </div>
             </dir>
 
-            <p ref={lastNameRef} className="message" />
+            <p ref={genderRef} className="message" />
           </div>
           {/* Gender Ends */}
         </div>
