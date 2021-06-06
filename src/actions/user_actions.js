@@ -24,7 +24,12 @@ import * as user from '../api/user_api';
 // Authenticate User
 const authenticateUser = () => async (dispatch) => {
   try {
-    dispatch({ type: AUTHENTICATE_USER_SUCCESS, payload: 'Hello user' });
+    const { data } = await user.authenticate();
+
+    dispatch({
+      type: AUTHENTICATE_USER_SUCCESS,
+      payload: `Welcome back ${data.user.firstName} ${data.user.lastName}.`,
+    });
   } catch (err) {
     dispatch({ type: AUTHENTICATE_USER_FAIL, payload: err.message });
   }

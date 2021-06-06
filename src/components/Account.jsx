@@ -24,7 +24,9 @@ const Account = () => {
 
     // eslint-disable-next-line
   }, [hasUserLoggedIn]);
+
   const { displayPicture, firstName, lastName, email, phoneNumber } = userInfo;
+
   return (
     <>
       <Wrapper className="w-960">
@@ -41,18 +43,22 @@ const Account = () => {
             <h4>First Name:</h4>
             <span>{firstName}</span>
           </div>
+
           <div className="row flex">
             <h4>Last Name:</h4>
             <span>{lastName}</span>
           </div>
+
           <div className="row flex">
             <h4>Email</h4>
             <span>{email}</span>
           </div>
+
           <div className="row flex">
             <h4>Phone Number</h4>
             <span>{phoneNumber}</span>
           </div>
+
           <div className="row flex">
             <h4>Password</h4>
             <span>*********</span>
@@ -66,13 +72,14 @@ const Account = () => {
 const Wrapper = styled.main`
   padding: 20px 0;
   display: grid;
-  gap: 1.3rem;
-  grid-template-columns: repeat(3, minmax(150px, 1fr));
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(150px, auto));
   grid-template-rows: minmax(180px, auto);
   grid-template-areas: 'as m m';
 
   aside {
-    grid-area: 'as';
+    grid-area: as;
+    border: 1px solid red;
     .dp {
       width: 120px;
       height: 120px;
@@ -80,8 +87,14 @@ const Wrapper = styled.main`
       object-fit: cover;
     }
   }
+
   main {
-    grid-area: 'm';
+    grid-area: m;
+    border: 1px solid red;
+    .row {
+      justify-content: space-between;
+      padding: 15px 0;
+    }
   }
 `;
 
