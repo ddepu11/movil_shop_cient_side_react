@@ -44,6 +44,18 @@ const Account = () => {
     setInfo({ ...info, [name]: value });
   };
 
+  const cancelUpdate = () => {
+    setWannaEdit(false);
+    setInfo({
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      password: '**********',
+      confirmPassword: '**********',
+    });
+  };
+
   return (
     <>
       {userLoading ? (
@@ -154,6 +166,7 @@ const Account = () => {
                 />
               </div>
             )}
+
             {!wannaEdit ? (
               <button
                 type="button"
@@ -163,13 +176,22 @@ const Account = () => {
                 Wanna Update the info??
               </button>
             ) : (
-              <button
-                className="update_btn"
-                type="button"
-                onClick={() => setWannaEdit(false)}
-              >
-                Update!!!
-              </button>
+              <>
+                <button
+                  className="update_btn"
+                  type="button"
+                  onClick={() => setWannaEdit(false)}
+                >
+                  Update!!!
+                </button>
+                <button
+                  type="button"
+                  className="cancel_btn"
+                  onClick={cancelUpdate}
+                >
+                  Cancel
+                </button>
+              </>
             )}
           </main>
         </Wrapper>
