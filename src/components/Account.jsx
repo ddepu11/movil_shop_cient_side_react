@@ -120,23 +120,39 @@ const Wrapper = styled.main`
         object-fit: cover;
         width: 100%;
         height: 100%;
-        border-radius: 50%;
+        box-shadow: -5px 6px 8px 1px #252525;
       }
     }
 
     .dp::before {
       content: '';
-      background: #9c4ddd;
+      background: #1e6adb;
       width: 100%;
       height: 100%;
       position: absolute;
-      top: -5px;
+      top: -10px;
       left: 12px;
       z-index: -1;
-      border-radius: 50%;
+      box-shadow: 5px -2px 8px #252525;
     }
     .dp::after {
-      
+      font-family: 'Font Awesome 5 Free';
+      content: '\f083';
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #1e6adb;
+      position: absolute;
+      top: 0;
+      left: -20px;
+      color: white;
+      font-size: 1.1em;
+      font-weight: bold;
+      display: grid;
+      place-content: center;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     }
 
     p {
