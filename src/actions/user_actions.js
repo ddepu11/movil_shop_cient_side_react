@@ -18,6 +18,9 @@ import {
   USER_SIGN_UP_SUCCESS,
   AUTHENTICATE_USER_SUCCESS,
   AUTHENTICATE_USER_FAIL,
+  UPDATE_USER_BEGIN,
+  UPDATE_USER_ERROR,
+  UPDATE_USER_SUCCESS,
 } from './constant';
 import * as user from '../api/user_api';
 
@@ -129,6 +132,18 @@ const logOutUser = () => async (dispatch) => {
   }
 };
 
+const updateUser = () => async (dispatch) => {
+  dispatch({ type: UPDATE_USER_BEGIN });
+
+  try {
+    const { data } = user.update();
+
+    dispatch({ type: UPDATE_USER_SUCCESS, payload: data });
+  } catch (err) {
+    dispatch({ type: UPDATE_USER_ERROR, payload: err.message });
+  }
+};
+
 export {
   customUserLogin,
   signUpUser,
@@ -138,4 +153,5 @@ export {
   logOutUser,
   isUserRegisteredWithThisEmail,
   authenticateUser,
+  updateUser,
 };
