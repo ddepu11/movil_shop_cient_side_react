@@ -21,7 +21,6 @@ const Account = () => {
   const clearAllSetTimeOut = () => {
     let id = setTimeOutRefId.current;
     while (id) {
-      console.log(id);
       clearTimeout(id);
       id -= 1;
     }
@@ -96,7 +95,7 @@ const Account = () => {
 
     if (!errorFlag) {
       clearAllSetTimeOut();
-      // setWannaEdit(false);
+      setWannaEdit(false);
     }
   };
 
@@ -204,7 +203,7 @@ const Account = () => {
                 <div className="flex">
                   <input
                     value={info.password}
-                    type="text"
+                    type="password"
                     name="password"
                     onChange={handleInput}
                   />
@@ -221,9 +220,9 @@ const Account = () => {
                 <h4>Confirm Password:</h4>
                 <div className="flex">
                   <input
-                    value={info.password}
-                    type="text"
-                    name="password"
+                    value={info.confirmPassword}
+                    type="password"
+                    name="confirmPassword"
                     onChange={handleInput}
                   />
                   <p ref={confirmPasswordRef} className="message" />
