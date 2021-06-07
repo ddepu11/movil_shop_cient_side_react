@@ -25,19 +25,30 @@ const Account = () => {
     // eslint-disable-next-line
   }, [hasUserLoggedIn]);
 
-  const { displayPicture, firstName, lastName, email, phoneNumber } = userInfo;
+  const { displayPicture, firstName, lastName, email, phoneNumber, gender } =
+    userInfo;
 
   return (
     <>
       <Wrapper className="w-960">
-        <aside>
-          <img
-            src={`dp/${displayPicture}`}
-            alt={`${firstName} ${lastName}`}
-            className="dp"
-          />
-          <p>{email}</p>
+        <header>
+          <h1>
+            Hello {firstName} {lastName}
+          </h1>
+        </header>
+
+        <aside className="flex">
+          <div className="dp">
+            <img
+              src={`dp/${displayPicture}`}
+              alt={`${firstName} ${lastName}`}
+            />
+          </div>
+          <p>
+            {firstName} {lastName}
+          </p>
         </aside>
+
         <main>
           <div className="row flex">
             <h4>First Name:</h4>
@@ -50,17 +61,22 @@ const Account = () => {
           </div>
 
           <div className="row flex">
-            <h4>Email</h4>
+            <h4>Gender:</h4>
+            <span>{gender}</span>
+          </div>
+
+          <div className="row flex">
+            <h4>Email:</h4>
             <span>{email}</span>
           </div>
 
           <div className="row flex">
-            <h4>Phone Number</h4>
+            <h4>Phone Number:</h4>
             <span>{phoneNumber}</span>
           </div>
 
           <div className="row flex">
-            <h4>Password</h4>
+            <h4>Password:</h4>
             <span>*********</span>
           </div>
         </main>
@@ -70,30 +86,86 @@ const Account = () => {
 };
 
 const Wrapper = styled.main`
-  padding: 20px 0;
+  padding: 25px 0 40px;
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(3, minmax(150px, auto));
-  grid-template-rows: minmax(180px, auto);
-  grid-template-areas: 'as m m';
+  grid-template-rows: minmax(50px, auto);
+  grid-template-areas: 'h h h' 'as m m';
+
+  header {
+    grid-area: h;
+    padding: 0px 0 50px;
+
+    h1 {
+      font-size: 2.5em;
+      color: #444;
+      letter-spacing: 4px;
+      text-transform: capitalize;
+    }
+  }
 
   aside {
     grid-area: as;
-    border: 1px solid red;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    z-index: 0;
     .dp {
-      width: 120px;
-      height: 120px;
+      width: 180px;
+      height: 180px;
+      transform: translateX(-15%);
+      position: relative;
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+
+    .dp::before {
+      content: '';
+      background: #9c4ddd;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: -5px;
+      left: 12px;
+      z-index: -1;
       border-radius: 50%;
-      object-fit: cover;
+    }
+    .dp::after {
+      
+    }
+
+    p {
+      padding: 20px 0px;
+      font-size: 1em;
+      color: #333;
+      letter-spacing: 1px;
     }
   }
 
   main {
     grid-area: m;
-    border: 1px solid red;
+
     .row {
       justify-content: space-between;
-      padding: 15px 0;
+      padding: 0px 0 40px;
+
+      h4 {
+        font-size: 1.2em;
+        color: #444;
+        letter-spacing: 2px;
+      }
+
+      span {
+        font-size: 1em;
+        color: #333;
+        justify-self: start;
+        letter-spacing: 1px;
+      }
     }
   }
 `;

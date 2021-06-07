@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { BiCart } from 'react-icons/bi';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -11,17 +11,21 @@ const Navbar = () => {
   const { logout, isAuthenticated } = useAuth0();
   const { hasUserLoggedIn, userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleLogOut = () => {
     if (isAuthenticated) {
       dispatch(logOutUser());
       logout();
+      history.push('/');
       // clear states
     } else if (hasUserLoggedIn) {
       // clear states
       dispatch(logOutUser());
+      history.push('/');
     }
   };
+
   return (
     <Wrapper>
       <div className="nav_top flex w-960">
