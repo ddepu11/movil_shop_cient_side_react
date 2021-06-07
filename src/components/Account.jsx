@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getAccountInfo } from '../actions/user_actions';
 import Loading from './Loading';
+import formValidation from '../utils/formValidation';
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,18 @@ const Account = () => {
     (state) => state.user
   );
 
+  const setTimeOutRefId = useRef();
+
+  // Clears all the set timeouts
+  const clearAllSetTimeOut = () => {
+    let id = setTimeOutRefId.current;
+    while (id) {
+      console.log(id);
+      clearTimeout(id);
+      id -= 1;
+    }
+  };
+
   useEffect(() => {
     const isUserObjEmpty = Object.keys(userInfo).length === 0;
 
@@ -23,11 +36,16 @@ const Account = () => {
 
     isUserObjEmpty && dispatch(getAccountInfo());
 
+    return () => {
+      clearAllSetTimeOut();
+    };
+
     // eslint-disable-next-line
   }, [hasUserLoggedIn]);
 
   const { displayPicture, firstName, lastName, email, phoneNumber, gender } =
     userInfo;
+
   const [wannaEdit, setWannaEdit] = useState(false);
 
   const [info, setInfo] = useState({
@@ -41,9 +59,11 @@ const Account = () => {
 
   const handleInput = (e) => {
     const { name, value } = e.target;
+
     setInfo({ ...info, [name]: value });
   };
 
+  // Cancel update process
   const cancelUpdate = () => {
     setWannaEdit(false);
     setInfo({
@@ -54,6 +74,30 @@ const Account = () => {
       password: '**********',
       confirmPassword: '**********',
     });
+  };
+
+  const firstNameRef = useRef(null);
+  const lastNameRef = useRef(null);
+  const passwordRef = useRef(null);
+  const phoneNumberRef = useRef(null);
+  const emailRef = useRef(null);
+  const confirmPasswordRef = useRef(null);
+
+  // Update User Information
+  const updateInfo = () => {
+    const errorFlag = formValidation(info, setTimeOutRefId, {
+      firstNameRef,
+      lastNameRef,
+      passwordRef,
+      phoneNumberRef,
+      emailRef,
+      confirmPasswordRef,
+    });
+
+    if (!errorFlag) {
+      clearAllSetTimeOut();
+      // setWannaEdit(false);
+    }
   };
 
   return (
@@ -84,12 +128,15 @@ const Account = () => {
             <div className="row flex">
               <h4>First Name:</h4>
               {wannaEdit ? (
-                <input
-                  value={info.firstName}
-                  type="text"
-                  name="firstName"
-                  onChange={handleInput}
-                />
+                <div className="flex">
+                  <input
+                    value={info.firstName}
+                    type="text"
+                    name="firstName"
+                    onChange={handleInput}
+                  />
+                  <p ref={firstNameRef} className="message" />
+                </div>
               ) : (
                 <span>{firstName}</span>
               )}
@@ -98,12 +145,15 @@ const Account = () => {
             <div className="row flex">
               <h4>Last Name:</h4>
               {wannaEdit ? (
-                <input
-                  value={info.lastName}
-                  type="text"
-                  name="lastName"
-                  onChange={handleInput}
-                />
+                <div className="flex">
+                  <input
+                    value={info.lastName}
+                    type="text"
+                    name="lastName"
+                    onChange={handleInput}
+                  />
+                  <p ref={lastNameRef} className="message" />
+                </div>
               ) : (
                 <span>{lastName}</span>
               )}
@@ -117,12 +167,15 @@ const Account = () => {
             <div className="row flex">
               <h4>Email:</h4>
               {wannaEdit ? (
-                <input
-                  value={info.email}
-                  type="text"
-                  name="email"
-                  onChange={handleInput}
-                />
+                <div className="flex">
+                  <input
+                    value={info.email}
+                    type="text"
+                    name="email"
+                    onChange={handleInput}
+                  />
+                  <p ref={emailRef} className="message" />
+                </div>
               ) : (
                 <span>{email}</span>
               )}
@@ -131,12 +184,15 @@ const Account = () => {
             <div className="row flex">
               <h4>Phone Number:</h4>
               {wannaEdit ? (
-                <input
-                  value={info.phoneNumber}
-                  type="text"
-                  name="phoneNumber"
-                  onChange={handleInput}
-                />
+                <div className="flex">
+                  <input
+                    value={info.phoneNumber}
+                    type="text"
+                    name="phoneNumber"
+                    onChange={handleInput}
+                  />
+                  <p ref={phoneNumberRef} className="message" />
+                </div>
               ) : (
                 <span>{phoneNumber}</span>
               )}
@@ -145,25 +201,33 @@ const Account = () => {
             <div className="row flex">
               <h4>Password:</h4>
               {wannaEdit ? (
-                <input
-                  value={info.password}
-                  type="text"
-                  name="password"
-                  onChange={handleInput}
-                />
+                <div className="flex">
+                  <input
+                    value={info.password}
+                    type="text"
+                    name="password"
+                    onChange={handleInput}
+                  />
+                  <p ref={passwordRef} className="message" />
+                </div>
               ) : (
                 <span>*************</span>
               )}
             </div>
+
+            {/* Buttons */}
             {wannaEdit && (
               <div className="row flex">
                 <h4>Confirm Password:</h4>
-                <input
-                  value={info.password}
-                  type="text"
-                  name="password"
-                  onChange={handleInput}
-                />
+                <div className="flex">
+                  <input
+                    value={info.password}
+                    type="text"
+                    name="password"
+                    onChange={handleInput}
+                  />
+                  <p ref={confirmPasswordRef} className="message" />
+                </div>
               </div>
             )}
 
@@ -180,7 +244,7 @@ const Account = () => {
                 <button
                   className="update_btn"
                   type="button"
-                  onClick={() => setWannaEdit(false)}
+                  onClick={updateInfo}
                 >
                   Update!!!
                 </button>
@@ -290,7 +354,9 @@ const Wrapper = styled.main`
         color: #444;
         letter-spacing: 2px;
       }
-
+      div {
+        flex-direction: column;
+      }
       span {
         font-size: 1em;
         color: #333;
@@ -305,6 +371,14 @@ const Wrapper = styled.main`
           rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
           rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
       }
+      .message.error {
+        color: red;
+        font-size: 1.2em;
+      }
+      .message.success {
+        color: green;
+        font-size: 1.2em;
+      }
     }
     .update_btn,
     .cancel_btn {
@@ -316,9 +390,11 @@ const Wrapper = styled.main`
       transition: transform 0.5s ease;
       margin-right: 30px;
     }
+
     .cancel_btn {
       background: #e00926;
     }
+
     .update_btn:hover,
     .cancel_btn:hover {
       transform: scale(1.1);

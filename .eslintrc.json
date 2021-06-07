@@ -24,13 +24,18 @@
         "depth": 3
       }
     ],
+
     "no-unused-expressions": [
       "error",
       { "allowShortCircuit": true, "allowTernary": true }
     ],
+
     "no-param-reassign": [
       "error",
-      { "props": true, "ignorePropertyModificationsFor": ["ref"] }
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["ref", "timeOutId"]
+      }
     ]
   }
 }
