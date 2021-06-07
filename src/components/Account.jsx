@@ -306,15 +306,21 @@ const Wrapper = styled.main`
           rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
       }
     }
-    .update_btn {
+    .update_btn,
+    .cancel_btn {
       font-size: 1em;
       padding: 10px 20px;
       background: #1e6adb;
       color: white;
       box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
       transition: transform 0.5s ease;
+      margin-right: 30px;
     }
-    .update_btn:hover {
+    .cancel_btn {
+      background: #e00926;
+    }
+    .update_btn:hover,
+    .cancel_btn:hover {
       transform: scale(1.1);
     }
   }
