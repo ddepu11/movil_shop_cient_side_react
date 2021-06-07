@@ -18,6 +18,9 @@ import {
   USER_SIGN_UP_SUCCESS,
   AUTHENTICATE_USER_SUCCESS,
   AUTHENTICATE_USER_FAIL,
+  UPDATE_USER_BEGIN,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_ERROR,
 } from '../actions/constant';
 
 const initialUser = {
@@ -172,6 +175,26 @@ const user = (userState = initialUser, action) => {
         hasUserError: true,
         userMsg: action.payload,
         userLoading: false,
+      };
+
+    case UPDATE_USER_BEGIN:
+      return {
+        ...userState,
+        userLoading: true,
+      };
+    case UPDATE_USER_SUCCESS:
+      return {
+        ...userState,
+        userLoading: false,
+        userInfo: action.payload.user,
+        userMsg: action.payload.msg,
+      };
+
+    case UPDATE_USER_ERROR:
+      return {
+        ...userState,
+        userLoading: false,
+        userMsg: action.payload,
       };
 
     default:

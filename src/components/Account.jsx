@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { getAccountInfo } from '../actions/user_actions';
+import { getAccountInfo, updateUser } from '../actions/user_actions';
 import Loading from './Loading';
 import formValidation from '../utils/formValidation';
 
@@ -42,8 +42,15 @@ const Account = () => {
     // eslint-disable-next-line
   }, [hasUserLoggedIn]);
 
-  const { displayPicture, firstName, lastName, email, phoneNumber, gender } =
-    userInfo;
+  const {
+    displayPicture,
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    gender,
+    password,
+  } = userInfo;
 
   const [wannaEdit, setWannaEdit] = useState(false);
 
@@ -52,8 +59,8 @@ const Account = () => {
     lastName,
     email,
     phoneNumber,
-    password: '**********',
-    confirmPassword: '**********',
+    password,
+    confirmPassword: '*************************************************',
   });
 
   const handleInput = (e) => {
@@ -75,6 +82,7 @@ const Account = () => {
     });
   };
 
+  // Reference to diff message paragraph
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const passwordRef = useRef(null);
@@ -95,6 +103,9 @@ const Account = () => {
 
     if (!errorFlag) {
       clearAllSetTimeOut();
+
+      dispatch(updateUser(info));
+
       setWannaEdit(false);
     }
   };

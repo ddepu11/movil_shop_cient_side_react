@@ -132,11 +132,11 @@ const logOutUser = () => async (dispatch) => {
   }
 };
 
-const updateUser = () => async (dispatch) => {
+const updateUser = (userInfo) => async (dispatch) => {
   dispatch({ type: UPDATE_USER_BEGIN });
 
   try {
-    const { data } = user.update();
+    const { data } = user.update(userInfo);
 
     dispatch({ type: UPDATE_USER_SUCCESS, payload: data });
   } catch (err) {
