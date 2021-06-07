@@ -31,13 +31,12 @@ const Account = () => {
   const [wannaEdit, setWannaEdit] = useState(false);
 
   const [info, setInfo] = useState({
-    displayPicture,
     firstName,
     lastName,
     email,
     phoneNumber,
-    gender,
     password: '**********',
+    confirmPassword: '**********',
   });
 
   const handleInput = (e) => {
@@ -100,16 +99,7 @@ const Account = () => {
 
             <div className="row flex">
               <h4>Gender:</h4>
-              {wannaEdit ? (
-                <input
-                  value={info.gender}
-                  type="text"
-                  name="gender"
-                  onChange={handleInput}
-                />
-              ) : (
-                <span>{gender}</span>
-              )}
+              <span>{gender}</span>
             </div>
 
             <div className="row flex">
@@ -153,7 +143,17 @@ const Account = () => {
                 <span>*************</span>
               )}
             </div>
-
+            {wannaEdit && (
+              <div className="row flex">
+                <h4>Confirm Password:</h4>
+                <input
+                  value={info.password}
+                  type="text"
+                  name="password"
+                  onChange={handleInput}
+                />
+              </div>
+            )}
             {!wannaEdit ? (
               <button
                 type="button"
