@@ -21,6 +21,7 @@ import {
   UPDATE_USER_BEGIN,
   UPDATE_USER_ERROR,
   UPDATE_USER_SUCCESS,
+  SEND_NOTIFICATION,
 } from './constant';
 import * as user from '../api/user_api';
 
@@ -147,6 +148,9 @@ const updateUser = (userInfo) => async (dispatch) => {
   }
 };
 
+const sendNotification = (msg) => (dispatch) => {
+  dispatch({ type: SEND_NOTIFICATION, payload: msg });
+};
 export {
   customUserLogin,
   signUpUser,
@@ -157,4 +161,5 @@ export {
   isUserRegisteredWithThisEmail,
   authenticateUser,
   updateUser,
+  sendNotification,
 };

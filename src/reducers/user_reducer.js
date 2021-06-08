@@ -21,6 +21,7 @@ import {
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
+  SEND_NOTIFICATION,
 } from '../actions/constant';
 
 const initialUser = {
@@ -194,6 +195,12 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         userLoading: false,
+        userMsg: action.payload,
+      };
+
+    case SEND_NOTIFICATION:
+      return {
+        ...userState,
         userMsg: action.payload,
       };
 

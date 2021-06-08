@@ -2,7 +2,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { getAccountInfo, updateUser } from '../actions/user_actions';
+import {
+  getAccountInfo,
+  sendNotification,
+  updateUser,
+} from '../actions/user_actions';
 import Loading from './Loading';
 import formValidation from '../utils/formValidation';
 
@@ -116,17 +120,27 @@ const Account = () => {
     if (!errorFlag) {
       clearAllSetTimeOut();
 
-      dispatch(
-        updateUser({
-          firstName: info.firstName,
-          lastName: info.lastName,
-          phoneNumber: info.phoneNumber,
-          email: info.email,
-          password: info.password,
-        })
-      );
-
-      setWannaEdit(false);
+      // If info is same dont update
+      if (
+        info.password === userInfo.password &&
+        info.firstName === userInfo.firstName &&
+        info.lastName === userInfo.lastName &&
+        info.email === userInfo.email &&
+        info.phoneNumber === userInfo.phoneNumber
+      ) {
+        dispatch(sendNotification('Sorry there is nothing to update!!!'));
+      } else {
+        dispatch(
+          updateUser({
+            firstName: info.firstName,
+            lastName: info.lastName,
+            phoneNumber: info.phoneNumber,
+            email: info.email,
+            password: info.password,
+          })
+        );
+        setWannaEdit(true);
+      }
     }
   };
 
@@ -267,7 +281,7 @@ const Account = () => {
                 className="update_btn"
                 onClick={initiateUpdateProcess}
               >
-                Wanna Update the info??
+                Wanna Update your information??
               </button>
             ) : (
               <>
