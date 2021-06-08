@@ -135,15 +135,15 @@ const formValidation = (userInfo, timeOutId, allRef) => {
   // Password  validation
   const { password } = userInfo;
 
-  if (password.length > 20) {
-    setNotification(
-      passwordRef,
-      "password's length cant be greater then 20 ",
-      'error',
-      timeOutId
-    );
-    erroFlag = true;
-  }
+  // if (password.length > 20) {
+  //   setNotification(
+  //     passwordRef,
+  //     "password's length cant be greater then 20 ",
+  //     'error',
+  //     timeOutId
+  //   );
+  //   erroFlag = true;
+  // }
 
   if (password.length < 6) {
     setNotification(
@@ -179,10 +179,10 @@ const formValidation = (userInfo, timeOutId, allRef) => {
     erroFlag = true;
   }
 
+  //  confirmPassword.length <= 20
   if (
     confirmPassword === password &&
     confirmPassword !== '' &&
-    confirmPassword.length <= 20 &&
     confirmPassword.length >= 6
   ) {
     setNotification(
@@ -193,15 +193,15 @@ const formValidation = (userInfo, timeOutId, allRef) => {
     );
   }
 
-  if (confirmPassword.length > 20) {
-    setNotification(
-      confirmPasswordRef,
-      "password's length cant be greater then 20 ",
-      'error',
-      timeOutId
-    );
-    erroFlag = true;
-  }
+  // if (confirmPassword.length > 20) {
+  //   setNotification(
+  //     confirmPasswordRef,
+  //     "password's length cant be greater then 20 ",
+  //     'error',
+  //     timeOutId
+  //   );
+  //   erroFlag = true;
+  // }
 
   if (confirmPassword.length < 6) {
     setNotification(

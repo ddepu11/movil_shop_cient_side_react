@@ -63,6 +63,18 @@ const Account = () => {
     confirmPassword: '*************************************************',
   });
 
+  const initiateUpdateProcess = () => {
+    setWannaEdit(true);
+    setInfo({
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      password,
+      confirmPassword: password,
+    });
+  };
+
   const handleInput = (e) => {
     const { name, value } = e.target;
 
@@ -77,8 +89,8 @@ const Account = () => {
       lastName,
       email,
       phoneNumber,
-      password: '**********',
-      confirmPassword: '**********',
+      password,
+      confirmPassword: password,
     });
   };
 
@@ -104,7 +116,15 @@ const Account = () => {
     if (!errorFlag) {
       clearAllSetTimeOut();
 
-      dispatch(updateUser(info));
+      dispatch(
+        updateUser({
+          firstName: info.firstName,
+          lastName: info.lastName,
+          phoneNumber: info.phoneNumber,
+          email: info.email,
+          password: info.password,
+        })
+      );
 
       setWannaEdit(false);
     }
@@ -245,7 +265,7 @@ const Account = () => {
               <button
                 type="button"
                 className="update_btn"
-                onClick={() => setWannaEdit(true)}
+                onClick={initiateUpdateProcess}
               >
                 Wanna Update the info??
               </button>

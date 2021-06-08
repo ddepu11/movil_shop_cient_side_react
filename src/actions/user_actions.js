@@ -136,9 +136,12 @@ const updateUser = (userInfo) => async (dispatch) => {
   dispatch({ type: UPDATE_USER_BEGIN });
 
   try {
-    const { data } = user.update(userInfo);
+    const { data } = await user.update(userInfo);
 
-    dispatch({ type: UPDATE_USER_SUCCESS, payload: data });
+    dispatch({
+      type: UPDATE_USER_SUCCESS,
+      payload: { user: data.user, msg: 'User updated Successfully!!!' },
+    });
   } catch (err) {
     dispatch({ type: UPDATE_USER_ERROR, payload: err.message });
   }
