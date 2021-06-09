@@ -31,6 +31,7 @@ const Account = () => {
       id -= 1;
     }
   };
+
   const [dpSRC, setDpSRC] = useState({ preview: '', file: '' });
 
   useEffect(() => {
@@ -49,7 +50,7 @@ const Account = () => {
     };
 
     // eslint-disable-next-line
-  }, [hasUserLoggedIn]);
+  }, [hasUserLoggedIn, userInfo]);
 
   const { firstName, lastName, email, phoneNumber, gender, password } =
     userInfo;
@@ -156,6 +157,8 @@ const Account = () => {
     }
   };
 
+  // Uploading the New User DP
+
   const changeDP = () => {
     const { file } = dpSRC;
     if (file) {
@@ -163,6 +166,8 @@ const Account = () => {
       formData.append('dp', file);
       dispatch(changeDisplayPicture(formData));
     }
+    setWannaChangeDP(false);
+    setDpSRC({ ...dpSRC, preview: `dp/${userInfo.displayPicture}` });
   };
 
   const cancelChangeDP = () => {
