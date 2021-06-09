@@ -151,6 +151,9 @@ const updateUser = (userInfo) => async (dispatch) => {
 const sendNotification = (msg) => (dispatch) => {
   dispatch({ type: SEND_NOTIFICATION, payload: msg });
 };
+
+const changeDisplayPicture = () => async () => {};
+
 export {
   customUserLogin,
   signUpUser,
@@ -162,4 +165,5 @@ export {
   authenticateUser,
   updateUser,
   sendNotification,
+  changeDisplayPicture,
 };

@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { ImCancelCircle } from 'react-icons/im';
 import {
+  changeDisplayPicture,
   getAccountInfo,
   sendNotification,
   updateUser,
 } from '../actions/user_actions';
 import Loading from './Loading';
 import formValidation from '../utils/formValidation';
+import setNotification from '../utils/setNotification';
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -30,7 +32,7 @@ const Account = () => {
       id -= 1;
     }
   };
-  const [dpSRC, setDpSRC] = useState('');
+  const [dpSRC, setDpSRC] = useState({ preview: '', file: '' });
 
   useEffect(() => {
     const isUserObjEmpty = Object.keys(userInfo).length === 0;
@@ -41,7 +43,7 @@ const Account = () => {
 
     isUserObjEmpty && dispatch(getAccountInfo());
 
-    setDpSRC(`dp/${userInfo.displayPicture}`);
+    setDpSRC({ ...dpSRC, preview: `dp/${userInfo.displayPicture}` });
 
     return () => {
       clearAllSetTimeOut();
@@ -146,8 +148,17 @@ const Account = () => {
   const handleChangeDP = (e) => {
     setWannaChangeDP(true);
     const file = e.target.files[0];
-    const fileSRC = URL.createObjectURL(file);
-    setDpSRC(fileSRC);
+    if (file.size < 5242880) {
+      const fileSRC = URL.createObjectURL(file);
+      setDpSRC({ ...dpSRC, preview: fileSRC, file });
+    } else {
+      dispatch(setNotification('Image size should not be geater then 5mb!!!'));
+    }
+  };
+
+  const changeDP = () => {
+    console.log(dpSRC);
+    dispatch(changeDisplayPicture());
   };
 
   const cancelChangeDP = () => {
@@ -169,7 +180,7 @@ const Account = () => {
 
           <aside className="flex">
             <div className="dp">
-              <img src={dpSRC} alt={`${firstName} ${lastName}`} />
+              <img src={dpSRC.preview} alt={`${firstName} ${lastName}`} />
 
               <div className="change_dp_div flex">
                 <label htmlFor="change_dp">Change DP</label>
@@ -184,7 +195,11 @@ const Account = () => {
 
                 {wannaChangeDP && (
                   <>
-                    <button type="button" className="upload_btn">
+                    <button
+                      onClick={changeDP}
+                      type="button"
+                      className="upload_btn"
+                    >
                       Upload
                     </button>
                     <button
