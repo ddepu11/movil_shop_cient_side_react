@@ -30,6 +30,7 @@ const Account = () => {
       id -= 1;
     }
   };
+  const [dpSRC, setDpSRC] = useState('');
 
   useEffect(() => {
     const isUserObjEmpty = Object.keys(userInfo).length === 0;
@@ -40,6 +41,8 @@ const Account = () => {
 
     isUserObjEmpty && dispatch(getAccountInfo());
 
+    setDpSRC(`dp/${userInfo.displayPicture}`);
+
     return () => {
       clearAllSetTimeOut();
     };
@@ -47,15 +50,8 @@ const Account = () => {
     // eslint-disable-next-line
   }, [hasUserLoggedIn]);
 
-  const {
-    displayPicture,
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
-    gender,
-    password,
-  } = userInfo;
+  const { firstName, lastName, email, phoneNumber, gender, password } =
+    userInfo;
 
   const [wannaEdit, setWannaEdit] = useState(false);
 
@@ -145,19 +141,18 @@ const Account = () => {
     }
   };
 
-  // const [newDP, setNewDP] = useState('');
   const [wannaChangeDP, setWannaChangeDP] = useState(false);
 
   const handleChangeDP = (e) => {
     setWannaChangeDP(true);
     const file = e.target.files[0];
     const fileSRC = URL.createObjectURL(file);
-    // setNewDP(fileSRC);
-    console.log(fileSRC);
+    setDpSRC(fileSRC);
   };
 
   const cancelChangeDP = () => {
     setWannaChangeDP(false);
+    setDpSRC(`dp/${userInfo.displayPicture}`);
   };
 
   return (
@@ -174,10 +169,7 @@ const Account = () => {
 
           <aside className="flex">
             <div className="dp">
-              <img
-                src={`dp/${displayPicture}`}
-                alt={`${firstName} ${lastName}`}
-              />
+              <img src={dpSRC} alt={`${firstName} ${lastName}`} />
 
               <div className="change_dp_div flex">
                 <label htmlFor="change_dp">Change DP</label>
