@@ -29,7 +29,6 @@ const changeDP = (formData) =>
     },
   });
 
-  
 export {
   logIn,
   signUp,

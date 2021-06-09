@@ -22,6 +22,9 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
   SEND_NOTIFICATION,
+  CHANGE_DP_BEGIN,
+  CHANGE_DP_ERROR,
+  CHANGE_DP_SUCCESS,
 } from '../constants/constant';
 
 const initialUser = {
@@ -201,6 +204,29 @@ const user = (userState = initialUser, action) => {
     case SEND_NOTIFICATION:
       return {
         ...userState,
+        userMsg: action.payload,
+      };
+
+    // Changing DP
+    case CHANGE_DP_BEGIN:
+      return {
+        ...userState,
+        userLoading: true,
+      };
+
+    case CHANGE_DP_SUCCESS:
+      return {
+        ...userState,
+        userLoading: false,
+        userMsg: action.payload.msg,
+        userInfo: action.payload.user,
+      };
+
+    case CHANGE_DP_ERROR:
+      return {
+        ...userState,
+        userLoading: false,
+        hasUserError: true,
         userMsg: action.payload,
       };
 
