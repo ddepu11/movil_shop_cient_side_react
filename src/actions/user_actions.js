@@ -155,10 +155,13 @@ const sendNotification = (msg) => (dispatch) => {
   dispatch({ type: SEND_NOTIFICATION, payload: msg });
 };
 
-const changeDisplayPicture = (data) => async (dispatch) => {
+const changeDisplayPicture = (formData) => async (dispatch) => {
   dispatch({ type: CHANGE_DP_BEGIN });
 
   try {
+    const { data } = await user.changeDP(formData);
+
+    console.log(data);
     dispatch({ type: CHANGE_DP_SUCCESS });
   } catch (err) {
     dispatch({ type: CHANGE_DP_ERROR, payload: err.msg });

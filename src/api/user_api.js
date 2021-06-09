@@ -22,6 +22,14 @@ const checkIsEmailRegistered = (email) =>
 
 const update = (data) => axios.post('/user/update', data);
 
+const changeDP = (formData) =>
+  axios.post('/user/change-dp', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
+  
 export {
   logIn,
   signUp,
@@ -30,4 +38,5 @@ export {
   checkIsEmailRegistered,
   authenticate,
   update,
+  changeDP,
 };
