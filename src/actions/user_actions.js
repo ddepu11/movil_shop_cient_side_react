@@ -22,7 +22,10 @@ import {
   UPDATE_USER_ERROR,
   UPDATE_USER_SUCCESS,
   SEND_NOTIFICATION,
-} from './constant';
+  CHANGE_DP_BEGIN,
+  CHANGE_DP_ERROR,
+  CHANGE_DP_SUCCESS,
+} from '../constants/constant';
 import * as user from '../api/user_api';
 
 // Authenticate User
@@ -152,7 +155,15 @@ const sendNotification = (msg) => (dispatch) => {
   dispatch({ type: SEND_NOTIFICATION, payload: msg });
 };
 
-const changeDisplayPicture = () => async () => {};
+const changeDisplayPicture = (data) => async (dispatch) => {
+  dispatch({ type: CHANGE_DP_BEGIN });
+
+  try {
+    dispatch({ type: CHANGE_DP_SUCCESS });
+  } catch (err) {
+    dispatch({ type: CHANGE_DP_ERROR, payload: err.msg });
+  }
+};
 
 export {
   customUserLogin,

@@ -22,7 +22,7 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
   SEND_NOTIFICATION,
-} from '../actions/constant';
+} from '../constants/constant';
 
 const initialUser = {
   userInfo: {},

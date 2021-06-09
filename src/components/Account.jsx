@@ -11,7 +11,6 @@ import {
 } from '../actions/user_actions';
 import Loading from './Loading';
 import formValidation from '../utils/formValidation';
-import setNotification from '../utils/setNotification';
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -148,22 +147,27 @@ const Account = () => {
   const handleChangeDP = (e) => {
     setWannaChangeDP(true);
     const file = e.target.files[0];
+
     if (file.size < 5242880) {
       const fileSRC = URL.createObjectURL(file);
       setDpSRC({ ...dpSRC, preview: fileSRC, file });
     } else {
-      dispatch(setNotification('Image size should not be geater then 5mb!!!'));
+      dispatch(sendNotification('Image size should not be geater then 5mb!!!'));
     }
   };
 
   const changeDP = () => {
-    console.log(dpSRC);
-    dispatch(changeDisplayPicture());
+    const { file } = dpSRC;
+    if (file) {
+      const formData = new FormData();
+      formData.append('dp', file);
+      dispatch(changeDisplayPicture(formData));
+    }
   };
 
   const cancelChangeDP = () => {
     setWannaChangeDP(false);
-    setDpSRC(`dp/${userInfo.displayPicture}`);
+    setDpSRC({ ...dpSRC, preview: `dp/${userInfo.displayPicture}` });
   };
 
   return (
