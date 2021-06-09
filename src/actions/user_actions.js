@@ -163,11 +163,12 @@ const changeDisplayPicture = (formData) => async (dispatch) => {
       data: { updatedUser },
     } = await user.changeDP(formData);
 
-    console.log(updatedUser);
-
     dispatch({
       type: CHANGE_DP_SUCCESS,
-      payload: { user: updatedUser, msg: 'User dp changed' },
+      payload: {
+        user: updatedUser,
+        msg: 'You have successfully changed your dp!!!',
+      },
     });
   } catch (err) {
     dispatch({ type: CHANGE_DP_ERROR, payload: err.msg });
