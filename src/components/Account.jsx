@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { ImCancelCircle } from 'react-icons/im';
 import {
   getAccountInfo,
   sendNotification,
@@ -144,6 +145,21 @@ const Account = () => {
     }
   };
 
+  // const [newDP, setNewDP] = useState('');
+  const [wannaChangeDP, setWannaChangeDP] = useState(false);
+
+  const handleChangeDP = (e) => {
+    setWannaChangeDP(true);
+    const file = e.target.files[0];
+    const fileSRC = URL.createObjectURL(file);
+    // setNewDP(fileSRC);
+    console.log(fileSRC);
+  };
+
+  const cancelChangeDP = () => {
+    setWannaChangeDP(false);
+  };
+
   return (
     <>
       {userLoading ? (
@@ -162,10 +178,39 @@ const Account = () => {
                 src={`dp/${displayPicture}`}
                 alt={`${firstName} ${lastName}`}
               />
+
+              <div className="change_dp_div flex">
+                <label htmlFor="change_dp">Change DP</label>
+
+                <input
+                  type="file"
+                  name="newDP"
+                  id="change_dp"
+                  accept=".jpg, .jpeg, .png"
+                  onChange={handleChangeDP}
+                />
+
+                {wannaChangeDP && (
+                  <>
+                    <button type="button" className="upload_btn">
+                      Upload
+                    </button>
+                    <button
+                      type="button"
+                      onClick={cancelChangeDP}
+                      className="cancel_upload_btn flex"
+                    >
+                      Cancel Upload
+                      <ImCancelCircle />
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
-            <p>
+
+            {/* <p>
               {firstName} {lastName}
-            </p>
+            </p> */}
           </aside>
 
           <main>
@@ -344,6 +389,51 @@ const Wrapper = styled.main`
         height: 100%;
         box-shadow: -5px 6px 8px 1px #252525;
       }
+      .change_dp_div {
+        margin-top: 20px;
+        text-align: center;
+        flex-direction: column;
+        gap: 8px 0;
+        label {
+          font-size: 1em;
+          padding: 5px 10px;
+          background: #1e6adb;
+          border-radius: 2px;
+          color: white;
+          width: 100%;
+        }
+        .upload_btn {
+          font-size: 1em;
+          padding: 5px 10px;
+          background: #1c8f0d;
+          color: white;
+          box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+          width: 100%;
+        }
+        .cancel_upload_btn {
+          color: red;
+          width: 100%;
+          font-size: 1.1em;
+          background: #b9b7b7;
+          justify-content: space-between;
+          padding: 5px 10px;
+        }
+        label,
+        .cancel_upload_btn,
+        .upload_btn {
+          transition: transform 0.5s ease;
+        }
+        label:hover,
+        .cancel_upload_btn:hover,
+        .upload_btn:hover {
+          transform: scale(1.15);
+          cursor: pointer;
+        }
+
+        input {
+          display: none;
+        }
+      }
     }
 
     .dp::before {
@@ -377,12 +467,12 @@ const Wrapper = styled.main`
         rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     }
 
-    p {
-      padding: 20px 0px;
-      font-size: 1em;
+    /* p {
+      margin-top: 60px;
+      font-size: 1.2em;
       color: #333;
       letter-spacing: 1px;
-    }
+    } */
   }
 
   main {
