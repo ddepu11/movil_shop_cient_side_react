@@ -130,15 +130,46 @@ const Account = () => {
         dispatch(sendNotification('Sorry there is nothing to update!!!'));
         setWannaEdit(false);
       } else {
-        dispatch(
-          updateUser({
-            firstName: info.firstName,
-            lastName: info.lastName,
-            phoneNumber: info.phoneNumber,
-            email: info.email,
-            password: info.password,
-          })
-        );
+        // if email same and phone no isn't dont sent email
+        if (
+          info.email === userInfo.email &&
+          info.phoneNumber !== userInfo.phoneNumber
+        ) {
+          dispatch(
+            updateUser({
+              firstName: info.firstName,
+              lastName: info.lastName,
+              phoneNumber: info.phoneNumber,
+              password: info.password,
+            })
+          );
+          // if phone no same and email isn't dont sent phone no
+        } else if (
+          info.phoneNumber === userInfo.phoneNumber &&
+          info.email !== userInfo.email
+        ) {
+          dispatch(
+            updateUser({
+              firstName: info.firstName,
+              lastName: info.lastName,
+              email: info.email,
+              password: info.password,
+            })
+          );
+          // if email and phone number same don't sent it
+        } else if (
+          info.phoneNumber === userInfo.phoneNumber &&
+          info.email === userInfo.email
+        ) {
+          dispatch(
+            updateUser({
+              firstName: info.firstName,
+              lastName: info.lastName,
+              password: info.password,
+            })
+          );
+        }
+
         setWannaEdit(false);
       }
     }

@@ -43,6 +43,7 @@ const user = (userState = initialUser, action) => {
         ...userState,
         hasUserLoggedIn: true,
         userMsg: action.payload,
+        hasUserError: false,
       };
 
     case AUTHENTICATE_USER_FAIL:
@@ -89,6 +90,7 @@ const user = (userState = initialUser, action) => {
         userMsg: action.payload.msg,
         hasUserLoggedIn: true,
         userLoading: false,
+        hasUserError: false,
       };
 
     case USER_LOG_IN_ERROR:
@@ -113,6 +115,7 @@ const user = (userState = initialUser, action) => {
         userSignUpSuccess: true,
         userLoading: false,
         userMsg: action.payload,
+        hasUserError: false,
       };
 
     case USER_SIGN_UP_ERROR:
@@ -134,6 +137,7 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         userSignUpSuccess: false,
+        hasUserError: false,
       };
 
     case ACCOUNT_INFO_BEGIN:
@@ -148,6 +152,7 @@ const user = (userState = initialUser, action) => {
         userLoading: false,
         userInfo: action.payload,
         hasUserLoggedIn: true,
+        hasUserError: false,
       };
 
     case ACCOUNT_INFO_ERROR:
@@ -171,6 +176,7 @@ const user = (userState = initialUser, action) => {
         userMsg: action.payload,
         hasUserLoggedIn: false,
         userInfo: {},
+        hasUserError: false,
       };
 
     case USER_LOG_OUT_ERROR:
@@ -192,6 +198,7 @@ const user = (userState = initialUser, action) => {
         userLoading: false,
         userInfo: action.payload.user,
         userMsg: action.payload.msg,
+        hasUserError: false,
       };
 
     case UPDATE_USER_ERROR:
@@ -220,6 +227,7 @@ const user = (userState = initialUser, action) => {
         userLoading: false,
         userMsg: action.payload.msg,
         userInfo: action.payload.user,
+        hasUserError: false,
       };
 
     case CHANGE_DP_ERROR:
