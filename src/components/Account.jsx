@@ -128,6 +128,7 @@ const Account = () => {
         info.phoneNumber === userInfo.phoneNumber
       ) {
         dispatch(sendNotification('Sorry there is nothing to update!!!'));
+        setWannaEdit(false);
       } else {
         dispatch(
           updateUser({
@@ -138,7 +139,7 @@ const Account = () => {
             password: info.password,
           })
         );
-        setWannaEdit(true);
+        setWannaEdit(false);
       }
     }
   };
@@ -394,22 +395,32 @@ const Wrapper = styled.main`
     justify-content: flex-start;
     align-items: stretch;
     z-index: 0;
+
     .dp {
       width: 180px;
       height: 180px;
       transform: translateX(-15%);
       position: relative;
+
       img {
         object-fit: cover;
         width: 100%;
         height: 100%;
         box-shadow: -5px 6px 8px 1px #252525;
+        transition: transform 0.6s cubic-bezier(0.65, 0.05, 0.36, 1);
       }
+
+      img:hover {
+        cursor: pointer;
+        transform: scale(1.6);
+      }
+
       .change_dp_div {
         margin-top: 20px;
         text-align: center;
         flex-direction: column;
         gap: 8px 0;
+
         label {
           font-size: 1em;
           padding: 5px 10px;
@@ -418,6 +429,7 @@ const Wrapper = styled.main`
           color: white;
           width: 100%;
         }
+
         .upload_btn {
           font-size: 1em;
           padding: 5px 10px;
@@ -426,6 +438,7 @@ const Wrapper = styled.main`
           box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
           width: 100%;
         }
+
         .cancel_upload_btn {
           color: red;
           width: 100%;
@@ -434,11 +447,13 @@ const Wrapper = styled.main`
           justify-content: space-between;
           padding: 5px 10px;
         }
+
         label,
         .cancel_upload_btn,
         .upload_btn {
           transition: transform 0.5s ease;
         }
+
         label:hover,
         .cancel_upload_btn:hover,
         .upload_btn:hover {
@@ -463,6 +478,7 @@ const Wrapper = styled.main`
       z-index: -1;
       box-shadow: 5px -2px 8px #252525;
     }
+
     .dp::after {
       font-family: 'Font Awesome 5 Free';
       content: '\f083';
@@ -514,12 +530,14 @@ const Wrapper = styled.main`
           overflow: hidden;
         }
       }
+
       span {
         font-size: 1em;
         color: #333;
         justify-self: start;
         letter-spacing: 1px;
       }
+
       input {
         padding: 10px 0px 10px 5px;
         font-size: 1em;
@@ -534,16 +552,19 @@ const Wrapper = styled.main`
         color: red;
         font-size: 1.1em;
       }
+
       .message.success {
         color: green;
         font-size: 1.1em;
       }
+
       .message.success,
       .message.error {
         height: auto;
         width: auto;
       }
     }
+
     .update_btn,
     .cancel_btn {
       font-size: 1em;

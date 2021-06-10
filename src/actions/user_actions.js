@@ -114,9 +114,11 @@ const getAccountInfo = () => async (dispatch) => {
 
     dispatch({ type: ACCOUNT_INFO_SUCCESS, payload: data });
   } catch (err) {
+    const msg = err.message.response;
+
     dispatch({
       type: ACCOUNT_INFO_ERROR,
-      payload: 'Unautherized user,please log in !!!',
+      payload: msg,
     });
   }
 };
@@ -131,8 +133,9 @@ const logOutUser = () => async (dispatch) => {
       type: USER_LOG_OUT_SUCCESS,
       payload: 'User logged out successfully!!!',
     });
-  } catch (error) {
-    dispatch({ type: USER_LOG_OUT_ERROR, payload: 'An error occured!!!' });
+  } catch (err) {
+    const msg = err.message.response;
+    dispatch({ type: USER_LOG_OUT_ERROR, payload: msg });
   }
 };
 
@@ -147,7 +150,8 @@ const updateUser = (userInfo) => async (dispatch) => {
       payload: { user: data.user, msg: 'User updated Successfully!!!' },
     });
   } catch (err) {
-    dispatch({ type: UPDATE_USER_ERROR, payload: err.message });
+    const { msg } = err.response.data;
+    dispatch({ type: UPDATE_USER_ERROR, payload: msg });
   }
 };
 
@@ -171,7 +175,8 @@ const changeDisplayPicture = (formData) => async (dispatch) => {
       },
     });
   } catch (err) {
-    dispatch({ type: CHANGE_DP_ERROR, payload: err.msg });
+    const msg = err.message.response;
+    dispatch({ type: CHANGE_DP_ERROR, payload: msg });
   }
 };
 
