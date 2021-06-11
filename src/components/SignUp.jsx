@@ -248,14 +248,14 @@ const SignUp = () => {
       erroFlag = true;
     }
 
-    // File upload validations
-    if (dp === '') {
-      showMessage(dpRef, 'Please select the img', 'error');
-      erroFlag = true;
-    } else if (dp.size > 2097152) {
-      // 2097152 bytes === 2MB
-      showMessage(dpRef, 'Image size should not be greater then 2MB', 'error');
-    }
+    // // File upload validations
+    // if (dp === '') {
+    //   showMessage(dpRef, 'Please select the img', 'error');
+    //   erroFlag = true;
+    // } else if (dp.size > 2097152) {
+    //   // 2097152 bytes === 2MB
+    //   showMessage(dpRef, 'Image size should not be greater then 2MB', 'error');
+    // }
   };
 
   // Appending signup credentials to formData object
@@ -273,7 +273,8 @@ const SignUp = () => {
     formValidation();
 
     const formData = new FormData();
-    formData.append('dp', dp);
+
+    dp !== '' && formData.append('dp', dp);
 
     if (!erroFlag) {
       appendDataToFD(formData);
@@ -313,7 +314,10 @@ const SignUp = () => {
           </div>
 
           <div className="form-control">
-            <label htmlFor="last_name">Last Name</label>
+            <div className="fc_top">
+              <label htmlFor="last_name">Last Name</label>
+              <span className="must"> *</span>
+            </div>
             <input
               value={signUpCredentials.lastName}
               onChange={handleInput}
@@ -327,7 +331,9 @@ const SignUp = () => {
 
           {/* Gender */}
           <div className="form-control">
-            <h2 className="gender_heading">Gender</h2>
+            <h2 className="gender_heading">
+              Gender <span style={{ color: 'red', fontSize: '1.1em' }}> *</span>
+            </h2>
 
             <dir className="gender">
               <div className="flex">
@@ -362,7 +368,10 @@ const SignUp = () => {
 
         <div className="row flex">
           <div className="form-control">
-            <label htmlFor="phone_number">Phone Number</label>
+            <div className="fc_top">
+              <label htmlFor="phone_number">Phone Number</label>
+              <span className="must"> *</span>
+            </div>
             <input
               value={signUpCredentials.phoneNumber}
               onChange={handleInput}
@@ -375,7 +384,10 @@ const SignUp = () => {
           </div>
 
           <div className="form-control">
-            <label htmlFor="email">Email Address</label>
+            <div className="fc_top">
+              <label htmlFor="email">Email Address</label>
+              <span className="must"> *</span>
+            </div>
             <input
               value={signUpCredentials.email}
               onChange={handleInput}
@@ -390,7 +402,10 @@ const SignUp = () => {
 
         <div className="row flex">
           <div className="form-control">
-            <label htmlFor="password">Password</label>
+            <div className="fc_top">
+              <label htmlFor="password">Password</label>
+              <span className="must"> *</span>
+            </div>
             <input
               value={signUpCredentials.password}
               onChange={handleInput}
@@ -403,7 +418,10 @@ const SignUp = () => {
           </div>
 
           <div className="form-control">
-            <label htmlFor="confirm_password">Confirm Password</label>
+            <div className="fc_top">
+              <label htmlFor="confirm_password">Confirm Password</label>
+              <span className="must"> *</span>
+            </div>
             <input
               value={signUpCredentials.confirmPassword}
               onChange={handleInput}
@@ -419,7 +437,7 @@ const SignUp = () => {
         {/* File Upload  */}
         <div className="row flex">
           <div className="form-control">
-            <p>Upload your display picture.</p>
+            <p>Upload your display picture</p>
             <label htmlFor="dp" className="dp-label" ref={dbLabelRef}>
               Choose file...
               <span className="browse_btn">Browse</span>
