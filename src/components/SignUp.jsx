@@ -55,8 +55,16 @@ const SignUp = () => {
     setSignUpCredentials({ ...signUpCredentials, [name]: value });
   };
 
+  const dbLabelRef = useRef();
+
   // Setting the img to the state
   const handleDP = (e) => {
+    dbLabelRef.current.innerText = `${e.target.files[0].name}`;
+    const span = document.createElement('span');
+    span.classList.add('browse_btn');
+    span.innerText = 'Browse';
+    dbLabelRef.current.appendChild(span);
+
     setDP(e.target.files[0]);
   };
 
@@ -279,6 +287,7 @@ const SignUp = () => {
   return (
     <Wrapper className="w-960">
       <h1>Get your free MovilShop account now</h1>
+
       <form onSubmit={handleSubmit}>
         <div className="row flex">
           <div className="form-control ">
@@ -312,7 +321,7 @@ const SignUp = () => {
             <h2 className="gender_heading">Gender</h2>
 
             <dir className="gender">
-              <div>
+              <div className="flex">
                 <label htmlFor="male">Male</label>
                 <input
                   value="male"
@@ -324,7 +333,7 @@ const SignUp = () => {
                 />
               </div>
 
-              <div>
+              <div className="flex">
                 <label htmlFor="female">Female</label>
                 <input
                   value="female"
@@ -355,6 +364,7 @@ const SignUp = () => {
             />
             <p ref={phoneNumberRef} className="message" />
           </div>
+
           <div className="form-control">
             <label htmlFor="email">Email Address</label>
             <input
@@ -400,8 +410,10 @@ const SignUp = () => {
         {/* File Upload  */}
         <div className="row flex">
           <div className="form-control">
-            <label htmlFor="dp" className="dp-label">
-              Display Picture
+            <p>Upload your display picture.</p>
+            <label htmlFor="dp" className="dp-label" ref={dbLabelRef}>
+              Choose file...
+              <span className="browse_btn">Browse</span>
             </label>
 
             <input
@@ -412,7 +424,6 @@ const SignUp = () => {
               onChange={handleDP}
               accept=".jpg, .png, .jpeg"
             />
-
             <p ref={dpRef} className="message" />
           </div>
 
@@ -424,6 +435,8 @@ const SignUp = () => {
                 type="checkbox"
                 placeholder="Wanna be seller??"
                 id="role"
+                name="role"
+                onChange={handleInput}
               />
               <label htmlFor="role">Yes</label>
             </div>
@@ -446,6 +459,7 @@ const Wrapper = styled.main`
     color: #333;
     font-size: 2em;
   }
+
   form {
     .row {
       justify-content: space-between;
@@ -460,6 +474,23 @@ const Wrapper = styled.main`
           font-size: 1.3em;
           color: #222;
           font-weight: 400;
+          margin-bottom: 8px;
+        }
+        .gender {
+          width: 60%;
+          div {
+            justify-content: space-between;
+            padding-bottom: 2px;
+            label {
+              padding: 0px 0;
+              font-size: 1.2em;
+            }
+          }
+        }
+        p {
+          font-size: 1.3em;
+          padding: 0px 0px 10px;
+          color: #222;
         }
 
         label {
@@ -477,10 +508,37 @@ const Wrapper = styled.main`
         }
 
         .dp-label {
-          /* width: 15%; */
+          width: 70%;
+          padding: 12px 0px 12px 3px;
+          border: 1px solid #a7a7a7;
+          font-size: 0.8em;
+          position: relative;
+          color: #535353;
+          background: #fff;
+          border-radius: 0.25rem;
+          box-shadow: inset 0 0.2rem 0.4rem #cacaca;
+          .browse_btn {
+            background: #c9c3c3;
+            color: #303030;
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: grid;
+            place-items: center;
+            padding: 0 20px;
+          }
+        }
+        .dp-label:hover {
+          box-shadow: inset 0 0.2rem 0.4rem #b4b4b4;
+
+          .browse_btn {
+            color: #c9c3c3;
+            background: #303030;
+          }
         }
         .dp {
-          /* width: 32.5%; */
+          display: none;
         }
 
         .message.error {
@@ -495,12 +553,7 @@ const Wrapper = styled.main`
       }
 
       .role-div {
-        p {
-          font-size: 1.3em;
-          padding: 0px 0px 10px;
-          color: #222;
-        }
-
+        transform: translateY(-15px);
         .role_inputs {
           cursor: pointer;
           justify-content: space-between;
