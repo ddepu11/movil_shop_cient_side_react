@@ -297,7 +297,10 @@ const SignUp = () => {
       <form onSubmit={handleSubmit}>
         <div className="row flex">
           <div className="form-control ">
-            <label htmlFor="first_name">First Name</label>
+            <div className="fc_top">
+              <label htmlFor="first_name">First Name</label>
+              <span className="must"> *</span>
+            </div>
             <input
               value={signUpCredentials.firstName}
               onChange={handleInput}
@@ -498,11 +501,16 @@ const Wrapper = styled.main`
           padding: 0px 0px 10px;
           color: #222;
         }
-
-        label {
-          font-size: 1.3em;
+        .fc_top {
           padding: 8px 0;
-          color: #222;
+          .must {
+            color: red;
+            font-size: 1.2em;
+          }
+          label {
+            font-size: 1.3em;
+            color: #222;
+          }
         }
 
         input {
