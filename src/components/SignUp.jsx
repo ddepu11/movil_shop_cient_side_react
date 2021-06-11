@@ -403,6 +403,7 @@ const SignUp = () => {
             <label htmlFor="dp" className="dp-label">
               Display Picture
             </label>
+
             <input
               type="file"
               name="dp"
@@ -414,7 +415,21 @@ const SignUp = () => {
 
             <p ref={dpRef} className="message" />
           </div>
+
+          <div className="form-control role-div">
+            <p>Do you want to be a seller?</p>
+
+            <div className="role_inputs flex">
+              <input
+                type="checkbox"
+                placeholder="Wanna be seller??"
+                id="role"
+              />
+              <label htmlFor="role">Yes</label>
+            </div>
+          </div>
         </div>
+
         <button type="submit" className="sign-up-btn">
           Create Account
         </button>
@@ -435,20 +450,24 @@ const Wrapper = styled.main`
     .row {
       justify-content: space-between;
       margin: 20px 0;
+
       .form-control {
         display: flex;
         flex-direction: column;
         width: 100%;
+
         .gender_heading {
           font-size: 1.3em;
           color: #222;
           font-weight: 400;
         }
+
         label {
           font-size: 1.3em;
           padding: 8px 0;
           color: #222;
         }
+
         input {
           background: #e2dcdc;
           padding: 10px 5px;
@@ -456,23 +475,60 @@ const Wrapper = styled.main`
           font-size: 1.1em;
           width: 65%;
         }
+
         .dp-label {
-          width: 15%;
+          /* width: 15%; */
         }
         .dp {
-          width: 32.5%;
+          /* width: 32.5%; */
         }
 
         .message.error {
           color: red;
           font-size: 1.2em;
         }
+
         .message.success {
           color: green;
           font-size: 1.2em;
         }
       }
+
+      .role-div {
+        p {
+          font-size: 1.3em;
+          padding: 0px 0px 10px;
+          color: #222;
+        }
+
+        .role_inputs {
+          cursor: pointer;
+          justify-content: space-between;
+          width: 30%;
+          position: relative;
+          padding: 10px 0 0 0px;
+
+          label {
+            font-size: 1.2em;
+            padding: 0px 0;
+            color: #222;
+            position: absolute;
+            left: 30px;
+          }
+
+          input {
+            background: #e2dcdc;
+            padding: 0px 0px;
+            border-radius: 0px;
+            font-size: 0em;
+            width: 10%;
+            position: absolute;
+            left: 0px;
+          }
+        }
+      }
     }
+
     .sign-up-btn {
       padding: 8px 10px;
       font-size: 1.2em;
