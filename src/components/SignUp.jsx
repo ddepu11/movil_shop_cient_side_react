@@ -43,6 +43,7 @@ const SignUp = () => {
     password: '',
     confirmPassword: '',
     gender: '',
+    role: 'USER',
   });
 
   const [dp, setDP] = useState('');
@@ -50,9 +51,14 @@ const SignUp = () => {
   let erroFlag = false;
 
   const handleInput = (e) => {
-    const { value, name } = e.target;
-
-    setSignUpCredentials({ ...signUpCredentials, [name]: value });
+    const { value, name, checked } = e.target;
+    if (name === 'role') {
+      checked
+        ? setSignUpCredentials({ ...signUpCredentials, [name]: 'SELLER' })
+        : setSignUpCredentials({ ...signUpCredentials, [name]: 'USER' });
+    } else {
+      setSignUpCredentials({ ...signUpCredentials, [name]: value });
+    }
   };
 
   const dbLabelRef = useRef();
