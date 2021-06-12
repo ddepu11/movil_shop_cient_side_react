@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { Provider } from 'react-redux';
 import { Auth0Provider } from '@auth0/auth0-react';
-import createAStore from './redux/redux';
+import createAStore from './redux/store';
 import App from './App';
 
 ReactDOM.render(
