@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Hero from './Hero';
 
 const About = () => (
   <>
-    <Hero title="about" />
     <Wrapper>
       <h2>About Us</h2>
       <p>Lorem ipsum dolor sit amet.</p>

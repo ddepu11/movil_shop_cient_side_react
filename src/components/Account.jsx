@@ -10,7 +10,7 @@ import {
   updateUser,
 } from '../actions/user_actions';
 import Loading from './Loading';
-import formValidation from '../utils/formValidation';
+import validateForm from '../utils/validateForm';
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -21,11 +21,11 @@ const Account = () => {
     (state) => state.user
   );
 
-  const setTimeOutRefId = useRef();
+  const setTimeOutId = useRef();
 
   // Clears all the set timeouts
   const clearAllSetTimeOut = () => {
-    let id = setTimeOutRefId.current;
+    let id = setTimeOutId.current;
     while (id) {
       clearTimeout(id);
       id -= 1;
@@ -98,26 +98,37 @@ const Account = () => {
   };
 
   // Reference to diff message paragraph
-  const firstNameRef = useRef(null);
-  const lastNameRef = useRef(null);
-  const passwordRef = useRef(null);
-  const phoneNumberRef = useRef(null);
-  const emailRef = useRef(null);
-  const confirmPasswordRef = useRef(null);
+  const firstNameValidationMessageTag = useRef(null);
+  const lastNameValidationMessageTag = useRef(null);
+  const passwordValidationMessageTag = useRef(null);
+  const phoneNumberValidationMessageTag = useRef(null);
+  const emailValidationMessageTag = useRef(null);
+  const confirmPasswordValidationMessageTag = useRef(null);
 
   // Update User Information
   const updateInfo = () => {
-    const errorFlag = formValidation(info, setTimeOutRefId, {
-      firstNameRef,
-      lastNameRef,
-      passwordRef,
-      phoneNumberRef,
-      emailRef,
-      confirmPasswordRef,
-    });
+    const errorFlag = validateForm(
+      {
+        firstName: info.firstName,
+        lastName: info.lastName,
+        email: info.email,
+        phoneNumber: info.phoneNumber,
+        password: info.password,
+        confirmPassword: info.confirmPassword,
+      },
+      setTimeOutId,
+      {
+        firstNameValidationMessageTag,
+        lastNameValidationMessageTag,
+        passwordValidationMessageTag,
+        phoneNumberValidationMessageTag,
+        emailValidationMessageTag,
+        confirmPasswordValidationMessageTag,
+      }
+    );
 
     if (!errorFlag) {
-      clearAllSetTimeOut();
+      // clearAllSetTimeOut();
 
       // If info is same dont update
       if (
@@ -156,7 +167,7 @@ const Account = () => {
               password: info.password,
             })
           );
-          // if email and phone number same don't sent it
+          // if email and phone number same don't sent them
         } else if (
           info.phoneNumber === userInfo.phoneNumber &&
           info.email === userInfo.email
@@ -177,7 +188,7 @@ const Account = () => {
 
   const [wannaChangeDP, setWannaChangeDP] = useState(false);
 
-  const handleChangeDP = (e) => {
+  const initiateChangeDPProcess = (e) => {
     setWannaChangeDP(true);
     const file = e.target.files[0];
 
@@ -202,7 +213,7 @@ const Account = () => {
     setDpSRC({ ...dpSRC, preview: `dp/${userInfo.displayPicture}` });
   };
 
-  const cancelChangeDP = () => {
+  const cancelChangeDPProcess = () => {
     setWannaChangeDP(false);
     setDpSRC({ ...dpSRC, preview: `dp/${userInfo.displayPicture}` });
   };
@@ -231,7 +242,7 @@ const Account = () => {
                   name="newDP"
                   id="change_dp"
                   accept=".jpg, .jpeg, .png"
-                  onChange={handleChangeDP}
+                  onChange={initiateChangeDPProcess}
                 />
 
                 {wannaChangeDP && (
@@ -245,7 +256,7 @@ const Account = () => {
                     </button>
                     <button
                       type="button"
-                      onClick={cancelChangeDP}
+                      onClick={cancelChangeDPProcess}
                       className="cancel_upload_btn flex"
                     >
                       Cancel Upload
@@ -272,7 +283,7 @@ const Account = () => {
                     name="firstName"
                     onChange={handleInput}
                   />
-                  <p ref={firstNameRef} className="message" />
+                  <p ref={firstNameValidationMessageTag} className="message" />
                 </div>
               ) : (
                 <span>{firstName}</span>
@@ -289,7 +300,7 @@ const Account = () => {
                     name="lastName"
                     onChange={handleInput}
                   />
-                  <p ref={lastNameRef} className="message" />
+                  <p ref={lastNameValidationMessageTag} className="message" />
                 </div>
               ) : (
                 <span>{lastName}</span>
@@ -311,7 +322,7 @@ const Account = () => {
                     name="email"
                     onChange={handleInput}
                   />
-                  <p ref={emailRef} className="message" />
+                  <p ref={emailValidationMessageTag} className="message" />
                 </div>
               ) : (
                 <span>{email}</span>
@@ -328,7 +339,10 @@ const Account = () => {
                     name="phoneNumber"
                     onChange={handleInput}
                   />
-                  <p ref={phoneNumberRef} className="message" />
+                  <p
+                    ref={phoneNumberValidationMessageTag}
+                    className="message"
+                  />
                 </div>
               ) : (
                 <span>{phoneNumber}</span>
@@ -345,7 +359,7 @@ const Account = () => {
                     name="password"
                     onChange={handleInput}
                   />
-                  <p ref={passwordRef} className="message" />
+                  <p ref={passwordValidationMessageTag} className="message" />
                 </div>
               ) : (
                 <span>*************</span>
@@ -363,7 +377,10 @@ const Account = () => {
                     name="confirmPassword"
                     onChange={handleInput}
                   />
-                  <p ref={confirmPasswordRef} className="message" />
+                  <p
+                    ref={confirmPasswordValidationMessageTag}
+                    className="message"
+                  />
                 </div>
               </div>
             )}

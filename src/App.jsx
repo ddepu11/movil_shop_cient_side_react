@@ -7,7 +7,7 @@ import Notification from './components/Notification';
 import Loading from './components/Loading';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
-import About from './components/About';
+import About from './pages/About';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import Footer from './components/Footer';

@@ -34,7 +34,7 @@
       "error",
       {
         "props": true,
-        "ignorePropertyModificationsFor": ["ref", "timeOutId"]
+        "ignorePropertyModificationsFor": ["ref", "setTimeOutId"]
       }
     ]
   }
