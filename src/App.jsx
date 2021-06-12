@@ -11,7 +11,7 @@ import About from './pages/About';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import Footer from './components/Footer';
-import Account from './components/Account';
+import Account from './components/Account/Account';
 import Products from './components/products/Products';
 
 const App = () => {

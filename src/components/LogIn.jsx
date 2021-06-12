@@ -9,6 +9,7 @@ import {
   customUserLogin,
 } from '../actions/user_actions';
 import Loading from './Loading';
+import clearAllSetTimeOut from '../utils/clearAllSetTimeOut';
 
 const Login = () => {
   const { hasUserLoggedIn, userLoading, userSignUpSuccess } = useSelector(
@@ -17,7 +18,7 @@ const Login = () => {
 
   const emailRef = useRef();
   const passwordRef = useRef();
-  const setTORefId = useRef();
+  const setTimeOutId = useRef();
 
   const { loginWithRedirect } = useAuth0();
 
@@ -36,14 +37,15 @@ const Login = () => {
     hasUserLoggedIn && history.push('/account');
 
     // Clearing all the setTimeouts while unmounting the components
-    return () => {
-      let refId = setTORefId.current;
-      clearTimeout(refId);
-      while (refId) {
-        refId -= 1;
-        clearTimeout(refId);
-      }
-    };
+    return () => clearAllSetTimeOut(setTimeOutId);
+    // return () => {
+    //   let refId = setTimeOutId.current;
+    //   clearTimeout(refId);
+    //   while (refId) {
+    //     refId -= 1;
+    //     clearTimeout(refId);
+    //   }
+    // };
   }, [hasUserLoggedIn, userSignUpSuccess, dispatch, history]);
 
   let error = false;
@@ -59,7 +61,7 @@ const Login = () => {
     ref.current.innerText = message;
     ref.current.classList.add(className);
 
-    setTORefId.current = setTimeout(() => {
+    setTimeOutId.current = setTimeout(() => {
       ref.current.innerText = '';
       ref.current.classList.remove(className);
     }, 3000);

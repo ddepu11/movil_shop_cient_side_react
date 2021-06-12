@@ -4,36 +4,35 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Loading from './Loading';
 import { signUpUser } from '../actions/user_actions';
+import clearAllSetTimeOut from '../utils/clearAllSetTimeOut';
+import validateForm from '../utils/validateForm';
 
 const SignUp = () => {
   const { userSignUpSuccess } = useSelector((state) => state.user);
-  const setTORefId = useRef();
+  const setTimeOutId = useRef();
+
   const dispatch = useDispatch();
 
-  useEffect(() =>
-    // userSignUpSuccess && dispatch()
-    // Clearing all the setTimeouts while unmounting the components
-    () => {
-      let refId = setTORefId.current;
-      clearTimeout(refId);
-      while (refId) {
-        refId -= 1;
-        clearTimeout(refId);
-      }
-    }
+  useEffect(
+    () =>
+      // userSignUpSuccess && dispatch()
+      // Clearing all the setTimeouts while unmounting the components
+      () =>
+        clearAllSetTimeOut(setTimeOutId)
   );
 
   const { userLoading } = useSelector((state) => state.user);
 
   // Referene for messages
-  const firstNameRef = useRef(null);
-  const lastNameRef = useRef(null);
-  const phoneNumberRef = useRef(null);
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
-  const confirmPasswordRef = useRef(null);
-  const dpRef = useRef(null);
-  const genderRef = useRef(null);
+  const firstNameValidationMessageTag = useRef(null);
+  const lastNameValidationMessageTag = useRef(null);
+  const passwordValidationMessageTag = useRef(null);
+  const phoneNumberValidationMessageTag = useRef(null);
+  const emailValidationMessageTag = useRef(null);
+  const confirmPasswordValidationMessageTag = useRef(null);
+
+  const dpValidationMessageTag = useRef(null);
+  const genderValidationMessageTag = useRef(null);
 
   const [signUpCredentials, setSignUpCredentials] = useState({
     firstName: '',
@@ -48,7 +47,7 @@ const SignUp = () => {
 
   const [dp, setDP] = useState('');
 
-  let erroFlag = false;
+  // let errorFlag = false;
 
   const handleInput = (e) => {
     const { value, name, checked } = e.target;
@@ -74,191 +73,6 @@ const SignUp = () => {
     setDP(e.target.files[0]);
   };
 
-  // Shows error or success message
-  const showMessage = (ref, message, className) => {
-    ref.current.innerText = message;
-    ref.current.classList.add(className);
-
-    setTORefId.current = setTimeout(() => {
-      ref.current.innerText = '';
-      ref.current.classList.remove(className);
-    }, 4000);
-  };
-
-  // Form validation
-  const formValidation = () => {
-    // First name validation
-    const { firstName } = signUpCredentials;
-
-    if (firstName.length > 20) {
-      showMessage(firstNameRef, 'first name is too lengthy', 'error');
-      erroFlag = true;
-    }
-
-    if (firstName.length < 2) {
-      showMessage(firstNameRef, 'first name is too short', 'error');
-      erroFlag = true;
-    }
-
-    if (firstName === '') {
-      showMessage(firstNameRef, 'first name cannot be empty', 'error');
-      erroFlag = true;
-    }
-
-    // **************** FN Validation ends  **********************
-    // Gender validation
-    const { gender } = signUpCredentials;
-    if (gender === '') {
-      showMessage(genderRef, 'Please select your gender!!!', 'error');
-      erroFlag = true;
-    }
-
-    // #############
-
-    // lastName validation
-    const { lastName } = signUpCredentials;
-
-    if (lastName.length > 20) {
-      showMessage(lastNameRef, 'last name is too lengthy', 'error');
-      erroFlag = true;
-    }
-
-    if (lastName.length < 2) {
-      showMessage(lastNameRef, 'last name is too short', 'error');
-      erroFlag = true;
-    }
-
-    if (lastName === '') {
-      showMessage(lastNameRef, 'last name cannot be empty', 'error');
-      erroFlag = true;
-    }
-
-    // **************** LN Validation ends  **********************
-
-    // Phone Number Validation
-    const { phoneNumber } = signUpCredentials;
-
-    if (phoneNumber.length > 10 || phoneNumber.length < 10) {
-      showMessage(phoneNumberRef, 'Min and Maximum 10 digits allowed', 'error');
-      erroFlag = true;
-    }
-
-    if (!/^\d+$/.test(phoneNumber)) {
-      showMessage(phoneNumberRef, 'Only numeric values allowed', 'error');
-      erroFlag = true;
-    }
-
-    if (phoneNumber === '') {
-      showMessage(phoneNumberRef, 'phone number cannot be empty', 'error');
-      erroFlag = true;
-    }
-
-    // **************** PN Validation ends  **********************
-
-    // Email address validation
-
-    const { email } = signUpCredentials;
-
-    function validateEmail() {
-      const re =
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
-    }
-
-    if (email === '') {
-      showMessage(emailRef, 'email cannot be empty', 'error');
-      erroFlag = true;
-    }
-
-    if (!validateEmail(email)) {
-      showMessage(emailRef, 'Invalid email address', 'error');
-      erroFlag = true;
-    }
-
-    // **************** Email Validation ends  **********************
-
-    // Password  validation
-    const { password } = signUpCredentials;
-
-    if (password.length > 20) {
-      showMessage(
-        passwordRef,
-        "password's length cant be greater then 20 ",
-        'error'
-      );
-      erroFlag = true;
-    }
-
-    if (password.length < 6) {
-      showMessage(
-        passwordRef,
-        "password's length cant be less then 6 ",
-        'error'
-      );
-      erroFlag = true;
-    }
-
-    if (password === '') {
-      showMessage(passwordRef, 'password cannot be empty', 'error');
-      erroFlag = true;
-    }
-    // **************** Password Validation ends  **********************
-
-    // Confirm Password  validation
-    const { confirmPassword } = signUpCredentials;
-
-    if (confirmPassword !== password) {
-      showMessage(confirmPasswordRef, 'Password did not match', 'error');
-      erroFlag = true;
-    }
-
-    if (
-      confirmPassword === password &&
-      confirmPassword !== '' &&
-      confirmPassword.length <= 20 &&
-      confirmPassword.length >= 6
-    ) {
-      showMessage(confirmPasswordRef, 'Password match successfully', 'success');
-    }
-
-    if (confirmPassword.length > 20) {
-      showMessage(
-        confirmPasswordRef,
-        "password's length cant be greater then 20 ",
-        'error'
-      );
-      erroFlag = true;
-    }
-
-    if (confirmPassword.length < 6) {
-      showMessage(
-        confirmPasswordRef,
-        "password's length cant be less then 6 ",
-        'error'
-      );
-      erroFlag = true;
-    }
-
-    if (confirmPassword === '') {
-      showMessage(
-        confirmPasswordRef,
-        'confirm password cannot be empty',
-        'error'
-      );
-      erroFlag = true;
-    }
-
-    // // File upload validations
-    // if (dp === '') {
-    //   showMessage(dpRef, 'Please select the img', 'error');
-    //   erroFlag = true;
-    // } else if (dp.size > 2097152) {
-    //   // 2097152 bytes === 2MB
-    //   showMessage(dpRef, 'Image size should not be greater then 2MB', 'error');
-    // }
-  };
-
-  // Appending signup credentials to formData object
   const appendDataToFD = (fd) => {
     const k = Object.keys(signUpCredentials);
     const v = Object.values(signUpCredentials);
@@ -270,13 +84,36 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    formValidation();
+
+    const errorFlag = validateForm(
+      {
+        firstName: signUpCredentials.firstName,
+        lastName: signUpCredentials.lastName,
+        email: signUpCredentials.email,
+        phoneNumber: signUpCredentials.phoneNumber,
+        password: signUpCredentials.password,
+        confirmPassword: signUpCredentials.confirmPassword,
+        gender: signUpCredentials.gender,
+        dp,
+      },
+      setTimeOutId,
+      {
+        firstNameValidationMessageTag,
+        lastNameValidationMessageTag,
+        passwordValidationMessageTag,
+        phoneNumberValidationMessageTag,
+        emailValidationMessageTag,
+        confirmPasswordValidationMessageTag,
+        genderValidationMessageTag,
+        dpValidationMessageTag,
+      }
+    );
 
     const formData = new FormData();
 
     dp !== '' && formData.append('dp', dp);
 
-    if (!erroFlag) {
+    if (!errorFlag) {
       appendDataToFD(formData);
 
       dispatch(signUpUser(formData));
@@ -310,7 +147,7 @@ const SignUp = () => {
               name="firstName"
               placeholder="Enter your first name."
             />
-            <p ref={firstNameRef} className="message" />
+            <p ref={firstNameValidationMessageTag} className="message" />
           </div>
 
           <div className="form-control">
@@ -326,7 +163,7 @@ const SignUp = () => {
               name="lastName"
               placeholder="Enter your last name."
             />
-            <p ref={lastNameRef} className="message" />
+            <p ref={lastNameValidationMessageTag} className="message" />
           </div>
 
           {/* Gender */}
@@ -361,7 +198,7 @@ const SignUp = () => {
               </div>
             </dir>
 
-            <p ref={genderRef} className="message" />
+            <p ref={genderValidationMessageTag} className="message" />
           </div>
           {/* Gender Ends */}
         </div>
@@ -380,7 +217,7 @@ const SignUp = () => {
               name="phoneNumber"
               placeholder="Enter your phone number."
             />
-            <p ref={phoneNumberRef} className="message" />
+            <p ref={phoneNumberValidationMessageTag} className="message" />
           </div>
 
           <div className="form-control">
@@ -396,7 +233,7 @@ const SignUp = () => {
               name="email"
               placeholder="Enter your email address."
             />
-            <p ref={emailRef} className="message" />
+            <p ref={emailValidationMessageTag} className="message" />
           </div>
         </div>
 
@@ -414,7 +251,7 @@ const SignUp = () => {
               name="password"
               placeholder="Enter your password."
             />
-            <p ref={passwordRef} className="message" />
+            <p ref={passwordValidationMessageTag} className="message" />
           </div>
 
           <div className="form-control">
@@ -430,7 +267,7 @@ const SignUp = () => {
               name="confirmPassword"
               placeholder="Confirm your password."
             />
-            <p ref={confirmPasswordRef} className="message" />
+            <p ref={confirmPasswordValidationMessageTag} className="message" />
           </div>
         </div>
 
@@ -451,7 +288,7 @@ const SignUp = () => {
               onChange={handleDP}
               accept=".jpg, .png, .jpeg"
             />
-            <p ref={dpRef} className="message" />
+            <p ref={dpValidationMessageTag} className="message" />
           </div>
 
           <div className="form-control role-div">
