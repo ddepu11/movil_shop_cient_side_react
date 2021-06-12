@@ -2,15 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import Loading from './Loading';
-import { signUpUser } from '../actions/user_actions';
-import clearAllSetTimeOut from '../utils/clearAllSetTimeOut';
-import validateForm from '../utils/validateForm';
+import Loading from '../Loading';
+import { signUpUser } from '../../actions/user_actions';
+import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
+import validateForm from '../../utils/validateForm';
+import FormControl from './FormControl';
 
 const SignUp = () => {
   const { userSignUpSuccess } = useSelector((state) => state.user);
   const setTimeOutId = useRef();
-
   const dispatch = useDispatch();
 
   useEffect(
@@ -23,7 +23,7 @@ const SignUp = () => {
 
   const { userLoading } = useSelector((state) => state.user);
 
-  // Referene for messages
+  // Referene for error
   const firstNameValidationMessageTag = useRef(null);
   const lastNameValidationMessageTag = useRef(null);
   const passwordValidationMessageTag = useRef(null);
@@ -73,6 +73,7 @@ const SignUp = () => {
     setDP(e.target.files[0]);
   };
 
+  // Appending signup credentials to formData object
   const appendDataToFD = (fd) => {
     const k = Object.keys(signUpCredentials);
     const v = Object.values(signUpCredentials);
@@ -134,23 +135,46 @@ const SignUp = () => {
 
       <form onSubmit={handleSubmit}>
         <div className="row flex">
-          <div className="form-control ">
+          <FormControl
+            inputValue={signUpCredentials.firstName}
+            handleInput={handleInput}
+            id="first_name"
+            placeholder="Enter your first name"
+            refObj={firstNameValidationMessageTag}
+            type="text"
+            name="firstName"
+            label="First Name"
+          />
+
+          {/* <div className="form-control ">
             <div className="fc_top">
               <label htmlFor="first_name">First Name</label>
               <span className="must"> *</span>
             </div>
+
             <input
               value={signUpCredentials.firstName}
               onChange={handleInput}
               type="text"
               id="first_name"
               name="firstName"
-              placeholder="Enter your first name."
+              placeholder="Enter your first name"
             />
             <p ref={firstNameValidationMessageTag} className="message" />
-          </div>
+          </div> */}
 
-          <div className="form-control">
+          <FormControl
+            inputValue={signUpCredentials.lastName}
+            handleInput={handleInput}
+            id="last_name"
+            placeholder="Enter your last name"
+            refObj={lastNameValidationMessageTag}
+            type="text"
+            name="lastName"
+            label="Last Name"
+          />
+
+          {/* <div className="form-control">
             <div className="fc_top">
               <label htmlFor="last_name">Last Name</label>
               <span className="must"> *</span>
@@ -164,7 +188,7 @@ const SignUp = () => {
               placeholder="Enter your last name."
             />
             <p ref={lastNameValidationMessageTag} className="message" />
-          </div>
+          </div> */}
 
           {/* Gender */}
           <div className="form-control">
@@ -204,7 +228,17 @@ const SignUp = () => {
         </div>
 
         <div className="row flex">
-          <div className="form-control">
+          <FormControl
+            inputValue={signUpCredentials.phoneNumber}
+            handleInput={handleInput}
+            id="phone_number"
+            placeholder="Enter your phone number"
+            refObj={phoneNumberValidationMessageTag}
+            type="text"
+            name="phoneNumber"
+            label="Phone Number"
+          />
+          {/* <div className="form-control">
             <div className="fc_top">
               <label htmlFor="phone_number">Phone Number</label>
               <span className="must"> *</span>
@@ -218,9 +252,19 @@ const SignUp = () => {
               placeholder="Enter your phone number."
             />
             <p ref={phoneNumberValidationMessageTag} className="message" />
-          </div>
+          </div> */}
 
-          <div className="form-control">
+          <FormControl
+            inputValue={signUpCredentials.email}
+            handleInput={handleInput}
+            id="email"
+            placeholder="Enter your email address"
+            refObj={emailValidationMessageTag}
+            type="text"
+            name="email"
+            label="Email address"
+          />
+          {/* <div className="form-control">
             <div className="fc_top">
               <label htmlFor="email">Email Address</label>
               <span className="must"> *</span>
@@ -234,7 +278,7 @@ const SignUp = () => {
               placeholder="Enter your email address."
             />
             <p ref={emailValidationMessageTag} className="message" />
-          </div>
+          </div> */}
         </div>
 
         <div className="row flex">
@@ -314,7 +358,6 @@ const SignUp = () => {
     </Wrapper>
   );
 };
-
 const Wrapper = styled.main`
   padding: 40px 0;
   h1 {
@@ -328,98 +371,6 @@ const Wrapper = styled.main`
     .row {
       justify-content: space-between;
       margin: 20px 0;
-
-      .form-control {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-
-        .gender_heading {
-          font-size: 1.3em;
-          color: #222;
-          font-weight: 400;
-          margin-bottom: 8px;
-        }
-        .gender {
-          width: 60%;
-          div {
-            justify-content: space-between;
-            padding-bottom: 2px;
-            label {
-              padding: 0px 0;
-              font-size: 1.2em;
-            }
-          }
-        }
-        p {
-          font-size: 1.3em;
-          padding: 0px 0px 10px;
-          color: #222;
-        }
-        .fc_top {
-          padding: 8px 0;
-          .must {
-            color: red;
-            font-size: 1.2em;
-          }
-          label {
-            font-size: 1.3em;
-            color: #222;
-          }
-        }
-
-        input {
-          background: #e2dcdc;
-          padding: 10px 5px;
-          border-radius: 5px;
-          font-size: 1.1em;
-          width: 65%;
-        }
-
-        .dp-label {
-          width: 70%;
-          padding: 12px 0px 12px 3px;
-          border: 1px solid #a7a7a7;
-          font-size: 0.8em;
-          position: relative;
-          color: #535353;
-          background: #fff;
-          border-radius: 0.25rem;
-          box-shadow: inset 0 0.2rem 0.4rem #cacaca;
-          .browse_btn {
-            background: #c9c3c3;
-            color: #303030;
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            display: grid;
-            place-items: center;
-            padding: 0 20px;
-          }
-        }
-        .dp-label:hover {
-          box-shadow: inset 0 0.2rem 0.4rem #b4b4b4;
-
-          .browse_btn {
-            color: #c9c3c3;
-            background: #303030;
-          }
-        }
-        .dp {
-          display: none;
-        }
-
-        .message.error {
-          color: red;
-          font-size: 1.2em;
-        }
-
-        .message.success {
-          color: green;
-          font-size: 1.2em;
-        }
-      }
 
       .role-div {
         transform: translateY(-15px);

@@ -9,9 +9,9 @@ import Home from './components/Home';
 import Navbar from './components/Navbar';
 import About from './pages/About';
 import LogIn from './components/LogIn';
-import SignUp from './components/SignUp';
+import SignUp from './components/signup/SignUp';
 import Footer from './components/Footer';
-import Account from './components/Account/Account';
+import Account from './components/account/Account';
 import Products from './components/products/Products';
 
 const App = () => {

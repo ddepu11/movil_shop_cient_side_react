@@ -1,8 +1,6 @@
 import setValidationMessage from './setValidationMessage';
 
 const validateForm = (formData, setTimeOutId, allValidationMessageTags) => {
-  console.log(allValidationMessageTags);
-
   const {
     firstNameValidationMessageTag,
     lastNameValidationMessageTag,
@@ -499,5 +497,3 @@ export default validateForm;
 //   //   showMessage(dpRef, 'Image size should not be greater then 2MB', 'error');
 //   // }
 // };
-
-// Appending signup credentials to formData object

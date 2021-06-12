@@ -36,6 +36,7 @@
         "props": true,
         "ignorePropertyModificationsFor": ["ref", "setTimeOutId"]
       }
-    ]
+    ],
+    "react/forbid-prop-types": ["error", { "forbid": ["any", "array"] }]
   }
 }
