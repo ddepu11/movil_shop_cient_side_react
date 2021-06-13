@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch, useSelector } from 'react-redux';
 import HeroImg from '../assests/home_hero_img.jpg';
-import Product from './Product';
-import Services from './Services';
+import Product from '../components/Product';
+import Services from '../components/Services';
 import {
   authenticateUser,
   isUserRegisteredWithThisEmail,

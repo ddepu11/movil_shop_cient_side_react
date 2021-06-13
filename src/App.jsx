@@ -5,7 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useSelector } from 'react-redux';
 import Notification from './components/Notification';
 import Loading from './components/Loading';
-import Home from './components/Home';
+import Home from './screens/Home';
 import Navbar from './components/Navbar';
 import About from './screens/About';
 import SignUp from './components/signup/SignUp';
