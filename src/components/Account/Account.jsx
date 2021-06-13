@@ -125,6 +125,7 @@ const Account = () => {
       ) {
         dispatch(sendNotification('Sorry there is nothing to update!!!'));
         setWannaEdit(false);
+        clearAllSetTimeOut(setTimeOutId);
       } else {
         // if email same and phone no isn't dont sent email
         if (

@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   clearUserSignUpSuccess,
   customUserLogin,
-} from '../actions/user_actions';
-import Loading from './Loading';
-import clearAllSetTimeOut from '../utils/clearAllSetTimeOut';
+} from '../../actions/user_actions';
+import Loading from '../Loading';
+import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
 
-const Login = () => {
+const SignIn = () => {
   const { hasUserLoggedIn, userLoading, userSignUpSuccess } = useSelector(
     (state) => state.user
   );
@@ -38,17 +38,9 @@ const Login = () => {
 
     // Clearing all the setTimeouts while unmounting the components
     return () => clearAllSetTimeOut(setTimeOutId);
-    // return () => {
-    //   let refId = setTimeOutId.current;
-    //   clearTimeout(refId);
-    //   while (refId) {
-    //     refId -= 1;
-    //     clearTimeout(refId);
-    //   }
-    // };
   }, [hasUserLoggedIn, userSignUpSuccess, dispatch, history]);
 
-  let error = false;
+  // let error = false;
 
   const handleInput = (e) => {
     const { value, name } = e.target;
@@ -56,66 +48,66 @@ const Login = () => {
     setUserCredentials({ ...userCredentials, [name]: value });
   };
 
-  // Shows error or success message
-  const showMessage = (ref, message, className) => {
-    ref.current.innerText = message;
-    ref.current.classList.add(className);
+  // // Shows error or success message
+  // const showMessage = (ref, message, className) => {
+  //   ref.current.innerText = message;
+  //   ref.current.classList.add(className);
 
-    setTimeOutId.current = setTimeout(() => {
-      ref.current.innerText = '';
-      ref.current.classList.remove(className);
-    }, 3000);
-  };
+  //   setTimeOutId.current = setTimeout(() => {
+  //     ref.current.innerText = '';
+  //     ref.current.classList.remove(className);
+  //   }, 3000);
+  // };
 
   // Form validation
-  const formValidation = () => {
-    // Email address validation
-    const { email } = userCredentials;
+  // const formValidation = () => {
+  //   // Email address validation
+  //   const { email } = userCredentials;
 
-    function validateEmail() {
-      const re =
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
-    }
+  //   function validateEmail() {
+  //     const re =
+  //       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //     return re.test(String(email).toLowerCase());
+  //   }
 
-    if (!validateEmail(email)) {
-      showMessage(emailRef, 'Invalid email address', 'error');
-      error = true;
-    }
+  //   if (!validateEmail(email)) {
+  //     showMessage(emailRef, 'Invalid email address', 'error');
+  //     error = true;
+  //   }
 
-    if (email === '') {
-      showMessage(emailRef, 'email cannot be empty', 'error');
-      error = true;
-    }
+  //   if (email === '') {
+  //     showMessage(emailRef, 'email cannot be empty', 'error');
+  //     error = true;
+  //   }
 
-    // **************** Email Validation ends  **********************
+  //   // **************** Email Validation ends  **********************
 
-    // Password  validation
-    const { password } = userCredentials;
+  //   // Password  validation
+  //   const { password } = userCredentials;
 
-    if (password.length > 20) {
-      showMessage(
-        passwordRef,
-        "password's length cant be greater then 20 ",
-        'error'
-      );
-      error = true;
-    }
+  //   if (password.length > 20) {
+  //     showMessage(
+  //       passwordRef,
+  //       "password's length cant be greater then 20 ",
+  //       'error'
+  //     );
+  //     error = true;
+  //   }
 
-    if (password.length < 6) {
-      showMessage(
-        passwordRef,
-        "password's length cant be less then 6 ",
-        'error'
-      );
-      error = true;
-    }
+  //   if (password.length < 6) {
+  //     showMessage(
+  //       passwordRef,
+  //       "password's length cant be less then 6 ",
+  //       'error'
+  //     );
+  //     error = true;
+  //   }
 
-    if (password === '') {
-      showMessage(passwordRef, 'password cannot be empty', 'error');
-      error = true;
-    }
-  };
+  //   if (password === '') {
+  //     showMessage(passwordRef, 'password cannot be empty', 'error');
+  //     error = true;
+  //   }
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -136,7 +128,7 @@ const Login = () => {
       ) : (
         <Wrapper className="w-960 flex">
           <div>
-            <h2>Login in to Movil Shop</h2>
+            <h2>Sign In in to Movil Shop</h2>
             <button
               type="button"
               onClick={() => loginWithRedirect()}
@@ -274,4 +266,4 @@ const Wrapper = styled.main`
   }
 `;
 
-export default Login;
+export default SignIn;

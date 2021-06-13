@@ -8,8 +8,8 @@ import Loading from './components/Loading';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import About from './pages/About';
-import LogIn from './components/LogIn';
 import SignUp from './components/signup/SignUp';
+import SignIn from './components/signin/SignIn';
 import Footer from './components/Footer';
 import Account from './components/account/Account';
 import Products from './components/products/Products';
@@ -39,7 +39,7 @@ const App = () => {
               <About />
             </Route>
             <Route exact path="/log-in">
-              <LogIn />
+              <SignIn />
             </Route>
             <Route exact path="/sign-up">
               <SignUp />
