@@ -146,23 +146,6 @@ const SignUp = () => {
             label="First Name"
           />
 
-          {/* <div className="form-control ">
-            <div className="fc_top">
-              <label htmlFor="first_name">First Name</label>
-              <span className="must"> *</span>
-            </div>
-
-            <input
-              value={signUpCredentials.firstName}
-              onChange={handleInput}
-              type="text"
-              id="first_name"
-              name="firstName"
-              placeholder="Enter your first name"
-            />
-            <p ref={firstNameValidationMessageTag} className="message" />
-          </div> */}
-
           <FormControl
             inputValue={signUpCredentials.lastName}
             handleInput={handleInput}
@@ -173,22 +156,6 @@ const SignUp = () => {
             name="lastName"
             label="Last Name"
           />
-
-          {/* <div className="form-control">
-            <div className="fc_top">
-              <label htmlFor="last_name">Last Name</label>
-              <span className="must"> *</span>
-            </div>
-            <input
-              value={signUpCredentials.lastName}
-              onChange={handleInput}
-              type="text"
-              id="last_name"
-              name="lastName"
-              placeholder="Enter your last name."
-            />
-            <p ref={lastNameValidationMessageTag} className="message" />
-          </div> */}
 
           {/* Gender */}
           <div className="form-control">
@@ -238,21 +205,6 @@ const SignUp = () => {
             name="phoneNumber"
             label="Phone Number"
           />
-          {/* <div className="form-control">
-            <div className="fc_top">
-              <label htmlFor="phone_number">Phone Number</label>
-              <span className="must"> *</span>
-            </div>
-            <input
-              value={signUpCredentials.phoneNumber}
-              onChange={handleInput}
-              type="text"
-              id="phone_number"
-              name="phoneNumber"
-              placeholder="Enter your phone number."
-            />
-            <p ref={phoneNumberValidationMessageTag} className="message" />
-          </div> */}
 
           <FormControl
             inputValue={signUpCredentials.email}
@@ -262,43 +214,34 @@ const SignUp = () => {
             refObj={emailValidationMessageTag}
             type="text"
             name="email"
-            label="Email address"
+            label="Email Address"
           />
-          {/* <div className="form-control">
-            <div className="fc_top">
-              <label htmlFor="email">Email Address</label>
-              <span className="must"> *</span>
-            </div>
-            <input
-              value={signUpCredentials.email}
-              onChange={handleInput}
-              type="text"
-              id="email"
-              name="email"
-              placeholder="Enter your email address."
-            />
-            <p ref={emailValidationMessageTag} className="message" />
-          </div> */}
         </div>
 
         <div className="row flex">
-          <div className="form-control">
-            <div className="fc_top">
-              <label htmlFor="password">Password</label>
-              <span className="must"> *</span>
-            </div>
-            <input
-              value={signUpCredentials.password}
-              onChange={handleInput}
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Enter your password."
-            />
-            <p ref={passwordValidationMessageTag} className="message" />
-          </div>
+          <FormControl
+            inputValue={signUpCredentials.password}
+            handleInput={handleInput}
+            id="password"
+            placeholder="Enter your password"
+            refObj={passwordValidationMessageTag}
+            type="password"
+            name="password"
+            label="Password"
+          />
 
-          <div className="form-control">
+          <FormControl
+            inputValue={signUpCredentials.confirmPassword}
+            handleInput={handleInput}
+            id="confirm_password"
+            placeholder="Confirm your password"
+            refObj={confirmPasswordValidationMessageTag}
+            type="confirmPassword"
+            name="confirmPassword"
+            label="Confirm Password"
+          />
+
+          {/* <div className="form-control">
             <div className="fc_top">
               <label htmlFor="confirm_password">Confirm Password</label>
               <span className="must"> *</span>
@@ -312,7 +255,7 @@ const SignUp = () => {
               placeholder="Confirm your password."
             />
             <p ref={confirmPasswordValidationMessageTag} className="message" />
-          </div>
+          </div> */}
         </div>
 
         {/* File Upload  */}
@@ -371,6 +314,97 @@ const Wrapper = styled.main`
     .row {
       justify-content: space-between;
       margin: 20px 0;
+      .form-control {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .gender_heading {
+          font-size: 1.3em;
+          color: #222;
+          font-weight: 400;
+          margin-bottom: 8px;
+        }
+        .gender {
+          width: 60%;
+          div {
+            justify-content: space-between;
+            padding-bottom: 2px;
+            label {
+              padding: 0px 0;
+              font-size: 1.2em;
+            }
+          }
+        }
+        p {
+          font-size: 1.3em;
+          padding: 0px 0px 10px;
+          color: #222;
+        }
+        .fc_top {
+          padding: 8px 0;
+          .must {
+            color: red;
+            font-size: 1.2em;
+          }
+          label {
+            font-size: 1.3em;
+            color: #222;
+          }
+        }
+
+        input {
+          background: #e2dcdc;
+          padding: 10px 5px;
+          border-radius: 5px;
+          font-size: 1.1em;
+          width: 65%;
+        }
+
+        .dp-label {
+          width: 70%;
+          padding: 12px 0px 12px 3px;
+          border: 1px solid #a7a7a7;
+          font-size: 0.8em;
+          position: relative;
+          color: #535353;
+          background: #fff;
+          border-radius: 0.25rem;
+          box-shadow: inset 0 0.2rem 0.4rem #cacaca;
+          .browse_btn {
+            background: #c9c3c3;
+            color: #303030;
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: grid;
+            place-items: center;
+            padding: 0 20px;
+          }
+        }
+        .dp-label:hover {
+          box-shadow: inset 0 0.2rem 0.4rem #b4b4b4;
+
+          .browse_btn {
+            color: #c9c3c3;
+            background: #303030;
+          }
+        }
+        .dp {
+          display: none;
+        }
+
+        .message.error {
+          color: red;
+          font-size: 1.2em;
+        }
+
+        .message.success {
+          color: green;
+          font-size: 1.2em;
+        }
+      }
 
       .role-div {
         transform: translateY(-15px);
