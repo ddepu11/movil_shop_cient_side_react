@@ -310,6 +310,7 @@ const SignUp = () => {
 
 const Wrapper = styled.main`
   padding: 35px 0;
+
   h1 {
     letter-spacing: 2px;
     text-transform: uppercase;

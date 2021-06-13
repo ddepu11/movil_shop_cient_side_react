@@ -11,6 +11,7 @@ import {
 import Loading from '../Loading';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
 import validateForm from '../../utils/validateForm';
+import FormControl from '../signup/FormControl';
 
 const SignIn = () => {
   const { hasUserLoggedIn, userLoading, userSignUpSuccess } = useSelector(
@@ -84,24 +85,25 @@ const SignIn = () => {
               <AiOutlineGoogle className="google" />
               <span>Log in with Google</span>
             </button>
+
             <div className="or flex">
               <div className="left" />
               <span>Or</span>
               <div className="right" />
             </div>
+
             <form onSubmit={handleSubmit}>
-              <div className="form-control">
-                <label htmlFor="username">Email Address</label>
-                <input
-                  value={userCredentials.email}
-                  onChange={handleInput}
-                  type="text"
-                  name="email"
-                  id="username"
-                  placeholder="Please enter your email address."
-                />
-                <p ref={emailValidationMessageTag} className="message" />
-              </div>
+              <FormControl
+                inputValue={userCredentials.email}
+                handleInput={handleInput}
+                id="username"
+                placeholder="Please enter your email address."
+                refObj={emailValidationMessageTag}
+                type="text"
+                name="email"
+                label="Email Address"
+              />
+
               <div className="form-control">
                 <div className="pwd-label flex">
                   <label htmlFor="password">Password</label>
@@ -117,15 +119,18 @@ const SignIn = () => {
                 />
                 <p ref={passwordValidationMessageTag} className="message" />
               </div>
+
               <button type="submit" className="sign-in-btn">
                 Log In
               </button>
             </form>
+
             <div className="or flex">
               <div className="left" />
               <span>Or</span>
               <div className="right" />
             </div>
+
             <Link className="sign-up-btn" to="/sign-up">
               Don&apos;t have an account? Sign Up Now !
             </Link>
@@ -172,6 +177,19 @@ const Wrapper = styled.main`
       display: flex;
       flex-direction: column;
       margin-bottom: 20px;
+
+      .fc_top {
+        padding: 8px 0;
+        .must {
+          color: red;
+          font-size: 1.2em;
+        }
+        label {
+          font-size: 1.3em;
+          color: #222;
+        }
+      }
+
       label {
         font-size: 1.3em;
         padding: 8px 0;
