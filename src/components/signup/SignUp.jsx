@@ -256,7 +256,7 @@ const SignUp = () => {
             id="confirm_password"
             placeholder="Confirm your password"
             refObj={confirmPasswordValidationMessageTag}
-            type="confirmPassword"
+            type="password"
             name="confirmPassword"
             label="Confirm Password"
           />
@@ -308,7 +308,7 @@ const SignUp = () => {
 };
 
 const Wrapper = styled.main`
-  padding: 40px 0;
+  padding: 35px 0;
   h1 {
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -318,7 +318,7 @@ const Wrapper = styled.main`
 
   form {
     .row {
-      margin: 20px 0;
+      margin: 25px 0;
       align-items: stretch;
 
       .fn_ln_div {
@@ -411,7 +411,7 @@ const Wrapper = styled.main`
         }
 
         .dp-label {
-          width: 70%;
+          width: 32.5%;
           padding: 12px 0px 12px 3px;
           border: 1px solid #a7a7a7;
           font-size: 0.8em;

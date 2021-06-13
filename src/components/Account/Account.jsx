@@ -11,6 +11,7 @@ import Loading from '../Loading';
 import validateForm from '../../utils/validateForm';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
 import Aside from './Aside';
+import FormField from './FormField';
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -180,10 +181,21 @@ const Account = () => {
               Hello {firstName} {lastName}
             </h1>
           </header>
+
           <Aside />
 
           <main>
-            <div className="row flex">
+            <FormField
+              heading="FirstName"
+              wannaEdit={wannaEdit}
+              inputValue={info.firstName}
+              type="text"
+              inputName="firstName"
+              handleInput={handleInput}
+              refObj={firstNameValidationMessageTag}
+              spanInnerText={firstName}
+            />
+            {/* <div className="row flex">
               <h4>First Name:</h4>
               {wannaEdit ? (
                 <div className="flex">
@@ -198,9 +210,18 @@ const Account = () => {
               ) : (
                 <span>{firstName}</span>
               )}
-            </div>
-
-            <div className="row flex">
+            </div> */}
+            {/* <FormField
+              heading="Last Name:"
+              wannaEdit={wannaEdit}
+              inputValue={info.lastName}
+              type="text"
+              inputName="lastName"
+              handleInput={handleInput}
+              refObj={lastNameValidationMessageTag}
+              spanInnerText={lastName}
+            /> */}
+            {/* <div className="row flex">
               <h4>Last Name:</h4>
               {wannaEdit ? (
                 <div className="flex">
@@ -215,13 +236,11 @@ const Account = () => {
               ) : (
                 <span>{lastName}</span>
               )}
-            </div>
-
+            </div> */}
             <div className="row flex">
               <h4>Gender:</h4>
               <span>{gender}</span>
             </div>
-
             <div className="row flex">
               <h4>Email:</h4>
               {wannaEdit ? (
@@ -238,7 +257,6 @@ const Account = () => {
                 <span>{email}</span>
               )}
             </div>
-
             <div className="row flex">
               <h4>Phone Number:</h4>
               {wannaEdit ? (
@@ -258,7 +276,6 @@ const Account = () => {
                 <span>{phoneNumber}</span>
               )}
             </div>
-
             <div className="row flex">
               <h4>Password:</h4>
               {wannaEdit ? (
@@ -275,7 +292,6 @@ const Account = () => {
                 <span>*************</span>
               )}
             </div>
-
             {/* Buttons */}
             {wannaEdit && (
               <div className="row flex">
@@ -294,7 +310,6 @@ const Account = () => {
                 </div>
               </div>
             )}
-
             {!wannaEdit ? (
               <button
                 type="button"
@@ -374,8 +389,9 @@ const Wrapper = styled.main`
       span {
         font-size: 1em;
         color: #333;
-        justify-self: start;
         letter-spacing: 1px;
+        display: block;
+        width: 38%;
       }
 
       input {
