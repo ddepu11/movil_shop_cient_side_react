@@ -1,8 +1,30 @@
 import React from 'react';
-import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-const Button = () => <Wrapper>s</Wrapper>;
+const Button = ({ innerText, pr, pl, pt, pb, fs, color }) => (
+  <button
+    type="button"
+    style={{
+      paddingTop: `${pt}px`,
+      paddingBottom: `${pb}px`,
+      paddingLeft: `${pl}px`,
+      paddingRight: `${pr}px`,
+      fontSize: `${fs}em`,
+      color,
+    }}
+  >
+    {innerText}
+  </button>
+);
 
-const Wrapper = styled.button``;
+Button.propTypes = {
+  innerText: PropTypes.string.isRequired,
+  pr: PropTypes.string.isRequired,
+  pl: PropTypes.string.isRequired,
+  pt: PropTypes.string.isRequired,
+  pb: PropTypes.string.isRequired,
+  fs: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+};
 
 export default Button;

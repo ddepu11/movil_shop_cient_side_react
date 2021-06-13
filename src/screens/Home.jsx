@@ -33,7 +33,7 @@ const Home = () => {
 
             <p>Comming soon in your door with huge discount</p>
 
-            <Link className="btn" to="/products">
+            <Link className="link_btn shop_now_btn" to="/products">
               Shop Now
             </Link>
           </aside>
@@ -49,7 +49,7 @@ const Home = () => {
           <Product />
           <Product />
         </div>
-        <Link to="/" className="btn">
+        <Link to="/" className="link_btn all_products_btn">
           All Products
         </Link>
       </div>
@@ -59,43 +59,51 @@ const Home = () => {
 };
 
 const Wrapper = styled.main`
+  .link_btn {
+    background-color: #fd3a65;
+    padding: 10px 20px;
+    color: white;
+  }
+
   .header {
     max-width: 1200px;
     margin: 0 auto;
     background-color: #db7979;
     padding: 20px;
     transform: translateY(-35px);
+
     .flex {
       justify-content: space-between;
+
       aside {
         align-self: center;
         color: white;
+
         h2 {
           font-size: 2.2em;
           letter-spacing: 4px;
           line-height: 1.4;
           text-transform: uppercase;
         }
+
         p {
           font-size: 0.9em;
           margin-top: 20px;
           text-transform: capitalize;
         }
-        a {
+
+        .shop_now_btn {
           margin-top: 30px;
         }
-        .btn {
-          background-color: #fd3a65;
-          padding: 10px 20px;
-          color: white;
-        }
       }
+
       img {
         width: 50%;
         height: 100%;
       }
     }
   }
+
   .recent-products {
     background-color: #c7c7c7;
     padding: 20px;
@@ -112,7 +120,7 @@ const Wrapper = styled.main`
       gap: 5rem;
     }
 
-    .btn {
+    .all_products_btn {
       margin-top: 30px;
     }
   }
