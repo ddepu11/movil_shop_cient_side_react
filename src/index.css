@@ -29,9 +29,11 @@ a {
   display: inline-block;
   text-decoration: none;
 }
+
 ul {
   list-style-type: none;
 }
+
 button {
   border: 0;
 }
@@ -39,19 +41,17 @@ button {
 button:hover {
   cursor: pointer;
 }
+
 input {
   border: 0;
 }
+
 button:focus,
 input:focus {
   outline: 0;
 }
+
 .w-960 {
   max-width: 960px;
   margin: 0 auto;
-}
-.btn {
-  background-color: #fd3a65;
-  padding: 10px 20px;
-  color: white;
 }

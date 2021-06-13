@@ -26,16 +26,18 @@ const Home = () => {
 
   return (
     <Wrapper>
-      <div className="hero">
+      <div className="header">
         <section className="flex w-960">
           <aside>
             <h2>MovilShop Number#1 Trusted Mobile Website.</h2>
+
             <p>Comming soon in your door with huge discount</p>
 
             <Link className="btn" to="/products">
               Shop Now
             </Link>
           </aside>
+
           <img src={HeroImg} alt="" />
         </section>
       </div>
@@ -57,7 +59,7 @@ const Home = () => {
 };
 
 const Wrapper = styled.main`
-  .hero {
+  .header {
     max-width: 1200px;
     margin: 0 auto;
     background-color: #db7979;
@@ -81,6 +83,11 @@ const Wrapper = styled.main`
         }
         a {
           margin-top: 30px;
+        }
+        .btn {
+          background-color: #fd3a65;
+          padding: 10px 20px;
+          color: white;
         }
       }
       img {
