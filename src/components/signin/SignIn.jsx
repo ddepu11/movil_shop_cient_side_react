@@ -10,14 +10,16 @@ import {
 } from '../../actions/user_actions';
 import Loading from '../Loading';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
+import validateForm from '../../utils/validateForm';
 
 const SignIn = () => {
   const { hasUserLoggedIn, userLoading, userSignUpSuccess } = useSelector(
     (state) => state.user
   );
 
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const emailValidationMessageTag = useRef(null);
+  const passwordValidationMessageTag = useRef(null);
+
   const setTimeOutId = useRef();
 
   const { loginWithRedirect } = useAuth0();
@@ -40,80 +42,25 @@ const SignIn = () => {
     return () => clearAllSetTimeOut(setTimeOutId);
   }, [hasUserLoggedIn, userSignUpSuccess, dispatch, history]);
 
-  // let error = false;
-
   const handleInput = (e) => {
     const { value, name } = e.target;
 
     setUserCredentials({ ...userCredentials, [name]: value });
   };
 
-  // // Shows error or success message
-  // const showMessage = (ref, message, className) => {
-  //   ref.current.innerText = message;
-  //   ref.current.classList.add(className);
-
-  //   setTimeOutId.current = setTimeout(() => {
-  //     ref.current.innerText = '';
-  //     ref.current.classList.remove(className);
-  //   }, 3000);
-  // };
-
-  // Form validation
-  // const formValidation = () => {
-  //   // Email address validation
-  //   const { email } = userCredentials;
-
-  //   function validateEmail() {
-  //     const re =
-  //       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  //     return re.test(String(email).toLowerCase());
-  //   }
-
-  //   if (!validateEmail(email)) {
-  //     showMessage(emailRef, 'Invalid email address', 'error');
-  //     error = true;
-  //   }
-
-  //   if (email === '') {
-  //     showMessage(emailRef, 'email cannot be empty', 'error');
-  //     error = true;
-  //   }
-
-  //   // **************** Email Validation ends  **********************
-
-  //   // Password  validation
-  //   const { password } = userCredentials;
-
-  //   if (password.length > 20) {
-  //     showMessage(
-  //       passwordRef,
-  //       "password's length cant be greater then 20 ",
-  //       'error'
-  //     );
-  //     error = true;
-  //   }
-
-  //   if (password.length < 6) {
-  //     showMessage(
-  //       passwordRef,
-  //       "password's length cant be less then 6 ",
-  //       'error'
-  //     );
-  //     error = true;
-  //   }
-
-  //   if (password === '') {
-  //     showMessage(passwordRef, 'password cannot be empty', 'error');
-  //     error = true;
-  //   }
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const { email, password } = userCredentials;
-    formValidation();
+    const error = validateForm(
+      userCredentials,
+      setTimeOutId,
+      {
+        emailValidationMessageTag,
+        passwordValidationMessageTag,
+      },
+      'SIGN_IN'
+    );
 
     if (!error) {
       dispatch(customUserLogin(email, password));
@@ -153,7 +100,7 @@ const SignIn = () => {
                   id="username"
                   placeholder="Please enter your email address."
                 />
-                <p ref={emailRef} className="message" />
+                <p ref={emailValidationMessageTag} className="message" />
               </div>
               <div className="form-control">
                 <div className="pwd-label flex">
@@ -168,7 +115,7 @@ const SignIn = () => {
                   id="password"
                   placeholder="Please enter your password."
                 />
-                <p ref={passwordRef} className="message" />
+                <p ref={passwordValidationMessageTag} className="message" />
               </div>
               <button type="submit" className="sign-in-btn">
                 Log In

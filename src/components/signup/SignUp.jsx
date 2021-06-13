@@ -105,7 +105,8 @@ const SignUp = () => {
         emailValidationMessageTag,
         confirmPasswordValidationMessageTag,
         genderValidationMessageTag,
-      }
+      },
+      'SIGN_UP'
     );
 
     const formData = new FormData();
