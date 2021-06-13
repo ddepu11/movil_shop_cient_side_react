@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const FormControl = ({
@@ -12,7 +11,7 @@ const FormControl = ({
   name,
   label,
 }) => (
-  <Wrapper className="form-control">
+  <div className="form-control">
     <div className="fc_top">
       <label htmlFor={id}>{label}</label>
       <span className="must"> *</span>
@@ -27,7 +26,7 @@ const FormControl = ({
       placeholder={placeholder}
     />
     <p ref={refObj} className="message" />
-  </Wrapper>
+  </div>
 );
 
 FormControl.propTypes = {
@@ -40,7 +39,5 @@ FormControl.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
 };
-
-const Wrapper = styled.div``;
 
 export default FormControl;

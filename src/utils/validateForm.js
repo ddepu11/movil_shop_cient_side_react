@@ -9,7 +9,6 @@ const validateForm = (formData, setTimeOutId, allValidationMessageTags) => {
     emailValidationMessageTag,
     confirmPasswordValidationMessageTag,
     genderValidationMessageTag,
-    dpValidationMessageTag,
   } = allValidationMessageTags;
 
   let erroFlag = false;
@@ -23,7 +22,6 @@ const validateForm = (formData, setTimeOutId, allValidationMessageTags) => {
     password,
     confirmPassword,
     gender,
-    dp,
   } = formData;
 
   if (firstName.length > 20) {
@@ -286,26 +284,26 @@ const validateForm = (formData, setTimeOutId, allValidationMessageTags) => {
     erroFlag = true;
   }
 
-  // File upload validations
-  if (dpValidationMessageTag) {
-    if (dp === '') {
-      setValidationMessage(
-        dpValidationMessageTag,
-        'Please select the img',
-        'error',
-        setTimeOutId
-      );
-      erroFlag = true;
-    } else if (dp.size > 2097152) {
-      // 2097152 bytes === 2MB
-      setValidationMessage(
-        dpValidationMessageTag,
-        'Image size should not be greater then 2MB',
-        'error',
-        setTimeOutId
-      );
-    }
-  }
+  // // File upload validations
+  // if (dpValidationMessageTag) {
+  //   if (dp === '') {
+  //     setValidationMessage(
+  //       dpValidationMessageTag,
+  //       'Please select the img',
+  //       'error',
+  //       setTimeOutId
+  //     );
+  //     erroFlag = true;
+  //   } else if (dp.size > 2097152) {
+  //     // 2097152 bytes === 2MB
+  //     setValidationMessage(
+  //       dpValidationMessageTag,
+  //       'Image size should not be greater then 2MB',
+  //       'error',
+  //       setTimeOutId
+  //     );
+  //   }
+  // }
 
   return erroFlag;
 };

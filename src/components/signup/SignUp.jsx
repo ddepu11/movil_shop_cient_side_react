@@ -95,7 +95,6 @@ const SignUp = () => {
         password: signUpCredentials.password,
         confirmPassword: signUpCredentials.confirmPassword,
         gender: signUpCredentials.gender,
-        dp,
       },
       setTimeOutId,
       {
@@ -106,7 +105,6 @@ const SignUp = () => {
         emailValidationMessageTag,
         confirmPasswordValidationMessageTag,
         genderValidationMessageTag,
-        dpValidationMessageTag,
       }
     );
 
@@ -135,63 +133,85 @@ const SignUp = () => {
 
       <form onSubmit={handleSubmit}>
         <div className="row flex">
-          <FormControl
-            inputValue={signUpCredentials.firstName}
-            handleInput={handleInput}
-            id="first_name"
-            placeholder="Enter your first name"
-            refObj={firstNameValidationMessageTag}
-            type="text"
-            name="firstName"
-            label="First Name"
-          />
+          <div className="flex fn_ln_div">
+            <FormControl
+              inputValue={signUpCredentials.firstName}
+              handleInput={handleInput}
+              id="first_name"
+              placeholder="Enter your first name"
+              refObj={firstNameValidationMessageTag}
+              type="text"
+              name="firstName"
+              label="First Name"
+            />
 
-          <FormControl
-            inputValue={signUpCredentials.lastName}
-            handleInput={handleInput}
-            id="last_name"
-            placeholder="Enter your last name"
-            refObj={lastNameValidationMessageTag}
-            type="text"
-            name="lastName"
-            label="Last Name"
-          />
-
-          {/* Gender */}
-          <div className="form-control">
-            <h2 className="gender_heading">
-              Gender <span style={{ color: 'red', fontSize: '1.1em' }}> *</span>
-            </h2>
-
-            <dir className="gender">
-              <div className="flex">
-                <label htmlFor="male">Male</label>
-                <input
-                  value="male"
-                  onChange={handleInput}
-                  type="radio"
-                  id="male"
-                  name="gender"
-                  placeholder="Enter your last name."
-                />
-              </div>
-
-              <div className="flex">
-                <label htmlFor="female">Female</label>
-                <input
-                  value="female"
-                  onChange={handleInput}
-                  type="radio"
-                  id="female"
-                  name="gender"
-                  placeholder="Enter your last name."
-                />
-              </div>
-            </dir>
-
-            <p ref={genderValidationMessageTag} className="message" />
+            <FormControl
+              inputValue={signUpCredentials.lastName}
+              handleInput={handleInput}
+              id="last_name"
+              placeholder="Enter your last name"
+              refObj={lastNameValidationMessageTag}
+              type="text"
+              name="lastName"
+              label="Last Name"
+            />
           </div>
-          {/* Gender Ends */}
+
+          <div className="flex gender_seller_div">
+            {/* Gender >>>> */}
+            <div className="form-control">
+              <h2 className="gender_heading">
+                Gender{' '}
+                <span style={{ color: 'red', fontSize: '1.1em' }}> *</span>
+              </h2>
+
+              <dir className="gender">
+                <div className="flex">
+                  <label htmlFor="male">Male</label>
+                  <input
+                    value="male"
+                    onChange={handleInput}
+                    type="radio"
+                    id="male"
+                    name="gender"
+                    placeholder="Enter your last name."
+                  />
+                </div>
+
+                <div className="flex">
+                  <label htmlFor="female">Female</label>
+                  <input
+                    value="female"
+                    onChange={handleInput}
+                    type="radio"
+                    id="female"
+                    name="gender"
+                    placeholder="Enter your last name."
+                  />
+                </div>
+              </dir>
+
+              <p ref={genderValidationMessageTag} className="message" />
+            </div>
+            {/* Gender Ends */}
+
+            {/* Seeler >>>> */}
+            <div className="form-control role-div">
+              <p>Do you want to be a seller?</p>
+
+              <div className="role_inputs flex">
+                <input
+                  type="checkbox"
+                  placeholder="Wanna be seller??"
+                  id="role"
+                  name="role"
+                  onChange={handleInput}
+                />
+                <label htmlFor="role">Yes</label>
+              </div>
+            </div>
+            {/* Seeler Ends>>>> */}
+          </div>
         </div>
 
         <div className="row flex">
@@ -277,21 +297,6 @@ const SignUp = () => {
             />
             <p ref={dpValidationMessageTag} className="message" />
           </div>
-
-          <div className="form-control role-div">
-            <p>Do you want to be a seller?</p>
-
-            <div className="role_inputs flex">
-              <input
-                type="checkbox"
-                placeholder="Wanna be seller??"
-                id="role"
-                name="role"
-                onChange={handleInput}
-              />
-              <label htmlFor="role">Yes</label>
-            </div>
-          </div>
         </div>
 
         <button type="submit" className="sign-up-btn">
@@ -301,6 +306,7 @@ const SignUp = () => {
     </Wrapper>
   );
 };
+
 const Wrapper = styled.main`
   padding: 40px 0;
   h1 {
@@ -312,35 +318,78 @@ const Wrapper = styled.main`
 
   form {
     .row {
-      justify-content: space-between;
       margin: 20px 0;
-      .form-control {
-        display: flex;
+      align-items: stretch;
+
+      .fn_ln_div {
         flex-direction: column;
         width: 100%;
+      }
 
+      .gender_seller_div {
+        width: 100%;
+        flex-direction: column;
+        justify-content: space-between;
         .gender_heading {
           font-size: 1.3em;
           color: #222;
           font-weight: 400;
-          margin-bottom: 8px;
+          margin-bottom: 5px;
         }
         .gender {
           width: 60%;
+
           div {
             justify-content: space-between;
-            padding-bottom: 2px;
+            padding-bottom: 3px;
             label {
               padding: 0px 0;
               font-size: 1.2em;
             }
           }
         }
+
+        .role-div {
+          transform: translateY(-35%);
+          .role_inputs {
+            cursor: pointer;
+            justify-content: space-between;
+            width: 30%;
+            position: relative;
+            padding: 10px 0 0 0px;
+
+            label {
+              font-size: 1.2em;
+              padding: 0px 0;
+              color: #222;
+              position: absolute;
+              left: 30px;
+            }
+
+            input {
+              background: #e2dcdc;
+              padding: 0px 0px;
+              border-radius: 0px;
+              font-size: 0em;
+              width: 10%;
+              position: absolute;
+              left: 0px;
+            }
+          }
+        }
+      }
+
+      .form-control {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
         p {
           font-size: 1.3em;
           padding: 0px 0px 10px;
           color: #222;
         }
+
         .fc_top {
           padding: 8px 0;
           .must {
@@ -383,6 +432,7 @@ const Wrapper = styled.main`
             padding: 0 20px;
           }
         }
+
         .dp-label:hover {
           box-shadow: inset 0 0.2rem 0.4rem #b4b4b4;
 
@@ -403,35 +453,6 @@ const Wrapper = styled.main`
         .message.success {
           color: green;
           font-size: 1.2em;
-        }
-      }
-
-      .role-div {
-        transform: translateY(-15px);
-        .role_inputs {
-          cursor: pointer;
-          justify-content: space-between;
-          width: 30%;
-          position: relative;
-          padding: 10px 0 0 0px;
-
-          label {
-            font-size: 1.2em;
-            padding: 0px 0;
-            color: #222;
-            position: absolute;
-            left: 30px;
-          }
-
-          input {
-            background: #e2dcdc;
-            padding: 0px 0px;
-            border-radius: 0px;
-            font-size: 0em;
-            width: 10%;
-            position: absolute;
-            left: 0px;
-          }
         }
       }
     }
