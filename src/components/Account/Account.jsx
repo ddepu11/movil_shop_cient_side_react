@@ -72,6 +72,7 @@ const Account = () => {
 
   // Cancel update process
   const cancelUpdate = () => {
+    clearAllSetTimeOut(setTimeOutId);
     setWannaEdit(false);
     setInfo({
       firstName,
@@ -186,7 +187,7 @@ const Account = () => {
 
           <main>
             <FormField
-              heading="FirstName"
+              heading="First Name:"
               wannaEdit={wannaEdit}
               inputValue={info.firstName}
               type="text"
@@ -195,23 +196,8 @@ const Account = () => {
               refObj={firstNameValidationMessageTag}
               spanInnerText={firstName}
             />
-            {/* <div className="row flex">
-              <h4>First Name:</h4>
-              {wannaEdit ? (
-                <div className="flex">
-                  <input
-                    value={info.firstName}
-                    type="text"
-                    name="firstName"
-                    onChange={handleInput}
-                  />
-                  <p ref={firstNameValidationMessageTag} className="message" />
-                </div>
-              ) : (
-                <span>{firstName}</span>
-              )}
-            </div> */}
-            {/* <FormField
+
+            <FormField
               heading="Last Name:"
               wannaEdit={wannaEdit}
               inputValue={info.lastName}
@@ -220,96 +206,61 @@ const Account = () => {
               handleInput={handleInput}
               refObj={lastNameValidationMessageTag}
               spanInnerText={lastName}
-            /> */}
-            {/* <div className="row flex">
-              <h4>Last Name:</h4>
-              {wannaEdit ? (
-                <div className="flex">
-                  <input
-                    value={info.lastName}
-                    type="text"
-                    name="lastName"
-                    onChange={handleInput}
-                  />
-                  <p ref={lastNameValidationMessageTag} className="message" />
-                </div>
-              ) : (
-                <span>{lastName}</span>
-              )}
-            </div> */}
+            />
+
             <div className="row flex">
               <h4>Gender:</h4>
               <span>{gender}</span>
             </div>
-            <div className="row flex">
-              <h4>Email:</h4>
-              {wannaEdit ? (
-                <div className="flex">
-                  <input
-                    value={info.email}
-                    type="text"
-                    name="email"
-                    onChange={handleInput}
-                  />
-                  <p ref={emailValidationMessageTag} className="message" />
-                </div>
-              ) : (
-                <span>{email}</span>
-              )}
-            </div>
-            <div className="row flex">
-              <h4>Phone Number:</h4>
-              {wannaEdit ? (
-                <div className="flex">
-                  <input
-                    value={info.phoneNumber}
-                    type="text"
-                    name="phoneNumber"
-                    onChange={handleInput}
-                  />
-                  <p
-                    ref={phoneNumberValidationMessageTag}
-                    className="message"
-                  />
-                </div>
-              ) : (
-                <span>{phoneNumber}</span>
-              )}
-            </div>
-            <div className="row flex">
-              <h4>Password:</h4>
-              {wannaEdit ? (
-                <div className="flex">
-                  <input
-                    value={info.password}
-                    type="password"
-                    name="password"
-                    onChange={handleInput}
-                  />
-                  <p ref={passwordValidationMessageTag} className="message" />
-                </div>
-              ) : (
-                <span>*************</span>
-              )}
-            </div>
+
+            <FormField
+              heading="Email:"
+              wannaEdit={wannaEdit}
+              inputValue={info.email}
+              type="email"
+              inputName="email"
+              handleInput={handleInput}
+              refObj={emailValidationMessageTag}
+              spanInnerText={email}
+            />
+
+            <FormField
+              heading="Phone Number:"
+              wannaEdit={wannaEdit}
+              inputValue={String(info.phoneNumber)}
+              type="text"
+              inputName="phoneNumber"
+              handleInput={handleInput}
+              refObj={phoneNumberValidationMessageTag}
+              spanInnerText={String(phoneNumber)}
+            />
+
+            <FormField
+              heading="Password:"
+              wannaEdit={wannaEdit}
+              inputValue={info.password}
+              type="password"
+              inputName="password"
+              handleInput={handleInput}
+              refObj={passwordValidationMessageTag}
+              spanInnerText="*************"
+            />
+
             {/* Buttons */}
             {wannaEdit && (
-              <div className="row flex">
-                <h4>Confirm Password:</h4>
-                <div className="flex">
-                  <input
-                    value={info.confirmPassword}
-                    type="password"
-                    name="confirmPassword"
-                    onChange={handleInput}
-                  />
-                  <p
-                    ref={confirmPasswordValidationMessageTag}
-                    className="message"
-                  />
-                </div>
-              </div>
+              <FormField
+                heading="Confirm Password:"
+                wannaEdit={wannaEdit}
+                inputValue={info.confirmPassword}
+                type="password"
+                inputName="confirmPassword"
+                handleInput={handleInput}
+                refObj={confirmPasswordValidationMessageTag}
+                spanInnerText="*************"
+              />
             )}
+
+            {/* Buttons */}
             {!wannaEdit ? (
               <button
                 type="button"
