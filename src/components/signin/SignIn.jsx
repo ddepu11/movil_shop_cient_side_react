@@ -106,20 +106,29 @@ const SignIn = () => {
                 label="Email Address"
               />
 
-              <div className="form-control">
-                <div className="pwd-label flex">
-                  <div>
-                    <label htmlFor="password">Password</label>
-                    <span
-                      className="must"
-                      style={{ color: 'red', fontSize: '1.25em' }}
-                    >
-                      {' '}
-                      *
-                    </span>
-                  </div>
-                  <Link to="/forget-password">Forget Password?</Link>
+              <FormControl
+                inputValue={userCredentials.password}
+                handleInput={handleInput}
+                id="password"
+                placeholder="Please enter your email address."
+                refObj={passwordValidationMessageTag}
+                type="password"
+                name="password"
+                label="Password"
+              />
+
+              {/* <div className="form-control">
+                <div className="fc_top">
+                  <label htmlFor="password">Password</label>
+                  <span
+                    className="must"
+                    style={{ color: 'red', fontSize: '1.25em' }}
+                  >
+                    {' '}
+                    *
+                  </span>
                 </div>
+                {/* <Link to="/forget-password">Forget Password?</Link> 
                 <input
                   value={userCredentials.password}
                   onChange={handleInput}
@@ -129,7 +138,7 @@ const SignIn = () => {
                   placeholder="Please enter your password."
                 />
                 <p ref={passwordValidationMessageTag} className="message" />
-              </div>
+              </div> */}
 
               <button type="submit" className="sign-in-btn">
                 Log In

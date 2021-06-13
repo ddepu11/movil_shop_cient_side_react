@@ -261,22 +261,6 @@ const SignUp = () => {
             name="confirmPassword"
             label="Confirm Password"
           />
-
-          {/* <div className="form-control">
-            <div className="fc_top">
-              <label htmlFor="confirm_password">Confirm Password</label>
-              <span className="must"> *</span>
-            </div>
-            <input
-              value={signUpCredentials.confirmPassword}
-              onChange={handleInput}
-              type="password"
-              id="confirm_password"
-              name="confirmPassword"
-              placeholder="Confirm your password."
-            />
-            <p ref={confirmPasswordValidationMessageTag} className="message" />
-          </div> */}
         </div>
 
         {/* File Upload  */}

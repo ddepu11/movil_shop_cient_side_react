@@ -289,7 +289,7 @@ const validateForm = (
     erroFlag = true;
   }
 
-  if (!validateEmail()) {
+  if (!validateEmail() && email !== '') {
     setValidationMessage(
       emailValidationMessageTag,
       'Invalid email address',
