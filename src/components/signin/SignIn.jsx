@@ -11,7 +11,7 @@ import {
 import Loading from '../Loading';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
 import validateForm from '../../utils/validateForm';
-import FormControl from '../signup/FormControl';
+import FormControl from '../FormControl';
 
 const SignIn = () => {
   const { hasUserLoggedIn, userLoading, userSignUpSuccess } = useSelector(
@@ -53,6 +53,7 @@ const SignIn = () => {
     e.preventDefault();
 
     const { email, password } = userCredentials;
+
     const error = validateForm(
       userCredentials,
       setTimeOutId,
@@ -77,6 +78,7 @@ const SignIn = () => {
         <Wrapper className="w-960 flex">
           <div>
             <h2>Sign In in to Movil Shop</h2>
+
             <button
               type="button"
               onClick={() => loginWithRedirect()}
@@ -106,7 +108,16 @@ const SignIn = () => {
 
               <div className="form-control">
                 <div className="pwd-label flex">
-                  <label htmlFor="password">Password</label>
+                  <div>
+                    <label htmlFor="password">Password</label>
+                    <span
+                      className="must"
+                      style={{ color: 'red', fontSize: '1.25em' }}
+                    >
+                      {' '}
+                      *
+                    </span>
+                  </div>
                   <Link to="/forget-password">Forget Password?</Link>
                 </div>
                 <input
@@ -182,7 +193,7 @@ const Wrapper = styled.main`
         padding: 8px 0;
         .must {
           color: red;
-          font-size: 1.2em;
+          font-size: 1.25em;
         }
         label {
           font-size: 1.3em;

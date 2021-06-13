@@ -6,7 +6,7 @@ import Loading from '../Loading';
 import { signUpUser } from '../../actions/user_actions';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
 import validateForm from '../../utils/validateForm';
-import FormControl from './FormControl';
+import FormControl from '../FormControl';
 
 const SignUp = () => {
   const { userSignUpSuccess } = useSelector((state) => state.user);
@@ -332,12 +332,14 @@ const Wrapper = styled.main`
         width: 100%;
         flex-direction: column;
         justify-content: space-between;
+
         .gender_heading {
           font-size: 1.3em;
           color: #222;
           font-weight: 400;
           margin-bottom: 5px;
         }
+
         .gender {
           width: 60%;
 
@@ -353,6 +355,7 @@ const Wrapper = styled.main`
 
         .role-div {
           transform: translateY(-35%);
+
           .role_inputs {
             cursor: pointer;
             justify-content: space-between;
@@ -394,10 +397,12 @@ const Wrapper = styled.main`
 
         .fc_top {
           padding: 8px 0;
+
           .must {
             color: red;
-            font-size: 1.2em;
+            font-size: 1.25em;
           }
+
           label {
             font-size: 1.3em;
             color: #222;
