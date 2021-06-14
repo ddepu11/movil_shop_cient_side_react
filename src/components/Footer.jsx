@@ -39,10 +39,9 @@ const Footer = () => (
         <label htmlFor="news_letter">Join our news letter</label>
         <input id="news_letter" type="email" placeholder="Enter your email" />
         <Button
-          pt="10"
-          pb="10"
-          pr="20"
-          pl="20"
+          pTB="10"
+          pLR="20"
+          bgColor="#c7abcc"
           innerText="Join"
           fs="1.2"
           color="#333"

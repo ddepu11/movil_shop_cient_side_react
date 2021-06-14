@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import logo from '../assests/logo.svg';
 import { logOutUser } from '../actions/user_actions';
+import Button from './Button';
 
 const Navbar = () => {
   const { logout, isAuthenticated } = useAuth0();
@@ -39,19 +40,27 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-
-        <div className="links">
-          <ul className="flex">
-            <li>{hasUserLoggedIn && <Link to="/account">Account</Link>}</li>
-            <li>
-              {hasUserLoggedIn || Object.keys(userInfo).length !== 0 ? (
-                <button
+        {/* <button
                   type="button"
                   className="log-out-btn"
                   onClick={handleLogOut}
                 >
                   Log Out
-                </button>
+                </button> */}
+        <div className="links">
+          <ul className="flex">
+            <li>{hasUserLoggedIn && <Link to="/account">Account</Link>}</li>
+            <li>
+              {hasUserLoggedIn || Object.keys(userInfo).length !== 0 ? (
+                <Button
+                  bgColor="#d41919"
+                  pTB="5"
+                  pLR="10"
+                  fs="1"
+                  color="white"
+                  innerText="Log Out"
+                  handleClick={handleLogOut}
+                />
               ) : (
                 <Link to="/log-in">LogIn</Link>
               )}
@@ -114,11 +123,6 @@ const Wrapper = styled.nav`
 
     .links {
       width: 15%;
-      .log-out-btn {
-        background: #d41919;
-        color: white;
-        padding: 5px 10px;
-      }
     }
   }
   .navbar {
