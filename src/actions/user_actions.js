@@ -38,7 +38,8 @@ const authenticateUser = () => async (dispatch) => {
       payload: `Welcome back ${data.user.firstName} ${data.user.lastName}.`,
     });
   } catch (err) {
-    dispatch({ type: AUTHENTICATE_USER_FAIL, payload: err.message });
+    const { msg } = err.response.data;
+    dispatch({ type: AUTHENTICATE_USER_FAIL, payload: msg });
   }
 };
 
@@ -114,8 +115,7 @@ const getAccountInfo = () => async (dispatch) => {
 
     dispatch({ type: ACCOUNT_INFO_SUCCESS, payload: data });
   } catch (err) {
-    const msg = err.message.response;
-
+    const { msg } = err.response.data;
     dispatch({
       type: ACCOUNT_INFO_ERROR,
       payload: msg,
@@ -134,7 +134,7 @@ const logOutUser = () => async (dispatch) => {
       payload: 'User logged out successfully!!!',
     });
   } catch (err) {
-    const msg = err.message.response;
+    const { msg } = err.response.data;
     dispatch({ type: USER_LOG_OUT_ERROR, payload: msg });
   }
 };

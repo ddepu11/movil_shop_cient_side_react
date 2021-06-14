@@ -226,7 +226,7 @@ const Wrapper = styled.main`
   .sign-up-btn {
     padding: 10px 40px;
     font-size: 1.2em;
-    background-color: #2a5be2;
+    background-color: #3284ff;
     color: #ffffff;
     margin-top: 12px;
     width: 100%;

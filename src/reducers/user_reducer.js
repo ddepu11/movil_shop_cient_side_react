@@ -50,6 +50,7 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         hasUserLoggedIn: false,
+        hasUserError: true,
       };
 
     case IS_EMAIL_REGISTERED_BEGIN:
