@@ -1,63 +1,88 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const Button = ({
-  innerText,
+  children,
   pr,
   pl,
   pt,
   pb,
+  mr,
+  ml,
+  mt,
+  mb,
   fs,
   color,
   bgColor,
   handleClick,
-  pTB,
-  pLR,
-}) => (
-  <button
-    onClick={handleClick}
-    type="button"
-    style={{
-      padding: `${pTB}px ${pLR}px`,
-      paddingTop: `${pt}px`,
-      paddingBottom: `${pb}px`,
-      paddingLeft: `${pl}px`,
-      paddingRight: `${pr}px`,
-      fontSize: `${fs}em`,
-      backgroundColor: `${bgColor}`,
-      color,
-    }}
-  >
-    {innerText}
-  </button>
-);
+  tr,
+  bSh,
+  width,
+}) => {
+  useEffect(() => {});
+
+  return (
+    <button
+      onClick={handleClick}
+      type="button"
+      style={{
+        paddingTop: pt,
+        paddingBottom: pb,
+        paddingLeft: pl,
+        paddingRight: pr,
+        marginRight: mr,
+        marginLeft: ml,
+        marginTop: mt,
+        marginBottom: mb,
+        fontSize: fs,
+        backgroundColor: bgColor,
+        color,
+        transform: tr,
+        boxShadow: bSh,
+        width,
+      }}
+    >
+      {children}
+    </button>
+  );
+};
 
 Button.propTypes = {
   handleClick: PropTypes.func,
-  innerText: PropTypes.string,
+  children: PropTypes.string,
   pr: PropTypes.string,
   pl: PropTypes.string,
   pt: PropTypes.string,
   pb: PropTypes.string,
+  mr: PropTypes.string,
+  ml: PropTypes.string,
+  mt: PropTypes.string,
+  mb: PropTypes.string,
   fs: PropTypes.string,
-  pTB: PropTypes.string,
-  pLR: PropTypes.string,
   color: PropTypes.string,
   bgColor: PropTypes.string,
+  tr: PropTypes.string,
+  bSh: PropTypes.string,
+  width: PropTypes.string,
 };
 
 Button.defaultProps = {
   handleClick: () => {},
-  innerText: 'XYZ',
-  pr: '5',
-  pl: '5',
-  pt: '10',
-  pb: '10',
-  fs: '1.2',
-  pTB: '5',
-  pLR: '10',
+  children: 'XYZ',
+  pr: '0',
+  pl: '0',
+  pt: '0',
+  pb: '0',
+  mr: '0',
+  ml: '0',
+  mt: '0',
+  mb: '0',
+  fs: '1em',
   color: 'white',
   bgColor: '#222',
+  tr: 'transform 0.5s ease',
+  bSh: 'rgba(0, 0, 0, 0.4) 0px 30px 90px',
+  width: 'auto',
 };
 
 export default Button;

@@ -12,6 +12,7 @@ import validateForm from '../../utils/validateForm';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
 import Aside from './Aside';
 import FormField from './FormField';
+import Button from '../Button';
 
 const Account = () => {
   const dispatch = useDispatch();
@@ -263,31 +264,45 @@ const Account = () => {
 
             {/* Buttons */}
             {!wannaEdit ? (
-              <button
-                type="button"
-                className="update_btn"
+              <Button
+                pt="10px"
+                pb="10px"
+                pl="20px"
+                pr="20px"
                 onClick={initiateUpdateProcess}
+                bgColor="#1e6adb"
+                color="white"
+                handleClick={initiateUpdateProcess}
               >
                 Wanna Update your information??
-              </button>
+              </Button>
             ) : (
               <>
-                <button
-                  className="update_btn"
-                  type="button"
-                  onClick={updateInfo}
+                <Button
+                  pt="10px"
+                  pb="10px"
+                  pl="20px"
+                  pr="20px"
+                  mr="10px"
+                  handleClick={updateInfo}
+                  bgColor="#20913c"
                 >
                   Update!!!
-                </button>
-                <button
-                  type="button"
-                  className="cancel_btn"
-                  onClick={cancelUpdate}
+                </Button>
+                <Button
+                  pt="10px"
+                  pb="10px"
+                  pl="20px"
+                  pr="20px"
+                  mr="10px"
+                  handleClick={cancelUpdate}
+                  bgColor="#e00926"
                 >
                   Cancel
-                </button>
+                </Button>
               </>
             )}
+            {/* Button Ends */}
           </main>
         </Wrapper>
       )}
@@ -371,21 +386,6 @@ const Wrapper = styled.main`
         height: auto;
         width: auto;
       }
-    }
-
-    .update_btn,
-    .cancel_btn {
-      font-size: 1em;
-      padding: 10px 20px;
-      background: #1e6adb;
-      color: white;
-      box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
-      transition: transform 0.5s ease;
-      margin-right: 30px;
-    }
-
-    .cancel_btn {
-      background: #e00926;
     }
 
     .update_btn:hover,

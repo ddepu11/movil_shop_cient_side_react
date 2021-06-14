@@ -6,6 +6,7 @@ import {
   changeDisplayPicture,
   sendNotification,
 } from '../../actions/user_actions';
+import Button from '../Button';
 
 const Aside = () => {
   const dispatch = useDispatch();
@@ -71,17 +72,37 @@ const Aside = () => {
 
           {wannaChangeDP && (
             <>
-              <button onClick={changeDP} type="button" className="upload_btn">
-                Upload
-              </button>
-              <button
-                type="button"
-                onClick={cancelChangeDPProcess}
-                className="cancel_upload_btn flex"
+              <Button
+                pt="5px"
+                pb="5px"
+                pl="10px"
+                pr="10px"
+                handleClick={changeDP}
+                width="100%"
+                bgColor="#1c8f0d"
+                tr=""
+                bSh=""
               >
-                Cancel Upload
-                <ImCancelCircle />
-              </button>
+                Upload
+              </Button>
+
+              <Button
+                pt="5px"
+                pb="5px"
+                pl="10px"
+                pr="10px"
+                color="red"
+                bgColor="#b9b7b7"
+                width="100%"
+                type="button"
+                handleClick={cancelChangeDPProcess}
+                className="flex"
+                fs="1.05em"
+                tr=""
+                bSh=""
+              >
+                Cancel Upload <ImCancelCircle />
+              </Button>
             </>
           )}
         </div>
@@ -129,24 +150,6 @@ const Wrapper = styled.aside`
         border-radius: 2px;
         color: white;
         width: 100%;
-      }
-
-      .upload_btn {
-        font-size: 1em;
-        padding: 5px 10px;
-        background: #1c8f0d;
-        color: white;
-        box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
-        width: 100%;
-      }
-
-      .cancel_upload_btn {
-        color: red;
-        width: 100%;
-        font-size: 1.1em;
-        background: #b9b7b7;
-        justify-content: space-between;
-        padding: 5px 10px;
       }
 
       label,

@@ -48,13 +48,17 @@ const Navbar = () => {
               {hasUserLoggedIn || Object.keys(userInfo).length !== 0 ? (
                 <Button
                   bgColor="#b82626"
-                  pTB="5"
-                  pLR="15"
-                  fs="1"
+                  pt="5px"
+                  pb="5px"
+                  pl="15px"
+                  pr="15px"
+                  fs="1em"
                   color="white"
-                  innerText="Log Out"
                   handleClick={handleLogOut}
-                />
+                  bSh=""
+                >
+                  Log Out
+                </Button>
               ) : (
                 <Link to="/log-in">LogIn</Link>
               )}
@@ -109,7 +113,6 @@ const Wrapper = styled.nav`
     }
     .contact {
       width: 30%;
-      border: 1px solid red;
     }
     .contact ul,
     .links ul {
@@ -117,7 +120,6 @@ const Wrapper = styled.nav`
     }
 
     .links {
-      /* border: 2px solid black; */
       width: 20%;
     }
   }
