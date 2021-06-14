@@ -18,6 +18,7 @@ const Button = ({
   tr,
   bSh,
   width,
+  borderRadius,
 }) => {
   useEffect(() => {});
 
@@ -40,6 +41,7 @@ const Button = ({
         transform: tr,
         boxShadow: bSh,
         width,
+        borderRadius,
       }}
     >
       {children}
@@ -64,6 +66,7 @@ Button.propTypes = {
   tr: PropTypes.string,
   bSh: PropTypes.string,
   width: PropTypes.string,
+  borderRadius: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -83,6 +86,7 @@ Button.defaultProps = {
   tr: 'transform 0.5s ease',
   bSh: 'rgba(0, 0, 0, 0.4) 0px 30px 90px',
   width: 'auto',
+  borderRadius: '0px',
 };
 
 export default Button;

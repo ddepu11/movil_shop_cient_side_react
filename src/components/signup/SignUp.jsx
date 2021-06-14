@@ -7,6 +7,7 @@ import { signUpUser } from '../../actions/user_actions';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
 import validateForm from '../../utils/validateForm';
 import FormControl from '../FormControl';
+import Button from '../Button';
 
 const SignUp = () => {
   const { userSignUpSuccess } = useSelector((state) => state.user);
@@ -284,9 +285,19 @@ const SignUp = () => {
           </div>
         </div>
 
-        <button type="submit" className="sign-up-btn">
+        <Button
+          handleClick={handleSubmit}
+          pt="8px"
+          pb="8px"
+          pl="10px"
+          pr="10px"
+          fs="1.2em"
+          bgColor="#2a5be2"
+          width="33%"
+          mt="12px"
+        >
           Create Account
-        </button>
+        </Button>
       </form>
     </Wrapper>
   );
@@ -446,15 +457,6 @@ const Wrapper = styled.main`
           font-size: 1.2em;
         }
       }
-    }
-
-    .sign-up-btn {
-      padding: 8px 10px;
-      font-size: 1.2em;
-      background-color: #2a5be2;
-      color: white;
-      margin-top: 12px;
-      width: 30%;
     }
   }
 `;

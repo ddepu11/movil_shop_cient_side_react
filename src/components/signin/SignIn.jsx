@@ -79,22 +79,25 @@ const SignIn = () => {
         <Wrapper className="w-960 flex">
           <div>
             <h2>Sign In in to Movil Shop</h2>
-
-            <button
-              type="button"
-              onClick={() => loginWithRedirect()}
-              className="google-btn flex"
+            <Button
+              bgColor="#3284ff"
+              pt="10px"
+              pr="60px"
+              pb="10px"
+              pl="12px"
+              width="100%"
+              borderRadius="5px"
+              fs="1.1em"
+              handleClick={() => loginWithRedirect()}
             >
               <AiOutlineGoogle className="google" />
               <span>Log in with Google</span>
-            </button>
-
+            </Button>
             <div className="or flex">
               <div className="left" />
               <span>Or</span>
               <div className="right" />
             </div>
-
             <form onSubmit={handleSubmit}>
               <FormControl
                 inputValue={userCredentials.email}
@@ -134,13 +137,11 @@ const SignIn = () => {
                 Log In
               </Button>
             </form>
-
             <div className="or flex">
               <div className="left" />
               <span>Or</span>
               <div className="right" />
             </div>
-
             <Link className="sign-up-btn" to="/sign-up">
               Don&apos;t have an account? Sign Up Now !
             </Link>
@@ -153,21 +154,20 @@ const SignIn = () => {
 
 const Wrapper = styled.main`
   padding: 10px 0 40px 0;
+
   h2 {
     font-size: 2.2em;
     padding: 15px 0;
   }
-  .google-btn {
-    font-size: 1em;
-    background: #3284ff;
-    color: white;
-    padding: 10px 60px 10px 12px;
-    border-radius: 5px;
+  button {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     .google {
       font-size: 1.8em;
     }
     span {
-      margin-left: 25px;
+      font-size: 1.2em;
     }
   }
   .or {
