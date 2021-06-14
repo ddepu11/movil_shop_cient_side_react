@@ -41,10 +41,10 @@ const Footer = () => (
         <Button
           pTB="10"
           pLR="20"
-          bgColor="#c7abcc"
+          bgColor="#9d9e9e"
           innerText="Join"
           fs="1.2"
-          color="#333"
+          color="#222222"
         />
       </div>
     </div>

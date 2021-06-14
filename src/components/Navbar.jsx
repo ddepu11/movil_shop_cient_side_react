@@ -40,22 +40,16 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        {/* <button
-                  type="button"
-                  className="log-out-btn"
-                  onClick={handleLogOut}
-                >
-                  Log Out
-                </button> */}
+
         <div className="links">
           <ul className="flex">
             <li>{hasUserLoggedIn && <Link to="/account">Account</Link>}</li>
             <li>
               {hasUserLoggedIn || Object.keys(userInfo).length !== 0 ? (
                 <Button
-                  bgColor="#d41919"
+                  bgColor="#b82626"
                   pTB="5"
-                  pLR="10"
+                  pLR="15"
                   fs="1"
                   color="white"
                   innerText="Log Out"
@@ -115,6 +109,7 @@ const Wrapper = styled.nav`
     }
     .contact {
       width: 30%;
+      border: 1px solid red;
     }
     .contact ul,
     .links ul {
@@ -122,7 +117,8 @@ const Wrapper = styled.nav`
     }
 
     .links {
-      width: 15%;
+      /* border: 2px solid black; */
+      width: 20%;
     }
   }
   .navbar {
