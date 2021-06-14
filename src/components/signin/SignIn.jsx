@@ -12,6 +12,7 @@ import Loading from '../Loading';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
 import validateForm from '../../utils/validateForm';
 import FormControl from '../FormControl';
+import Button from '../Button';
 
 const SignIn = () => {
   const { hasUserLoggedIn, userLoading, userSignUpSuccess } = useSelector(
@@ -117,9 +118,21 @@ const SignIn = () => {
                 label="Password"
               />
 
-              <button type="submit" className="sign-in-btn">
+              <Button
+                pt="10px"
+                pb="10px"
+                pl="40px"
+                pr="40px"
+                mt="12px"
+                fs="1.2em"
+                width="100%"
+                bgColor="#222222"
+                bSh=""
+                tr=""
+                handleClick={handleSubmit}
+              >
                 Log In
-              </button>
+              </Button>
             </form>
 
             <div className="or flex">
@@ -208,14 +221,6 @@ const Wrapper = styled.main`
         color: green;
         font-size: 1.2em;
       }
-    }
-    .sign-in-btn {
-      padding: 10px 40px;
-      font-size: 1.2em;
-      background-color: #222222;
-      color: white;
-      margin-top: 12px;
-      width: 100%;
     }
   }
   .sign-up-btn {
