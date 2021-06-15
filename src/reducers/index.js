@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
-import user from './user_reducer';
+import user from './userReducer';
+import dashboard from './dashboardReducer';
 
-export default combineReducers({ user });
+export default combineReducers({ user, dashboard });

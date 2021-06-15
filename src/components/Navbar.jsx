@@ -6,7 +6,7 @@ import { GiBowTieRibbon } from 'react-icons/gi';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import logo from '../assests/logo.svg';
-import { logOutUser } from '../actions/user_actions';
+import { logOutUser } from '../actions/userActions';
 import Button from './Button';
 
 const Navbar = () => {

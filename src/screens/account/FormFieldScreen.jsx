@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const FormField = ({
+const FormFieldScreen = ({
   heading,
   wannaEdit,
   inputValue = '',
@@ -29,7 +29,7 @@ const FormField = ({
   </div>
 );
 
-FormField.propTypes = {
+FormFieldScreen.propTypes = {
   heading: PropTypes.string.isRequired,
   wannaEdit: PropTypes.bool.isRequired,
   inputValue: PropTypes.string,
@@ -40,8 +40,8 @@ FormField.propTypes = {
   spanInnerText: PropTypes.string,
 };
 
-FormField.defaultProps = {
+FormFieldScreen.defaultProps = {
   inputValue: 'XYZ',
   spanInnerText: 'XYZ',
 };
-export default FormField;
+export default FormFieldScreen;

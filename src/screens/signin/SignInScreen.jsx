@@ -7,14 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   clearUserSignUpSuccess,
   customUserLogin,
-} from '../../actions/user_actions';
-import Loading from '../Loading';
+} from '../../actions/userActions';
+import Loading from '../../components/Loading';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
 import validateForm from '../../utils/validateForm';
-import FormControl from '../FormControl';
-import Button from '../Button';
+import FormControl from '../../components/FormControl';
+import Button from '../../components/Button';
 
-const SignIn = () => {
+const SignInScreen = () => {
   const { hasUserLoggedIn, userLoading, userSignUpSuccess } = useSelector(
     (state) => state.user
   );
@@ -237,4 +237,4 @@ const Wrapper = styled.main`
   }
 `;
 
-export default SignIn;
+export default SignInScreen;

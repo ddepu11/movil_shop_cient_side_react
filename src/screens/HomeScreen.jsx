@@ -9,7 +9,7 @@ import Services from '../components/Services';
 import {
   authenticateUser,
   isUserRegisteredWithThisEmail,
-} from '../actions/user_actions';
+} from '../actions/userActions';
 
 const Home = () => {
   const { user, isAuthenticated } = useAuth0();

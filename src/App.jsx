@@ -5,15 +5,15 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useSelector } from 'react-redux';
 import Notification from './components/Notification';
 import Loading from './components/Loading';
-import Home from './screens/Home';
+import HomeScreen from './screens/HomeScreen';
 import Navbar from './components/Navbar';
-import About from './screens/About';
-import SignUp from './components/signup/SignUp';
-import SignIn from './components/signin/SignIn';
+import AboutScreen from './screens/AboutScreen';
+import SignUpScreen from './screens/signup/SignUpScreen';
+import SignInScreen from './screens/signin/SignInScreen';
 import Footer from './components/Footer';
-import Account from './components/account/Account';
+import AccountScreen from './screens/account/AccountScreen';
 import Products from './components/products/Products';
-import Dashboard from './components/dashboard/Dashboard';
+import DashboardScreen from './screens/dashboard/DashboardScreen';
 
 const App = () => {
   const { isLoading } = useAuth0();
@@ -34,19 +34,19 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route exact path="/">
-              <Home />
+              <HomeScreen />
             </Route>
 
             <Route exact path="/about">
-              <About />
+              <AboutScreen />
             </Route>
 
             <Route exact path="/sign-in">
-              <SignIn />
+              <SignInScreen />
             </Route>
 
             <Route exact path="/sign-up">
-              <SignUp />
+              <SignUpScreen />
             </Route>
 
             <Route exact path="/products">
@@ -54,11 +54,11 @@ const App = () => {
             </Route>
 
             <Route exact path="/account">
-              <Account />
+              <AccountScreen />
             </Route>
 
             <Route exact path="/dashboard">
-              <Dashboard />
+              <DashboardScreen />
             </Route>
           </Switch>
           <Footer />

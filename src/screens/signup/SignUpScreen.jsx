@@ -2,14 +2,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import Loading from '../Loading';
-import { signUpUser } from '../../actions/user_actions';
+import Loading from '../../components/Loading';
+import { signUpUser } from '../../actions/userActions';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
 import validateForm from '../../utils/validateForm';
-import FormControl from '../FormControl';
-import Button from '../Button';
+import FormControl from '../../components/FormControl';
+import Button from '../../components/Button';
 
-const SignUp = () => {
+const SignUpScreen = () => {
   const { userSignUpSuccess } = useSelector((state) => state.user);
   const setTimeOutId = useRef();
   const dispatch = useDispatch();
@@ -461,4 +461,4 @@ const Wrapper = styled.main`
   }
 `;
 
-export default SignUp;
+export default SignUpScreen;

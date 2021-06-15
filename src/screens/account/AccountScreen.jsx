@@ -6,15 +6,15 @@ import {
   getAccountInfo,
   sendNotification,
   updateUser,
-} from '../../actions/user_actions';
-import Loading from '../Loading';
+} from '../../actions/userActions';
+import Loading from '../../components/Loading';
 import validateForm from '../../utils/validateForm';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
-import Aside from './Aside';
-import FormField from './FormField';
-import Button from '../Button';
+import AsideScreen from './AsideScreen';
+import FormFieldScreen from './FormFieldScreen';
+import Button from '../../components/Button';
 
-const Account = () => {
+const AccountScreen = () => {
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -185,10 +185,10 @@ const Account = () => {
             </h1>
           </header>
 
-          <Aside />
+          <AsideScreen />
 
           <main>
-            <FormField
+            <FormFieldScreen
               heading="First Name:"
               wannaEdit={wannaEdit}
               inputValue={info.firstName}
@@ -199,7 +199,7 @@ const Account = () => {
               spanInnerText={firstName}
             />
 
-            <FormField
+            <FormFieldScreen
               heading="Last Name:"
               wannaEdit={wannaEdit}
               inputValue={info.lastName}
@@ -215,7 +215,7 @@ const Account = () => {
               <span>{gender}</span>
             </div>
 
-            <FormField
+            <FormFieldScreen
               heading="Email:"
               wannaEdit={wannaEdit}
               inputValue={info.email}
@@ -226,7 +226,7 @@ const Account = () => {
               spanInnerText={email}
             />
 
-            <FormField
+            <FormFieldScreen
               heading="Phone Number:"
               wannaEdit={wannaEdit}
               inputValue={String(info.phoneNumber)}
@@ -237,7 +237,7 @@ const Account = () => {
               spanInnerText={String(phoneNumber)}
             />
 
-            <FormField
+            <FormFieldScreen
               heading="Password:"
               wannaEdit={wannaEdit}
               inputValue={info.password}
@@ -250,7 +250,7 @@ const Account = () => {
 
             {/* Buttons */}
             {wannaEdit && (
-              <FormField
+              <FormFieldScreen
                 heading="Confirm Password:"
                 wannaEdit={wannaEdit}
                 inputValue={info.confirmPassword}
@@ -396,4 +396,4 @@ const Wrapper = styled.main`
   }
 `;
 
-export default Account;
+export default AccountScreen;

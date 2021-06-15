@@ -5,10 +5,10 @@ import { ImCancelCircle } from 'react-icons/im';
 import {
   changeDisplayPicture,
   sendNotification,
-} from '../../actions/user_actions';
-import Button from '../Button';
+} from '../../actions/userActions';
+import Button from '../../components/Button';
 
-const Aside = () => {
+const AsideScreen = () => {
   const dispatch = useDispatch();
 
   const { userInfo } = useSelector((state) => state.user);
@@ -204,4 +204,4 @@ const Wrapper = styled.aside`
   }
 `;
 
-export default Aside;
+export default AsideScreen;

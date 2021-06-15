@@ -26,7 +26,7 @@ import {
   CHANGE_DP_ERROR,
   CHANGE_DP_SUCCESS,
 } from '../constants/constant';
-import * as user from '../api/user_api';
+import * as user from '../api/userApi';
 
 // Authenticate User
 const authenticateUser = () => async (dispatch) => {
