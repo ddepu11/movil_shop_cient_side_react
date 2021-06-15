@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import Aside from './Aside';
+import Section from './Section';
 
 const Dashboard = () => (
   <Wrapper className="w-960">
-    <h1>Hello I am dashboard</h1>
+    <Aside />
+
+    <Section />
   </Wrapper>
 );
 

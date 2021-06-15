@@ -13,7 +13,7 @@ import SignIn from './components/signin/SignIn';
 import Footer from './components/Footer';
 import Account from './components/account/Account';
 import Products from './components/products/Products';
-import Dashboard from './screens/Dashboard';
+import Dashboard from './components/dashboard/Dashboard';
 
 const App = () => {
   const { isLoading } = useAuth0();
