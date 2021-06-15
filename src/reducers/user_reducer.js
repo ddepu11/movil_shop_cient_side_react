@@ -180,6 +180,7 @@ const user = (userState = initialUser, action) => {
         hasUserLoggedIn: false,
         userInfo: {},
         hasUserError: false,
+        role: '',
       };
 
     case USER_LOG_OUT_ERROR:

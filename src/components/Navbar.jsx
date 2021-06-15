@@ -11,7 +11,9 @@ import Button from './Button';
 
 const Navbar = () => {
   const { logout, isAuthenticated } = useAuth0();
-  const { hasUserLoggedIn, userInfo } = useSelector((state) => state.user);
+  const { hasUserLoggedIn, userInfo, role } = useSelector(
+    (state) => state.user
+  );
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -44,7 +46,8 @@ const Navbar = () => {
 
         <div className="links">
           <ul className="flex">
-            {userInfo.role === 'SELLER' && (
+            {/* Seller Batch Button */}
+            {(userInfo.role === 'SELLER' || role === 'SELLER') && (
               <li>
                 <Button
                   pt="6px"
@@ -70,12 +73,24 @@ const Navbar = () => {
                 </Button>
               </li>
             )}
+
+            {/* Dashboard page link */}
+            {(userInfo.role === 'SELLER' ||
+              userInfo.role === 'ADMIN' ||
+              role === 'SELLER' ||
+              role === 'ADMIN') && (
+              <li>
+                <Link to="/dashboard">Dashboard</Link>
+              </li>
+            )}
+
+            {/* Account Page Link */}
             {hasUserLoggedIn && (
               <li>
-                {' '}
                 <Link to="/account">Account</Link>
               </li>
             )}
+
             {!hasUserLoggedIn && (
               <li>
                 <Link to="/sign-up">Sign Up</Link>

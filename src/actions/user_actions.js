@@ -34,7 +34,6 @@ const authenticateUser = () => async (dispatch) => {
     const { data } = await user.authenticate();
 
     const { firstName, lastName, role } = data.user;
-    console.log(data.user);
     dispatch({
       type: AUTHENTICATE_USER_SUCCESS,
       payload: {

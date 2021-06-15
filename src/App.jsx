@@ -13,6 +13,7 @@ import SignIn from './components/signin/SignIn';
 import Footer from './components/Footer';
 import Account from './components/account/Account';
 import Products from './components/products/Products';
+import Dashboard from './screens/Dashboard';
 
 const App = () => {
   const { isLoading } = useAuth0();
@@ -35,20 +36,29 @@ const App = () => {
             <Route exact path="/">
               <Home />
             </Route>
+
             <Route exact path="/about">
               <About />
             </Route>
+
             <Route exact path="/sign-in">
               <SignIn />
             </Route>
+
             <Route exact path="/sign-up">
               <SignUp />
             </Route>
+
             <Route exact path="/products">
               <Products />
             </Route>
+
             <Route exact path="/account">
               <Account />
+            </Route>
+
+            <Route exact path="/dashboard">
+              <Dashboard />
             </Route>
           </Switch>
           <Footer />
