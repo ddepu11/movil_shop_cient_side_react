@@ -33,9 +33,14 @@ const authenticateUser = () => async (dispatch) => {
   try {
     const { data } = await user.authenticate();
 
+    const { firstName, lastName, role } = data.user;
+    console.log(data.user);
     dispatch({
       type: AUTHENTICATE_USER_SUCCESS,
-      payload: `Welcome back ${data.user.firstName} ${data.user.lastName}.`,
+      payload: {
+        msg: `Welcome back ${firstName} ${lastName}.`,
+        role,
+      },
     });
   } catch (err) {
     const { msg } = err.response.data;

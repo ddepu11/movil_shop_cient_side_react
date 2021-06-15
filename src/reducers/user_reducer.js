@@ -34,6 +34,7 @@ const initialUser = {
   hasUserError: false,
   userMsg: '',
   userSignUpSuccess: false,
+  role: '',
 };
 
 const user = (userState = initialUser, action) => {
@@ -42,7 +43,8 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         hasUserLoggedIn: true,
-        userMsg: action.payload,
+        userMsg: action.payload.msg,
+        role: action.payload.role,
         hasUserError: false,
       };
 

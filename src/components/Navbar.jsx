@@ -53,7 +53,7 @@ const Navbar = () => {
                   pr="1px"
                   fs="1.05em"
                   color="white"
-                  bSh="rgba(0, 0, 0, 0.3) 0px 10px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px"
+                  bSh="rgba(0, 0, 0, 0.3) 0px 10px 20px, rgba(0, 0, 0, 0.22) 0px 10px 12px"
                   bgColor="#333"
                   borderRadius="5px"
                 >
@@ -155,11 +155,14 @@ const Wrapper = styled.nav`
     }
     .contact ul,
     .links ul {
-      justify-content: space-around;
+      justify-content: space-between;
+      li {
+        margin-left: 20px;
+      }
     }
 
     .links {
-      width: 40%;
+      width: auto;
       button {
         display: flex;
         justify-content: space-between;

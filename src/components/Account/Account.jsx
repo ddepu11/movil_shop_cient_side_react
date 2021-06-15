@@ -273,6 +273,7 @@ const Account = () => {
                 bgColor="#1e6adb"
                 color="white"
                 handleClick={initiateUpdateProcess}
+                bSh="rgba(0, 0, 0, 0.3) 0px 10px 20px, rgba(0, 0, 0, 0.22) 0px 10px 12px"
               >
                 Wanna Update your information??
               </Button>
