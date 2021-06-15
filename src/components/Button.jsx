@@ -19,6 +19,7 @@ const Button = ({
   bSh,
   width,
   borderRadius,
+  bcgImage,
 }) => {
   useEffect(() => {});
 
@@ -42,6 +43,7 @@ const Button = ({
         boxShadow: bSh,
         width,
         borderRadius,
+        backgroundImage: bcgImage,
       }}
     >
       {children}
@@ -67,6 +69,7 @@ Button.propTypes = {
   bSh: PropTypes.string,
   width: PropTypes.string,
   borderRadius: PropTypes.string,
+  bcgImage: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -87,6 +90,7 @@ Button.defaultProps = {
   bSh: 'rgba(0, 0, 0, 0.4) 0px 30px 90px',
   width: 'auto',
   borderRadius: '0px',
+  bcgImage: '',
 };
 
 export default Button;

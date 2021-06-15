@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import { BiCart } from 'react-icons/bi';
+import { GiBowTieRibbon } from 'react-icons/gi';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import logo from '../assests/logo.svg';
@@ -43,11 +44,48 @@ const Navbar = () => {
 
         <div className="links">
           <ul className="flex">
-            <li>{hasUserLoggedIn && <Link to="/account">Account</Link>}</li>
+            {userInfo.role === 'SELLER' && (
+              <li>
+                <Button
+                  pt="6px"
+                  pb="6px"
+                  pl="12px"
+                  pr="1px"
+                  fs="1.05em"
+                  color="white"
+                  bSh="rgba(0, 0, 0, 0.3) 0px 10px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px"
+                  bgColor="#333"
+                  borderRadius="5px"
+                >
+                  <GiBowTieRibbon />
+                  <span
+                    style={{
+                      color: 'white',
+                      marginLeft: '5px',
+                      padding: '0px  5px',
+                    }}
+                  >
+                    You are a seller
+                  </span>
+                </Button>
+              </li>
+            )}
+            {hasUserLoggedIn && (
+              <li>
+                {' '}
+                <Link to="/account">Account</Link>
+              </li>
+            )}
+            {!hasUserLoggedIn && (
+              <li>
+                <Link to="/sign-up">Sign Up</Link>
+              </li>
+            )}
+
             <li>
               {hasUserLoggedIn || Object.keys(userInfo).length !== 0 ? (
                 <Button
-                  bgColor="#b82626"
+                  bcgImage="linear-gradient(to right, #bb2032 0%, #df3f51  51%, #D31027  100%)"
                   pt="5px"
                   pb="5px"
                   pl="15px"
@@ -55,12 +93,13 @@ const Navbar = () => {
                   fs="1em"
                   color="white"
                   handleClick={handleLogOut}
-                  bSh=""
+                  borderRadius="5px"
+                  bSh="rgba(0, 0, 0, 0.3) 0px 10px 20px, rgba(0, 0, 0, 0.22) 0px 10px 10px"
                 >
                   Log Out
                 </Button>
               ) : (
-                <Link to="/log-in">LogIn</Link>
+                <Link to="/sign-in">Sign In</Link>
               )}
             </li>
           </ul>
@@ -116,11 +155,16 @@ const Wrapper = styled.nav`
     }
     .contact ul,
     .links ul {
-      justify-content: space-between;
+      justify-content: space-around;
     }
 
     .links {
-      width: 20%;
+      width: 40%;
+      button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
     }
   }
   .navbar {

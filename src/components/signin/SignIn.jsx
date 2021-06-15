@@ -159,6 +159,7 @@ const Wrapper = styled.main`
     font-size: 2.2em;
     padding: 15px 0;
   }
+
   button {
     display: flex;
     justify-content: space-around;
@@ -170,6 +171,7 @@ const Wrapper = styled.main`
       font-size: 1.2em;
     }
   }
+
   .or {
     padding: 15px 0;
     color: #555;
@@ -182,6 +184,7 @@ const Wrapper = styled.main`
       border-radius: 5px;
     }
   }
+
   form {
     .form-control {
       display: flex;
@@ -223,6 +226,7 @@ const Wrapper = styled.main`
       }
     }
   }
+
   .sign-up-btn {
     padding: 10px 40px;
     font-size: 1.2em;
