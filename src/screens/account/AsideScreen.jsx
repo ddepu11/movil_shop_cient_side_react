@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { ImCancelCircle } from 'react-icons/im';
-import {
-  changeDisplayPicture,
-  sendNotification,
-} from '../../actions/userActions';
+import { changeDisplayPicture } from '../../actions/userActions';
 import Button from '../../components/Button';
+import { sendNotification } from '../../actions/notificationActions';
 
 const AsideScreen = () => {
   const dispatch = useDispatch();
@@ -31,7 +29,9 @@ const AsideScreen = () => {
       const fileSRC = URL.createObjectURL(file);
       setDpSRC({ ...dpSRC, preview: fileSRC, file });
     } else {
-      dispatch(sendNotification('Image size should not be geater then 5mb!!!'));
+      dispatch(
+        sendNotification('Image size should not be geater then 5mb!!!', true)
+      );
     }
   };
 

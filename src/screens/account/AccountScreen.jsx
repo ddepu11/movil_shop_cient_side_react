@@ -2,17 +2,14 @@ import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {
-  getAccountInfo,
-  sendNotification,
-  updateUser,
-} from '../../actions/userActions';
+import { getAccountInfo, updateUser } from '../../actions/userActions';
 import Loading from '../../components/Loading';
 import validateForm from '../../utils/validateForm';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
 import AsideScreen from './AsideScreen';
 import FormFieldScreen from './FormFieldScreen';
 import Button from '../../components/Button';
+import { sendNotification } from '../../actions/notificationActions';
 
 const AccountScreen = () => {
   const dispatch = useDispatch();
@@ -124,7 +121,7 @@ const AccountScreen = () => {
         info.email === userInfo.email &&
         info.phoneNumber === userInfo.phoneNumber
       ) {
-        dispatch(sendNotification('Sorry there is nothing to update!!!'));
+        dispatch(sendNotification('Sorry there is nothing to update!!!', true));
         setWannaEdit(false);
         clearAllSetTimeOut(setTimeOutId);
       } else {

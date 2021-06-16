@@ -25,12 +25,8 @@ import {
   USER_CHANGE_DP_SUCCESS,
 } from '../constants/userConstants';
 
-import {
-  NOTIFICATION_CLEAR,
-  NOTIFICATION_SEND,
-} from '../constants/notificationConstants';
-
 import * as user from '../api/userApi';
+import { sendNotification } from './notificationActions';
 
 // Authenticate User
 const authenticateUser = () => async (dispatch) => {
@@ -40,14 +36,15 @@ const authenticateUser = () => async (dispatch) => {
     const { firstName, lastName, role } = data.user;
     dispatch({
       type: USER_AUTHENTICATION_SUCCESS,
-      payload: {
-        msg: `Welcome back ${firstName} ${lastName}.`,
-        role,
-      },
+      payload: role,
     });
+    dispatch(
+      sendNotification(`Welcome back ${firstName} ${lastName} :)`, false)
+    );
   } catch (err) {
     const { msg } = err.response.data;
     dispatch({ type: USER_AUTHENTICATION_FAIL, payload: msg });
+    dispatch(sendNotification(msg, true));
   }
 };
 
@@ -62,11 +59,13 @@ const isUserRegisteredWithThisEmail = (email) => async (dispatch) => {
       type: USER_REGISTER_CHECK_SUCCESS,
       payload: { user: data.user, msg: 'User Logged In Successfully!!!' },
     });
+    dispatch(sendNotification('User Logged In Successfully!!!', false));
   } catch (error) {
     dispatch({
       type: USER_REGISTER_CHECK_ERROR,
       payload: 'User was not registered!!!',
     });
+    dispatch(sendNotification('User was not registered!!!', true));
   }
 };
 
@@ -79,9 +78,11 @@ const customUserSignIn = (email, password) => async (dispatch) => {
 
     // Handle this
     dispatch({ type: USER_SIGN_IN_SUCCESS, payload: data });
+    dispatch(sendNotification(data.msg, false));
   } catch (err) {
     const { msg } = err.response.data;
     dispatch({ type: USER_SIGN_IN_ERROR, payload: msg });
+    dispatch(sendNotification(msg, true));
   }
 };
 
@@ -97,17 +98,14 @@ const signUpUser = (userCredentials) => async (dispatch) => {
         type: USER_SIGN_UP_SUCCESS,
         payload: data.msg,
       });
+      dispatch(sendNotification(data.msg, false));
     }
   } catch (err) {
     const { msg } = err.response.data;
 
     dispatch({ type: USER_SIGN_UP_ERROR, payload: msg });
+    dispatch(sendNotification(msg, true));
   }
-};
-
-// Clears any notification
-const clearNotification = () => (dispatch) => {
-  dispatch({ type: NOTIFICATION_CLEAR });
 };
 
 // assigns false to hasUseSignedUp flag
@@ -122,12 +120,14 @@ const getAccountInfo = () => async (dispatch) => {
     const { data } = await user.accountInfo();
 
     dispatch({ type: USER_INFO_SUCCESS, payload: data });
+    dispatch(sendNotification(data.msg, false));
   } catch (err) {
     const { msg } = err.response.data;
     dispatch({
       type: USER_INFO_ERROR,
       payload: msg,
     });
+    dispatch(sendNotification(msg, true));
   }
 };
 
@@ -141,9 +141,11 @@ const logOutUser = () => async (dispatch) => {
       type: USER_LOG_OUT_SUCCESS,
       payload: 'User logged out successfully!!!',
     });
+    dispatch(sendNotification('User logged out successfully!!!', false));
   } catch (err) {
     const { msg } = err.response.data;
     dispatch({ type: USER_LOG_OUT_ERROR, payload: msg });
+    dispatch(sendNotification(msg, true));
   }
 };
 
@@ -157,14 +159,12 @@ const updateUser = (userInfo) => async (dispatch) => {
       type: USER_UPDATE_SUCCESS,
       payload: { user: data.user, msg: 'User updated Successfully!!!' },
     });
+    dispatch(sendNotification('User updated Successfully!!!', false));
   } catch (err) {
     const { msg } = err.response.data;
     dispatch({ type: USER_UPDATE_ERROR, payload: msg });
+    dispatch(sendNotification(msg, true));
   }
-};
-
-const sendNotification = (msg) => (dispatch) => {
-  dispatch({ type: NOTIFICATION_SEND, payload: msg });
 };
 
 const changeDisplayPicture = (formData) => async (dispatch) => {
@@ -182,22 +182,24 @@ const changeDisplayPicture = (formData) => async (dispatch) => {
         msg: 'You have successfully changed your dp!!!',
       },
     });
+    dispatch(
+      sendNotification('You have successfully changed your dp!!!', false)
+    );
   } catch (err) {
     const msg = err.message.response;
     dispatch({ type: USER_CHANGE_DP_ERROR, payload: msg });
+    dispatch(sendNotification(msg, true));
   }
 };
 
 export {
   customUserSignIn,
   signUpUser,
-  clearNotification,
   clearUserSignUpSuccess,
   getAccountInfo,
   logOutUser,
   isUserRegisteredWithThisEmail,
   authenticateUser,
   updateUser,
-  sendNotification,
   changeDisplayPicture,
 };

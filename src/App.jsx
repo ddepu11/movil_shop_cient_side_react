@@ -17,7 +17,9 @@ import DashboardScreen from './screens/dashboard/DashboardScreen';
 
 const App = () => {
   const { isLoading } = useAuth0();
-  const { userMsg, hasUserError } = useSelector((state) => state.user);
+  const { notificationMessage, danger } = useSelector(
+    (state) => state.notification
+  );
 
   return (
     <Wrapper>
@@ -25,10 +27,10 @@ const App = () => {
         <Loading />
       ) : (
         <Router>
-          {userMsg && (
+          {notificationMessage && (
             <Notification
-              msg={userMsg.toString()}
-              color={hasUserError ? '#c52525' : '#25c555'}
+              msg={notificationMessage.toString()}
+              color={danger ? '#c52525' : '#25c555'}
             />
           )}
           <Navbar />

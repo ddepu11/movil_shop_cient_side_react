@@ -25,11 +25,6 @@ import {
   USER_CHANGE_DP_SUCCESS,
 } from '../constants/userConstants';
 
-import {
-  NOTIFICATION_CLEAR,
-  NOTIFICATION_SEND,
-} from '../constants/notificationConstants';
-
 const initialUser = {
   userInfo: {},
   hasUserLoggedIn: false,
@@ -46,8 +41,7 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         hasUserLoggedIn: true,
-        userMsg: action.payload.msg,
-        role: action.payload.role,
+        role: action.payload,
         hasUserError: false,
       };
 
@@ -132,13 +126,6 @@ const user = (userState = initialUser, action) => {
         userMsg: action.payload,
       };
 
-    case NOTIFICATION_CLEAR:
-      return {
-        ...userState,
-        userMsg: '',
-        hasUserError: false,
-      };
-
     case USER_CLEAR_SIGNUP_STATUS:
       return {
         ...userState,
@@ -213,12 +200,6 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         userLoading: false,
-        userMsg: action.payload,
-      };
-
-    case NOTIFICATION_SEND:
-      return {
-        ...userState,
         userMsg: action.payload,
       };
 
