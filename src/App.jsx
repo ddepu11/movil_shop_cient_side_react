@@ -12,7 +12,7 @@ import SignUpScreen from './screens/signup/SignUpScreen';
 import SignInScreen from './screens/signin/SignInScreen';
 import Footer from './components/Footer';
 import AccountScreen from './screens/account/AccountScreen';
-import Products from './components/products/Products';
+import ProductsScreen from './screens/products/ProductsScreen';
 import DashboardScreen from './screens/dashboard/DashboardScreen';
 
 const App = () => {
@@ -50,7 +50,7 @@ const App = () => {
             </Route>
 
             <Route exact path="/products">
-              <Products />
+              <ProductsScreen />
             </Route>
 
             <Route exact path="/account">

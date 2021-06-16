@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
 
-const Filters = () => (
+const FiltersScreen = () => (
   <Wrapper>
     <div className="filters_div">
       <form>
@@ -177,4 +177,4 @@ const Wrapper = styled.aside`
   }
 `;
 
-export default Filters;
+export default FiltersScreen;

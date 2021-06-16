@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { clearUserMessage } from '../actions/userActions';
+import { clearNotification } from '../actions/userActions';
 
 const Notification = ({ msg, color }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     setTimeout(() => {
-      dispatch(clearUserMessage());
+      dispatch(clearNotification());
     }, 5000);
   });
 
@@ -19,6 +19,7 @@ const Notification = ({ msg, color }) => {
     </Wrapper>
   );
 };
+
 Notification.propTypes = {
   msg: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
@@ -41,4 +42,5 @@ const Wrapper = styled.div`
     font-size: 1.2em;
   }
 `;
+
 export default Notification;

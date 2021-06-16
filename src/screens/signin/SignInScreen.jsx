@@ -6,7 +6,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   clearUserSignUpSuccess,
-  customUserLogin,
+  customUserSignIn,
 } from '../../actions/userActions';
 import Loading from '../../components/Loading';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
@@ -66,7 +66,7 @@ const SignInScreen = () => {
     );
 
     if (!error) {
-      dispatch(customUserLogin(email, password));
+      dispatch(customUserSignIn(email, password));
       setUserCredentials({ password: '', email: '' });
     }
   };

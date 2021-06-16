@@ -1,30 +1,30 @@
 import {
-  ACCOUNT_INFO_BEGIN,
-  ACCOUNT_INFO_ERROR,
-  ACCOUNT_INFO_SUCCESS,
-  CLEAR_USER_MESSAGE,
-  CLEAR_USER_SIGNUP_SUCCESS,
-  IS_EMAIL_REGISTERED_BEGIN,
-  IS_EMAIL_REGISTERED_ERROR,
-  IS_EMAIL_REGISTERED_SUCCESS,
-  USER_LOG_IN_BEGIN,
-  USER_LOG_IN_ERROR,
-  USER_LOG_IN_SUCCESS,
+  USER_INFO_BEGIN,
+  USER_INFO_ERROR,
+  USER_INFO_SUCCESS,
+  NOTIFICATION_CLEAR,
+  USER_CLEAR_SIGNUP_STATUS,
+  USER_REGISTER_CHECK_BEGIN,
+  USER_REGISTER_CHECK_SUCCESS,
+  USER_REGISTER_CHECK_ERROR,
+  USER_SIGN_IN_BEGIN,
+  USER_SIGN_IN_SUCCESS,
+  USER_SIGN_IN_ERROR,
   USER_LOG_OUT_BEGIN,
   USER_LOG_OUT_ERROR,
   USER_LOG_OUT_SUCCESS,
   USER_SIGN_UP_BEGIN,
   USER_SIGN_UP_ERROR,
   USER_SIGN_UP_SUCCESS,
-  AUTHENTICATE_USER_SUCCESS,
-  AUTHENTICATE_USER_FAIL,
-  UPDATE_USER_BEGIN,
-  UPDATE_USER_SUCCESS,
-  UPDATE_USER_ERROR,
-  SEND_NOTIFICATION,
-  CHANGE_DP_BEGIN,
-  CHANGE_DP_ERROR,
-  CHANGE_DP_SUCCESS,
+  USER_AUTHENTICATION_SUCCESS,
+  USER_AUTHENTICATION_FAIL,
+  USER_UPDATE_BEGIN,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_ERROR,
+  NOTIFICATION_SEND,
+  USER_CHANGE_DP_BEGIN,
+  USER_CHANGE_DP_ERROR,
+  USER_CHANGE_DP_SUCCESS,
 } from '../constants/constant';
 
 const initialUser = {
@@ -39,7 +39,7 @@ const initialUser = {
 
 const user = (userState = initialUser, action) => {
   switch (action.type) {
-    case AUTHENTICATE_USER_SUCCESS:
+    case USER_AUTHENTICATION_SUCCESS:
       return {
         ...userState,
         hasUserLoggedIn: true,
@@ -48,20 +48,20 @@ const user = (userState = initialUser, action) => {
         hasUserError: false,
       };
 
-    case AUTHENTICATE_USER_FAIL:
+    case USER_AUTHENTICATION_FAIL:
       return {
         ...userState,
         hasUserLoggedIn: false,
         hasUserError: true,
       };
 
-    case IS_EMAIL_REGISTERED_BEGIN:
+    case USER_REGISTER_CHECK_BEGIN:
       return {
         ...userState,
         userLoading: true,
       };
 
-    case IS_EMAIL_REGISTERED_SUCCESS:
+    case USER_REGISTER_CHECK_SUCCESS:
       return {
         ...userState,
         hasUserLoggedIn: true,
@@ -71,7 +71,7 @@ const user = (userState = initialUser, action) => {
         hasUserError: false,
       };
 
-    case IS_EMAIL_REGISTERED_ERROR:
+    case USER_REGISTER_CHECK_ERROR:
       return {
         ...userState,
         userLoading: false,
@@ -80,14 +80,14 @@ const user = (userState = initialUser, action) => {
       };
 
     // Login State handling
-    case USER_LOG_IN_BEGIN:
+    case USER_SIGN_IN_BEGIN:
       return {
         ...userState,
         userLoading: true,
         hasUserError: false,
       };
 
-    case USER_LOG_IN_SUCCESS:
+    case USER_SIGN_IN_SUCCESS:
       return {
         ...userState,
         userMsg: action.payload.msg,
@@ -96,7 +96,7 @@ const user = (userState = initialUser, action) => {
         hasUserError: false,
       };
 
-    case USER_LOG_IN_ERROR:
+    case USER_SIGN_IN_ERROR:
       return {
         ...userState,
         hasUserError: true,
@@ -129,27 +129,27 @@ const user = (userState = initialUser, action) => {
         userMsg: action.payload,
       };
 
-    case CLEAR_USER_MESSAGE:
+    case NOTIFICATION_CLEAR:
       return {
         ...userState,
         userMsg: '',
         hasUserError: false,
       };
 
-    case CLEAR_USER_SIGNUP_SUCCESS:
+    case USER_CLEAR_SIGNUP_STATUS:
       return {
         ...userState,
         userSignUpSuccess: false,
         hasUserError: false,
       };
 
-    case ACCOUNT_INFO_BEGIN:
+    case USER_INFO_BEGIN:
       return {
         ...userState,
         userLoading: true,
       };
 
-    case ACCOUNT_INFO_SUCCESS:
+    case USER_INFO_SUCCESS:
       return {
         ...userState,
         userLoading: false,
@@ -158,7 +158,7 @@ const user = (userState = initialUser, action) => {
         hasUserError: false,
       };
 
-    case ACCOUNT_INFO_ERROR:
+    case USER_INFO_ERROR:
       return {
         ...userState,
         userLoading: false,
@@ -191,12 +191,13 @@ const user = (userState = initialUser, action) => {
         userLoading: false,
       };
 
-    case UPDATE_USER_BEGIN:
+    case USER_UPDATE_BEGIN:
       return {
         ...userState,
         userLoading: true,
       };
-    case UPDATE_USER_SUCCESS:
+
+    case USER_UPDATE_SUCCESS:
       return {
         ...userState,
         userLoading: false,
@@ -205,27 +206,27 @@ const user = (userState = initialUser, action) => {
         hasUserError: false,
       };
 
-    case UPDATE_USER_ERROR:
+    case USER_UPDATE_ERROR:
       return {
         ...userState,
         userLoading: false,
         userMsg: action.payload,
       };
 
-    case SEND_NOTIFICATION:
+    case NOTIFICATION_SEND:
       return {
         ...userState,
         userMsg: action.payload,
       };
 
     // Changing DP
-    case CHANGE_DP_BEGIN:
+    case USER_CHANGE_DP_BEGIN:
       return {
         ...userState,
         userLoading: true,
       };
 
-    case CHANGE_DP_SUCCESS:
+    case USER_CHANGE_DP_SUCCESS:
       return {
         ...userState,
         userLoading: false,
@@ -234,7 +235,7 @@ const user = (userState = initialUser, action) => {
         hasUserError: false,
       };
 
-    case CHANGE_DP_ERROR:
+    case USER_CHANGE_DP_ERROR:
       return {
         ...userState,
         userLoading: false,

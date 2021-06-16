@@ -1,31 +1,32 @@
 import {
-  ACCOUNT_INFO_BEGIN,
-  ACCOUNT_INFO_ERROR,
-  ACCOUNT_INFO_SUCCESS,
-  CLEAR_USER_MESSAGE,
-  CLEAR_USER_SIGNUP_SUCCESS,
-  IS_EMAIL_REGISTERED_BEGIN,
-  IS_EMAIL_REGISTERED_ERROR,
-  IS_EMAIL_REGISTERED_SUCCESS,
-  USER_LOG_IN_BEGIN,
-  USER_LOG_IN_ERROR,
-  USER_LOG_IN_SUCCESS,
+  USER_INFO_BEGIN,
+  USER_INFO_SUCCESS,
+  USER_INFO_ERROR,
+  NOTIFICATION_CLEAR,
+  USER_CLEAR_SIGNUP_STATUS,
+  USER_REGISTER_CHECK_BEGIN,
+  USER_REGISTER_CHECK_SUCCESS,
+  USER_REGISTER_CHECK_ERROR,
+  USER_SIGN_IN_BEGIN,
+  USER_SIGN_IN_SUCCESS,
+  USER_SIGN_IN_ERROR,
   USER_LOG_OUT_BEGIN,
   USER_LOG_OUT_ERROR,
   USER_LOG_OUT_SUCCESS,
   USER_SIGN_UP_BEGIN,
   USER_SIGN_UP_ERROR,
   USER_SIGN_UP_SUCCESS,
-  AUTHENTICATE_USER_SUCCESS,
-  AUTHENTICATE_USER_FAIL,
-  UPDATE_USER_BEGIN,
-  UPDATE_USER_ERROR,
-  UPDATE_USER_SUCCESS,
-  SEND_NOTIFICATION,
-  CHANGE_DP_BEGIN,
-  CHANGE_DP_ERROR,
-  CHANGE_DP_SUCCESS,
+  USER_AUTHENTICATION_SUCCESS,
+  USER_AUTHENTICATION_FAIL,
+  USER_UPDATE_BEGIN,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_ERROR,
+  NOTIFICATION_SEND,
+  USER_CHANGE_DP_BEGIN,
+  USER_CHANGE_DP_ERROR,
+  USER_CHANGE_DP_SUCCESS,
 } from '../constants/constant';
+
 import * as user from '../api/userApi';
 
 // Authenticate User
@@ -35,7 +36,7 @@ const authenticateUser = () => async (dispatch) => {
 
     const { firstName, lastName, role } = data.user;
     dispatch({
-      type: AUTHENTICATE_USER_SUCCESS,
+      type: USER_AUTHENTICATION_SUCCESS,
       payload: {
         msg: `Welcome back ${firstName} ${lastName}.`,
         role,
@@ -43,41 +44,41 @@ const authenticateUser = () => async (dispatch) => {
     });
   } catch (err) {
     const { msg } = err.response.data;
-    dispatch({ type: AUTHENTICATE_USER_FAIL, payload: msg });
+    dispatch({ type: USER_AUTHENTICATION_FAIL, payload: msg });
   }
 };
 
 //  check if given email is registered while loggijng in using google??
 const isUserRegisteredWithThisEmail = (email) => async (dispatch) => {
-  dispatch({ type: IS_EMAIL_REGISTERED_BEGIN });
+  dispatch({ type: USER_REGISTER_CHECK_BEGIN });
 
   try {
     const { data } = await user.checkIsEmailRegistered(email);
 
     dispatch({
-      type: IS_EMAIL_REGISTERED_SUCCESS,
+      type: USER_REGISTER_CHECK_SUCCESS,
       payload: { user: data.user, msg: 'User Logged In Successfully!!!' },
     });
   } catch (error) {
     dispatch({
-      type: IS_EMAIL_REGISTERED_ERROR,
+      type: USER_REGISTER_CHECK_ERROR,
       payload: 'User was not registered!!!',
     });
   }
 };
 
 // Custom User Login
-const customUserLogin = (email, password) => async (dispatch) => {
-  dispatch({ type: USER_LOG_IN_BEGIN });
+const customUserSignIn = (email, password) => async (dispatch) => {
+  dispatch({ type: USER_SIGN_IN_BEGIN });
 
   try {
     const { data } = await user.logIn(email, password);
 
     // Handle this
-    dispatch({ type: USER_LOG_IN_SUCCESS, payload: data });
+    dispatch({ type: USER_SIGN_IN_SUCCESS, payload: data });
   } catch (err) {
     const { msg } = err.response.data;
-    dispatch({ type: USER_LOG_IN_ERROR, payload: msg });
+    dispatch({ type: USER_SIGN_IN_ERROR, payload: msg });
   }
 };
 
@@ -101,27 +102,27 @@ const signUpUser = (userCredentials) => async (dispatch) => {
   }
 };
 
-// Clears users messages
-const clearUserMessage = () => (dispatch) => {
-  dispatch({ type: CLEAR_USER_MESSAGE });
+// Clears any notification
+const clearNotification = () => (dispatch) => {
+  dispatch({ type: NOTIFICATION_CLEAR });
 };
 
 // assigns false to hasUseSignedUp flag
 const clearUserSignUpSuccess = () => (dispatch) => {
-  dispatch({ type: CLEAR_USER_SIGNUP_SUCCESS });
+  dispatch({ type: USER_CLEAR_SIGNUP_STATUS });
 };
 
 const getAccountInfo = () => async (dispatch) => {
-  dispatch({ type: ACCOUNT_INFO_BEGIN });
+  dispatch({ type: USER_INFO_BEGIN });
 
   try {
     const { data } = await user.accountInfo();
 
-    dispatch({ type: ACCOUNT_INFO_SUCCESS, payload: data });
+    dispatch({ type: USER_INFO_SUCCESS, payload: data });
   } catch (err) {
     const { msg } = err.response.data;
     dispatch({
-      type: ACCOUNT_INFO_ERROR,
+      type: USER_INFO_ERROR,
       payload: msg,
     });
   }
@@ -144,27 +145,27 @@ const logOutUser = () => async (dispatch) => {
 };
 
 const updateUser = (userInfo) => async (dispatch) => {
-  dispatch({ type: UPDATE_USER_BEGIN });
+  dispatch({ type: USER_UPDATE_BEGIN });
 
   try {
     const { data } = await user.update(userInfo);
 
     dispatch({
-      type: UPDATE_USER_SUCCESS,
+      type: USER_UPDATE_SUCCESS,
       payload: { user: data.user, msg: 'User updated Successfully!!!' },
     });
   } catch (err) {
     const { msg } = err.response.data;
-    dispatch({ type: UPDATE_USER_ERROR, payload: msg });
+    dispatch({ type: USER_UPDATE_ERROR, payload: msg });
   }
 };
 
 const sendNotification = (msg) => (dispatch) => {
-  dispatch({ type: SEND_NOTIFICATION, payload: msg });
+  dispatch({ type: NOTIFICATION_SEND, payload: msg });
 };
 
 const changeDisplayPicture = (formData) => async (dispatch) => {
-  dispatch({ type: CHANGE_DP_BEGIN });
+  dispatch({ type: USER_CHANGE_DP_BEGIN });
 
   try {
     const {
@@ -172,7 +173,7 @@ const changeDisplayPicture = (formData) => async (dispatch) => {
     } = await user.changeDP(formData);
 
     dispatch({
-      type: CHANGE_DP_SUCCESS,
+      type: USER_CHANGE_DP_SUCCESS,
       payload: {
         user: updatedUser,
         msg: 'You have successfully changed your dp!!!',
@@ -180,14 +181,14 @@ const changeDisplayPicture = (formData) => async (dispatch) => {
     });
   } catch (err) {
     const msg = err.message.response;
-    dispatch({ type: CHANGE_DP_ERROR, payload: msg });
+    dispatch({ type: USER_CHANGE_DP_ERROR, payload: msg });
   }
 };
 
 export {
-  customUserLogin,
+  customUserSignIn,
   signUpUser,
-  clearUserMessage,
+  clearNotification,
   clearUserSignUpSuccess,
   getAccountInfo,
   logOutUser,
