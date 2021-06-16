@@ -59,6 +59,7 @@ const Navbar = () => {
                   bSh="rgba(0, 0, 0, 0.3) 0px 10px 20px, rgba(0, 0, 0, 0.22) 0px 10px 12px"
                   bgColor="#333"
                   borderRadius="5px"
+                  cursor="auto"
                 >
                   <GiBowTieRibbon />
                   <span
