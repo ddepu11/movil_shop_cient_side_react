@@ -20,6 +20,7 @@ const Button = ({
   width,
   borderRadius,
   bcgImage,
+  cursor,
 }) => {
   useEffect(() => {});
 
@@ -44,6 +45,7 @@ const Button = ({
         width,
         borderRadius,
         backgroundImage: bcgImage,
+        cursor,
       }}
     >
       {children}
@@ -70,6 +72,7 @@ Button.propTypes = {
   width: PropTypes.string,
   borderRadius: PropTypes.string,
   bcgImage: PropTypes.string,
+  cursor: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -91,6 +94,7 @@ Button.defaultProps = {
   width: 'auto',
   borderRadius: '0px',
   bcgImage: '',
+  cursor: 'pointer',
 };
 
 export default Button;
