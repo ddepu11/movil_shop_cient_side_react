@@ -34,17 +34,17 @@ const authenticateUser = () => async (dispatch) => {
     const { data } = await user.authenticate();
 
     const { firstName, lastName, role } = data.user;
+
     dispatch({
       type: USER_AUTHENTICATION_SUCCESS,
       payload: role,
     });
+
     dispatch(
       sendNotification(`Welcome back ${firstName} ${lastName} :)`, false)
     );
   } catch (err) {
-    const { msg } = err.response.data;
-    dispatch({ type: USER_AUTHENTICATION_FAIL, payload: msg });
-    dispatch(sendNotification(msg, true));
+    dispatch({ type: USER_AUTHENTICATION_FAIL });
   }
 };
 
@@ -57,7 +57,7 @@ const isUserRegisteredWithThisEmail = (email) => async (dispatch) => {
 
     dispatch({
       type: USER_REGISTER_CHECK_SUCCESS,
-      payload: { user: data.user, msg: 'User Logged In Successfully!!!' },
+      payload: data.user,
     });
     dispatch(sendNotification('User Logged In Successfully!!!', false));
   } catch (error) {
@@ -77,7 +77,7 @@ const customUserSignIn = (email, password) => async (dispatch) => {
     const { data } = await user.logIn(email, password);
 
     // Handle this
-    dispatch({ type: USER_SIGN_IN_SUCCESS, payload: data });
+    dispatch({ type: USER_SIGN_IN_SUCCESS });
     dispatch(sendNotification(data.msg, false));
   } catch (err) {
     const { msg } = err.response.data;
@@ -96,8 +96,8 @@ const signUpUser = (userCredentials) => async (dispatch) => {
     if (data) {
       dispatch({
         type: USER_SIGN_UP_SUCCESS,
-        payload: data.msg,
       });
+
       dispatch(sendNotification(data.msg, false));
     }
   } catch (err) {
@@ -139,8 +139,8 @@ const logOutUser = () => async (dispatch) => {
 
     dispatch({
       type: USER_LOG_OUT_SUCCESS,
-      payload: 'User logged out successfully!!!',
     });
+
     dispatch(sendNotification('User logged out successfully!!!', false));
   } catch (err) {
     const { msg } = err.response.data;
@@ -157,7 +157,7 @@ const updateUser = (userInfo) => async (dispatch) => {
 
     dispatch({
       type: USER_UPDATE_SUCCESS,
-      payload: { user: data.user, msg: 'User updated Successfully!!!' },
+      payload: data.user,
     });
     dispatch(sendNotification('User updated Successfully!!!', false));
   } catch (err) {
@@ -177,11 +177,9 @@ const changeDisplayPicture = (formData) => async (dispatch) => {
 
     dispatch({
       type: USER_CHANGE_DP_SUCCESS,
-      payload: {
-        user: updatedUser,
-        msg: 'You have successfully changed your dp!!!',
-      },
+      payload: updatedUser,
     });
+
     dispatch(
       sendNotification('You have successfully changed your dp!!!', false)
     );

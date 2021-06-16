@@ -30,7 +30,6 @@ const initialUser = {
   hasUserLoggedIn: false,
   userLoading: false,
   hasUserError: false,
-  userMsg: '',
   userSignUpSuccess: false,
   role: '',
 };
@@ -62,8 +61,7 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         hasUserLoggedIn: true,
-        userInfo: action.payload.user,
-        userMsg: action.payload.msg,
+        userInfo: action.payload,
         userLoading: false,
         hasUserError: false,
       };
@@ -76,7 +74,7 @@ const user = (userState = initialUser, action) => {
         userMsg: action.payload,
       };
 
-    // Login State handling
+    // Sign-in State handling
     case USER_SIGN_IN_BEGIN:
       return {
         ...userState,
@@ -87,7 +85,6 @@ const user = (userState = initialUser, action) => {
     case USER_SIGN_IN_SUCCESS:
       return {
         ...userState,
-        userMsg: action.payload.msg,
         hasUserLoggedIn: true,
         userLoading: false,
         hasUserError: false,
@@ -114,7 +111,6 @@ const user = (userState = initialUser, action) => {
         ...userState,
         userSignUpSuccess: true,
         userLoading: false,
-        userMsg: action.payload,
         hasUserError: false,
       };
 
@@ -143,9 +139,9 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         userLoading: false,
-        userInfo: action.payload,
         hasUserLoggedIn: true,
         hasUserError: false,
+        userInfo: action.payload,
       };
 
     case USER_INFO_ERROR:
@@ -156,6 +152,7 @@ const user = (userState = initialUser, action) => {
         userMsg: action.payload,
       };
 
+    // Log out
     case USER_LOG_OUT_BEGIN:
       return {
         ...userState,
@@ -166,7 +163,6 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         userLoading: false,
-        userMsg: action.payload,
         hasUserLoggedIn: false,
         userInfo: {},
         hasUserError: false,
@@ -181,6 +177,7 @@ const user = (userState = initialUser, action) => {
         userLoading: false,
       };
 
+    // User info updated
     case USER_UPDATE_BEGIN:
       return {
         ...userState,
@@ -191,8 +188,7 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         userLoading: false,
-        userInfo: action.payload.user,
-        userMsg: action.payload.msg,
+        userInfo: action.payload,
         hasUserError: false,
       };
 
@@ -214,8 +210,7 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         userLoading: false,
-        userMsg: action.payload.msg,
-        userInfo: action.payload.user,
+        userInfo: action.payload,
         hasUserError: false,
       };
 
