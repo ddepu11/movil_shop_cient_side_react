@@ -11,9 +11,11 @@ import Button from './Button';
 
 const Navbar = () => {
   const { logout, isAuthenticated } = useAuth0();
+
   const { hasUserLoggedIn, userInfo, role } = useSelector(
     (state) => state.user
   );
+
   const dispatch = useDispatch();
   const history = useHistory();
 

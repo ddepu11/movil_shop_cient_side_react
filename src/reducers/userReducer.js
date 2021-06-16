@@ -2,7 +2,6 @@ import {
   USER_INFO_BEGIN,
   USER_INFO_ERROR,
   USER_INFO_SUCCESS,
-  NOTIFICATION_CLEAR,
   USER_CLEAR_SIGNUP_STATUS,
   USER_REGISTER_CHECK_BEGIN,
   USER_REGISTER_CHECK_SUCCESS,
@@ -21,11 +20,15 @@ import {
   USER_UPDATE_BEGIN,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_ERROR,
-  NOTIFICATION_SEND,
   USER_CHANGE_DP_BEGIN,
   USER_CHANGE_DP_ERROR,
   USER_CHANGE_DP_SUCCESS,
-} from '../constants/constant';
+} from '../constants/userConstants';
+
+import {
+  NOTIFICATION_CLEAR,
+  NOTIFICATION_SEND,
+} from '../constants/notificationConstants';
 
 const initialUser = {
   userInfo: {},
