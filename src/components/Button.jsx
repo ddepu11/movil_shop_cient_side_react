@@ -55,7 +55,11 @@ const Button = ({
 
 Button.propTypes = {
   handleClick: PropTypes.func,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.element,
+  ]),
   pr: PropTypes.string,
   pl: PropTypes.string,
   pt: PropTypes.string,

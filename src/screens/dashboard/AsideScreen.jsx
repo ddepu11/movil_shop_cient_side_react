@@ -7,8 +7,7 @@ import Button from '../../components/Button';
 const AsideScreen = () => {
   const { userInfo } = useSelector((state) => state.user);
 
-  console.log(userInfo);
-  const { displayPicture, firstName, lastName } = userInfo;
+  const { displayPicture, firstName, lastName, email } = userInfo;
 
   return (
     <Wrapper className="flex">
@@ -19,7 +18,7 @@ const AsideScreen = () => {
         pr="6px"
         fs="1.2em"
         color="white"
-        bSh="rgba(0, 0, 0, 0.3) 0px 10px 20px, rgba(0, 0, 0, 0.22) 0px 10px 12px"
+        bSh="rgba(0, 0, 0, 0.3) 0px 8px 18px, rgba(0, 0, 0, 0.22) 0px 8px 10px"
         bgColor="#0066ff"
         borderRadius="5px"
         cursor="auto"
@@ -41,10 +40,11 @@ const AsideScreen = () => {
       <div className="dp">
         <img src={`dp/${displayPicture}`} alt={firstName} />
       </div>
-      <div className="info">
+      <div className="info flex">
         <p>
           {firstName} {lastName}
         </p>
+        <span>{email}</span>
       </div>
     </Wrapper>
   );
@@ -72,6 +72,25 @@ const Wrapper = styled.aside`
       width: 100%;
       object-fit: cover;
       border-radius: 50%;
+    }
+  }
+  .dp::before {
+    content: '';
+    width: 160px;
+    height: 160px;
+    background: #332;
+  }
+  .info {
+    padding: 10px 0;
+    flex-direction: column;
+    p {
+      font-size: 1.3em;
+      color: #332;
+    }
+    span {
+      padding: 5px 0 0;
+      font-size: 1em;
+      color: #444;
     }
   }
 `;
