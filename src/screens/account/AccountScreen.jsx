@@ -26,7 +26,7 @@ const AccountScreen = () => {
     const isUserObjEmpty = Object.keys(userInfo).length === 0;
 
     if (hasUserError || (!hasUserLoggedIn && isUserObjEmpty)) {
-      history.push('/log-in');
+      history.push('/sign-in');
     }
 
     isUserObjEmpty && dispatch(getAccountInfo());

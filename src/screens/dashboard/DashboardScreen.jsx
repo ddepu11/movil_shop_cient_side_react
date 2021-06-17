@@ -14,7 +14,7 @@ const DashboardScreen = () => {
   const { userInfo, hasUserLoggedIn } = useSelector((state) => state.user);
 
   useEffect(() => {
-    !hasUserLoggedIn && history.push('/');
+    !hasUserLoggedIn && history.push('/sign-in');
 
     Object.keys(userInfo).length === 0 && dispatch(getAccountInfo());
   }, [userInfo, dispatch, history, hasUserLoggedIn]);
@@ -29,10 +29,9 @@ const DashboardScreen = () => {
 
 const Wrapper = styled.main`
   padding: 20px 0;
-  border: 1px solid red;
   display: grid;
-  grid-template-columns: repeat(4, minmax(200px, 1fr));
-  grid-template-rows: auto;
+  grid-template-columns: repeat(4, minmax(80px, 1fr));
+  grid-template-rows: minmax(200px, auto);
   gap: 1.5rem;
   grid-template-areas: 'a s s s';
 `;
