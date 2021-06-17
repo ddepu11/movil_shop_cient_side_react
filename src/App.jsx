@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Notification from './components/Notification';
 import Loading from './components/Loading';
 import HomeScreen from './screens/HomeScreen';
@@ -14,12 +14,22 @@ import Footer from './components/Footer';
 import AccountScreen from './screens/account/AccountScreen';
 import ProductsScreen from './screens/products/ProductsScreen';
 import DashboardScreen from './screens/dashboard/DashboardScreen';
+import { authenticateUser } from './actions/userActions';
 
 const App = () => {
   const { isLoading } = useAuth0();
+
   const { notificationMessage, danger } = useSelector(
     (state) => state.notification
   );
+
+  const dispatch = useDispatch();
+
+  const { hasUserLoggedIn } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    !hasUserLoggedIn && dispatch(authenticateUser());
+  }, [hasUserLoggedIn, dispatch]);
 
   return (
     <Wrapper>

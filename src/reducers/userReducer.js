@@ -71,7 +71,6 @@ const user = (userState = initialUser, action) => {
         ...userState,
         userLoading: false,
         hasUserError: true,
-        userMsg: action.payload,
       };
 
     // Sign-in State handling
@@ -94,7 +93,6 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         hasUserError: true,
-        userMsg: action.payload,
         userLoading: false,
       };
 
@@ -119,7 +117,6 @@ const user = (userState = initialUser, action) => {
         ...userState,
         userLoading: false,
         hasUserError: true,
-        userMsg: action.payload,
       };
 
     case USER_CLEAR_SIGNUP_STATUS:
@@ -149,7 +146,6 @@ const user = (userState = initialUser, action) => {
         ...userState,
         userLoading: false,
         hasUserError: true,
-        userMsg: action.payload,
       };
 
     // Log out
@@ -173,7 +169,6 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         hasUserError: true,
-        userMsg: action.payload,
         userLoading: false,
       };
 
@@ -196,7 +191,6 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         userLoading: false,
-        userMsg: action.payload,
       };
 
     // Changing DP
@@ -219,7 +213,6 @@ const user = (userState = initialUser, action) => {
         ...userState,
         userLoading: false,
         hasUserError: true,
-        userMsg: action.payload,
       };
 
     default:

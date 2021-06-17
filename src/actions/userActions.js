@@ -120,14 +120,12 @@ const getAccountInfo = () => async (dispatch) => {
     const { data } = await user.accountInfo();
 
     dispatch({ type: USER_INFO_SUCCESS, payload: data });
-    dispatch(sendNotification(data.msg, false));
   } catch (err) {
-    const { msg } = err.response.data;
-    dispatch({
-      type: USER_INFO_ERROR,
-      payload: msg,
-    });
-    dispatch(sendNotification(msg, true));
+    dispatch({ type: USER_INFO_ERROR });
+
+    dispatch(
+      sendNotification('You have no permission to access that page!!!', true)
+    );
   }
 };
 
