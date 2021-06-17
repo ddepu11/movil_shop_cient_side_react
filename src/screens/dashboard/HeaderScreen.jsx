@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // import { GiBowTieRibbon } from 'react-icons/gi';
 // import Button from '../../components/Button';
 
-const AsideScreen = () => {
+const HeaderScreen = () => {
   const { userInfo } = useSelector((state) => state.user);
 
   const { displayPicture, firstName, lastName, email } = userInfo;
@@ -51,7 +51,7 @@ const AsideScreen = () => {
 };
 
 const Wrapper = styled.aside`
-  grid-area: a;
+  grid-area: h;
   flex-direction: column;
   justify-content: flex-start;
 
@@ -92,7 +92,7 @@ const Wrapper = styled.aside`
     top: -2px;
     left: -2px;
     border-radius: 50%;
-    background: #18e999;
+    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
     animation: round 3s linear 2s infinite;
   }
 
@@ -131,4 +131,4 @@ const Wrapper = styled.aside`
   }
 `;
 
-export default AsideScreen;
+export default HeaderScreen;
