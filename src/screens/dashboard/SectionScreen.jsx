@@ -9,7 +9,6 @@ const SectionScreen = () => (
 
 const Wrapper = styled.section`
   grid-area: s;
-  border: 1px solid #855;
 `;
 
 export default SectionScreen;

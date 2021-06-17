@@ -126,7 +126,7 @@ const SignUpScreen = () => {
   }
 
   if (userSignUpSuccess) {
-    return <Redirect to="/log-in" />;
+    return <Redirect to="/sign-in" />;
   }
 
   return (

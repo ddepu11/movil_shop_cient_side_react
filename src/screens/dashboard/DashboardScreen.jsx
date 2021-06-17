@@ -28,12 +28,14 @@ const DashboardScreen = () => {
 };
 
 const Wrapper = styled.main`
-  padding: 20px 0;
+  padding: 30px 0;
   display: grid;
   grid-template-columns: repeat(4, minmax(80px, 1fr));
   grid-template-rows: minmax(200px, auto);
   gap: 1.5rem;
-  grid-template-areas: 'a s s s';
+  grid-template-areas:
+    'a a a a'
+    's s s s';
 `;
 
 export default DashboardScreen;

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { GiBowTieRibbon } from 'react-icons/gi';
-import Button from '../../components/Button';
+// import { GiBowTieRibbon } from 'react-icons/gi';
+// import Button from '../../components/Button';
 
 const AsideScreen = () => {
   const { userInfo } = useSelector((state) => state.user);
@@ -11,7 +11,7 @@ const AsideScreen = () => {
 
   return (
     <Wrapper className="flex">
-      <Button
+      {/* <Button
         pt="6px"
         pb="6px"
         pl="6px"
@@ -36,7 +36,7 @@ const AsideScreen = () => {
             SELLER
           </span>
         </div>
-      </Button>
+      </Button> */}
       <div className="dp">
         <img src={`dp/${displayPicture}`} alt={firstName} />
       </div>
@@ -64,31 +64,67 @@ const Wrapper = styled.aside`
   }
 
   .dp {
-    width: 150px;
-    height: 150px;
-    margin-top: 15px;
+    width: 180px;
+    height: 180px;
+
     img {
       height: 100%;
       width: 100%;
       object-fit: cover;
       border-radius: 50%;
+      box-shadow: rgba(35, 185, 255, 0.56) 5px 5px 80px 6px;
+      transition: transform 1s ease-out;
     }
+
+    img:hover {
+      transform: scale(1.5);
+    }
+
+    position: relative;
   }
+
   .dp::before {
     content: '';
-    width: 160px;
-    height: 160px;
-    background: #332;
+    position: absolute;
+    z-index: -1;
+    height: 103%;
+    width: 103%;
+    top: -2px;
+    left: -2px;
+    border-radius: 50%;
+    background: #b1e918;
+    animation: round 4s linear 2s infinite;
   }
+
+  @keyframes round {
+    0% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.07);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
   .info {
     padding: 10px 0;
     flex-direction: column;
+    width: 100%;
     p {
-      font-size: 1.3em;
-      color: #332;
+      margin-top: 14px;
+      font-size: 1.6em;
+      letter-spacing: 6px;
+      color: #444;
+      font-weight: bold;
+      text-transform: uppercase;
     }
+
     span {
-      padding: 5px 0 0;
+      padding: 8px 0 0;
       font-size: 1em;
       color: #444;
     }
