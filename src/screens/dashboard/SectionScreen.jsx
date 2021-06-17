@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const SectionScreen = () => (
   <Wrapper>
-    <h1>SectionScreen</h1>
+    <div>SectionScreen</div>
   </Wrapper>
 );
 

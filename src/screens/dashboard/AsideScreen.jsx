@@ -72,12 +72,12 @@ const Wrapper = styled.aside`
       width: 100%;
       object-fit: cover;
       border-radius: 50%;
-      box-shadow: rgba(35, 185, 255, 0.56) 5px 5px 80px 6px;
+      box-shadow: rgba(35, 185, 255, 0.56) 10px 5px 80px 20px;
       transition: transform 1s ease-out;
     }
 
     img:hover {
-      transform: scale(1.5);
+      transform: scale(1.4);
     }
 
     position: relative;
@@ -92,8 +92,8 @@ const Wrapper = styled.aside`
     top: -2px;
     left: -2px;
     border-radius: 50%;
-    background: #b1e918;
-    animation: round 4s linear 2s infinite;
+    background: #18e999;
+    animation: round 3s linear 2s infinite;
   }
 
   @keyframes round {
