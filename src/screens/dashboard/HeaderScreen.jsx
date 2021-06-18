@@ -10,7 +10,7 @@ const HeaderScreen = () => {
   const { displayPicture, firstName, lastName, email } = userInfo;
 
   return (
-    <Wrapper className="flex">
+    <Wrapper className="flex card">
       {/* <Button
         pt="6px"
         pb="6px"
@@ -50,10 +50,11 @@ const HeaderScreen = () => {
   );
 };
 
-const Wrapper = styled.aside`
+const Wrapper = styled.header`
   grid-area: h;
   flex-direction: column;
   justify-content: flex-start;
+  padding: 20px 0 10px;
 
   button {
     transition: transform 0.5s ease;
@@ -77,7 +78,7 @@ const Wrapper = styled.aside`
     }
 
     img:hover {
-      transform: scale(1.4);
+      transform: scale(1.3);
     }
 
     position: relative;

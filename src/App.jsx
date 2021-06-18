@@ -43,7 +43,9 @@ const App = () => {
               color={danger ? '#c52525' : '#25c555'}
             />
           )}
+
           <Navbar />
+
           <Switch>
             <Route exact path="/">
               <HomeScreen />
@@ -69,7 +71,7 @@ const App = () => {
               <AccountScreen />
             </Route>
 
-            <Route exact path="/dashboard">
+            <Route path="/dashboard">
               <DashboardScreen />
             </Route>
           </Switch>

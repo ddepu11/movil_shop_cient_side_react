@@ -8,15 +8,16 @@ const NavigationScreen = () => (
   <Wrapper>
     <ul className="flex">
       <li>
-        <Link to="/" className="flex">
-          <span> Add a product</span>
-          <FcAddDatabase fontSize="1.2em" />
-        </Link>
-      </li>
-      <li>
-        <Link to="/" className="flex">
+        <Link to="/dashboard/all-product" className="flex">
           <span>All Products</span>
           <BiSpreadsheet fontSize="1.2em" />
+        </Link>
+      </li>
+
+      <li>
+        <Link to="/dashboard/add-product" className="flex">
+          <span> Add a product</span>
+          <FcAddDatabase fontSize="1.2em" />
         </Link>
       </li>
     </ul>
