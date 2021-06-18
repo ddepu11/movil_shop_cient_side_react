@@ -1,19 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Route } from 'react-router-dom';
-import AllProductsScreen from './AllProductsScreen';
-import AddProductScreen from './AddProductScreen';
+import AllMobilesScreen from './AllMobilesScreen';
+import AddMobileScreen from './AddMobileScreen';
 
 const SectionScreen = () => (
   <Wrapper className="card">
-    <h1>Hello</h1>
-
-    <Route exact path="/dashboard/add-product">
-      <AddProductScreen />
+    <Route exact path="/dashboard/all-mobiles">
+      <AllMobilesScreen />
     </Route>
 
-    <Route exact path="/dashboard/all-product">
-      <AllProductsScreen />
+    <Route exact path="/dashboard/add-mobile">
+      <AddMobileScreen />
     </Route>
   </Wrapper>
 );

@@ -329,7 +329,7 @@ const Wrapper = styled.main`
 
   main {
     grid-area: m;
-    padding: 5px 25px 20px;
+    padding: 5px 15px 20px;
 
     .row {
       justify-content: space-between;
