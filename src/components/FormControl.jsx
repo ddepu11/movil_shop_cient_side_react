@@ -64,18 +64,22 @@ const Wrapper = styled.div`
   }
 
   input {
-    background: #e2dcdc;
-    padding: 10px 5px;
+    background: #e9ebeb;
+    padding: 8px 5px;
     border-radius: 5px;
     font-size: 1.2em;
+    color: #5a5a5f;
   }
+
   .pwd-label {
     justify-content: space-between;
   }
+
   .message.error {
     color: red;
     font-size: 1.2em;
   }
+
   .message.success {
     color: green;
     font-size: 1.2em;
