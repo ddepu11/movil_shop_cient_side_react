@@ -390,24 +390,7 @@ const Wrapper = styled.main`
           color: #222;
         }
 
-        .fc_top {
-          padding: 8px 0;
-
-          .must {
-            color: red;
-            font-size: 1.25em;
-          }
-
-          label {
-            font-size: 1.3em;
-            color: #222;
-          }
-        }
-
         input {
-          background: #e2dcdc;
-          padding: 10px 5px;
-          border-radius: 5px;
           font-size: 1.1em;
           width: 65%;
         }

@@ -98,7 +98,8 @@ const SignInScreen = () => {
               <span>Or</span>
               <div className="right" />
             </div>
-            <form onSubmit={handleSubmit}>
+
+            <form>
               <FormControl
                 inputValue={userCredentials.email}
                 handleInput={handleInput}
@@ -185,8 +186,8 @@ const Wrapper = styled.main`
     }
   }
 
-  form {
-    .form-control {
+  /* form {
+    /* .form-control {
       display: flex;
       flex-direction: column;
       margin-bottom: 20px;
@@ -224,8 +225,8 @@ const Wrapper = styled.main`
         color: green;
         font-size: 1.2em;
       }
-    }
-  }
+    } */
+  } */
 
   .sign-up-btn {
     padding: 10px 40px;

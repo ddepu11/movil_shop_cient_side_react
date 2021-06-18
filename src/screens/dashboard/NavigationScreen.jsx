@@ -26,20 +26,20 @@ const NavigationScreen = () => (
 
 const Wrapper = styled.section`
   grid-area: n;
-  padding: 15px 0;
+  padding: 0px 0 0px;
 
   ul {
-    flex-direction: column;
-
+    gap: 0 20px;
     li {
       width: 100%;
       padding: 0px 0 25px;
       a {
         padding: 5px 15px;
         font-size: 1.2em;
-        background: #1956c5;
-        color: white;
-        border-radius: 5px;
+        background: transparent;
+        color: #222;
+        border-radius: 1px;
+        box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
         span {
           margin-right: 8px;
         }

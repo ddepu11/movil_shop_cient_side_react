@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const FormControl = ({
   inputValue,
@@ -11,7 +12,7 @@ const FormControl = ({
   name,
   label,
 }) => (
-  <div className="form-control">
+  <Wrapper className="form-control">
     <div className="fc_top">
       <label htmlFor={id}>{label}</label>
       <span className="must"> *</span>
@@ -26,7 +27,7 @@ const FormControl = ({
       placeholder={placeholder}
     />
     <p ref={refObj} className="message" />
-  </div>
+  </Wrapper>
 );
 
 FormControl.propTypes = {
@@ -39,5 +40,46 @@ FormControl.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  .fc_top {
+    padding: 8px 0;
+    .must {
+      color: red;
+      font-size: 1.25em;
+    }
+    label {
+      font-size: 1.3em;
+      color: #222;
+    }
+  }
+
+  label {
+    font-size: 1.3em;
+    padding: 8px 0;
+  }
+
+  input {
+    background: #e2dcdc;
+    padding: 10px 5px;
+    border-radius: 5px;
+    font-size: 1.2em;
+  }
+  .pwd-label {
+    justify-content: space-between;
+  }
+  .message.error {
+    color: red;
+    font-size: 1.2em;
+  }
+  .message.success {
+    color: green;
+    font-size: 1.2em;
+  }
+`;
 
 export default FormControl;

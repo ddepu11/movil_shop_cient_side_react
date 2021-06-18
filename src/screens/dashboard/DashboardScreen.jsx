@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import HeaderScreen from './HeaderScreen';
 import SectionScreen from './SectionScreen';
-import NavigationScreen from './NavigationScreen';
 import { getAccountInfo } from '../../actions/userActions';
 
 const DashboardScreen = () => {
@@ -23,7 +22,6 @@ const DashboardScreen = () => {
   return (
     <Wrapper className="w-960">
       <HeaderScreen />
-      <NavigationScreen />
       <SectionScreen />
     </Wrapper>
   );
@@ -37,7 +35,7 @@ const Wrapper = styled.main`
   gap: 1.5rem;
   grid-template-areas:
     'h h h h'
-    'n s s s';
+    's s s s';
 `;
 
 export default DashboardScreen;
