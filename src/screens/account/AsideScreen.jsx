@@ -117,7 +117,7 @@ const Wrapper = styled.aside`
   justify-content: flex-start;
   align-items: stretch;
   z-index: 0;
-
+  padding: 15px 0;
   .dp {
     width: 180px;
     height: 180px;

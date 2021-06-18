@@ -5,7 +5,7 @@ import AllProductsScreen from './AllProductsScreen';
 import AddProductScreen from './AddProductScreen';
 
 const SectionScreen = () => (
-  <Wrapper>
+  <Wrapper className="card">
     <h1>Hello</h1>
 
     <Route exact path="/dashboard/add-product">
@@ -19,6 +19,7 @@ const SectionScreen = () => (
 );
 
 const Wrapper = styled.section`
+  padding: 12px 10px;
   grid-area: s;
 `;
 

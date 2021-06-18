@@ -30,7 +30,7 @@ const DashboardScreen = () => {
 };
 
 const Wrapper = styled.main`
-  padding: 10px 0 0;
+  padding: 10px 0;
   display: grid;
   grid-template-columns: repeat(4, minmax(80px, 1fr));
   grid-template-rows: minmax(200px, auto);

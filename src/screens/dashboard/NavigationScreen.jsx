@@ -26,12 +26,14 @@ const NavigationScreen = () => (
 
 const Wrapper = styled.section`
   grid-area: n;
-  padding: 0px 0;
+  padding: 15px 0;
+
   ul {
     flex-direction: column;
-    align-items: flex-start;
+
     li {
-      padding: 0px 0 20px;
+      width: 100%;
+      padding: 0px 0 25px;
       a {
         padding: 5px 15px;
         font-size: 1.2em;

@@ -184,7 +184,7 @@ const AccountScreen = () => {
 
           <AsideScreen />
 
-          <main>
+          <main className="card">
             <FormFieldScreen
               heading="First Name:"
               wannaEdit={wannaEdit}
@@ -311,7 +311,7 @@ const AccountScreen = () => {
 const Wrapper = styled.main`
   padding: 25px 0 40px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(150px, auto));
+  grid-template-columns: repeat(3, minmax(50px, auto));
   grid-template-rows: minmax(50px, auto);
   grid-template-areas: 'h h h' 'as m m';
 
@@ -329,6 +329,7 @@ const Wrapper = styled.main`
 
   main {
     grid-area: m;
+    padding: 5px 25px 20px;
 
     .row {
       justify-content: space-between;
@@ -339,10 +340,12 @@ const Wrapper = styled.main`
         color: #444;
         letter-spacing: 2px;
       }
+
       div {
         flex-direction: column;
         width: 38%;
         align-items: flex-start;
+
         p {
           transition: all 0.5s ease;
           height: 0;
