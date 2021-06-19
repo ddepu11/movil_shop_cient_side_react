@@ -10,7 +10,7 @@ const Notification = ({ msg, color }) => {
   const [top, setTop] = useState(`${window.pageYOffset + 180}px`);
 
   const respondScroll = () => {
-    setTop(`${window.pageYOffset + 180}px`);
+    setTop(`${window.pageYOffset + 120}px`);
   };
 
   document.addEventListener('scroll', respondScroll);
@@ -18,7 +18,7 @@ const Notification = ({ msg, color }) => {
   useEffect(() => {
     setTimeout(() => {
       dispatch(clearNotification());
-    }, 5000);
+    }, 4000);
 
     return () => window.removeEventListener('scroll', respondScroll);
   }, [top, dispatch]);

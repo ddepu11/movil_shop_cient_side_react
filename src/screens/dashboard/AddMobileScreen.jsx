@@ -95,7 +95,8 @@ const AddMobileScreen = () => {
     }
   };
 
-  const removeImage = (file, preview) => {
+  // Remove a perticular image
+  const removeAPreviewImage = (file, preview) => {
     const newPrev = mobileInfo.previews.filter((el) => el !== preview);
     const newFiles = mobileInfo.files.filter((el) => el.name !== file.name);
 
@@ -104,6 +105,7 @@ const AddMobileScreen = () => {
       previews: [...newPrev],
       files: [...newFiles],
     }));
+    dispatch(sendNotification(`Removed a preview image!!!`, true));
   };
 
   const handleSubmit = () => {};
@@ -255,7 +257,9 @@ const AddMobileScreen = () => {
 
                 <IoTrashBin
                   className="remove_img_btn"
-                  onClick={() => removeImage(mobileInfo.files[index], e)}
+                  onClick={() =>
+                    removeAPreviewImage(mobileInfo.files[index], e)
+                  }
                   type="button"
                 />
               </div>
