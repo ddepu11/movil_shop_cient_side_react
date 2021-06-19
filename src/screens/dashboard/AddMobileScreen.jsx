@@ -6,16 +6,15 @@ import { AiOutlineFileAdd } from 'react-icons/ai';
 import Button from '../../components/Button';
 import FormControl from '../../components/FormControl';
 import { sendNotification } from '../../actions/notificationActions';
-import setValidationMessage from '../../utils/setValidationMessage';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
+import validateMovileForm from '../../utils/validateAddMobileForm';
+import { createMobile } from '../../actions/mobileActions';
 
 const AddMobileScreen = () => {
   const setTimeOutId = useRef(0);
 
-  useEffect(() => {
-    console.log('');
-    return () => clearAllSetTimeOut(setTimeOutId);
-  }, []);
+  // Clearing all set timeouts
+  useEffect(() => () => clearAllSetTimeOut(setTimeOutId), []);
 
   const [mobileInfo, setMobileInfo] = useState({
     title: '',
@@ -117,113 +116,21 @@ const AddMobileScreen = () => {
     dispatch(sendNotification(`Removed a preview image!!!`, true));
   };
 
-  const validateMovileForm = () => {
-    const {
-      title,
-      price,
-      brand,
-      internalMemory,
-      ram,
-      os,
-      battery,
-      processor,
-      camera,
-      files,
-    } = mobileInfo;
-
-    if (!title) {
-      setValidationMessage(
-        titleMessageRefTag,
-        'text field cant be empty!!!',
-        'error',
-        setTimeOutId
-      );
-    }
-
-    if (!price) {
-      setValidationMessage(
-        priceMessageRefTag,
-        'price field cant be empty!!!',
-        'error',
-        setTimeOutId
-      );
-    }
-
-    if (!brand) {
-      setValidationMessage(
-        brandMessageRefTag,
-        'brand field cant be empty!!!',
-        'error',
-        setTimeOutId
-      );
-    }
-
-    if (!internalMemory) {
-      setValidationMessage(
-        internalMemoryMessageRefTag,
-        'Internal memory field cant be empty!!!',
-        'error',
-        setTimeOutId
-      );
-    }
-
-    if (!ram) {
-      setValidationMessage(
-        ramMessageRefTag,
-        'ram field cant be empty!!!',
-        'error',
-        setTimeOutId
-      );
-    }
-
-    if (!os) {
-      setValidationMessage(
-        osMessageRefTag,
-        'os field cant be empty!!!',
-        'error',
-        setTimeOutId
-      );
-    }
-
-    if (!battery) {
-      setValidationMessage(
-        batteryMessageRefTag,
-        'battery field cant be empty!!!',
-        'error',
-        setTimeOutId
-      );
-    }
-
-    if (!processor) {
-      setValidationMessage(
-        processorMessageRefTag,
-        'processor field cant be empty!!!',
-        'error',
-        setTimeOutId
-      );
-    }
-
-    if (!camera) {
-      setValidationMessage(
-        cameraMessageRefTag,
-        'camera field cant be empty!!!',
-        'error',
-        setTimeOutId
-      );
-    }
-
-    if (files.length === 0) {
-      setValidationMessage(
-        imageUploadValidationMessageTag,
-        'please select atleast 1 image file',
-        'error',
-        setTimeOutId
-      );
-    }
-  };
-
   const handleSubmit = () => {
-    validateMovileForm();
+    const errorFlag = validateMovileForm(mobileInfo, setTimeOutId, {
+      titleMessageRefTag,
+      priceMessageRefTag,
+      brandMessageRefTag,
+      internalMemoryMessageRefTag,
+      ramMessageRefTag,
+      osMessageRefTag,
+      batteryMessageRefTag,
+      processorMessageRefTag,
+      cameraMessageRefTag,
+      imageUploadValidationMessageTag,
+    });
+
+    !errorFlag && dispatch(createMobile(mobileInfo));
   };
 
   return (
@@ -277,6 +184,7 @@ const AddMobileScreen = () => {
             refObj={internalMemoryMessageRefTag}
           />
         </div>
+
         <div className="row flex">
           <FormControl
             inputValue={mobileInfo.os}
@@ -299,6 +207,7 @@ const AddMobileScreen = () => {
             refObj={ramMessageRefTag}
           />
         </div>
+
         <div className="row flex">
           <FormControl
             inputValue={mobileInfo.processor}
@@ -408,10 +317,11 @@ const AddMobileScreen = () => {
               pb="10px"
               pl="20px"
               pr="20px"
+              ml="220px"
               borderRadius="5px"
               bgColor="rgb(32, 145, 60)"
               color="white"
-              width="40%"
+              width="50%"
               handleClick={handleSubmit}
             >
               Submit
@@ -432,6 +342,7 @@ const Wrapper = styled.main`
     letter-spacing: 2.5px;
     padding: 6px 0 18px;
   }
+
   .form {
     .row {
       justify-content: space-between;
@@ -519,6 +430,7 @@ const Wrapper = styled.main`
         }
       }
     }
+
     .images_preview {
       padding: 20px 00px;
       margin-top: 15px;
