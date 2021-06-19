@@ -69,6 +69,7 @@ const AddMobileScreen = () => {
   };
 
   const dispatch = useDispatch();
+
   const addMoreImages = (e) => {
     const { files: prevFiles } = mobileInfo;
     const { files } = e.target;
@@ -92,6 +93,17 @@ const AddMobileScreen = () => {
       console.log('Max 6 can be uploaded');
       dispatch(sendNotification('Cant upload more then 6 images!!!', true));
     }
+  };
+
+  const removeImage = (file, preview) => {
+    const newPrev = mobileInfo.previews.filter((el) => el !== preview);
+    const newFiles = mobileInfo.files.filter((el) => el.name !== file.name);
+
+    setMobileInfo((prevState) => ({
+      ...prevState,
+      previews: [...newPrev],
+      files: [...newFiles],
+    }));
   };
 
   const handleSubmit = () => {};
@@ -237,10 +249,15 @@ const AddMobileScreen = () => {
 
         {mobileInfo.previews.length !== 0 ? (
           <div className="row flex images_preview">
-            {mobileInfo.previews.map((e) => (
+            {mobileInfo.previews.map((e, index) => (
               <div className="img" key={Math.floor(Math.random() * Date.now())}>
                 <img src={e} alt={e} />
-                <IoTrashBin className="remove_img" />
+
+                <IoTrashBin
+                  className="remove_img_btn"
+                  onClick={() => removeImage(mobileInfo.files[index], e)}
+                  type="button"
+                />
               </div>
             ))}
             <div className="add_btn">
@@ -387,9 +404,10 @@ const Wrapper = styled.main`
         position: relative;
       }
 
-      .remove_img {
-        color: #eb4d0f;
+      .remove_img_btn {
+        color: #ce3813;
         position: absolute;
+        background: transparent;
         top: 4px;
         right: 2px;
         width: 18px;
@@ -397,6 +415,7 @@ const Wrapper = styled.main`
         border-radius: 50%;
         cursor: pointer;
       }
+
       .add_btn {
         width: 200px;
         height: 200px;
