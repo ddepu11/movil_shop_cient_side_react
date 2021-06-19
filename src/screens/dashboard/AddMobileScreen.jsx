@@ -1,9 +1,11 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import { IoTrashBin } from 'react-icons/io5';
 import { AiOutlineFileAdd } from 'react-icons/ai';
 import Button from '../../components/Button';
 import FormControl from '../../components/FormControl';
+import { sendNotification } from '../../actions/notificationActions';
 
 const AddMobileScreen = () => {
   const [mobileInfo, setMobileInfo] = useState({
@@ -18,7 +20,7 @@ const AddMobileScreen = () => {
     camera: '',
     colors: '',
     previews: [],
-    files: null,
+    files: [],
   });
 
   const handleInput = (e) => {
@@ -39,17 +41,57 @@ const AddMobileScreen = () => {
   // const colorsMessageRefTag = useRef(null);
 
   const handleMobileImages = (e) => {
+    const { previews, files: prevFiles } = mobileInfo;
+
     const { files } = e.target;
     const pics = Array.from(files);
 
-    mobileInfo.previews.length = 0;
+    previews.length = 0;
+    prevFiles.length = 0;
 
-    pics.forEach((el) => {
-      const fileSRC = URL.createObjectURL(el);
-      mobileInfo.previews.push(fileSRC);
+    setMobileInfo({
+      ...mobileInfo,
+      previews: [...previews],
+      files: [...prevFiles],
     });
 
-    setMobileInfo({ ...mobileInfo, pics });
+    pics.forEach(async (el, index) => {
+      const fileSRC = URL.createObjectURL(el);
+
+      if (index < 6) {
+        setMobileInfo((prevState) => ({
+          ...prevState,
+          previews: [...prevState.previews, fileSRC],
+          files: [...prevState.files, el],
+        }));
+      }
+    });
+  };
+
+  const dispatch = useDispatch();
+  const addMoreImages = (e) => {
+    const { files: prevFiles } = mobileInfo;
+    const { files } = e.target;
+    let pics = Array.from(files);
+
+    for (let i = 0; i < prevFiles.length; i += 1) {
+      pics = pics.filter((el) => el.name !== prevFiles[i].name);
+    }
+
+    if (prevFiles.length < 6) {
+      pics.forEach((el) => {
+        const fileSRC = URL.createObjectURL(el);
+
+        setMobileInfo((prevState) => ({
+          ...prevState,
+          previews: [...prevState.previews, fileSRC],
+          files: [...prevState.files, el],
+        }));
+      });
+    } else {
+      console.log('Max 6 can be uploaded');
+      dispatch(sendNotification('Cant upload more then 6 images!!!', true));
+    }
   };
 
   const handleSubmit = () => {};
@@ -185,6 +227,7 @@ const AddMobileScreen = () => {
                   id="mobile_image"
                   onChange={handleMobileImages}
                   multiple
+                  accept=".png, .jpg, .jpeg"
                 />
                 <p ref={imageUploadValidationMessageTag} className="message" />
               </div>
@@ -195,13 +238,22 @@ const AddMobileScreen = () => {
         {mobileInfo.previews.length !== 0 ? (
           <div className="row flex images_preview">
             {mobileInfo.previews.map((e) => (
-              <div className="img" key={e.length}>
+              <div className="img" key={Math.floor(Math.random() * Date.now())}>
                 <img src={e} alt={e} />
                 <IoTrashBin className="remove_img" />
               </div>
             ))}
             <div className="add_btn">
-              <AiOutlineFileAdd className="plus" />
+              <label htmlFor="upload_more">
+                <AiOutlineFileAdd className="plus" />
+              </label>
+              <input
+                type="file"
+                multiple
+                accept=".png, .jpg, .jpeg"
+                id="upload_more"
+                onChange={addMoreImages}
+              />
             </div>
           </div>
         ) : (
@@ -350,7 +402,7 @@ const Wrapper = styled.main`
         height: 200px;
         display: grid;
         place-items: center;
-        font-size: 4em;
+        font-size: 5em;
         cursor: pointer;
         color: #0066ff;
         .plus {
@@ -358,6 +410,9 @@ const Wrapper = styled.main`
         }
         .plus:hover {
           transform: scale(1.8);
+        }
+        input {
+          display: none;
         }
       }
     }
