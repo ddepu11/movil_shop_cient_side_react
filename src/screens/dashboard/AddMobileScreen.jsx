@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { IoTrashBin } from 'react-icons/io5';
@@ -6,8 +6,17 @@ import { AiOutlineFileAdd } from 'react-icons/ai';
 import Button from '../../components/Button';
 import FormControl from '../../components/FormControl';
 import { sendNotification } from '../../actions/notificationActions';
+import setValidationMessage from '../../utils/setValidationMessage';
+import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
 
 const AddMobileScreen = () => {
+  const setTimeOutId = useRef(0);
+
+  useEffect(() => {
+    console.log('');
+    return () => clearAllSetTimeOut(setTimeOutId);
+  }, []);
+
   const [mobileInfo, setMobileInfo] = useState({
     title: '',
     price: '',
@@ -108,7 +117,114 @@ const AddMobileScreen = () => {
     dispatch(sendNotification(`Removed a preview image!!!`, true));
   };
 
-  const handleSubmit = () => {};
+  const validateMovileForm = () => {
+    const {
+      title,
+      price,
+      brand,
+      internalMemory,
+      ram,
+      os,
+      battery,
+      processor,
+      camera,
+      files,
+    } = mobileInfo;
+
+    if (!title) {
+      setValidationMessage(
+        titleMessageRefTag,
+        'text field cant be empty!!!',
+        'error',
+        setTimeOutId
+      );
+    }
+
+    if (!price) {
+      setValidationMessage(
+        priceMessageRefTag,
+        'price field cant be empty!!!',
+        'error',
+        setTimeOutId
+      );
+    }
+
+    if (!brand) {
+      setValidationMessage(
+        brandMessageRefTag,
+        'brand field cant be empty!!!',
+        'error',
+        setTimeOutId
+      );
+    }
+
+    if (!internalMemory) {
+      setValidationMessage(
+        internalMemoryMessageRefTag,
+        'Internal memory field cant be empty!!!',
+        'error',
+        setTimeOutId
+      );
+    }
+
+    if (!ram) {
+      setValidationMessage(
+        ramMessageRefTag,
+        'ram field cant be empty!!!',
+        'error',
+        setTimeOutId
+      );
+    }
+
+    if (!os) {
+      setValidationMessage(
+        osMessageRefTag,
+        'os field cant be empty!!!',
+        'error',
+        setTimeOutId
+      );
+    }
+
+    if (!battery) {
+      setValidationMessage(
+        batteryMessageRefTag,
+        'battery field cant be empty!!!',
+        'error',
+        setTimeOutId
+      );
+    }
+
+    if (!processor) {
+      setValidationMessage(
+        processorMessageRefTag,
+        'processor field cant be empty!!!',
+        'error',
+        setTimeOutId
+      );
+    }
+
+    if (!camera) {
+      setValidationMessage(
+        cameraMessageRefTag,
+        'camera field cant be empty!!!',
+        'error',
+        setTimeOutId
+      );
+    }
+
+    if (files.length === 0) {
+      setValidationMessage(
+        imageUploadValidationMessageTag,
+        'please select atleast 1 image file',
+        'error',
+        setTimeOutId
+      );
+    }
+  };
+
+  const handleSubmit = () => {
+    validateMovileForm();
+  };
 
   return (
     <Wrapper>
@@ -128,12 +244,12 @@ const AddMobileScreen = () => {
 
           <FormControl
             inputValue={mobileInfo.price}
-            type="text"
+            type="number"
             id="price"
             handleInput={handleInput}
             placeholder="Price of mobile"
             name="price"
-            label="Price"
+            label="Price (INR) "
             refObj={priceMessageRefTag}
           />
         </div>
@@ -149,9 +265,10 @@ const AddMobileScreen = () => {
             label="Brand"
             refObj={brandMessageRefTag}
           />
+
           <FormControl
             inputValue={mobileInfo.internalMemory}
-            type="text"
+            type="number"
             id="internalMemory"
             handleInput={handleInput}
             placeholder="Internal memory of mobile"
@@ -173,34 +290,34 @@ const AddMobileScreen = () => {
           />
           <FormControl
             inputValue={mobileInfo.ram}
-            type="string"
+            type="number"
             id="ram"
             handleInput={handleInput}
             placeholder="Ram of mobile"
             name="ram"
-            label="Ram"
+            label="Ram (GB)"
             refObj={ramMessageRefTag}
           />
         </div>
         <div className="row flex">
           <FormControl
             inputValue={mobileInfo.processor}
-            type="string"
+            type="number"
             id="processor"
             handleInput={handleInput}
             placeholder="Processor of mobile"
             name="processor"
-            label="Processor"
+            label="Processor (GHz)"
             refObj={processorMessageRefTag}
           />
           <FormControl
             inputValue={mobileInfo.camera}
-            type="string"
+            type="number"
             id="camera"
             handleInput={handleInput}
             placeholder="Camera of mobile"
             name="camera"
-            label="camera"
+            label="Camera (MP)"
             refObj={cameraMessageRefTag}
           />
         </div>
@@ -208,12 +325,12 @@ const AddMobileScreen = () => {
         <div className="row flex">
           <FormControl
             inputValue={mobileInfo.battery}
-            type="string"
+            type="number"
             id="battery"
             handleInput={handleInput}
             placeholder="Battery of mobile"
             name="battery"
-            label="Battery"
+            label="Battery (Mah)"
             refObj={batteryMessageRefTag}
           />
 
@@ -243,7 +360,10 @@ const AddMobileScreen = () => {
                   multiple
                   accept=".png, .jpg, .jpeg"
                 />
-                <p ref={imageUploadValidationMessageTag} className="message" />
+                <p
+                  ref={imageUploadValidationMessageTag}
+                  className="message file_msg"
+                />
               </div>
             </div>
           </div>
@@ -335,7 +455,7 @@ const Wrapper = styled.main`
 
           .footer {
             width: 80%;
-
+            flex-direction: column;
             label {
               width: 100%;
               padding: 11px 0px 11px 3px;
@@ -360,6 +480,20 @@ const Wrapper = styled.main`
                 /* font-weight: bold; */
                 letter-spacing: 0.1px;
               }
+            }
+
+            .file_msg {
+              align-self: flex-start;
+            }
+
+            .message.error {
+              color: red;
+              font-size: 1.2em;
+            }
+
+            .message.success {
+              color: green;
+              font-size: 1.2em;
             }
 
             label:hover {
@@ -389,7 +523,7 @@ const Wrapper = styled.main`
       padding: 20px 00px;
       margin-top: 15px;
       flex-wrap: wrap;
-      gap: 1.2rem 20px;
+      gap: 1.3rem 25px;
       justify-content: center;
       box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
         rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
@@ -404,7 +538,12 @@ const Wrapper = styled.main`
           box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
             rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
             rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+          transition: transform 0.5s ease;
         }
+        img:hover {
+          transform: scale(1.2) translateY(-5px);
+        }
+
         position: relative;
       }
 
