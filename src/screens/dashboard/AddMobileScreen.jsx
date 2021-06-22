@@ -390,8 +390,9 @@ const Wrapper = styled.main`
 
         .os-top {
           justify-content: flex-start;
-          padding: 8px 0;
+
           p {
+            padding: 8px 0;
             font-size: 1.3em;
             color: #222;
           }
@@ -399,13 +400,16 @@ const Wrapper = styled.main`
         .os-middle {
           width: 80%;
 
+          .android {
+            padding: 0 0 8px;
+          }
+
           .android,
           .ios {
-            padding: 0 0 8px;
             justify-content: space-between;
 
             label {
-              font-size: 1.1em;
+              font-size: 1.05em;
             }
           }
         }
