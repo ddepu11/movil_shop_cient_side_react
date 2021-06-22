@@ -186,48 +186,6 @@ const Wrapper = styled.main`
     }
   }
 
-  /* form {
-    /* .form-control {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 20px;
-
-      .fc_top {
-        padding: 8px 0;
-        .must {
-          color: red;
-          font-size: 1.25em;
-        }
-        label {
-          font-size: 1.3em;
-          color: #222;
-        }
-      }
-
-      label {
-        font-size: 1.3em;
-        padding: 8px 0;
-      }
-      input {
-        background: #e2dcdc;
-        padding: 10px 5px;
-        border-radius: 5px;
-        font-size: 1.2em;
-      }
-      .pwd-label {
-        justify-content: space-between;
-      }
-      .message.error {
-        color: red;
-        font-size: 1.2em;
-      }
-      .message.success {
-        color: green;
-        font-size: 1.2em;
-      }
-    } */
-  } */
-
   .sign-up-btn {
     padding: 10px 40px;
     font-size: 1.2em;

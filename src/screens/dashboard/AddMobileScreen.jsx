@@ -1,20 +1,29 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IoTrashBin } from 'react-icons/io5';
 import { AiOutlineFileAdd } from 'react-icons/ai';
+import { useHistory } from 'react-router-dom';
 import Button from '../../components/Button';
 import FormControl from '../../components/FormControl';
 import { sendNotification } from '../../actions/notificationActions';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
 import validateMovileForm from '../../utils/validateAddMobileForm';
 import { createMobile } from '../../actions/mobileActions';
+import Loading from '../../components/Loading';
 
 const AddMobileScreen = () => {
+  const history = useHistory();
+  const { mobileSaved, mobileLoading } = useSelector((state) => state.mobile);
+
   const setTimeOutId = useRef(0);
 
   // Clearing all set timeouts
-  useEffect(() => () => clearAllSetTimeOut(setTimeOutId), []);
+  useEffect(() => {
+    mobileSaved && history.push('/dashboard');
+
+    return () => clearAllSetTimeOut(setTimeOutId);
+  }, [mobileSaved, history]);
 
   const [mobileInfo, setMobileInfo] = useState({
     title: '',
@@ -133,6 +142,8 @@ const AddMobileScreen = () => {
     !errorFlag && dispatch(createMobile(mobileInfo));
   };
 
+  mobileLoading && <Loading />;
+
   return (
     <Wrapper>
       <h1>Add a new mobile</h1>
@@ -180,7 +191,7 @@ const AddMobileScreen = () => {
             handleInput={handleInput}
             placeholder="Internal memory of mobile"
             name="internalMemory"
-            label="Internal Memory"
+            label="Internal Memory (GB)"
             refObj={internalMemoryMessageRefTag}
           />
         </div>

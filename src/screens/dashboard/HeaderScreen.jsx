@@ -1,45 +1,33 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import Loading from '../../components/Loading';
+import User from '../../assests/user.png';
+
 // import { GiBowTieRibbon } from 'react-icons/gi';
 // import Button from '../../components/Button';
 
 const HeaderScreen = () => {
   const { userInfo } = useSelector((state) => state.user);
 
-  const { displayPicture, firstName, lastName, email } = userInfo;
+  const { displayPicture, firstName, lastName, email, userLoading } = userInfo;
+
+  let imgSrc = `dp/${displayPicture}`;
+
+  if (!displayPicture) {
+    imgSrc = User;
+  }
+
+  if (userLoading) {
+    <Loading />;
+  }
 
   return (
     <Wrapper className="flex card">
-      {/* <Button
-        pt="6px"
-        pb="6px"
-        pl="6px"
-        pr="6px"
-        fs="1.2em"
-        color="white"
-        bSh="rgba(0, 0, 0, 0.3) 0px 8px 18px, rgba(0, 0, 0, 0.22) 0px 8px 10px"
-        bgColor="#0066ff"
-        borderRadius="5px"
-        cursor="auto"
-        width="65%"
-      >
-        <div className="flex">
-          <GiBowTieRibbon />
-          <span
-            style={{
-              color: 'white',
-              marginLeft: '12px',
-              letterSpacing: '2.5px',
-            }}
-          >
-            SELLER
-          </span>
-        </div>
-      </Button> */}
       <div className="dp">
-        <img src={`dp/${displayPicture}`} alt={firstName} />
+        <img src={imgSrc} alt={firstName} />
       </div>
+
       <div className="info flex">
         <p>
           {firstName} {lastName}

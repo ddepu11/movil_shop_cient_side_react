@@ -81,7 +81,7 @@ const customUserSignIn = (email, password) => async (dispatch) => {
     dispatch(sendNotification(data.msg, false));
   } catch (err) {
     const { msg } = err.response.data;
-    dispatch({ type: USER_SIGN_IN_ERROR, payload: msg });
+    dispatch({ type: USER_SIGN_IN_ERROR });
     dispatch(sendNotification(msg, true));
   }
 };

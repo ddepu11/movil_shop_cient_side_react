@@ -13,15 +13,17 @@ const Notification = ({ msg, color }) => {
     setTop(`${window.pageYOffset + 120}px`);
   };
 
-  document.addEventListener('scroll', respondScroll);
-
   useEffect(() => {
+    window.addEventListener('scroll', respondScroll);
+
     setTimeout(() => {
       dispatch(clearNotification());
     }, 4000);
 
-    return () => window.removeEventListener('scroll', respondScroll);
-  }, [top, dispatch]);
+    return () => {
+      window.removeEventListener('scroll', respondScroll);
+    };
+  }, [dispatch]);
 
   return (
     <Wrapper style={{ background: color, top }}>
