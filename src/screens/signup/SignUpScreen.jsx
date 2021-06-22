@@ -198,7 +198,7 @@ const SignUpScreen = () => {
             {/* Gender Ends */}
 
             {/* Seeler >>>> */}
-            <div className="form-control role-div">
+            <div className="form-control role-div flex">
               <p>Do you want to be a seller?</p>
 
               <div className="role_inputs flex">
@@ -314,8 +314,8 @@ const Wrapper = styled.main`
   }
 
   form {
+    margin-top: 25px;
     .row {
-      margin: 25px 0;
       align-items: stretch;
 
       .fn_ln_div {
@@ -324,9 +324,9 @@ const Wrapper = styled.main`
       }
 
       .gender_seller_div {
-        width: 100%;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-start;
+        width: 100%;
 
         .gender_heading {
           font-size: 1.3em;
@@ -342,25 +342,24 @@ const Wrapper = styled.main`
             justify-content: space-between;
             padding-bottom: 3px;
             label {
-              padding: 0px 0;
               font-size: 1.2em;
             }
           }
         }
 
         .role-div {
-          transform: translateY(-35%);
+          align-items: flex-start;
+          justify-content: space-between;
+          margin-top: 20px;
 
           .role_inputs {
-            cursor: pointer;
-            justify-content: space-between;
             width: 30%;
             position: relative;
-            padding: 10px 0 0 0px;
+            padding: 12px 0 0 0px;
+            cursor: pointer;
 
             label {
               font-size: 1.2em;
-              padding: 0px 0;
               color: #222;
               position: absolute;
               left: 30px;

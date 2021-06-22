@@ -38,7 +38,7 @@ const validateMovileForm = (
   if (title.length === 1) {
     setValidationMessage(
       titleMessageRefTag,
-      'Title is too short!!!',
+      'Title is too short!',
       'error',
       setTimeOutId
     );
@@ -48,7 +48,7 @@ const validateMovileForm = (
   if (!title) {
     setValidationMessage(
       titleMessageRefTag,
-      'text field cant be empty!!!',
+      'text field cant be empty!',
       'error',
       setTimeOutId
     );
@@ -62,7 +62,7 @@ const validateMovileForm = (
   if (+price < 1000) {
     setValidationMessage(
       priceMessageRefTag,
-      'price is too low!!!',
+      'price is too low!',
       'error',
       setTimeOutId
     );
@@ -72,7 +72,7 @@ const validateMovileForm = (
   if (!price) {
     setValidationMessage(
       priceMessageRefTag,
-      'price field cant be empty!!!',
+      'price field cant be empty!',
       'error',
       setTimeOutId
     );
@@ -86,7 +86,7 @@ const validateMovileForm = (
   if (brand.length === 1) {
     setValidationMessage(
       brandMessageRefTag,
-      'brand name is too short!!!',
+      'brand name is too short!',
       'error',
       setTimeOutId
     );
@@ -96,7 +96,7 @@ const validateMovileForm = (
   if (!brand) {
     setValidationMessage(
       brandMessageRefTag,
-      'brand field cant be empty!!!',
+      'brand field cant be empty!',
       'error',
       setTimeOutId
     );
@@ -108,7 +108,7 @@ const validateMovileForm = (
   if (+internalMemory < 8) {
     setValidationMessage(
       internalMemoryMessageRefTag,
-      'Internal memory is too low!!!',
+      'Internal memory is too low!',
       'error',
       setTimeOutId
     );
@@ -118,7 +118,7 @@ const validateMovileForm = (
   if (!internalMemory) {
     setValidationMessage(
       internalMemoryMessageRefTag,
-      'Internal memory field cant be empty!!!',
+      'Internal memory field cant be empty!',
       'error',
       setTimeOutId
     );
@@ -155,7 +155,7 @@ const validateMovileForm = (
   if (!os) {
     setValidationMessage(
       osMessageRefTag,
-      'os field cant be empty!!!',
+      'os field cant be empty!',
       'error',
       setTimeOutId
     );
@@ -202,23 +202,34 @@ const validateMovileForm = (
   // %%%%%%%%%%%%%%% Processor %%%%%%%%%%%%%%%%%%%%%%%
 
   // Camera
+  if (+camera < 2) {
+    setValidationMessage(
+      cameraMessageRefTag,
+      'camera mp is too low!',
+      'error',
+      setTimeOutId
+    );
+
+    errorFlag = true;
+  }
+
   if (!camera) {
     setValidationMessage(
       cameraMessageRefTag,
-      'camera field cant be empty!!!',
+      'camera field cant be empty!',
       'error',
       setTimeOutId
     );
     errorFlag = true;
   }
 
-  // %%%%%%%%%%%%%%% Camera %%%%%%%%%%%%%%%%%%%%%%%
+  // %%%%%%%%%%%%%%% Camera Ends %%%%%%%%%%%%%%%%%%%%%%%
 
   // Images
   if (files.length === 0) {
     setValidationMessage(
       imageUploadValidationMessageTag,
-      'please select atleast 1 image file',
+      'please select atleast 1 image file!',
       'error',
       setTimeOutId
     );

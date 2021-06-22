@@ -197,16 +197,43 @@ const AddMobileScreen = () => {
         </div>
 
         <div className="row flex">
-          <FormControl
-            inputValue={mobileInfo.os}
-            type="string"
-            id="os"
-            handleInput={handleInput}
-            placeholder="OS of mobile"
-            name="os"
-            label="os"
-            refObj={osMessageRefTag}
-          />
+          <div className="form-control">
+            <div className="os-top flex">
+              <p>Operating System</p>
+              <span
+                style={{ marginLeft: '5px', color: 'red', fontSize: '1.2em' }}
+              >
+                *
+              </span>
+            </div>
+
+            <div className="os-middle">
+              <div className="android">
+                <label htmlFor="android">Android</label>
+                <input
+                  onChange={handleInput}
+                  type="radio"
+                  id="android"
+                  name="os"
+                  value="android"
+                />
+              </div>
+
+              <div className="ios flex">
+                <label htmlFor="ios">IOS</label>
+                <input
+                  onChange={handleInput}
+                  type="radio"
+                  name="os"
+                  id="ios"
+                  value="ios"
+                />
+              </div>
+            </div>
+
+            <p ref={osMessageRefTag} className="message" />
+          </div>
+
           <FormControl
             inputValue={mobileInfo.ram}
             type="number"
@@ -359,7 +386,30 @@ const Wrapper = styled.main`
       justify-content: space-between;
 
       .form-control {
-        /* border: 1px solid red; */
+        margin-bottom: 20px;
+
+        .os-top {
+          justify-content: flex-start;
+          padding: 8px 0;
+          p {
+            font-size: 1.3em;
+            color: #222;
+          }
+        }
+        .os-middle {
+          width: 80%;
+
+          .android,
+          .ios {
+            padding: 0 0 8px;
+            justify-content: space-between;
+
+            label {
+              font-size: 1.1em;
+            }
+          }
+        }
+
         .upload_images {
           flex-direction: column;
           align-items: flex-start;
@@ -378,6 +428,7 @@ const Wrapper = styled.main`
           .footer {
             width: 80%;
             flex-direction: column;
+
             label {
               width: 100%;
               padding: 11px 0px 11px 3px;
@@ -388,6 +439,7 @@ const Wrapper = styled.main`
               background: #fff;
               border-radius: 0.25rem;
               box-shadow: inset 0 0.2rem 0.4rem #cacaca;
+
               .browse_btn {
                 background: #a8aaaa;
                 color: #111;
@@ -399,23 +451,12 @@ const Wrapper = styled.main`
                 place-items: center;
                 padding: 0 15px;
                 font-size: 1.2em;
-                /* font-weight: bold; */
                 letter-spacing: 0.1px;
               }
             }
 
             .file_msg {
               align-self: flex-start;
-            }
-
-            .message.error {
-              color: red;
-              font-size: 1.2em;
-            }
-
-            .message.success {
-              color: green;
-              font-size: 1.2em;
             }
 
             label:hover {
@@ -432,7 +473,18 @@ const Wrapper = styled.main`
             }
           }
         }
-        padding: 0 0px 0 100px;
+
+        .message.error {
+          color: red;
+          font-size: 1.2em;
+        }
+
+        .message.success {
+          color: green;
+          font-size: 1.2em;
+        }
+
+        padding: 0 0px 0 80px;
         width: 80%;
 
         input,
