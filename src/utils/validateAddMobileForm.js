@@ -33,10 +33,36 @@ const validateMovileForm = (
     files,
   } = mobileInfo;
 
+  // Ttitle
+
+  if (title.length === 1) {
+    setValidationMessage(
+      titleMessageRefTag,
+      'Title is too short!!!',
+      'error',
+      setTimeOutId
+    );
+    errorFlag = true;
+  }
+
   if (!title) {
     setValidationMessage(
       titleMessageRefTag,
       'text field cant be empty!!!',
+      'error',
+      setTimeOutId
+    );
+    errorFlag = true;
+  }
+
+  // %%%%%%%%%%%%%%% Ttitle Ends %%%%%%%%%%%%%%%%%%%%%%%
+
+  // Price
+
+  if (+price < 1000) {
+    setValidationMessage(
+      priceMessageRefTag,
+      'price is too low!!!',
       'error',
       setTimeOutId
     );
@@ -53,10 +79,36 @@ const validateMovileForm = (
     errorFlag = true;
   }
 
+  // %%%%%%%%%%%%%%% Price Ends %%%%%%%%%%%%%%%%%%%%%%%
+
+  // Brand
+
+  if (brand.length === 1) {
+    setValidationMessage(
+      brandMessageRefTag,
+      'brand name is too short!!!',
+      'error',
+      setTimeOutId
+    );
+    errorFlag = true;
+  }
+
   if (!brand) {
     setValidationMessage(
       brandMessageRefTag,
       'brand field cant be empty!!!',
+      'error',
+      setTimeOutId
+    );
+    errorFlag = true;
+  }
+  // %%%%%%%%%%%%%%% Brand Ends %%%%%%%%%%%%%%%%%%%%%%%
+
+  // Internal Memory
+  if (+internalMemory < 8) {
+    setValidationMessage(
+      internalMemoryMessageRefTag,
+      'Internal memory is too low!!!',
       'error',
       setTimeOutId
     );
@@ -73,15 +125,32 @@ const validateMovileForm = (
     errorFlag = true;
   }
 
-  if (!ram) {
+  // %%%%%%%%%%%%%%% Brand Ends %%%%%%%%%%%%%%%%%%%%%%%
+
+  // Ram
+  if (+ram < 4) {
     setValidationMessage(
       ramMessageRefTag,
-      'ram field cant be empty!!!',
+      'ram is too low!',
       'error',
       setTimeOutId
     );
     errorFlag = true;
   }
+
+  if (!ram) {
+    setValidationMessage(
+      ramMessageRefTag,
+      'ram field cant be empty!',
+      'error',
+      setTimeOutId
+    );
+    errorFlag = true;
+  }
+
+  // %%%%%%%%%%%%%%% Ram Ends %%%%%%%%%%%%%%%%%%%%%%%
+
+  // Operation System
 
   if (!os) {
     setValidationMessage(
@@ -93,26 +162,46 @@ const validateMovileForm = (
     errorFlag = true;
   }
 
+  // %%%%%%%%%%%%%%% OS Ends %%%%%%%%%%%%%%%%%%%%%%%
+
+  // Battery
+
   if (!battery) {
     setValidationMessage(
       batteryMessageRefTag,
-      'battery field cant be empty!!!',
+      'battery field cant be empty!',
       'error',
       setTimeOutId
     );
     errorFlag = true;
   }
 
+  if (+battery < 3000) {
+    setValidationMessage(
+      batteryMessageRefTag,
+      'battery capacity is too small!',
+      'error',
+      setTimeOutId
+    );
+    errorFlag = true;
+  }
+
+  // %%%%%%%%%%%%%%% Battery Ends %%%%%%%%%%%%%%%%%%%%%%%
+
+  // Processor
   if (!processor) {
     setValidationMessage(
       processorMessageRefTag,
-      'processor field cant be empty!!!',
+      'processor field cant be empty!',
       'error',
       setTimeOutId
     );
     errorFlag = true;
   }
 
+  // %%%%%%%%%%%%%%% Processor %%%%%%%%%%%%%%%%%%%%%%%
+
+  // Camera
   if (!camera) {
     setValidationMessage(
       cameraMessageRefTag,
@@ -123,6 +212,9 @@ const validateMovileForm = (
     errorFlag = true;
   }
 
+  // %%%%%%%%%%%%%%% Camera %%%%%%%%%%%%%%%%%%%%%%%
+
+  // Images
   if (files.length === 0) {
     setValidationMessage(
       imageUploadValidationMessageTag,
@@ -132,6 +224,8 @@ const validateMovileForm = (
     );
     errorFlag = true;
   }
+
+  // %%%%%%%%%%%%%%% Images Ends %%%%%%%%%%%%%%%%%%%%%%%
 
   return errorFlag;
 };
