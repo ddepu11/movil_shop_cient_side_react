@@ -17,10 +17,11 @@ const Button = ({
   handleClick,
   tr,
   bSh,
-  width,
   borderRadius,
   bcgImage,
   cursor,
+  width,
+  height,
 }) => {
   useEffect(() => {});
 
@@ -43,6 +44,7 @@ const Button = ({
         transform: tr,
         boxShadow: bSh,
         width,
+        height,
         borderRadius,
         backgroundImage: bcgImage,
         cursor,
@@ -74,6 +76,7 @@ Button.propTypes = {
   tr: PropTypes.string,
   bSh: PropTypes.string,
   width: PropTypes.string,
+  height: PropTypes.string,
   borderRadius: PropTypes.string,
   bcgImage: PropTypes.string,
   cursor: PropTypes.string,
@@ -96,6 +99,7 @@ Button.defaultProps = {
   tr: 'transform 0.5s ease',
   bSh: 'rgba(0, 0, 0, 0.4) 0px 30px 90px',
   width: 'auto',
+  height: 'auto',
   borderRadius: '0px',
   bcgImage: '',
   cursor: 'pointer',

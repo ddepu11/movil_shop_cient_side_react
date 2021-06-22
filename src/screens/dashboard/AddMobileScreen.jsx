@@ -35,7 +35,7 @@ const AddMobileScreen = () => {
     battery: '',
     processor: '',
     camera: '',
-    colors: '',
+    colors: [],
     previews: [],
     files: [],
   });
@@ -55,7 +55,7 @@ const AddMobileScreen = () => {
   const processorMessageRefTag = useRef(null);
   const cameraMessageRefTag = useRef(null);
   const imageUploadValidationMessageTag = useRef(null);
-  // const colorsMessageRefTag = useRef(null);
+  const colorsMessageRefTag = useRef(null);
 
   const handleMobileImages = (e) => {
     const { previews, files: prevFiles } = mobileInfo;
@@ -122,7 +122,50 @@ const AddMobileScreen = () => {
       previews: [...newPrev],
       files: [...newFiles],
     }));
+
     dispatch(sendNotification(`Removed a preview image!!!`, true));
+  };
+
+  // Color Handing
+  const mobileColors = ['red', 'white', 'black', '#FFD700', 'grey'];
+
+  const [colorSelect, setColorSelect] = useState({
+    red: false,
+    white: false,
+    black: false,
+    FFD700: false,
+    grey: false,
+  });
+
+  const handleColors = (selectedColor) => {
+    let color = selectedColor;
+
+    if (color === '#FFD700') {
+      color = 'FFD700';
+    }
+
+    setColorSelect((prevState) => ({
+      ...prevState,
+      [color]: !prevState[color],
+    }));
+
+    let cToAdd = color;
+
+    if (cToAdd === 'FFD700') {
+      cToAdd = '#FFD700';
+    }
+
+    if (!colorSelect[color]) {
+      setMobileInfo((prevState) => ({
+        ...prevState,
+        colors: [...prevState.colors, cToAdd],
+      }));
+    } else {
+      setMobileInfo((prevState) => ({
+        ...prevState,
+        colors: [...prevState.colors.filter((e) => e !== cToAdd)],
+      }));
+    }
   };
 
   const handleSubmit = () => {
@@ -137,12 +180,15 @@ const AddMobileScreen = () => {
       processorMessageRefTag,
       cameraMessageRefTag,
       imageUploadValidationMessageTag,
+      colorsMessageRefTag,
     });
 
     !errorFlag && dispatch(createMobile(mobileInfo));
   };
 
-  mobileLoading && <Loading />;
+  if (mobileLoading) {
+    return <Loading />;
+  }
 
   return (
     <Wrapper>
@@ -316,6 +362,50 @@ const AddMobileScreen = () => {
           </div>
         </div>
 
+        <div className="row flex">
+          <div className="form-control">
+            <div className="colors_top flex">
+              <p>Colors</p>
+              <span
+                style={{ marginLeft: '5px', color: 'red', fontSize: '1.2em' }}
+              >
+                *
+              </span>
+            </div>
+            <div className="colors_top">
+              {mobileColors.map((e) => {
+                let color = e;
+
+                if (e === '#FFD700') {
+                  color = 'FFD700';
+                }
+
+                return (
+                  <Button
+                    key={Math.floor(Math.random() * Date.now() + e.length)}
+                    pt="0px"
+                    pb="0px"
+                    pl="0px"
+                    pr="0px"
+                    borderRadius="50%"
+                    bgColor={e}
+                    width="25px"
+                    height="25px"
+                    color={e === 'white' || e === '#FFD700' ? 'black' : 'white'}
+                    mr="20px"
+                    bSh=" rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset"
+                    handleClick={() => handleColors(e)}
+                    fs="0.8em"
+                  >
+                    {colorSelect[color] ? `✓` : ''}
+                  </Button>
+                );
+              })}
+            </div>
+            <p ref={colorsMessageRefTag} className="message" />
+          </div>
+        </div>
+
         {mobileInfo.previews.length !== 0 ? (
           <div className="row flex images_preview">
             {mobileInfo.previews.map((e, index) => (
@@ -388,7 +478,8 @@ const Wrapper = styled.main`
       .form-control {
         margin-bottom: 20px;
 
-        .os-top {
+        .os-top,
+        .colors_top {
           justify-content: flex-start;
 
           p {
@@ -397,6 +488,7 @@ const Wrapper = styled.main`
             color: #222;
           }
         }
+
         .os-middle {
           width: 80%;
 
@@ -417,7 +509,6 @@ const Wrapper = styled.main`
         .upload_images {
           flex-direction: column;
           align-items: flex-start;
-          transform: translateY(-11px);
 
           .header {
             padding: 8px 0 10px;

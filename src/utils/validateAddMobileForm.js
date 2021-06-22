@@ -16,6 +16,7 @@ const validateMovileForm = (
     processorMessageRefTag,
     cameraMessageRefTag,
     imageUploadValidationMessageTag,
+    colorsMessageRefTag,
   } = allValidationMessageTags;
 
   let errorFlag = false;
@@ -31,6 +32,7 @@ const validateMovileForm = (
     processor,
     camera,
     files,
+    colors,
   } = mobileInfo;
 
   // Ttitle
@@ -224,7 +226,17 @@ const validateMovileForm = (
   }
 
   // %%%%%%%%%%%%%%% Camera Ends %%%%%%%%%%%%%%%%%%%%%%%
-
+  // Colors
+  if (colors.length === 0) {
+    setValidationMessage(
+      colorsMessageRefTag,
+      'Please select atleast one color!',
+      'error',
+      setTimeOutId
+    );
+    errorFlag = true;
+  }
+  // %%%%%%%%%%%%%%% Camera Ends %%%%%%%%%%%%%%%%%%%%%%%
   // Images
   if (files.length === 0) {
     setValidationMessage(
