@@ -6,6 +6,7 @@ import HeaderScreen from './HeaderScreen';
 import SectionScreen from './SectionScreen';
 import { getAccountInfo } from '../../actions/userActions';
 import { clearMobileSaved } from '../../actions/mobileActions';
+import Loading from "../../components/Loading";
 
 const DashboardScreen = () => {
   const history = useHistory();
@@ -13,7 +14,7 @@ const DashboardScreen = () => {
   const dispatch = useDispatch();
 
   const { userInfo, hasUserLoggedIn } = useSelector((state) => state.user);
-  const { mobileSaved } = useSelector((state) => state.mobile);
+  const { mobileSaved, mobileLoading } = useSelector((state) => state.mobile);
 
   useEffect(() => {
     mobileSaved && dispatch(clearMobileSaved());
@@ -22,6 +23,10 @@ const DashboardScreen = () => {
 
     Object.keys(userInfo).length === 0 && dispatch(getAccountInfo());
   }, [userInfo, dispatch, history, hasUserLoggedIn, mobileSaved]);
+
+  if (mobileLoading) {
+    return <Loading />;
+  }
 
   return (
     <Wrapper className="w-960">

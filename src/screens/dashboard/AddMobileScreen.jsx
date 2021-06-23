@@ -10,11 +10,12 @@ import { sendNotification } from '../../actions/notificationActions';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
 import validateMovileForm from '../../utils/validateAddMobileForm';
 import { createMobile } from '../../actions/mobileActions';
-import Loading from '../../components/Loading';
 
 const AddMobileScreen = () => {
+
   const history = useHistory();
-  const { mobileSaved, mobileLoading } = useSelector((state) => state.mobile);
+
+  const { mobileSaved } = useSelector((state) => state.mobile);
 
   const setTimeOutId = useRef(0);
 
@@ -184,10 +185,6 @@ const AddMobileScreen = () => {
     });
 
     !errorFlag && dispatch(createMobile(mobileInfo));
-  };
-
-  if (mobileLoading) {
-    return <Loading />;
   }
 
   return (
