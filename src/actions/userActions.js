@@ -147,11 +147,11 @@ const logOutUser = () => async (dispatch) => {
   }
 };
 
-const updateUser = (userInfo) => async (dispatch) => {
+const updateUser = (userInfo, _id) => async (dispatch) => {
   dispatch({ type: USER_UPDATE_BEGIN });
 
   try {
-    const { data } = await user.update(userInfo);
+    const { data } = await user.update(userInfo, _id);
 
     dispatch({
       type: USER_UPDATE_SUCCESS,
@@ -165,13 +165,13 @@ const updateUser = (userInfo) => async (dispatch) => {
   }
 };
 
-const changeDisplayPicture = (formData) => async (dispatch) => {
+const changeDisplayPicture = (formData, _id) => async (dispatch) => {
   dispatch({ type: USER_CHANGE_DP_BEGIN });
 
   try {
     const {
       data: { updatedUser },
-    } = await user.changeDP(formData);
+    } = await user.changeDP(formData, _id);
 
     dispatch({
       type: USER_CHANGE_DP_SUCCESS,

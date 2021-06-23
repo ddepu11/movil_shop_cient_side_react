@@ -36,7 +36,7 @@ const AccountScreen = () => {
     // eslint-disable-next-line
   }, [hasUserLoggedIn, userInfo]);
 
-  const { firstName, lastName, email, phoneNumber, gender, password } =
+  const { firstName, lastName, email, phoneNumber, gender, password, _id } =
     userInfo;
 
   const [wannaEdit, setWannaEdit] = useState(false);
@@ -131,12 +131,15 @@ const AccountScreen = () => {
           info.phoneNumber !== userInfo.phoneNumber
         ) {
           dispatch(
-            updateUser({
-              firstName: info.firstName,
-              lastName: info.lastName,
-              phoneNumber: info.phoneNumber,
-              password: info.password,
-            })
+            updateUser(
+              {
+                firstName: info.firstName,
+                lastName: info.lastName,
+                phoneNumber: info.phoneNumber,
+                password: info.password,
+              },
+              _id
+            )
           );
           // if phone no same and email isn't dont sent phone no
         } else if (
@@ -144,12 +147,15 @@ const AccountScreen = () => {
           info.email !== userInfo.email
         ) {
           dispatch(
-            updateUser({
-              firstName: info.firstName,
-              lastName: info.lastName,
-              email: info.email,
-              password: info.password,
-            })
+            updateUser(
+              {
+                firstName: info.firstName,
+                lastName: info.lastName,
+                email: info.email,
+                password: info.password,
+              },
+              _id
+            )
           );
           // if email and phone number same don't sent them
         } else if (
@@ -157,11 +163,14 @@ const AccountScreen = () => {
           info.email === userInfo.email
         ) {
           dispatch(
-            updateUser({
-              firstName: info.firstName,
-              lastName: info.lastName,
-              password: info.password,
-            })
+            updateUser(
+              {
+                firstName: info.firstName,
+                lastName: info.lastName,
+                password: info.password,
+              },
+              _id
+            )
           );
         }
 

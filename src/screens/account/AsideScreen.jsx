@@ -41,7 +41,8 @@ const AsideScreen = () => {
     if (file) {
       const formData = new FormData();
       formData.append('dp', file);
-      dispatch(changeDisplayPicture(formData));
+
+      dispatch(changeDisplayPicture(formData, userInfo._id));
     }
     setWannaChangeDP(false);
     setDpSRC({ ...dpSRC, preview: `dp/${userInfo.displayPicture}` });

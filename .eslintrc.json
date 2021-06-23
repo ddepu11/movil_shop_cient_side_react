@@ -13,7 +13,7 @@
     "spaced-comment": "warn",
     "no-underscore-dangle": [
       "error",
-      { "allow": ["__REDUX_DEVTOOLS_EXTENSION__"] }
+      { "allow": ["__REDUX_DEVTOOLS_EXTENSION__", "_id"] }
     ],
     "jsx-a11y/label-has-associated-control": [
       2,

@@ -1,33 +1,35 @@
 import axios from 'axios';
 
-const authenticate = () => axios.get('/user/authenticate');
+const authenticate = () => axios.get('/users/authenticate');
 
 const logIn = (email, password) =>
-  axios.post('/user/login', { email, password });
+  axios.post('/users/sign-in', { email, password });
 
 // Signing up with credentials and an image
 const signUp = (formData) =>
-  axios.post('/user/sign-up', formData, {
+  axios.post('/users/sign-up', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
   });
 
-const accountInfo = () => axios.get('/user/account');
+const accountInfo = () => axios.get('/users/account-info');
 
-const logOut = () => axios.get('/user/log-out');
+const logOut = () => axios.get('/users/log-out');
 
 const checkIsEmailRegistered = (email) =>
-  axios.post('/user/is-email-registered', { email });
+  axios.post('/users/exists', { email });
 
-const update = (data) => axios.post('/user/update', data);
+const update = (data, _id) => axios.put(`/users/${_id}`, data);
 
-const changeDP = (formData) =>
-  axios.post('/user/change-dp', formData, {
+const changeDP = (formData, _id) =>
+  axios.put(`/users/${_id}/dp`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
   });
+
+  axios.get
 
 export {
   logIn,
