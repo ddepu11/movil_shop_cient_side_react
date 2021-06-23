@@ -12,7 +12,6 @@ import validateMovileForm from '../../utils/validateAddMobileForm';
 import { createMobile } from '../../actions/mobileActions';
 
 const AddMobileScreen = () => {
-
   const history = useHistory();
 
   const { mobileSaved } = useSelector((state) => state.mobile);
@@ -130,43 +129,20 @@ const AddMobileScreen = () => {
   // Color Handing
   const mobileColors = ['red', 'white', 'black', '#FFD700', 'grey'];
 
-  const [colorSelect, setColorSelect] = useState({
-    red: false,
-    white: false,
-    black: false,
-    FFD700: false,
-    grey: false,
-  });
+  const handleColors = (e) => {
+    const { value } = e.target.dataset;
 
-  const handleColors = (selectedColor) => {
-    let color = selectedColor;
+    setMobileInfo((prevState) => {
+      // if color already exits reomve it
+      if (prevState.colors.includes(value)) {
+        return {
+          ...prevState,
+          colors: [...prevState.colors.filter((c) => c !== value)],
+        };
+      }
 
-    if (color === '#FFD700') {
-      color = 'FFD700';
-    }
-
-    setColorSelect((prevState) => ({
-      ...prevState,
-      [color]: !prevState[color],
-    }));
-
-    let cToAdd = color;
-
-    if (cToAdd === 'FFD700') {
-      cToAdd = '#FFD700';
-    }
-
-    if (!colorSelect[color]) {
-      setMobileInfo((prevState) => ({
-        ...prevState,
-        colors: [...prevState.colors, cToAdd],
-      }));
-    } else {
-      setMobileInfo((prevState) => ({
-        ...prevState,
-        colors: [...prevState.colors.filter((e) => e !== cToAdd)],
-      }));
-    }
+      return { ...prevState, colors: [...prevState.colors, value.trim()] };
+    });
   };
 
   const handleSubmit = () => {
@@ -185,7 +161,7 @@ const AddMobileScreen = () => {
     });
 
     !errorFlag && dispatch(createMobile(mobileInfo));
-  }
+  };
 
   return (
     <Wrapper>
@@ -370,34 +346,27 @@ const AddMobileScreen = () => {
               </span>
             </div>
             <div className="colors_top">
-              {mobileColors.map((e) => {
-                let color = e;
-
-                if (e === '#FFD700') {
-                  color = 'FFD700';
-                }
-
-                return (
-                  <Button
-                    key={Math.floor(Math.random() * Date.now() + e.length)}
-                    pt="0px"
-                    pb="0px"
-                    pl="0px"
-                    pr="0px"
-                    borderRadius="50%"
-                    bgColor={e}
-                    width="25px"
-                    height="25px"
-                    color={e === 'white' || e === '#FFD700' ? 'black' : 'white'}
-                    mr="20px"
-                    bSh=" rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset"
-                    handleClick={() => handleColors(e)}
-                    fs="0.8em"
-                  >
-                    {colorSelect[color] ? `✓` : ''}
-                  </Button>
-                );
-              })}
+              {mobileColors.map((e) => (
+                <Button
+                  key={Math.floor(Math.random() * Date.now() + e.length)}
+                  pt="0px"
+                  pb="0px"
+                  pl="0px"
+                  pr="0px"
+                  borderRadius="50%"
+                  bgColor={e}
+                  width="25px"
+                  height="25px"
+                  color={e === 'white' || e === '#FFD700' ? 'black' : 'white'}
+                  mr="20px"
+                  bSh=" rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset"
+                  handleClick={handleColors}
+                  fs="0.8em"
+                  dataVal={e}
+                >
+                  {mobileInfo.colors.includes(e) ? `✓` : ''}
+                </Button>
+              ))}
             </div>
             <p ref={colorsMessageRefTag} className="message" />
           </div>

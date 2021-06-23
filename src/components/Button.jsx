@@ -22,6 +22,7 @@ const Button = ({
   cursor,
   width,
   height,
+  dataVal
 }) => {
   useEffect(() => {});
 
@@ -29,6 +30,7 @@ const Button = ({
     <button
       onClick={handleClick}
       type="button"
+      data-value={dataVal}
       style={{
         paddingTop: pt,
         paddingBottom: pb,
@@ -80,6 +82,7 @@ Button.propTypes = {
   borderRadius: PropTypes.string,
   bcgImage: PropTypes.string,
   cursor: PropTypes.string,
+  dataVal: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -103,6 +106,7 @@ Button.defaultProps = {
   borderRadius: '0px',
   bcgImage: '',
   cursor: 'pointer',
+  dataVal: '',
 };
 
 export default Button;
