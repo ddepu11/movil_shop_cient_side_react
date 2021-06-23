@@ -22,7 +22,7 @@ const Button = ({
   cursor,
   width,
   height,
-  dataVal
+  dataVal,
 }) => {
   useEffect(() => {});
 

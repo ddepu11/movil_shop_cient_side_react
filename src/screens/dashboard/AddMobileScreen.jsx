@@ -227,7 +227,7 @@ const AddMobileScreen = () => {
             </div>
 
             <div className="os-middle">
-              <div className="android">
+              <div className="android flex">
                 <label htmlFor="android">Android</label>
                 <input
                   onChange={handleInput}
@@ -411,11 +411,11 @@ const AddMobileScreen = () => {
               pb="10px"
               pl="20px"
               pr="20px"
-              ml="220px"
+              mt="22px"
               borderRadius="5px"
               bgColor="rgb(32, 145, 60)"
               color="white"
-              width="50%"
+              width="15%"
               handleClick={handleSubmit}
             >
               Submit
@@ -456,8 +456,7 @@ const Wrapper = styled.main`
         }
 
         .os-middle {
-          width: 80%;
-
+          width: 40%;
           .android {
             padding: 0 0 8px;
           }
@@ -465,9 +464,14 @@ const Wrapper = styled.main`
           .android,
           .ios {
             justify-content: space-between;
+            /* border: 1px solid red; */
 
             label {
               font-size: 1.05em;
+            }
+
+            input {
+              width: 10%;
             }
           }
         }
