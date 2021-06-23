@@ -20,7 +20,7 @@ const AddMobileScreen = () => {
 
   // Clearing all set timeouts
   useEffect(() => {
-    mobileSaved && history.push('/dashboard');
+    mobileSaved && history.push('/dashboard/all-mobiles');
 
     return () => clearAllSetTimeOut(setTimeOutId);
   }, [mobileSaved, history]);
