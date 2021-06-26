@@ -6,7 +6,7 @@ import HeaderScreen from './HeaderScreen';
 import SectionScreen from './SectionScreen';
 import { getAccountInfo } from '../../actions/userActions';
 import { clearMobileSaved } from '../../actions/mobileActions';
-import Loading from "../../components/Loading";
+import Loading from '../../components/Loading';
 
 const DashboardScreen = () => {
   const history = useHistory();

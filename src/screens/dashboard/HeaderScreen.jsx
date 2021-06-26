@@ -2,21 +2,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Loading from '../../components/Loading';
-import User from '../../assests/user.png';
-
-// import { GiBowTieRibbon } from 'react-icons/gi';
-// import Button from '../../components/Button';
+import UserDefaultPic from '../../assests/user.png';
 
 const HeaderScreen = () => {
   const { userInfo } = useSelector((state) => state.user);
 
   const { displayPicture, firstName, lastName, email, userLoading } = userInfo;
-
-  let imgSrc = `dp/${displayPicture}`;
-
-  if (!displayPicture) {
-    imgSrc = User;
-  }
 
   if (userLoading) {
     <Loading />;
@@ -25,7 +16,10 @@ const HeaderScreen = () => {
   return (
     <Wrapper className="flex card">
       <div className="dp">
-        <img src={imgSrc} alt={firstName} />
+        <img
+          src={displayPicture ? `/dp/${displayPicture}` : UserDefaultPic}
+          alt={firstName}
+        />
       </div>
 
       <div className="info flex">

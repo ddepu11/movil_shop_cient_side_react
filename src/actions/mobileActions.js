@@ -9,15 +9,16 @@ import {
 
 import { sendNotification } from './notificationActions';
 
-export const createMobile = (mobileInfo) => async (dispatch) => {
+export const createMobile = (formData) => async (dispatch) => {
   dispatch({ type: MOBILE_CREATE_BEGIN });
 
   try {
-    const { data } = await create(mobileInfo);
+    const { data } = await create(formData);
 
     console.log(data);
 
     dispatch({ type: MOBILE_CREATE_SUCCESS });
+
     dispatch(sendNotification('Successfuly saved mobile info!!!', false));
   } catch (err) {
     const { msg } = err.responce.data;

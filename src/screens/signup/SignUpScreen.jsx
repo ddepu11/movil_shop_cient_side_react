@@ -116,7 +116,6 @@ const SignUpScreen = () => {
 
     if (!errorFlag) {
       appendDataToFD(formData);
-
       dispatch(signUpUser(formData));
     }
   };

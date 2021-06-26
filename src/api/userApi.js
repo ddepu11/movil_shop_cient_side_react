@@ -13,7 +13,7 @@ const signUp = (formData) =>
     },
   });
 
-const accountInfo = () => axios.get('/users/account-info');
+const accountInfo = () => axios.get(`/users/account-info`);
 
 const logOut = () => axios.get('/users/log-out');
 
@@ -28,8 +28,6 @@ const changeDP = (formData, _id) =>
       'Content-Type': 'multipart/form-data',
     },
   });
-
-  axios.get
 
 export {
   logIn,
