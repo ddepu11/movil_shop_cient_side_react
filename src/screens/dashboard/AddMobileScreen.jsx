@@ -166,16 +166,16 @@ const AddMobileScreen = () => {
       const k = Object.keys(mobileInfo);
       const v = Object.values(mobileInfo);
 
-      mobileInfo.files.forEach((f, index) => {
-        formData.append(`file${index}`, f);
-      });
-
       for (let i = 0; i < k.length; i += 1) {
         // Exculding previews
-        if (k[i].toString() !== 'previews' && k[i].toString() !== 'files') {
+        if (k[i] !== 'previews' && k[i] !== 'files') {
           formData.append(k[i].toString().trim(), v[i]);
         }
       }
+
+      mobileInfo.files.forEach((f) => {
+        formData.append(`mobilePics`, f);
+      });
 
       dispatch(createMobile(formData));
     }
