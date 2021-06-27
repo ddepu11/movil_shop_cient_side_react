@@ -7,22 +7,35 @@ import SectionScreen from './SectionScreen';
 import { getAccountInfo } from '../../actions/userActions';
 import { clearMobileSaved } from '../../actions/mobileActions';
 import Loading from '../../components/Loading';
+import { sendNotification } from '../../actions/notificationActions';
 
 const DashboardScreen = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
 
-  const { userInfo, hasUserLoggedIn } = useSelector((state) => state.user);
+  const { userInfo, hasUserLoggedIn, role } = useSelector(
+    (state) => state.user
+  );
   const { mobileSaved, mobileLoading } = useSelector((state) => state.mobile);
 
   useEffect(() => {
     mobileSaved && dispatch(clearMobileSaved());
 
-    !hasUserLoggedIn && history.push('/sign-in');
-
     Object.keys(userInfo).length === 0 && dispatch(getAccountInfo());
-  }, [userInfo, dispatch, history, hasUserLoggedIn, mobileSaved]);
+
+    if (role !== 'SELLER') {
+      dispatch(
+        sendNotification(
+          'Sorry, You have no permission to access the dashboard page!!',
+          true
+        )
+      );
+      history.push('/sign-in');
+    }
+
+    !hasUserLoggedIn && history.push('/sign-in');
+  }, [userInfo, dispatch, history, hasUserLoggedIn, mobileSaved, role]);
 
   if (mobileLoading) {
     return <Loading />;

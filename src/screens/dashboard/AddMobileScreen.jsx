@@ -14,6 +14,10 @@ import { createMobile } from '../../actions/mobileActions';
 const AddMobileScreen = () => {
   const history = useHistory();
 
+  const {
+    userInfo: { _id },
+  } = useSelector((state) => state.user);
+
   const { mobileSaved } = useSelector((state) => state.mobile);
 
   const setTimeOutId = useRef(0);
@@ -165,6 +169,8 @@ const AddMobileScreen = () => {
 
       const k = Object.keys(mobileInfo);
       const v = Object.values(mobileInfo);
+
+      formData.append('userId', _id);
 
       for (let i = 0; i < k.length; i += 1) {
         // Exculding previews

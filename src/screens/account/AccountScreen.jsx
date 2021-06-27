@@ -25,16 +25,18 @@ const AccountScreen = () => {
   useEffect(() => {
     const isUserObjEmpty = Object.keys(userInfo).length === 0;
 
-    if (hasUserError || (!hasUserLoggedIn && isUserObjEmpty)) {
+    if (!hasUserLoggedIn && isUserObjEmpty) {
       history.push('/sign-in');
     }
 
     isUserObjEmpty && dispatch(getAccountInfo());
 
+    hasUserError && clearAllSetTimeOut(setTimeOutId);
+
     return () => clearAllSetTimeOut(setTimeOutId);
 
     // eslint-disable-next-line
-  }, [hasUserLoggedIn, userInfo]);
+  }, [hasUserLoggedIn, userInfo, hasUserError]);
 
   const { firstName, lastName, email, phoneNumber, gender, password, _id } =
     userInfo;

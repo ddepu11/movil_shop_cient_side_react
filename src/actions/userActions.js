@@ -77,7 +77,7 @@ const customUserSignIn = (email, password) => async (dispatch) => {
     const { data } = await user.logIn(email, password);
 
     // Handle this
-    dispatch({ type: USER_SIGN_IN_SUCCESS });
+    dispatch({ type: USER_SIGN_IN_SUCCESS, payload: data.user });
     dispatch(sendNotification(data.msg, false));
   } catch (err) {
     const { msg } = err.response.data;

@@ -13,15 +13,13 @@ export const createMobile = (formData) => async (dispatch) => {
   dispatch({ type: MOBILE_CREATE_BEGIN });
 
   try {
-    const { data } = await create(formData);
-
-    console.log(data);
+    await create(formData);
 
     dispatch({ type: MOBILE_CREATE_SUCCESS });
 
     dispatch(sendNotification('Successfuly saved mobile info!!!', false));
   } catch (err) {
-    const { msg } = err.responce.data;
+    const { msg } = err.response.data;
 
     dispatch({ type: MOBILE_CREATE_ERROR });
 

@@ -87,6 +87,7 @@ const user = (userState = initialUser, action) => {
         hasUserLoggedIn: true,
         userLoading: false,
         hasUserError: false,
+        role: action.payload.role,
       };
 
     case USER_SIGN_IN_ERROR:
@@ -191,6 +192,7 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         userLoading: false,
+        hasUserError: true,
       };
 
     // Changing DP

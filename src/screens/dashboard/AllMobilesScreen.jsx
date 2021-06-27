@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const AllMobileScreen = () => {
+  
   console.log('All M');
 
   return (
