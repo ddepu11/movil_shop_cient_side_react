@@ -29,5 +29,3 @@ export const createMobile = (formData) => async (dispatch) => {
 
 export const clearMobileSaved = () => (dispatch) =>
   dispatch({ type: MOBILE_CLEAR_SAVED });
-
-export const listMobile = () => {};

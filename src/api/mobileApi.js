@@ -7,4 +7,4 @@ export const create = (formData) =>
     },
   });
 
-export const fetchAll = () => {};
+export const all = () => {};
