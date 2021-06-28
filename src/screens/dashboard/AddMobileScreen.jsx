@@ -170,7 +170,7 @@ const AddMobileScreen = () => {
       const k = Object.keys(mobileInfo);
       const v = Object.values(mobileInfo);
 
-      formData.append('userId', _id);
+      formData.append('sellerId', _id);
 
       for (let i = 0; i < k.length; i += 1) {
         // Exculding previews

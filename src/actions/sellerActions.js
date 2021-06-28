@@ -15,7 +15,7 @@ export const listMobiles = (sellerId) => async (dispatch) => {
     const res = await mobiles(sellerId);
 
     if (res) {
-      dispatch({ type: SELLER_MOBILE_LIST_SUCCESS, payload: res.data });
+      dispatch({ type: SELLER_MOBILE_LIST_SUCCESS, payload: res.data.mobiles });
     } else {
       dispatch({ type: SELLER_MOBILE_LIST_ERROR });
 

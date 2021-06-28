@@ -6,17 +6,20 @@ import Mobile from '../../components/Mobile';
 import { listMobiles } from '../../actions/sellerActions';
 
 const AllMobileScreen = () => {
-  const { mobileLoading, userInfo } = useSelector((state) => state.user);
+  const { userInfo } = useSelector((state) => state.user);
+  const { sellerLoading, sellerMobiles } = useSelector((state) => state.seller);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(listMobiles(userInfo._id));
+    Object.keys(userInfo).length !== 0 && dispatch(listMobiles(userInfo._id));
   }, [dispatch, userInfo]);
 
-  if (mobileLoading) {
+  if (sellerLoading) {
     return <Loading />;
   }
+
+  sellerMobiles && console.log(sellerMobiles);
 
   return (
     <Wrapper>
