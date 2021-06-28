@@ -83,7 +83,7 @@ const Navbar = () => {
               role === 'SELLER' ||
               role === 'ADMIN') && (
               <li>
-                <Link to="/dashboard">Dashboard</Link>
+                <Link to="/dashboard/all-mobiles">Dashboard</Link>
               </li>
             )}
 
