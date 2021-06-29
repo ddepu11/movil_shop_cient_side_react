@@ -160,9 +160,10 @@ const Navbar = () => {
 const Wrapper = styled.nav`
   max-width: 100%;
   margin: 0 auto;
+
   .nav_top {
     justify-content: space-between;
-    padding: 30px 5px;
+    padding: 30px 0px;
 
     ul li span,
     a {
@@ -188,8 +189,10 @@ const Wrapper = styled.nav`
       }
     }
   }
+
   .navbar {
     background-color: #c7c7c7;
+    padding: 0 10px;
   }
   .nav_bottom {
     justify-content: space-between;

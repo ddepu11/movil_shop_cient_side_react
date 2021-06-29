@@ -7,7 +7,7 @@ import Loading from '../../components/Loading';
 import validateForm from '../../utils/validateForm';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
 import AsideScreen from './AsideScreen';
-import FormFieldScreen from './FormFieldScreen';
+import FormFieldUpdate from '../../components/FormFieldUpdate';
 import Button from '../../components/Button';
 import { sendNotification } from '../../actions/notificationActions';
 
@@ -196,7 +196,7 @@ const AccountScreen = () => {
           <AsideScreen />
 
           <main className="card">
-            <FormFieldScreen
+            <FormFieldUpdate
               heading="First Name:"
               wannaEdit={wannaEdit}
               inputValue={info.firstName}
@@ -207,7 +207,7 @@ const AccountScreen = () => {
               spanInnerText={firstName}
             />
 
-            <FormFieldScreen
+            <FormFieldUpdate
               heading="Last Name:"
               wannaEdit={wannaEdit}
               inputValue={info.lastName}
@@ -218,12 +218,12 @@ const AccountScreen = () => {
               spanInnerText={lastName}
             />
 
-            <div className="row flex">
+            <div className="gender_row flex">
               <h4>Gender:</h4>
               <span>{gender}</span>
             </div>
 
-            <FormFieldScreen
+            <FormFieldUpdate
               heading="Email:"
               wannaEdit={wannaEdit}
               inputValue={info.email}
@@ -234,7 +234,7 @@ const AccountScreen = () => {
               spanInnerText={email}
             />
 
-            <FormFieldScreen
+            <FormFieldUpdate
               heading="Phone Number:"
               wannaEdit={wannaEdit}
               inputValue={String(info.phoneNumber)}
@@ -245,7 +245,7 @@ const AccountScreen = () => {
               spanInnerText={String(phoneNumber)}
             />
 
-            <FormFieldScreen
+            <FormFieldUpdate
               heading="Password:"
               wannaEdit={wannaEdit}
               inputValue={info.password}
@@ -258,7 +258,7 @@ const AccountScreen = () => {
 
             {/* Buttons */}
             {wannaEdit && (
-              <FormFieldScreen
+              <FormFieldUpdate
                 heading="Confirm Password:"
                 wannaEdit={wannaEdit}
                 inputValue={info.confirmPassword}
@@ -320,7 +320,7 @@ const AccountScreen = () => {
 };
 
 const Wrapper = styled.main`
-  padding: 25px 0 40px;
+  padding: 25px 10px 40px;
   display: grid;
   grid-template-columns: repeat(3, minmax(50px, auto));
   grid-template-rows: minmax(50px, auto);
@@ -342,7 +342,7 @@ const Wrapper = styled.main`
     grid-area: m;
     padding: 5px 15px 20px;
 
-    .row {
+    .gender_row {
       justify-content: space-between;
       padding: 0px 0 30px;
 
@@ -352,51 +352,12 @@ const Wrapper = styled.main`
         letter-spacing: 2px;
       }
 
-      div {
-        flex-direction: column;
-        width: 38%;
-        align-items: flex-start;
-
-        p {
-          transition: all 0.5s ease;
-          height: 0;
-          width: 0;
-          overflow: hidden;
-        }
-      }
-
       span {
         font-size: 1em;
         color: #333;
         letter-spacing: 1px;
         display: block;
         width: 38%;
-      }
-
-      input {
-        padding: 10px 0px 10px 5px;
-        font-size: 1em;
-        border-radius: 2px;
-        width: 100%;
-        box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
-          rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
-          rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
-      }
-
-      .message.error {
-        color: red;
-        font-size: 1.1em;
-      }
-
-      .message.success {
-        color: green;
-        font-size: 1.1em;
-      }
-
-      .message.success,
-      .message.error {
-        height: auto;
-        width: auto;
       }
     }
 

@@ -123,7 +123,6 @@ const Wrapper = styled.aside`
   .dp {
     width: 180px;
     height: 180px;
-    transform: translateX(-15%);
     position: relative;
 
     img {

@@ -53,7 +53,7 @@ const Footer = () => (
       </div>
     </div>
 
-    <div className="fotter_fw">
+    <div className="f_bottom">
       <div className="f_lover flex">
         <div className="left">
           <p>
@@ -74,13 +74,12 @@ const Footer = () => (
 
 const Wrapper = styled.footer`
   background-color: #c7c7c7;
-  padding: 00px 0px;
 
   .f_upper {
     justify-content: space-around;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 50px 0px;
+    padding: 50px 10px;
 
     .left {
       width: 60%;
@@ -121,9 +120,9 @@ const Wrapper = styled.footer`
     }
   }
 
-  .fotter_fw {
+  .f_bottom {
     background-color: #555;
-    padding: 20px 0;
+    padding: 20px 10px;
   }
 
   .f_lover {
