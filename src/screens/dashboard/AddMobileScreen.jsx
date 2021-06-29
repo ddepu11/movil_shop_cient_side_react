@@ -8,7 +8,7 @@ import Button from '../../components/Button';
 import FormControl from '../../components/FormControl';
 import { sendNotification } from '../../actions/notificationActions';
 import clearAllSetTimeOut from '../../utils/clearAllSetTimeOut';
-import validateMovileForm from '../../utils/validateAddMobileForm';
+import validateMobileForm from '../../utils/validateMobileForm';
 import { createMobile } from '../../actions/mobileActions';
 
 const AddMobileScreen = () => {
@@ -150,7 +150,7 @@ const AddMobileScreen = () => {
   };
 
   const handleSubmit = () => {
-    const errorFlag = validateMovileForm(mobileInfo, setTimeOutId, {
+    const errorFlag = validateMobileForm(mobileInfo, setTimeOutId, {
       titleMessageRefTag,
       priceMessageRefTag,
       brandMessageRefTag,

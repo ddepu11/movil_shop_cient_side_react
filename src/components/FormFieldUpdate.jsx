@@ -33,7 +33,7 @@ const FormFieldUpdate = ({
 FormFieldUpdate.propTypes = {
   heading: PropTypes.string.isRequired,
   wannaEdit: PropTypes.bool.isRequired,
-  inputValue: PropTypes.string,
+  inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   type: PropTypes.string.isRequired,
   inputName: PropTypes.string.isRequired,
   handleInput: PropTypes.func.isRequired,

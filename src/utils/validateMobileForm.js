@@ -1,6 +1,6 @@
 import setValidationMessage from './setValidationMessage';
 
-const validateMovileForm = (
+const validateMobileForm = (
   mobileInfo,
   setTimeOutId,
   allValidationMessageTags
@@ -226,8 +226,9 @@ const validateMovileForm = (
   }
 
   // %%%%%%%%%%%%%%% Camera Ends %%%%%%%%%%%%%%%%%%%%%%%
+
   // Colors
-  if (colors.length === 0) {
+  if (colors && colors.length === 0) {
     setValidationMessage(
       colorsMessageRefTag,
       'Please select atleast one color!',
@@ -237,8 +238,9 @@ const validateMovileForm = (
     errorFlag = true;
   }
   // %%%%%%%%%%%%%%% Camera Ends %%%%%%%%%%%%%%%%%%%%%%%
+
   // Images
-  if (files.length === 0) {
+  if (files && files.length === 0) {
     setValidationMessage(
       imageUploadValidationMessageTag,
       'please select atleast 1 image file!',
@@ -253,4 +255,4 @@ const validateMovileForm = (
   return errorFlag;
 };
 
-export default validateMovileForm;
+export default validateMobileForm;

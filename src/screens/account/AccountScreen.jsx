@@ -256,7 +256,6 @@ const AccountScreen = () => {
               spanInnerText="*************"
             />
 
-            {/* Buttons */}
             {wannaEdit && (
               <FormFieldUpdate
                 heading="Confirm Password:"
@@ -277,7 +276,6 @@ const AccountScreen = () => {
                 pb="10px"
                 pl="20px"
                 pr="20px"
-                onClick={initiateUpdateProcess}
                 bgColor="#1e6adb"
                 color="white"
                 handleClick={initiateUpdateProcess}

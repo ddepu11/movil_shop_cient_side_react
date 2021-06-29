@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { ImBin2 } from 'react-icons/im';
 import Button from './Button';
+import FormFieldUpdate from './FormFieldUpdate';
+import validateMobileForm from '../utils/validateMobileForm';
+import clearAllSetTimeOut from '../utils/clearAllSetTimeOut';
 
 const Mobile = ({
   imgSrc,
@@ -20,10 +23,202 @@ const Mobile = ({
   mobileId,
   handleDeleteMobile,
 }) => {
-  // const handleDeleteMobile = (id) => {
-  // };
+  const setTimeOutId = useRef();
 
-  console.log('');
+  useEffect(() => {
+    console.log('');
+    return clearAllSetTimeOut(setTimeOutId);
+  }, []);
+
+  const [mobileInfo, setMobileInfo] = useState({
+    title,
+    brand,
+    os,
+    internalMemory,
+    ram,
+    camera,
+    processor,
+    battery,
+    price,
+  });
+
+  const [wannaEdit, setWannaEdit] = useState(false);
+
+  const initiateUpdateProcess = () => {
+    setWannaEdit(true);
+  };
+
+  // Reference to diff message paragraph
+  const titleMessageRefTag = useRef(null);
+  const brandMessageRefTag = useRef(null);
+  const osMessageRefTag = useRef(null);
+  const internalMemoryMessageRefTag = useRef(null);
+  const ramMessageRefTag = useRef(null);
+  const cameraMessageRefTag = useRef(null);
+  const processorMessageRefTag = useRef(null);
+  const batteryMessageRefTag = useRef(null);
+  const priceMessageRefTag = useRef(null);
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setMobileInfo({ ...mobileInfo, [name]: value });
+  };
+
+  const updateInfo = () => {
+    const errorFlag = validateMobileForm(mobileInfo, setTimeOutId, {
+      titleMessageRefTag,
+      priceMessageRefTag,
+      brandMessageRefTag,
+      internalMemoryMessageRefTag,
+      ramMessageRefTag,
+      osMessageRefTag,
+      batteryMessageRefTag,
+      processorMessageRefTag,
+      cameraMessageRefTag,
+    });
+
+    !errorFlag && console.log(mobileInfo);
+  };
+
+  const cancelUpdate = () => {
+    setWannaEdit(false);
+
+    setMobileInfo({
+      title,
+      brand,
+      os,
+      internalMemory,
+      ram,
+      camera,
+      processor,
+      battery,
+      price,
+    });
+  };
+
+  if (wannaEdit) {
+    return (
+      <Wrapper1 className="w-960">
+        <h1 className="heading">Update {title} Info </h1>
+        <FormFieldUpdate
+          heading="Title"
+          wannaEdit={wannaEdit}
+          inputValue={mobileInfo.title}
+          type="text"
+          inputName="title"
+          handleInput={handleInput}
+          refObj={titleMessageRefTag}
+        />
+
+        <FormFieldUpdate
+          heading="Price"
+          wannaEdit={wannaEdit}
+          inputValue={mobileInfo.price}
+          type="number"
+          inputName="price"
+          handleInput={handleInput}
+          refObj={priceMessageRefTag}
+        />
+
+        <FormFieldUpdate
+          heading="Brand"
+          wannaEdit={wannaEdit}
+          inputValue={mobileInfo.brand}
+          type="text"
+          inputName="brand"
+          handleInput={handleInput}
+          refObj={brandMessageRefTag}
+        />
+
+        <FormFieldUpdate
+          heading="Operating System"
+          wannaEdit={wannaEdit}
+          inputValue={mobileInfo.os}
+          type="text"
+          inputName="os"
+          handleInput={handleInput}
+          refObj={osMessageRefTag}
+        />
+
+        <FormFieldUpdate
+          heading="Internal Memory (GB)"
+          wannaEdit={wannaEdit}
+          inputValue={mobileInfo.internalMemory}
+          type="number"
+          inputName="internalMemory"
+          handleInput={handleInput}
+          refObj={internalMemoryMessageRefTag}
+        />
+
+        <FormFieldUpdate
+          heading="Ram (GB)"
+          wannaEdit={wannaEdit}
+          inputValue={mobileInfo.ram}
+          type="number"
+          inputName="ram"
+          handleInput={handleInput}
+          refObj={ramMessageRefTag}
+        />
+
+        <FormFieldUpdate
+          heading="Camera (MP)"
+          wannaEdit={wannaEdit}
+          inputValue={mobileInfo.camera}
+          type="number"
+          inputName="camera"
+          handleInput={handleInput}
+          refObj={cameraMessageRefTag}
+        />
+
+        <FormFieldUpdate
+          heading="Processor (GHz)"
+          wannaEdit={wannaEdit}
+          inputValue={mobileInfo.processor}
+          type="number"
+          inputName="processor"
+          handleInput={handleInput}
+          refObj={processorMessageRefTag}
+        />
+
+        <FormFieldUpdate
+          heading="Battery"
+          wannaEdit={wannaEdit}
+          inputValue={mobileInfo.battery}
+          type="number"
+          inputName="battery"
+          handleInput={handleInput}
+          refObj={batteryMessageRefTag}
+        />
+
+        <div className="update_cancel_btn flex">
+          <Button
+            pt="8px"
+            pb="8px"
+            pl="16px"
+            pr="16px"
+            mr="10px"
+            handleClick={updateInfo}
+            bgColor="#20913c"
+            fs="0.8em"
+          >
+            Update!!!
+          </Button>
+          <Button
+            pt="8px"
+            pb="8px"
+            pl="16px"
+            pr="16px"
+            mr="10px"
+            fs="0.8em"
+            handleClick={cancelUpdate}
+            bgColor="#e00926"
+          >
+            Cancel
+          </Button>
+        </div>
+      </Wrapper1>
+    );
+  }
 
   return (
     <Wrapper className="flex">
@@ -48,7 +243,24 @@ const Mobile = ({
             <li>- &nbsp;&nbsp;{battery}Mah Battery</li>
           </ul>
         </div>
-
+        <div className="middle">
+          {/* Buttons */}
+          {!wannaEdit && (
+            <Button
+              pt="5px"
+              pb="5px"
+              pl="10px"
+              pr="10px"
+              bgColor="#1e6adb"
+              color="white"
+              handleClick={initiateUpdateProcess}
+              bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
+              fs="0.8em"
+            >
+              Initiate Mobile Update
+            </Button>
+          )}
+        </div>
         <div className="right">
           <h1>{price} &#8377;</h1>
           <div className="color_btns flex">
@@ -75,7 +287,6 @@ const Mobile = ({
       </div>
 
       <Button
-        key={Math.floor(Math.random() * Date.now() * 2)}
         pt="0px"
         pb="0px"
         pl="0px"
@@ -99,6 +310,18 @@ const Mobile = ({
   );
 };
 
+const Wrapper1 = styled.div`
+  width: 70%;
+
+  .heading {
+    font-size: 1.2em;
+  }
+
+  .update_cancel_btn {
+    padding: 0px 0 20px;
+  }
+`;
+
 const Wrapper = styled.div`
   padding: 10px 20px;
   justify-content: space-between;
@@ -108,6 +331,7 @@ const Wrapper = styled.div`
     rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
   margin-bottom: 15px;
   position: relative;
+
   .mobile_pic {
     width: 170px;
     height: 208px;
@@ -122,7 +346,7 @@ const Wrapper = styled.div`
 
   .mobile_info {
     justify-content: space-between;
-    align-self: flex-start;
+    align-items: flex-end;
     width: 100%;
     padding: 0px 0px 0 25px;
 
@@ -142,6 +366,11 @@ const Wrapper = styled.div`
         }
       }
     }
+
+    .middle {
+      justify-self: end;
+    }
+
     .right {
       align-self: flex-start;
       color: #444;
