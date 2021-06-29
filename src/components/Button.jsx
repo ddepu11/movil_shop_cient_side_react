@@ -23,6 +23,11 @@ const Button = ({
   width,
   height,
   dataVal,
+  positionVal,
+  fromTop,
+  fromRight,
+  fromBottom,
+  fromLeft,
 }) => {
   useEffect(() => {});
 
@@ -50,6 +55,11 @@ const Button = ({
         borderRadius,
         backgroundImage: bcgImage,
         cursor,
+        position: positionVal,
+        top: fromTop,
+        bottom: fromBottom,
+        left: fromLeft,
+        right: fromRight,
       }}
     >
       {children}
@@ -83,6 +93,11 @@ Button.propTypes = {
   bcgImage: PropTypes.string,
   cursor: PropTypes.string,
   dataVal: PropTypes.string,
+  positionVal: PropTypes.string,
+  fromBottom: PropTypes.string,
+  fromTop: PropTypes.string,
+  fromLeft: PropTypes.string,
+  fromRight: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -107,6 +122,11 @@ Button.defaultProps = {
   bcgImage: '',
   cursor: 'pointer',
   dataVal: '',
+  positionVal: 'static',
+  fromRight: '',
+  fromLeft: '',
+  fromBottom: '',
+  fromTop: '',
 };
 
 export default Button;

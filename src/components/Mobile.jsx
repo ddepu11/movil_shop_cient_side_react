@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { ImBin2 } from 'react-icons/im';
 import Button from './Button';
 
 const Mobile = ({
@@ -16,55 +17,87 @@ const Mobile = ({
   userId,
   brand,
   colors,
-}) => (
-  <Wrapper className="flex">
-    <div className="mobile_pic">
-      <img
-        src={`/sellers/${userId}/${title}_${os}_${price}_${processor}/${imgSrc}`}
-        alt={title}
-      />
-    </div>
-    <div className="mobile_info flex">
-      <div className="left">
-        <div>
-          <h1>{title}</h1>
+  mobileId,
+  handleDeleteMobile,
+}) => {
+  // const handleDeleteMobile = (id) => {
+  // };
+
+  console.log('');
+
+  return (
+    <Wrapper className="flex">
+      <div className="mobile_pic">
+        <img
+          src={`/sellers/${userId}/${title}_${os}_${price}_${processor}/${imgSrc}`}
+          alt={title}
+        />
+      </div>
+      <div className="mobile_info flex">
+        <div className="left">
+          <div>
+            <h1>{title}</h1>
+          </div>
+          <ul>
+            <li>- &nbsp;&nbsp;{brand}</li>
+            <li>- &nbsp;&nbsp;{os} operating system</li>
+            <li>- &nbsp;&nbsp;{internalMemory}GB Internal Storage</li>
+            <li>- &nbsp;&nbsp;{ram}GB Ram</li>
+            <li>- &nbsp;&nbsp;{camera} MP Camera</li>
+            <li>- &nbsp;&nbsp;{processor} GHz Processor</li>
+            <li>- &nbsp;&nbsp;{battery}Mah Battery</li>
+          </ul>
         </div>
-        <ul>
-          <li>- &nbsp;&nbsp;{brand}</li>
-          <li>- &nbsp;&nbsp;{os} operating system</li>
-          <li>- &nbsp;&nbsp;{internalMemory}GB Internal Storage</li>
-          <li>- &nbsp;&nbsp;{ram}GB Ram</li>
-          <li>- &nbsp;&nbsp;{camera} MP Camera</li>
-          <li>- &nbsp;&nbsp;{processor} GHz Processor</li>
-          <li>- &nbsp;&nbsp;{battery}Mah Battery</li>
-        </ul>
+
+        <div className="right">
+          <h1>{price} &#8377;</h1>
+          <div className="color_btns flex">
+            {colors.map((c) => (
+              <Button
+                key={Math.floor(Math.random() * c.length * 1500)}
+                pt="0px"
+                pb="0px"
+                pl="0px"
+                pr="0px"
+                mb="15px"
+                borderRadius="50%"
+                bgColor={c}
+                width="18px"
+                height="18px"
+                bSh=" rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset"
+                fs="0.8em"
+              >
+                {' '}
+              </Button>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div className="right">
-        <h1>{price} &#8377;</h1>
-        <div className="colors flex">
-          {colors.map((c) => (
-            <Button
-              key={Math.floor(Math.random() * c.length * 1500)}
-              pt="0px"
-              pb="0px"
-              pl="0px"
-              pr="0px"
-              borderRadius="50%"
-              bgColor={c}
-              width="25px"
-              height="25px"
-              bSh=" rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset"
-              fs="0.8em"
-            >
-              {' '}
-            </Button>
-          ))}
-        </div>
-      </div>
-    </div>
-  </Wrapper>
-);
+      <Button
+        key={Math.floor(Math.random() * Date.now() * 2)}
+        pt="0px"
+        pb="0px"
+        pl="0px"
+        pr="0px"
+        borderRadius="50%"
+        bgColor="tranparent"
+        width="22px"
+        height="22px"
+        color="#cc3131"
+        mr="20px"
+        bSh=""
+        handleClick={() => handleDeleteMobile(mobileId)}
+        fs="1.1em"
+        positionVal="absolute"
+        fromBottom="5px"
+        fromRight="0"
+      >
+        <ImBin2 />
+      </Button>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
   padding: 10px 20px;
@@ -74,7 +107,7 @@ const Wrapper = styled.div`
     rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
     rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
   margin-bottom: 15px;
-
+  position: relative;
   .mobile_pic {
     width: 170px;
     height: 208px;
@@ -114,6 +147,12 @@ const Wrapper = styled.div`
       color: #444;
       letter-spacing: 1.1px;
       font-size: 1.2em;
+
+      .color_btns {
+        margin-top: 20px;
+        justify-content: space-between;
+        flex-direction: column;
+      }
     }
   }
 `;
@@ -131,6 +170,8 @@ Mobile.propTypes = {
   userId: PropTypes.string.isRequired,
   brand: PropTypes.string.isRequired,
   colors: PropTypes.array.isRequired,
+  mobileId: PropTypes.string.isRequired,
+  handleDeleteMobile: PropTypes.func.isRequired,
 };
 
 export default Mobile;

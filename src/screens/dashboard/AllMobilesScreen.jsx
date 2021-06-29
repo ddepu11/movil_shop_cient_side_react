@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import Loading from '../../components/Loading';
 import Mobile from '../../components/Mobile';
-import { listMobiles } from '../../actions/sellerActions';
+import { listMobiles, removeMobile } from '../../actions/sellerActions';
 
 const AllMobileScreen = () => {
   const { userInfo } = useSelector((state) => state.user);
@@ -16,6 +16,10 @@ const AllMobileScreen = () => {
       dispatch(listMobiles(userInfo._id));
   }, [dispatch, userInfo, sellerMobiles]);
 
+  const handleDeleteMobile = (id) => {
+    dispatch(removeMobile(id));
+  };
+
   if (sellerLoading) {
     return <Loading />;
   }
@@ -24,40 +28,43 @@ const AllMobileScreen = () => {
     <Wrapper>
       <h1 className="heading">All the mobiles you have added</h1>
       <section className="mobiles">
-        {sellerMobiles.map((item) => {
-          const {
-            pictures,
-            title,
-            price,
-            os,
-            internalMemory,
-            processor,
-            battery,
-            camera,
-            ram,
-            brand,
-            _id,
-            colors,
-          } = item;
+        {sellerMobiles.length !== 0 &&
+          sellerMobiles.map((item) => {
+            const {
+              pictures,
+              title,
+              price,
+              os,
+              internalMemory,
+              processor,
+              battery,
+              camera,
+              ram,
+              brand,
+              _id,
+              colors,
+            } = item;
 
-          return (
-            <Mobile
-              key={_id}
-              imgSrc={pictures[0]}
-              ram={ram}
-              camera={camera}
-              title={title}
-              price={price}
-              os={os}
-              processor={processor}
-              battery={battery}
-              internalMemory={internalMemory}
-              userId={userInfo._id}
-              brand={brand}
-              colors={colors}
-            />
-          );
-        })}
+            return (
+              <Mobile
+                key={_id}
+                imgSrc={pictures[0]}
+                ram={ram}
+                camera={camera}
+                title={title}
+                price={price}
+                os={os}
+                processor={processor}
+                battery={battery}
+                internalMemory={internalMemory}
+                userId={userInfo._id}
+                brand={brand}
+                colors={colors}
+                mobileId={_id}
+                handleDeleteMobile={handleDeleteMobile}
+              />
+            );
+          })}
       </section>
     </Wrapper>
   );
