@@ -37,6 +37,7 @@ const AllMobileScreen = () => {
             ram,
             brand,
             _id,
+            colors,
           } = item;
 
           return (
@@ -53,6 +54,7 @@ const AllMobileScreen = () => {
               internalMemory={internalMemory}
               userId={userInfo._id}
               brand={brand}
+              colors={colors}
             />
           );
         })}

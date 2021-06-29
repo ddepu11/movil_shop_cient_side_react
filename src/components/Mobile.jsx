@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import Button from './Button';
 
 const Mobile = ({
   imgSrc,
@@ -14,6 +15,7 @@ const Mobile = ({
   price,
   userId,
   brand,
+  colors,
 }) => (
   <Wrapper className="flex">
     <div className="mobile_pic">
@@ -22,7 +24,6 @@ const Mobile = ({
         alt={title}
       />
     </div>
-
     <div className="mobile_info flex">
       <div className="left">
         <div>
@@ -41,6 +42,25 @@ const Mobile = ({
 
       <div className="right">
         <h1>{price} &#8377;</h1>
+        <div className="colors flex">
+          {colors.map((c) => (
+            <Button
+              key={Math.floor(Math.random() * c.length * 1500)}
+              pt="0px"
+              pb="0px"
+              pl="0px"
+              pr="0px"
+              borderRadius="50%"
+              bgColor={c}
+              width="25px"
+              height="25px"
+              bSh=" rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset"
+              fs="0.8em"
+            >
+              {' '}
+            </Button>
+          ))}
+        </div>
       </div>
     </div>
   </Wrapper>
@@ -110,6 +130,7 @@ Mobile.propTypes = {
   price: PropTypes.number.isRequired,
   userId: PropTypes.string.isRequired,
   brand: PropTypes.string.isRequired,
+  colors: PropTypes.array.isRequired,
 };
 
 export default Mobile;
