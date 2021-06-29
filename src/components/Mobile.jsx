@@ -1,37 +1,50 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-const Mobile = () => {
-  console.log('Mobile');
+const Mobile = ({
+  imgSrc,
+  title,
+  os,
+  internalMemory,
+  ram,
+  camera,
+  processor,
+  battery,
+  price,
+  userId,
+  brand,
+}) => (
+  <Wrapper className="flex">
+    <div className="mobile_pic">
+      <img
+        src={`/sellers/${userId}/${title}_${os}_${price}_${processor}/${imgSrc}`}
+        alt={title}
+      />
+    </div>
 
-  return (
-    <Wrapper className="flex">
-      <div className="mobile_pic">
-        <img src="https://i.pravatar.cc/300" alt="as" />
+    <div className="mobile_info flex">
+      <div className="left">
+        <div>
+          <h1>{title}</h1>
+        </div>
+        <ul>
+          <li>- &nbsp;&nbsp;{brand}</li>
+          <li>- &nbsp;&nbsp;{os} operating system</li>
+          <li>- &nbsp;&nbsp;{internalMemory}GB Internal Storage</li>
+          <li>- &nbsp;&nbsp;{ram}GB Ram</li>
+          <li>- &nbsp;&nbsp;{camera} MP Camera</li>
+          <li>- &nbsp;&nbsp;{processor} GHz Processor</li>
+          <li>- &nbsp;&nbsp;{battery}Mah Battery</li>
+        </ul>
       </div>
 
-      <div className="mobile_info flex">
-        <div className="left">
-          <div>
-            <h1>Redmi Note 10</h1>
-          </div>
-          <ul>
-            <li>- &nbsp;&nbsp;Android Operating System</li>
-            <li>- &nbsp;&nbsp;128GB Internal Storage</li>
-            <li>- &nbsp;&nbsp;4GB Ram</li>
-            <li>- &nbsp;&nbsp;64 mp camera</li>
-            <li>- &nbsp;&nbsp;2.6 GHz processor</li>
-            <li>- &nbsp;&nbsp;6000mah</li>
-          </ul>
-        </div>
-
-        <div className="right">
-          <h1>10,999 &#8377;</h1>
-        </div>
+      <div className="right">
+        <h1>{price} &#8377;</h1>
       </div>
-    </Wrapper>
-  );
-};
+    </div>
+  </Wrapper>
+);
 
 const Wrapper = styled.div`
   padding: 10px 20px;
@@ -49,7 +62,7 @@ const Wrapper = styled.div`
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: scale-down;
       border-radius: 5px;
     }
   }
@@ -84,5 +97,19 @@ const Wrapper = styled.div`
     }
   }
 `;
+
+Mobile.propTypes = {
+  imgSrc: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  os: PropTypes.string.isRequired,
+  internalMemory: PropTypes.number.isRequired,
+  ram: PropTypes.string.isRequired,
+  camera: PropTypes.string.isRequired,
+  processor: PropTypes.string.isRequired,
+  battery: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  userId: PropTypes.string.isRequired,
+  brand: PropTypes.string.isRequired,
+};
 
 export default Mobile;

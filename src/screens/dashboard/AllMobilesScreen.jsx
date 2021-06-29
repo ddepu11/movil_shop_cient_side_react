@@ -12,20 +12,50 @@ const AllMobileScreen = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    Object.keys(userInfo).length !== 0 && dispatch(listMobiles(userInfo._id));
-  }, [dispatch, userInfo]);
+    if (Object.keys(userInfo).length !== 0 && sellerMobiles.length === 0)
+      dispatch(listMobiles(userInfo._id));
+  }, [dispatch, userInfo, sellerMobiles]);
 
   if (sellerLoading) {
     return <Loading />;
   }
 
-  sellerMobiles && console.log(sellerMobiles);
-
   return (
     <Wrapper>
       <h1 className="heading">All the mobiles you have added</h1>
       <section className="mobiles">
-        <Mobile />
+        {sellerMobiles.map((item) => {
+          const {
+            pictures,
+            title,
+            price,
+            os,
+            internalMemory,
+            processor,
+            battery,
+            camera,
+            ram,
+            brand,
+            _id,
+          } = item;
+
+          return (
+            <Mobile
+              key={_id}
+              imgSrc={pictures[0]}
+              ram={ram}
+              camera={camera}
+              title={title}
+              price={price}
+              os={os}
+              processor={processor}
+              battery={battery}
+              internalMemory={internalMemory}
+              userId={userInfo._id}
+              brand={brand}
+            />
+          );
+        })}
       </section>
     </Wrapper>
   );

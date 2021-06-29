@@ -8,8 +8,9 @@ import {
 } from '../constants/mobileConstants';
 
 import { sendNotification } from './notificationActions';
+import { listMobiles } from './sellerActions';
 
-export const createMobile = (formData) => async (dispatch) => {
+export const createMobile = (formData, id) => async (dispatch) => {
   dispatch({ type: MOBILE_CREATE_BEGIN });
 
   try {
@@ -18,6 +19,8 @@ export const createMobile = (formData) => async (dispatch) => {
     dispatch({ type: MOBILE_CREATE_SUCCESS });
 
     dispatch(sendNotification('Successfuly saved mobile info!!!', false));
+
+    dispatch(listMobiles(id));
   } catch (err) {
     const { msg } = err.response.data;
 

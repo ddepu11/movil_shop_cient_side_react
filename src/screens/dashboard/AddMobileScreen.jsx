@@ -183,7 +183,7 @@ const AddMobileScreen = () => {
         formData.append(`mobilePics`, f);
       });
 
-      dispatch(createMobile(formData));
+      dispatch(createMobile(formData, _id));
     }
   };
 
