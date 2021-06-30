@@ -8,7 +8,7 @@ import { AiOutlineUnorderedList } from 'react-icons/ai';
 import FiltersScreen from './FiltersScreen';
 import Hero from '../../components/Hero';
 
-const ProductsScreen = () => (
+const MobilesScreen = () => (
   <>
     <Hero title="products" />
     <Wrapper className="w-960">
@@ -27,6 +27,7 @@ const ProductsScreen = () => (
               <option value="">Name (Z - A)</option>
             </select>
           </div>
+
           <div className="view_by flex">
             <span>View</span>
             <button type="button">
@@ -38,7 +39,6 @@ const ProductsScreen = () => (
           </div>
         </header>
         {/* <Mobile /> */}
-        {/* <Product /> */}
       </section>
     </Wrapper>
   </>
@@ -70,13 +70,16 @@ const Wrapper = styled.main`
           padding: 5px 10px;
         }
       }
+
       .view_by {
         width: 15%;
         justify-content: space-between;
+
         span {
-          font-size: 1.1em;
-          align-self: flex-start;
+          font-size: 1.2em;
+          padding: 0 0 5px;
         }
+
         button {
           background: transparent;
           font-size: 1.2em;
@@ -86,4 +89,4 @@ const Wrapper = styled.main`
   }
 `;
 
-export default ProductsScreen;
+export default MobilesScreen;
