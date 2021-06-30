@@ -5,6 +5,9 @@ import {
   SELLER_MOBILE_LIST_BEGIN,
   SELLER_MOBILE_LIST_ERROR,
   SELLER_MOBILE_LIST_SUCCESS,
+  SELLER_MOBILE_UPDATE_BEGIN,
+  SELLER_MOBILE_UPDATE_ERROR,
+  SELLER_MOBILE_UPDATE_SUCCESS,
 } from '../constants/sellerConstants';
 
 const initialState = {
@@ -55,6 +58,30 @@ const seller = (sellerState = initialState, action) => {
         sellerLoading: false,
         sellerError: true,
       };
+
+    case SELLER_MOBILE_UPDATE_BEGIN:
+      return {
+        ...sellerState,
+        sellerLoading: true,
+      };
+
+    case SELLER_MOBILE_UPDATE_SUCCESS:
+      return {
+        ...sellerState,
+        sellerLoading: false,
+        sellerMobiles: sellerState.sellerMobiles.map((m) => {
+          if (m._id === action.payload._id) return action.payload;
+          return m;
+        }),
+      };
+
+    case SELLER_MOBILE_UPDATE_ERROR:
+      return {
+        ...sellerState,
+        sellerLoading: false,
+        sellerError: true,
+      };
+
     default:
       return sellerState;
   }

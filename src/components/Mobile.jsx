@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { ImBin2 } from 'react-icons/im';
 import Button from './Button';
 import FormFieldUpdate from './FormFieldUpdate';
 import validateMobileForm from '../utils/validateMobileForm';
 import clearAllSetTimeOut from '../utils/clearAllSetTimeOut';
+import { updateSellerMobile } from '../actions/sellerActions';
+import { sendNotification } from '../actions/notificationActions';
 
 const Mobile = ({
   imgSrc,
@@ -23,12 +26,11 @@ const Mobile = ({
   mobileId,
   handleDeleteMobile,
 }) => {
+  const dispatch = useDispatch();
+
   const setTimeOutId = useRef();
 
-  useEffect(() => {
-    console.log('');
-    return clearAllSetTimeOut(setTimeOutId);
-  }, []);
+  useEffect(() => () => clearAllSetTimeOut(setTimeOutId), []);
 
   const [mobileInfo, setMobileInfo] = useState({
     title,
@@ -77,7 +79,23 @@ const Mobile = ({
       cameraMessageRefTag,
     });
 
-    !errorFlag && console.log(mobileInfo);
+    if (
+      !errorFlag &&
+      mobileInfo.title === title &&
+      mobileInfo.brand === brand &&
+      mobileInfo.os === os &&
+      mobileInfo.internalMemory === internalMemory &&
+      mobileInfo.ram === ram &&
+      mobileInfo.processor === processor &&
+      mobileInfo.camera === camera &&
+      mobileInfo.battery === battery &&
+      mobileInfo.price === price
+    ) {
+      dispatch(sendNotification('Sorry There is notingh to update!', true));
+    } else if (!errorFlag) {
+      dispatch(updateSellerMobile(mobileInfo, mobileId));
+      setWannaEdit(false);
+    }
   };
 
   const cancelUpdate = () => {
@@ -203,6 +221,7 @@ const Mobile = ({
           >
             Update!!!
           </Button>
+
           <Button
             pt="8px"
             pb="8px"
@@ -223,10 +242,7 @@ const Mobile = ({
   return (
     <Wrapper className="flex">
       <div className="mobile_pic">
-        <img
-          src={`/sellers/${userId}/${title}_${os}_${price}_${processor}/${imgSrc}`}
-          alt={title}
-        />
+        <img src={`/sellers/${userId}/${imgSrc}`} alt={title} />
       </div>
       <div className="mobile_info flex">
         <div className="left">

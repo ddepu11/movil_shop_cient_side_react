@@ -157,6 +157,7 @@ const updateUser = (userInfo, _id) => async (dispatch) => {
       type: USER_UPDATE_SUCCESS,
       payload: data.user,
     });
+
     dispatch(sendNotification('User updated Successfully!!!', false));
   } catch (err) {
     const { msg } = err.response.data;
