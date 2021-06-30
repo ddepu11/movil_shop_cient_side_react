@@ -16,7 +16,7 @@ Hero.propTypes = {
 
 const Wrapper = styled.main`
   background: #555;
-  padding: 40px 0;
+  padding: 40px 5px;
   color: white;
   .w-960 {
     h1 {

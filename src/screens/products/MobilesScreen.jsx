@@ -2,7 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { BsGrid3X3Gap } from 'react-icons/bs';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
-import Product from '../../components/Product';
+// import Product from '../../components/Product';
+// import Mobile from '../../components/Mobile';
+
 import FiltersScreen from './FiltersScreen';
 import Hero from '../../components/Hero';
 
@@ -35,15 +37,15 @@ const ProductsScreen = () => (
             </button>
           </div>
         </header>
-
-        <Product />
+        {/* <Mobile /> */}
+        {/* <Product /> */}
       </section>
     </Wrapper>
   </>
 );
 
 const Wrapper = styled.main`
-  padding: 40px 0;
+  padding: 40px 6px;
   display: grid;
   grid-template-columns: 220px 1fr;
   gap: 20px;

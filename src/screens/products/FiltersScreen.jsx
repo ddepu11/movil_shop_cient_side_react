@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
+import Button from '../../components/Button';
 
 const FiltersScreen = () => (
   <Wrapper>
@@ -65,6 +66,10 @@ const FiltersScreen = () => (
             <input type="radio" id="8gb" name="internal_memory" />
             <label htmlFor="8gb">8gb</label>
           </div>
+          <div className="internal_storage">
+            <input type="radio" id="4gb" name="internal_memory" />
+            <label htmlFor="4gb">4gb</label>
+          </div>
         </div>
         <div className="form-control">
           <h5>Color</h5>
@@ -81,14 +86,27 @@ const FiltersScreen = () => (
             <button type="button" className="c" /> */}
           </div>
         </div>
+
         <div className="form-control">
           <h5 className="assured">MovilShop Assured</h5>
           <input type="checkbox" />
         </div>
 
-        <button type="button" className="clear_filters">
-          Clear Filters
-        </button>
+        <Button
+          bgColor="#fa0000e6"
+          color="#f8f6f6"
+          borderRadius="1px"
+          fs="1.2em"
+          pt="8px"
+          pb="8px"
+          pr="16px"
+          pl="16px"
+          mt="10px"
+          width="100%"
+          bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
+        >
+          Clear Filter
+        </Button>
       </form>
     </div>
   </Wrapper>
@@ -97,7 +115,7 @@ const FiltersScreen = () => (
 const Wrapper = styled.aside`
   .filters_div {
     .form-control {
-      margin-bottom: 22px;
+      margin-bottom: 25px;
       h5 {
         font-size: 1.1em;
         margin-bottom: 10px;
