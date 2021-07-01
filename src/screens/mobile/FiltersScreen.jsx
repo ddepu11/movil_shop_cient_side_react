@@ -1,29 +1,38 @@
 import React from 'react';
 import styled from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
+import PropTypes from 'prop-types';
 import Button from '../../components/Button';
 
-const FiltersScreen = () => (
+const FiltersScreen = ({ handleInput, handleButtons, filters }) => (
   <Wrapper>
     <div className="filters_div">
       <form>
         <div className="form-control">
-          <input type="text" className="search" placeholder="search" />
+          <input
+            type="text"
+            onChange={handleInput}
+            className="search"
+            placeholder="search"
+            name="search"
+          />
         </div>
 
         <div className="form-control">
           <h5>Brand</h5>
-          <select name="brand" id="brand">
+
+          <select name="brand" id="brand" onChange={handleInput}>
             <option value="all">All</option>
-            <option value="">Nokia</option>
-            <option value="">Redmi</option>
-            <option value="">Oneplus</option>
-            <option value="">Realme</option>
-            <option value="">Motorola</option>
-            <option value="">Oppo</option>
-            <option value="">Lenovo</option>
+            <option value="nokia">Nokia</option>
+            <option value="redmi">Redmi</option>
+            <option value="oneplus">Oneplus</option>
+            <option value="realme">Realme</option>
+            <option value="motorola">Motorola</option>
+            <option value="oppo">Oppo</option>
+            <option value="lenovo">Lenovo</option>
           </select>
         </div>
+
         <div className="form-control">
           <h5>Customer Ratings</h5>
           <div className="custumer_rating_btns">
@@ -36,6 +45,7 @@ const FiltersScreen = () => (
               pt="5px"
               ml="10px"
               width="50%"
+              handleClick={() => handleButtons('star', '5')}
             >
               <div className="flex" style={{ justifyContent: 'space-between' }}>
                 <span>5</span> <AiFillStar />
@@ -51,6 +61,7 @@ const FiltersScreen = () => (
               pt="5px"
               ml="10px"
               width="50%"
+              handleClick={() => handleButtons('star', '4')}
             >
               <div className="flex" style={{ justifyContent: 'space-between' }}>
                 <span>4</span> <AiFillStar />
@@ -66,6 +77,7 @@ const FiltersScreen = () => (
               pt="5px"
               ml="10px"
               width="50%"
+              handleClick={() => handleButtons('star', '3')}
             >
               <div className="flex" style={{ justifyContent: 'space-between' }}>
                 <span>3</span> <AiFillStar />
@@ -81,6 +93,7 @@ const FiltersScreen = () => (
               pt="5px"
               ml="10px"
               width="50%"
+              handleClick={() => handleButtons('star', '2')}
             >
               <div className="flex" style={{ justifyContent: 'space-between' }}>
                 <span>2</span> <AiFillStar />
@@ -96,6 +109,7 @@ const FiltersScreen = () => (
               pt="5px"
               ml="10px"
               width="50%"
+              handleClick={() => handleButtons('star', '1')}
             >
               <div className="flex" style={{ justifyContent: 'space-between' }}>
                 <span>1</span> <AiFillStar />
@@ -107,25 +121,54 @@ const FiltersScreen = () => (
 
         <div className="form-control">
           <h5>Price</h5>
-          <input className="price_input" type="range" min="0" max="4222" />
-          <p>Range: 0 - 422</p>
+          <input
+            onChange={handleInput}
+            className="price_input"
+            type="range"
+            min="8000"
+            max="150000"
+            name="price"
+          />
+          <p>Range: 8000 - {filters.price}</p>
         </div>
 
         <div className="form-control">
           <h5>Internal Memory</h5>
+
           <div className="internal_storage">
-            <input type="radio" id="16gb" name="internal_memory" />
+            <input
+              onChange={handleInput}
+              type="radio"
+              id="16gb"
+              name="internalMemory"
+              value="16"
+            />
             <label htmlFor="16gb">16gb</label>
           </div>
+
           <div className="internal_storage">
-            <input type="radio" id="8gb" name="internal_memory" />
+            <input
+              onChange={handleInput}
+              type="radio"
+              id="8gb"
+              name="internalMemory"
+              value="8"
+            />
             <label htmlFor="8gb">8gb</label>
           </div>
+
           <div className="internal_storage">
-            <input type="radio" id="4gb" name="internal_memory" />
+            <input
+              onChange={handleInput}
+              type="radio"
+              id="4gb"
+              name="internalMemory"
+              value="4"
+            />
             <label htmlFor="4gb">4gb</label>
           </div>
         </div>
+
         <div className="form-control">
           <h5>Color</h5>
 
@@ -139,6 +182,7 @@ const FiltersScreen = () => (
               mr="10px"
               bSh=""
               borderRadius="50%"
+              handleClick={() => handleButtons('color', 'all')}
             >
               All
             </Button>
@@ -151,6 +195,7 @@ const FiltersScreen = () => (
               height="30px"
               bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
               borderRadius="50%"
+              handleClick={() => handleButtons('color', '#f8f6f6')}
             >
               {' '}
             </Button>
@@ -158,8 +203,15 @@ const FiltersScreen = () => (
         </div>
 
         <div className="form-control">
-          <h5 className="assured">MovilShop Assured</h5>
-          <input type="checkbox" />
+          <label htmlFor="assured" className="assured">
+            MovilShop Assured
+          </label>
+          <input
+            type="checkbox"
+            name="movilShopAssured"
+            onChange={handleInput}
+            id="assured"
+          />
         </div>
 
         <Button
@@ -189,12 +241,14 @@ const Wrapper = styled.aside`
       .price_input {
         width: 100%;
       }
+
       h5 {
         font-size: 1.1em;
         margin-bottom: 10px;
         color: rgb(94, 94, 94);
         letter-spacing: 2px;
       }
+
       .search {
         font-size: 1.2em;
         padding: 5px 10px;
@@ -243,6 +297,7 @@ const Wrapper = styled.aside`
           margin-right: 5px;
         }
       }
+
       .assured {
         display: inline;
         margin-right: 10px;
@@ -260,5 +315,10 @@ const Wrapper = styled.aside`
     }
   }
 `;
+FiltersScreen.propTypes = {
+  handleInput: PropTypes.func.isRequired,
+  handleButtons: PropTypes.func.isRequired,
+  filters: PropTypes.object.isRequired,
+};
 
 export default FiltersScreen;
