@@ -15,7 +15,7 @@ const AddMobileScreen = () => {
   const history = useHistory();
 
   const {
-    userInfo: { _id },
+    userInfo: { _id, email, firstName, lastName },
   } = useSelector((state) => state.user);
 
   const { mobileSaved } = useSelector((state) => state.mobile);
@@ -171,6 +171,10 @@ const AddMobileScreen = () => {
       const v = Object.values(mobileInfo);
 
       formData.append('sellerId', _id);
+
+      formData.append('sellerEmail', email);
+
+      formData.append('sellerName', `${firstName} ${lastName}`);
 
       for (let i = 0; i < k.length; i += 1) {
         // Exculding previews
