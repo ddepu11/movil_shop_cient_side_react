@@ -1,6 +1,7 @@
 import { mobiles, remove, update } from '../api/sellerApi';
 
 import {
+  SELLER_CLEAR_STATE,
   SELLER_MOBILE_DELETE_BEGIN,
   SELLER_MOBILE_DELETE_ERROR,
   SELLER_MOBILE_DELETE_SUCCESS,
@@ -91,4 +92,5 @@ export const updateSellerMobile =
     }
   };
 
-export const getSeller = () => {};
+export const clearSellerState = () => (dispatch) =>
+  dispatch({ type: SELLER_CLEAR_STATE });

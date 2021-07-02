@@ -27,6 +27,7 @@ import {
 
 import * as user from '../api/userApi';
 import { sendNotification } from './notificationActions';
+import { clearSellerState } from './sellerActions';
 
 // Authenticate User
 const authenticateUser = () => async (dispatch) => {
@@ -140,6 +141,8 @@ const logOutUser = () => async (dispatch) => {
     });
 
     dispatch(sendNotification('User logged out successfully!!!', false));
+
+    dispatch(clearSellerState());
   } catch (err) {
     const { msg } = err.response.data;
     dispatch({ type: USER_LOG_OUT_ERROR, payload: msg });

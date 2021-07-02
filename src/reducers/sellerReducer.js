@@ -1,4 +1,5 @@
 import {
+  SELLER_CLEAR_STATE,
   SELLER_MOBILE_DELETE_BEGIN,
   SELLER_MOBILE_DELETE_ERROR,
   SELLER_MOBILE_DELETE_SUCCESS,
@@ -80,6 +81,13 @@ const seller = (sellerState = initialState, action) => {
         ...sellerState,
         sellerLoading: false,
         sellerError: true,
+      };
+
+    case SELLER_CLEAR_STATE:
+      return {
+        sellerMobiles: [],
+        sellerLoading: false,
+        sellerError: false,
       };
 
     default:
