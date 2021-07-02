@@ -7,4 +7,4 @@ export const create = (formData) =>
     },
   });
 
-export const all = () => {};
+export const listAll = () => axios.get('/mobiles');

@@ -3,9 +3,13 @@ import {
   MOBILE_CREATE_BEGIN,
   MOBILE_CREATE_ERROR,
   MOBILE_CREATE_SUCCESS,
+  MOBILE_LIST_BEGIN,
+  MOBILE_LIST_ERROR,
+  MOBILE_LIST_SUCCESS,
 } from '../constants/mobileConstants';
 
 const initialState = {
+  mobiles: [],
   mobileSaved: false,
   mobileLoading: false,
   mobileError: false,
@@ -34,6 +38,25 @@ const mobile = (mobileState = initialState, action) => {
       return {
         ...mobileState,
         mobileSaved: false,
+      };
+
+    case MOBILE_LIST_BEGIN:
+      return {
+        ...mobileState,
+        mobileLoading: true,
+      };
+
+    case MOBILE_LIST_SUCCESS:
+      return {
+        ...mobileState,
+        mobileLoading: false,
+        mobiles: action.payload,
+      };
+
+    case MOBILE_LIST_ERROR:
+      return {
+        ...mobileState,
+        mobileError: true,
       };
 
     default:
