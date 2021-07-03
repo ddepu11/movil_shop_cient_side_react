@@ -1,5 +1,6 @@
 import {
   FILTER_MOBILE_BY_BRAND,
+  FILTER_MOBILE_BY_STAR,
   FILTER_MOBILE_GET_ALL,
   FILTER_MOBILE_SET,
   FILTER_MOBILE_SORT,
@@ -23,4 +24,4 @@ export const filterByBrand = () => (dispatch) =>
   dispatch({ type: FILTER_MOBILE_BY_BRAND });
 
 export const filterByStars = () => (dispatch) =>
-  dispatch({ type: FILTER_MOBILE_BY_BRAND });
+  dispatch({ type: FILTER_MOBILE_BY_STAR });

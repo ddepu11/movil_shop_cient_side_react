@@ -88,9 +88,20 @@ const filterMobile = (state = initialState, action) => {
       };
 
     case FILTER_MOBILE_BY_STAR:
+      if (state.filters.star === 'all') {
+        return {
+          ...state,
+          filteredMobile: state.mobiles,
+        };
+      }
+
       return {
         ...state,
+        filteredMobile: state.mobiles.filter(
+          (m) => m.stars.toString() === state.filters.star
+        ),
       };
+
     default:
       return {
         ...state,

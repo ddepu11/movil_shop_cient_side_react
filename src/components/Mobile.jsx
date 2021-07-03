@@ -554,10 +554,15 @@ Mobile.propTypes = {
   userId: PropTypes.string.isRequired,
   brand: PropTypes.string.isRequired,
   colors: PropTypes.array.isRequired,
-  mobileId: PropTypes.string.isRequired,
-  handleDeleteMobile: PropTypes.func.isRequired,
+  mobileId: PropTypes.string,
+  handleDeleteMobile: PropTypes.func,
   usedFor: PropTypes.string.isRequired,
-  sellerName: PropTypes.string.isRequired,
+  sellerName: PropTypes.string,
+};
+Mobile.defaultProps = {
+  mobileId: '234857asd87s8d',
+  sellerName: 'xyz',
+  handleDeleteMobile: () => {},
 };
 
 export default Mobile;
