@@ -63,6 +63,7 @@ const AllMobileScreen = () => {
                 mobileId={_id}
                 handleDeleteMobile={handleDeleteMobile}
                 handlingUpdate={1}
+                usedFor="seller"
               />
             );
           })}

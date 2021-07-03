@@ -45,7 +45,7 @@ const GridViewScreen = () => {
             userId={id}
             brand={brand}
             colors={colors}
-            handlingUpdate={0}
+            usedFor="grid"
           />
         );
       })}
@@ -54,7 +54,10 @@ const GridViewScreen = () => {
 };
 
 const Wrapper = styled.main`
-  border: 1px solid black;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px 00px;
+  padding: 15px 0px 0 15px;
 `;
 
 export default GridViewScreen;

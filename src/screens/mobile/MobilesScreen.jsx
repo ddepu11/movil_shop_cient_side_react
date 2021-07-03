@@ -103,7 +103,7 @@ const MobilesScreen = () => {
 const Wrapper = styled.main`
   padding: 40px 6px;
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 200px 1fr;
   gap: 20px;
 
   .display_products {

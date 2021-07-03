@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { ImBin2 } from 'react-icons/im';
+import { FcSearch } from 'react-icons/fc';
+import { Link } from 'react-router-dom';
 import Button from './Button';
 import FormFieldUpdate from './FormFieldUpdate';
 import validateMobileForm from '../utils/validateMobileForm';
@@ -25,7 +27,7 @@ const Mobile = ({
   colors,
   mobileId,
   handleDeleteMobile,
-  handlingUpdate,
+  usedFor,
 }) => {
   const dispatch = useDispatch();
 
@@ -240,11 +242,33 @@ const Mobile = ({
     );
   }
 
+  if (usedFor === 'grid') {
+    return (
+      <Wrapper2>
+        <div className="mobile_pic">
+          <img src={`/sellers/${userId}/${imgSrc}`} alt={title} />
+        </div>
+
+        <div className="info">
+          <h2>{title}</h2>
+          <span>{price} &#8377;</span>
+        </div>
+
+        <div className="cover">
+          <Link to="/">
+            <FcSearch className="search" fontSize="3.2em" />
+          </Link>
+        </div>
+      </Wrapper2>
+    );
+  }
+
   return (
-    <Wrapper className="flex">
+    <Wrapper0 className="flex">
       <div className="mobile_pic">
         <img src={`/sellers/${userId}/${imgSrc}`} alt={title} />
       </div>
+
       <div className="mobile_info flex">
         <div className="left">
           <div>
@@ -261,26 +285,24 @@ const Mobile = ({
           </ul>
         </div>
 
-        {handlingUpdate === 1 && (
-          <div className="middle">
-            {/* Buttons */}
-            {!wannaEdit && (
-              <Button
-                pt="5px"
-                pb="5px"
-                pl="10px"
-                pr="10px"
-                bgColor="#1e6adb"
-                color="white"
-                handleClick={initiateUpdateProcess}
-                bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
-                fs="0.8em"
-              >
-                Initiate Mobile Update
-              </Button>
-            )}
-          </div>
-        )}
+        <div className="middle">
+          {/* Buttons */}
+          {!wannaEdit && (
+            <Button
+              pt="5px"
+              pb="5px"
+              pl="10px"
+              pr="10px"
+              bgColor="#1e6adb"
+              color="white"
+              handleClick={initiateUpdateProcess}
+              bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
+              fs="0.8em"
+            >
+              Initiate Mobile Update
+            </Button>
+          )}
+        </div>
 
         <div className="right">
           <h1>{price} &#8377;</h1>
@@ -307,29 +329,82 @@ const Mobile = ({
         </div>
       </div>
 
-      <Button
-        pt="0px"
-        pb="0px"
-        pl="0px"
-        pr="0px"
-        borderRadius="50%"
-        bgColor="tranparent"
-        width="22px"
-        height="22px"
-        color="#cc3131"
-        mr="20px"
-        bSh=""
-        handleClick={() => handleDeleteMobile(mobileId)}
-        fs="1.1em"
-        positionVal="absolute"
-        fromBottom="5px"
-        fromRight="0"
-      >
-        <ImBin2 />
-      </Button>
-    </Wrapper>
+      {/* Delete Button */}
+      {usedFor === 'seller' && (
+        <Button
+          pt="0px"
+          pb="0px"
+          pl="0px"
+          pr="0px"
+          borderRadius="50%"
+          bgColor="tranparent"
+          width="22px"
+          height="22px"
+          color="#cc3131"
+          mr="20px"
+          bSh=""
+          handleClick={() => handleDeleteMobile(mobileId)}
+          fs="1.1em"
+          positionVal="absolute"
+          fromBottom="5px"
+          fromRight="0"
+        >
+          <ImBin2 />
+        </Button>
+      )}
+    </Wrapper0>
   );
 };
+
+const Wrapper2 = styled.div`
+  width: 150px;
+  position: relative;
+  padding: 10px 0;
+
+  .mobile_pic {
+    height: 150px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .info {
+    margin-top: 10px;
+    text-align: center;
+
+    h2 {
+      font-size: 0.8em;
+      color: #333;
+      margin-bottom: 5px;
+      letter-spacing: 1px;
+    }
+  }
+
+  .cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #aebbd4;
+    opacity: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 5px;
+    transition: all 0.5s ease;
+  }
+
+  .cover:hover {
+    opacity: 0.7;
+    .search {
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
+`;
 
 const Wrapper1 = styled.div`
   width: 70%;
@@ -343,7 +418,7 @@ const Wrapper1 = styled.div`
   }
 `;
 
-const Wrapper = styled.div`
+const Wrapper0 = styled.div`
   padding: 10px 20px;
   justify-content: space-between;
   gap: 0 10px;
@@ -422,7 +497,7 @@ Mobile.propTypes = {
   colors: PropTypes.array.isRequired,
   mobileId: PropTypes.string.isRequired,
   handleDeleteMobile: PropTypes.func.isRequired,
-  handlingUpdate: PropTypes.number.isRequired,
+  usedFor: PropTypes.string.isRequired,
 };
 
 export default Mobile;
