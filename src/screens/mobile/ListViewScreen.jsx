@@ -12,7 +12,7 @@ const ListViewScreen = () => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper className="flex">
       {mobiles.map((mobile) => {
         const {
           _id,
@@ -27,13 +27,13 @@ const ListViewScreen = () => {
           internalMemory,
           brand,
           colors,
-          sellerInfo: { id },
+          sellerInfo: { id, sellerName, sellerEmail },
         } = mobile;
 
         return (
           <Mobile
             key={_id}
-            imgSrc={pictures[0]}
+            pictures={pictures}
             ram={ram}
             camera={camera}
             title={title}
@@ -46,6 +46,9 @@ const ListViewScreen = () => {
             brand={brand}
             colors={colors}
             handlingUpdate={0}
+            usedFor="list"
+            sellerName={sellerName}
+            sellerEmail={sellerEmail}
           />
         );
       })}
@@ -55,6 +58,9 @@ const ListViewScreen = () => {
 
 const Wrapper = styled.main`
   border: 1px solid red;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px 0;
 `;
 
 export default ListViewScreen;

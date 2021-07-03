@@ -13,7 +13,7 @@ import { updateSellerMobile } from '../actions/sellerActions';
 import { sendNotification } from '../actions/notificationActions';
 
 const Mobile = ({
-  imgSrc,
+  pictures,
   title,
   os,
   internalMemory,
@@ -242,11 +242,33 @@ const Mobile = ({
     );
   }
 
+  if (usedFor === 'list') {
+    return (
+      <Wrapper3>
+        <div className="mobile_pic">
+          <img src={`/sellers/${userId}/${pictures[0]}`} alt={title} />
+        </div>
+
+        <div className="info">
+          <h2>{title}</h2>
+          <p>Price {price} &#8377;</p>
+          <span>Soled by</span>
+        </div>
+
+        <div className="cover">
+          <Link to="/">
+            <FcSearch className="search" fontSize="3.2em" />
+          </Link>
+        </div>
+      </Wrapper3>
+    );
+  }
+
   if (usedFor === 'grid') {
     return (
       <Wrapper2>
         <div className="mobile_pic">
-          <img src={`/sellers/${userId}/${imgSrc}`} alt={title} />
+          <img src={`/sellers/${userId}/${pictures[0]}`} alt={title} />
         </div>
 
         <div className="info">
@@ -266,7 +288,7 @@ const Mobile = ({
   return (
     <Wrapper0 className="flex">
       <div className="mobile_pic">
-        <img src={`/sellers/${userId}/${imgSrc}`} alt={title} />
+        <img src={`/sellers/${userId}/${pictures[0]}`} alt={title} />
       </div>
 
       <div className="mobile_info flex">
@@ -355,6 +377,10 @@ const Mobile = ({
     </Wrapper0>
   );
 };
+
+const Wrapper3 = styled.div`
+
+`;
 
 const Wrapper2 = styled.div`
   width: 150px;
@@ -483,7 +509,7 @@ const Wrapper0 = styled.div`
 `;
 
 Mobile.propTypes = {
-  imgSrc: PropTypes.string.isRequired,
+  pictures: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   os: PropTypes.string.isRequired,
   internalMemory: PropTypes.number.isRequired,

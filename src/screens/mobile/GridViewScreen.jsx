@@ -33,7 +33,7 @@ const GridViewScreen = () => {
         return (
           <Mobile
             key={_id}
-            imgSrc={pictures[0]}
+            pictures={pictures}
             ram={ram}
             camera={camera}
             title={title}
