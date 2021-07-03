@@ -542,7 +542,7 @@ const Wrapper0 = styled.div`
 `;
 
 Mobile.propTypes = {
-  pictures: PropTypes.string.isRequired,
+  pictures: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
   os: PropTypes.string.isRequired,
   internalMemory: PropTypes.number.isRequired,

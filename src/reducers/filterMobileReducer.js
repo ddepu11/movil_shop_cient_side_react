@@ -1,4 +1,6 @@
 import {
+  FILTER_MOBILE_BY_BRAND,
+  FILTER_MOBILE_BY_STAR,
   FILTER_MOBILE_GET_ALL,
   FILTER_MOBILE_SET,
   FILTER_MOBILE_SORT,
@@ -70,6 +72,25 @@ const filterMobile = (state = initialState, action) => {
           return { ...state };
       }
 
+    case FILTER_MOBILE_BY_BRAND:
+      if (state.filters.brand === 'all') {
+        return {
+          ...state,
+          filteredMobile: state.mobiles,
+        };
+      }
+
+      return {
+        ...state,
+        filteredMobile: state.mobiles.filter(
+          (m) => m.brand === state.filters.brand
+        ),
+      };
+
+    case FILTER_MOBILE_BY_STAR:
+      return {
+        ...state,
+      };
     default:
       return {
         ...state,

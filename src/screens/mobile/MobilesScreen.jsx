@@ -10,7 +10,11 @@ import Hero from '../../components/Hero';
 import GridViewScreen from './GridViewScreen';
 import ListViewScreen from './ListViewScreen';
 import { listAllMobiles } from '../../actions/mobileActions';
-import { setFilters, sort } from '../../actions/filterMobileActions';
+import {
+  filterByBrand,
+  setFilters,
+  sort,
+} from '../../actions/filterMobileActions';
 
 const MobilesScreen = () => {
   const dispatch = useDispatch();
@@ -24,6 +28,10 @@ const MobilesScreen = () => {
   useEffect(() => {
     dispatch(sort());
   }, [filters.sortBy, dispatch]);
+
+  useEffect(() => {
+    dispatch(filterByBrand());
+  }, [filters.brand, dispatch]);
 
   const handleButtons = (name, value) => {
     dispatch(setFilters({ name, value }));

@@ -2,238 +2,270 @@ import React from 'react';
 import styled from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import Button from '../../components/Button';
 
-const FiltersScreen = ({ handleButtons, handleInput, filters }) => (
-  <Wrapper>
-    <div className="filters_div">
-      <form>
-        <div className="form-control">
-          <input
-            type="text"
-            onChange={handleInput}
-            className="search"
-            placeholder="search"
-            name="search"
-          />
-        </div>
+const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
+  const { mobiles } = useSelector((state) => state.mobile);
 
-        <div className="form-control">
-          <h5>Brand</h5>
+  let brands;
 
-          <select name="brand" id="brand" onChange={handleInput}>
-            <option value="all">All</option>
-            <option value="nokia">Nokia</option>
-            <option value="redmi">Redmi</option>
-            <option value="oneplus">Oneplus</option>
-            <option value="realme">Realme</option>
-            <option value="motorola">Motorola</option>
-            <option value="oppo">Oppo</option>
-            <option value="lenovo">Lenovo</option>
-          </select>
-        </div>
+  if (Object.keys(mobiles).length !== 0) {
+    brands = Array.from(new Set(mobiles.map((m) => m.brand)));
+  }
 
-        <div className="form-control">
-          <h5>Customer Ratings</h5>
-          <div className="custumer_rating_btns">
-            <Button
-              bgColor="transparent"
-              color="#222"
-              borderRadius="1px"
-              bSh=""
-              pb="5px"
-              pt="5px"
-              ml="10px"
-              width="50%"
-              handleClick={() => handleButtons('star', '5')}
-            >
-              <div className="flex" style={{ justifyContent: 'space-between' }}>
-                <span>5</span> <AiFillStar />
-                <span>and above</span>
-              </div>
-            </Button>
-            <Button
-              bgColor="transparent"
-              color="#222"
-              borderRadius="1px"
-              bSh=""
-              pb="5px"
-              pt="5px"
-              ml="10px"
-              width="50%"
-              handleClick={() => handleButtons('star', '4')}
-            >
-              <div className="flex" style={{ justifyContent: 'space-between' }}>
-                <span>4</span> <AiFillStar />
-                <span>and above</span>
-              </div>
-            </Button>
-            <Button
-              bgColor="transparent"
-              color="#222"
-              borderRadius="1px"
-              bSh=""
-              pb="5px"
-              pt="5px"
-              ml="10px"
-              width="50%"
-              handleClick={() => handleButtons('star', '3')}
-            >
-              <div className="flex" style={{ justifyContent: 'space-between' }}>
-                <span>3</span> <AiFillStar />
-                <span>and above</span>
-              </div>
-            </Button>
-            <Button
-              bgColor="transparent"
-              color="#222"
-              borderRadius="1px"
-              bSh=""
-              pb="5px"
-              pt="5px"
-              ml="10px"
-              width="50%"
-              handleClick={() => handleButtons('star', '2')}
-            >
-              <div className="flex" style={{ justifyContent: 'space-between' }}>
-                <span>2</span> <AiFillStar />
-                <span>and above</span>
-              </div>
-            </Button>
-            <Button
-              bgColor="transparent"
-              color="#222"
-              borderRadius="1px"
-              bSh=""
-              pb="5px"
-              pt="5px"
-              ml="10px"
-              width="50%"
-              handleClick={() => handleButtons('star', '1')}
-            >
-              <div className="flex" style={{ justifyContent: 'space-between' }}>
-                <span>1</span> <AiFillStar />
-                <span>and above</span>
-              </div>
-            </Button>
+  return (
+    <Wrapper>
+      <div className="filters_div">
+        <form>
+          <div className="form-control">
+            <input
+              type="text"
+              onChange={handleInput}
+              className="search"
+              placeholder="search"
+              name="search"
+            />
           </div>
-        </div>
 
-        <div className="form-control">
-          <h5>Price</h5>
-          <input
-            onChange={handleInput}
-            className="price_input"
-            type="range"
-            min="8000"
-            max="150000"
-            name="price"
-          />
-          <p>Range: 8000 - {filters.price}</p>
-        </div>
+          <div className="form-control">
+            <h5>Brand</h5>
 
-        <div className="form-control">
-          <h5>Internal Memory</h5>
+            <select
+              name="brand"
+              id="brand"
+              value={filters.brand}
+              onChange={handleInput}
+            >
+              <option value="all">All</option>
+              {brands &&
+                brands.map((b) => (
+                  <option
+                    key={Math.floor(Math.random() * b.length * Date.now())}
+                    value={b}
+                  >
+                    {b}
+                  </option>
+                ))}
+            </select>
+          </div>
 
-          <div className="internal_storage">
+          <div className="form-control">
+            <h5>Customer Ratings</h5>
+            <div className="custumer_rating_btns">
+              <Button
+                bgColor="transparent"
+                color="#222"
+                borderRadius="1px"
+                bSh=""
+                pb="5px"
+                pt="5px"
+                ml="10px"
+                width="55%"
+                handleClick={() => handleButtons('star', '5')}
+              >
+                <div
+                  className="flex"
+                  style={{ justifyContent: 'space-between' }}
+                >
+                  <span>5</span>&nbsp; <AiFillStar />
+                  <span>and above</span>
+                </div>
+              </Button>
+              <Button
+                bgColor="transparent"
+                color="#222"
+                borderRadius="1px"
+                bSh=""
+                pb="5px"
+                pt="5px"
+                ml="10px"
+                width="55%"
+                handleClick={() => handleButtons('star', '4')}
+              >
+                <div
+                  className="flex"
+                  style={{ justifyContent: 'space-between' }}
+                >
+                  <span>4</span>&nbsp; <AiFillStar />
+                  <span>and above</span>
+                </div>
+              </Button>
+              <Button
+                bgColor="transparent"
+                color="#222"
+                borderRadius="1px"
+                bSh=""
+                pb="5px"
+                pt="5px"
+                ml="10px"
+                width="55%"
+                handleClick={() => handleButtons('star', '3')}
+              >
+                <div
+                  className="flex"
+                  style={{ justifyContent: 'space-between' }}
+                >
+                  <span>3</span>&nbsp; <AiFillStar />
+                  <span>and above</span>
+                </div>
+              </Button>
+              <Button
+                bgColor="transparent"
+                color="#222"
+                borderRadius="1px"
+                bSh=""
+                pb="5px"
+                pt="5px"
+                ml="10px"
+                width="55%"
+                handleClick={() => handleButtons('star', '2')}
+              >
+                <div
+                  className="flex"
+                  style={{ justifyContent: 'space-between' }}
+                >
+                  <span>2</span>&nbsp; <AiFillStar />
+                  <span>and above</span>
+                </div>
+              </Button>
+              <Button
+                bgColor="transparent"
+                color="#222"
+                borderRadius="1px"
+                bSh=""
+                pb="5px"
+                pt="5px"
+                ml="10px"
+                width="55%"
+                handleClick={() => handleButtons('star', '1')}
+              >
+                <div
+                  className="flex"
+                  style={{ justifyContent: 'space-between' }}
+                >
+                  <span>1</span>&nbsp; <AiFillStar />
+                  <span>and above</span>
+                </div>
+              </Button>
+            </div>
+          </div>
+
+          <div className="form-control">
+            <h5>Price</h5>
             <input
               onChange={handleInput}
-              type="radio"
-              id="16gb"
-              name="internalMemory"
-              value="16"
+              className="price_input"
+              type="range"
+              min="8000"
+              max="150000"
+              name="price"
             />
-            <label htmlFor="16gb">16gb</label>
+            <p>Range: 8000 - {filters.price}</p>
           </div>
 
-          <div className="internal_storage">
+          <div className="form-control">
+            <h5>Internal Memory</h5>
+
+            <div className="internal_storage">
+              <input
+                onChange={handleInput}
+                type="radio"
+                id="16gb"
+                name="internalMemory"
+                value="16"
+              />
+              <label htmlFor="16gb">16gb</label>
+            </div>
+
+            <div className="internal_storage">
+              <input
+                onChange={handleInput}
+                type="radio"
+                id="8gb"
+                name="internalMemory"
+                value="8"
+              />
+              <label htmlFor="8gb">8gb</label>
+            </div>
+
+            <div className="internal_storage">
+              <input
+                onChange={handleInput}
+                type="radio"
+                id="4gb"
+                name="internalMemory"
+                value="4"
+              />
+              <label htmlFor="4gb">4gb</label>
+            </div>
+          </div>
+
+          <div className="form-control">
+            <h5>Color</h5>
+
+            <div className="colors flex">
+              <Button
+                bgColor="transparent"
+                color="#333"
+                fs="1.2em"
+                width="30px"
+                height="30px"
+                mr="10px"
+                bSh=""
+                borderRadius="50%"
+                handleClick={() => handleButtons('color', 'all')}
+              >
+                All
+              </Button>
+
+              <Button
+                bgColor="#fa0000e6"
+                color="#f8f6f6"
+                fs="1.2em"
+                width="30px"
+                height="30px"
+                bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
+                borderRadius="50%"
+                handleClick={() => handleButtons('color', '#f8f6f6')}
+              >
+                {' '}
+              </Button>
+            </div>
+          </div>
+
+          <div className="form-control">
+            <label htmlFor="assured" className="assured">
+              MovilShop Assured
+            </label>
             <input
+              type="checkbox"
+              name="movilShopAssured"
               onChange={handleInput}
-              type="radio"
-              id="8gb"
-              name="internalMemory"
-              value="8"
+              id="assured"
             />
-            <label htmlFor="8gb">8gb</label>
           </div>
 
-          <div className="internal_storage">
-            <input
-              onChange={handleInput}
-              type="radio"
-              id="4gb"
-              name="internalMemory"
-              value="4"
-            />
-            <label htmlFor="4gb">4gb</label>
-          </div>
-        </div>
-
-        <div className="form-control">
-          <h5>Color</h5>
-
-          <div className="colors flex">
-            <Button
-              bgColor="transparent"
-              color="#333"
-              fs="1.2em"
-              width="30px"
-              height="30px"
-              mr="10px"
-              bSh=""
-              borderRadius="50%"
-              handleClick={() => handleButtons('color', 'all')}
-            >
-              All
-            </Button>
-
-            <Button
-              bgColor="#fa0000e6"
-              color="#f8f6f6"
-              fs="1.2em"
-              width="30px"
-              height="30px"
-              bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
-              borderRadius="50%"
-              handleClick={() => handleButtons('color', '#f8f6f6')}
-            >
-              {' '}
-            </Button>
-          </div>
-        </div>
-
-        <div className="form-control">
-          <label htmlFor="assured" className="assured">
-            MovilShop Assured
-          </label>
-          <input
-            type="checkbox"
-            name="movilShopAssured"
-            onChange={handleInput}
-            id="assured"
-          />
-        </div>
-
-        <Button
-          bgColor="#fa0000e6"
-          color="#f8f6f6"
-          borderRadius="1px"
-          fs="1.2em"
-          pt="8px"
-          pb="8px"
-          pr="16px"
-          pl="16px"
-          mt="10px"
-          width="100%"
-          bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
-        >
-          Clear Filter
-        </Button>
-      </form>
-    </div>
-  </Wrapper>
-);
-
+          <Button
+            bgColor="#fa0000e6"
+            color="#f8f6f6"
+            borderRadius="1px"
+            fs="1.2em"
+            pt="8px"
+            pb="8px"
+            pr="16px"
+            pl="16px"
+            mt="10px"
+            width="100%"
+            bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
+          >
+            Clear Filter
+          </Button>
+        </form>
+      </div>
+    </Wrapper>
+  );
+};
 FiltersScreen.propTypes = {
   handleButtons: PropTypes.func.isRequired,
   handleInput: PropTypes.func.isRequired,
