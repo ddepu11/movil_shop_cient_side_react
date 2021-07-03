@@ -225,7 +225,17 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
                 borderRadius="50%"
                 handleClick={() => handleButtons('color', 'all')}
               >
-                All
+                {filters.color === 'all' ? (
+                  <span
+                    style={{
+                      borderBottom: '2px solid black',
+                    }}
+                  >
+                    All
+                  </span>
+                ) : (
+                  <span>All</span>
+                )}
               </Button>
 
               {colors &&
@@ -233,15 +243,16 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
                   <Button
                     key={Math.floor(Math.random() * c.length * Date.now())}
                     bgColor={c}
-                    color="#f8f6f6"
+                    color={c === 'white' || c === '#FFD700' ? 'black' : 'white'}
                     fs="1.2em"
-                    width="30px"
-                    height="30px"
-                    bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
+                    width="28px"
+                    height="28px"
+                    mr="5px"
+                    bSh="rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"
                     borderRadius="50%"
                     handleClick={() => handleButtons('color', c)}
                   >
-                    {filters.color === c.toString() ? 'k' : ''}
+                    {filters.color === c ? <span>&#10003;</span> : ''}
                   </Button>
                 ))}
             </div>
