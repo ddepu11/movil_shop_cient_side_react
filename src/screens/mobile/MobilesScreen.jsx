@@ -13,6 +13,7 @@ import { listAllMobiles } from '../../actions/mobileActions';
 import {
   filterByBrand,
   filterByPrice,
+  filterByRam,
   filterByStars,
   setFilters,
   sort,
@@ -42,6 +43,10 @@ const MobilesScreen = () => {
   useEffect(() => {
     dispatch(filterByPrice());
   }, [filters.price, dispatch]);
+
+  useEffect(() => {
+    dispatch(filterByRam());
+  }, [filters.ram, dispatch]);
 
   const handleButtons = (name, value) => {
     dispatch(setFilters({ name, value }));

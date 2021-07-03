@@ -1,6 +1,7 @@
 import {
   FILTER_MOBILE_BY_BRAND,
   FILTER_MOBILE_BY_PRICE,
+  FILTER_MOBILE_BY_RAM,
   FILTER_MOBILE_BY_STAR,
   FILTER_MOBILE_GET_ALL,
   FILTER_MOBILE_SET,
@@ -17,7 +18,7 @@ const initialState = {
     brand: 'all',
     star: 'all',
     price: '8000',
-    internalMemory: 'all',
+    ram: 'all',
     color: 'all',
     movilShopAssured: false,
   },
@@ -108,6 +109,21 @@ const filterMobile = (state = initialState, action) => {
         ...state,
         filteredMobile: state.mobiles.filter(
           (m) => m.price < state.filters.price
+        ),
+      };
+
+    case FILTER_MOBILE_BY_RAM:
+      if (state.filters.ram === 'all') {
+        return {
+          ...state,
+          filteredMobile: state.mobiles,
+        };
+      }
+
+      return {
+        ...state,
+        filteredMobile: state.mobiles.filter(
+          (m) => m.ram === state.filters.ram
         ),
       };
 

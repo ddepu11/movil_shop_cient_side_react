@@ -9,9 +9,18 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
   const { mobiles } = useSelector((state) => state.mobile);
 
   let brands;
+  let colors = [];
 
   if (Object.keys(mobiles).length !== 0) {
     brands = Array.from(new Set(mobiles.map((m) => m.brand)));
+
+    for (let i = 0; i < mobiles.length; i += 1) {
+      for (let j = 0; j < mobiles[i].colors.length; j += 1) {
+        colors.push(mobiles[i].colors[j]);
+      }
+    }
+
+    colors = [...new Set(colors)];
   }
 
   return (
@@ -165,36 +174,36 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
           </div>
 
           <div className="form-control">
-            <h5>Internal Memory</h5>
+            <h5>Ram</h5>
 
-            <div className="internal_storage">
+            <div className="ram">
               <input
                 onChange={handleInput}
                 type="radio"
                 id="16gb"
-                name="internalMemory"
+                name="ram"
                 value="16"
               />
               <label htmlFor="16gb">16gb</label>
             </div>
 
-            <div className="internal_storage">
+            <div className="ram">
               <input
                 onChange={handleInput}
                 type="radio"
                 id="8gb"
-                name="internalMemory"
+                name="ram"
                 value="8"
               />
               <label htmlFor="8gb">8gb</label>
             </div>
 
-            <div className="internal_storage">
+            <div className="ram">
               <input
                 onChange={handleInput}
                 type="radio"
                 id="4gb"
-                name="internalMemory"
+                name="ram"
                 value="4"
               />
               <label htmlFor="4gb">4gb</label>
@@ -219,18 +228,22 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
                 All
               </Button>
 
-              <Button
-                bgColor="#fa0000e6"
-                color="#f8f6f6"
-                fs="1.2em"
-                width="30px"
-                height="30px"
-                bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
-                borderRadius="50%"
-                handleClick={() => handleButtons('color', '#f8f6f6')}
-              >
-                {' '}
-              </Button>
+              {colors &&
+                colors.map((c) => (
+                  <Button
+                    key={Math.floor(Math.random() * c.length * Date.now())}
+                    bgColor={c}
+                    color="#f8f6f6"
+                    fs="1.2em"
+                    width="30px"
+                    height="30px"
+                    bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
+                    borderRadius="50%"
+                    handleClick={() => handleButtons('color', c)}
+                  >
+                    {filters.color === c.toString() ? 'k' : ''}
+                  </Button>
+                ))}
             </div>
           </div>
 
@@ -324,7 +337,7 @@ const Wrapper = styled.aside`
         padding: 5px 0 0;
       }
 
-      .internal_storage {
+      .ram {
         margin-bottom: 10px;
         padding: 0 0px 0 10px;
         input {
