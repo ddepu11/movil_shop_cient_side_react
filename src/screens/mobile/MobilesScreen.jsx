@@ -12,6 +12,7 @@ import ListViewScreen from './ListViewScreen';
 import { listAllMobiles } from '../../actions/mobileActions';
 import {
   filterByBrand,
+  filterByPrice,
   filterByStars,
   setFilters,
   sort,
@@ -37,6 +38,10 @@ const MobilesScreen = () => {
   useEffect(() => {
     dispatch(filterByStars());
   }, [filters.star, dispatch]);
+
+  useEffect(() => {
+    dispatch(filterByPrice());
+  }, [filters.price, dispatch]);
 
   const handleButtons = (name, value) => {
     dispatch(setFilters({ name, value }));

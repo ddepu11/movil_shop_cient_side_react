@@ -157,11 +157,11 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
               onChange={handleInput}
               className="price_input"
               type="range"
-              min="8000"
+              min="0"
               max="150000"
               name="price"
             />
-            <p>Range: 8000 - {filters.price}</p>
+            <p>Range: 0 - {filters.price}</p>
           </div>
 
           <div className="form-control">

@@ -1,5 +1,6 @@
 import {
   FILTER_MOBILE_BY_BRAND,
+  FILTER_MOBILE_BY_PRICE,
   FILTER_MOBILE_BY_STAR,
   FILTER_MOBILE_GET_ALL,
   FILTER_MOBILE_SET,
@@ -99,6 +100,14 @@ const filterMobile = (state = initialState, action) => {
         ...state,
         filteredMobile: state.mobiles.filter(
           (m) => m.stars.toString() === state.filters.star
+        ),
+      };
+
+    case FILTER_MOBILE_BY_PRICE:
+      return {
+        ...state,
+        filteredMobile: state.mobiles.filter(
+          (m) => m.price < state.filters.price
         ),
       };
 
