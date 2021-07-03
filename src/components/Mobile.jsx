@@ -28,6 +28,7 @@ const Mobile = ({
   mobileId,
   handleDeleteMobile,
   usedFor,
+  sellerName,
 }) => {
   const dispatch = useDispatch();
 
@@ -244,29 +245,29 @@ const Mobile = ({
 
   if (usedFor === 'list') {
     return (
-      <Wrapper3>
+      <ListView className="flex">
         <div className="mobile_pic">
           <img src={`/sellers/${userId}/${pictures[0]}`} alt={title} />
         </div>
 
-        <div className="info">
+        <div className="info flex">
           <h2>{title}</h2>
-          <p>Price {price} &#8377;</p>
-          <span>Soled by</span>
-        </div>
-
-        <div className="cover">
+          <p>Price: {price} &#8377;</p>
+          <span>Soled by: {sellerName}</span>
           <Link to="/">
-            <FcSearch className="search" fontSize="3.2em" />
+            <div className="flex">
+              <FcSearch className="search" fontSize="1.3em" />
+              <span>More Details</span>
+            </div>
           </Link>
         </div>
-      </Wrapper3>
+      </ListView>
     );
   }
 
   if (usedFor === 'grid') {
     return (
-      <Wrapper2>
+      <GridView>
         <div className="mobile_pic">
           <img src={`/sellers/${userId}/${pictures[0]}`} alt={title} />
         </div>
@@ -281,7 +282,7 @@ const Mobile = ({
             <FcSearch className="search" fontSize="3.2em" />
           </Link>
         </div>
-      </Wrapper2>
+      </GridView>
     );
   }
 
@@ -378,18 +379,50 @@ const Mobile = ({
   );
 };
 
-const Wrapper3 = styled.div`
+const ListView = styled.div`
+  padding: 12px 0;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  width: 80%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
+  .mobile_pic {
+    width: 180px;
+    height: 180px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .info {
+    flex-direction: column;
+    align-items: flex-start;
+
+    h2 {
+      font-size: 1.3em;
+      color: #222;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    p,
+    span {
+      color: #333;
+      margin-bottom: 5px;
+    }
+  }
 `;
 
-const Wrapper2 = styled.div`
+const GridView = styled.div`
   width: 150px;
   position: relative;
-  padding: 10px 0;
+  padding: 10px 2px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 
   .mobile_pic {
     height: 150px;
-
     img {
       width: 100%;
       height: 100%;
@@ -524,6 +557,7 @@ Mobile.propTypes = {
   mobileId: PropTypes.string.isRequired,
   handleDeleteMobile: PropTypes.func.isRequired,
   usedFor: PropTypes.string.isRequired,
+  sellerName: PropTypes.string.isRequired,
 };
 
 export default Mobile;

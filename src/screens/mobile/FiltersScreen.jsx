@@ -4,7 +4,7 @@ import { AiFillStar } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 import Button from '../../components/Button';
 
-const FiltersScreen = ({ handleInput, handleButtons, filters }) => (
+const FiltersScreen = ({ handleButtons, handleInput, filters }) => (
   <Wrapper>
     <div className="filters_div">
       <form>
@@ -234,6 +234,12 @@ const FiltersScreen = ({ handleInput, handleButtons, filters }) => (
   </Wrapper>
 );
 
+FiltersScreen.propTypes = {
+  handleButtons: PropTypes.func.isRequired,
+  handleInput: PropTypes.func.isRequired,
+  filters: PropTypes.object.isRequired,
+};
+
 const Wrapper = styled.aside`
   .filters_div {
     position: sticky;
@@ -326,10 +332,5 @@ const Wrapper = styled.aside`
     }
   }
 `;
-FiltersScreen.propTypes = {
-  handleInput: PropTypes.func.isRequired,
-  handleButtons: PropTypes.func.isRequired,
-  filters: PropTypes.object.isRequired,
-};
 
 export default FiltersScreen;

@@ -9,6 +9,7 @@ import {
   MOBILE_LIST_ERROR,
   MOBILE_LIST_SUCCESS,
 } from '../constants/mobileConstants';
+import { loadMobiles } from './filterMobileActions';
 
 import { sendNotification } from './notificationActions';
 import { listMobiles } from './sellerActions';
@@ -42,9 +43,9 @@ export const listAllMobiles = () => async (dispatch) => {
   try {
     const res = await listAll();
 
-
     if (res) {
       dispatch({ type: MOBILE_LIST_SUCCESS, payload: res.data.mobiles });
+      dispatch(loadMobiles(res.data.mobiles));
     } else {
       dispatch({ type: MOBILE_LIST_ERROR });
 

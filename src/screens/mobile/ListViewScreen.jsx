@@ -5,7 +5,8 @@ import Loading from '../../components/Loading';
 import Mobile from '../../components/Mobile';
 
 const ListViewScreen = () => {
-  const { mobiles, mobileLoading } = useSelector((state) => state.mobile);
+  const { mobiles } = useSelector((state) => state.filterMobile);
+  const { mobileLoading } = useSelector((state) => state.mobile);
 
   if (mobileLoading) {
     return <Loading />;
@@ -27,7 +28,7 @@ const ListViewScreen = () => {
           internalMemory,
           brand,
           colors,
-          sellerInfo: { id, sellerName, sellerEmail },
+          sellerInfo: { id, name },
         } = mobile;
 
         return (
@@ -47,8 +48,7 @@ const ListViewScreen = () => {
             colors={colors}
             handlingUpdate={0}
             usedFor="list"
-            sellerName={sellerName}
-            sellerEmail={sellerEmail}
+            sellerName={name}
           />
         );
       })}
@@ -57,10 +57,10 @@ const ListViewScreen = () => {
 };
 
 const Wrapper = styled.main`
-  border: 1px solid red;
   flex-direction: column;
   align-items: flex-start;
-  gap: 15px 0;
+  gap: 25px 0;
+  padding: 10px 0 0;
 `;
 
 export default ListViewScreen;

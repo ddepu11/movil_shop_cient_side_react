@@ -111,7 +111,6 @@ const AddMobileScreen = () => {
         }));
       });
     } else {
-      console.log('Max 6 can be uploaded');
       dispatch(sendNotification('Cant upload more then 6 images!!!', true));
     }
   };

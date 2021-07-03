@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { BsGrid3X3Gap } from 'react-icons/bs';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
 // import Product from '../../components/Product';
 // import Mobile from '../../components/Mobile';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import FiltersScreen from './FiltersScreen';
 import Hero from '../../components/Hero';
 import GridViewScreen from './GridViewScreen';
 import ListViewScreen from './ListViewScreen';
 import { listAllMobiles } from '../../actions/mobileActions';
+import { setFilters } from '../../actions/filterMobileActions';
 
 const MobilesScreen = () => {
   const dispatch = useDispatch();
@@ -18,32 +19,22 @@ const MobilesScreen = () => {
     dispatch(listAllMobiles());
   }, [dispatch]);
 
-  const [filters, setFilters] = useState({
-    view: 'grid',
-    sortBy: 'lowest',
-    search: '',
-    brand: 'all',
-    star: 'all',
-    price: '8000',
-    internalMemory: 'all',
-    color: 'all',
-    movilShopAssured: false,
-  });
+  const { filters } = useSelector((state) => state.filterMobile);
 
   const handleButtons = (name, value) => {
-    setFilters({ ...filters, [name]: value });
+    dispatch(setFilters({ name, value }));
   };
 
   const handleInput = (e) => {
-    const { name, value } = e.target;
+    let { value } = e.target;
+    const { name } = e.target;
 
     if (name === 'movilShopAssured') {
-      setFilters((prevState) => ({
-        ...prevState,
-        movilShopAssured: !prevState.movilShopAssured,
-      }));
+      value = !filters.movilShopAssured;
+
+      dispatch(setFilters({ name, value }));
     } else {
-      setFilters({ ...filters, [name]: value });
+      dispatch(setFilters({ name, value }));
     }
   };
 
@@ -53,9 +44,9 @@ const MobilesScreen = () => {
 
       <Wrapper className="w-960">
         <FiltersScreen
-          handleInput={handleInput}
-          handleButtons={handleButtons}
           filters={filters}
+          handleButtons={handleButtons}
+          handleInput={handleInput}
         />
 
         <section className="display_products">

@@ -5,7 +5,8 @@ import Loading from '../../components/Loading';
 import Mobile from '../../components/Mobile';
 
 const GridViewScreen = () => {
-  const { mobiles, mobileLoading } = useSelector((state) => state.mobile);
+  const { mobiles } = useSelector((state) => state.filterMobile);
+  const { mobileLoading } = useSelector((state) => state.mobile);
 
   if (mobileLoading) {
     return <Loading />;
@@ -56,7 +57,7 @@ const GridViewScreen = () => {
 const Wrapper = styled.main`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px 00px;
+  gap: 30px 00px;
   padding: 15px 0px 0 15px;
 `;
 
