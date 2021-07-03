@@ -28,7 +28,7 @@ const Home = () => {
 
             <p>Comming soon in your door with huge discount</p>
 
-            <Link className="link_btn shop_now_btn" to="/products">
+            <Link className="link_btn shop_now_btn" to="/mobiles">
               Shop Now
             </Link>
           </aside>

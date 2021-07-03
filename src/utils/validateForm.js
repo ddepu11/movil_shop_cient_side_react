@@ -29,7 +29,7 @@ const validateForm = (
     gender,
   } = formData;
 
-  // Only validate elow condition for SIGN_UP and info update
+  // Only validate below condition for SIGN_UP and info update
   if (validationFor !== 'SIGN_IN') {
     // First name validation
     if (firstName.length > 20) {

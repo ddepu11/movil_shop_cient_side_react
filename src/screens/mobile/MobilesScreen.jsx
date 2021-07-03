@@ -13,6 +13,7 @@ import { listAllMobiles } from '../../actions/mobileActions';
 import {
   filterByBrand,
   filterByColor,
+  filterByMovilShopAssured,
   filterByPrice,
   filterByRam,
   filterByStars,
@@ -52,6 +53,10 @@ const MobilesScreen = () => {
   useEffect(() => {
     dispatch(filterByColor());
   }, [filters.color, dispatch]);
+
+  useEffect(() => {
+    dispatch(filterByMovilShopAssured());
+  }, [filters.movilShopAssured, dispatch]);
 
   const handleButtons = (name, value) => {
     dispatch(setFilters({ name, value }));

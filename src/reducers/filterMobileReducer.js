@@ -1,6 +1,7 @@
 import {
   FILTER_MOBILE_BY_BRAND,
   FILTER_MOBILE_BY_COLOR,
+  FILTER_MOBILE_BY_MOVILSHOP_ASSURED,
   FILTER_MOBILE_BY_PRICE,
   FILTER_MOBILE_BY_RAM,
   FILTER_MOBILE_BY_STAR,
@@ -139,6 +140,22 @@ const filterMobile = (state = initialState, action) => {
         ...state,
         filteredMobile: state.mobiles.filter((m) =>
           m.colors.includes(state.filters.color)
+        ),
+      };
+
+    case FILTER_MOBILE_BY_MOVILSHOP_ASSURED:
+      if (state.filters.movilShopAssured) {
+        return {
+          ...state,
+          filteredMobile: state.mobiles.filter(
+            (m) => m.movilShopAssured === true
+          ),
+        };
+      }
+      return {
+        ...state,
+        filteredMobile: state.mobiles.filter(
+          (m) => m.movilShopAssured === false
         ),
       };
 
