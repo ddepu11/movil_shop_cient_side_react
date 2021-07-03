@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { BsGrid3X3Gap } from 'react-icons/bs';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
 // import Product from '../../components/Product';
 // import Mobile from '../../components/Mobile';
+import { useDispatch } from 'react-redux';
 import FiltersScreen from './FiltersScreen';
 import Hero from '../../components/Hero';
 import GridViewScreen from './GridViewScreen';
 import ListViewScreen from './ListViewScreen';
+import { listAllMobiles } from '../../actions/mobileActions';
 
 const MobilesScreen = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(listAllMobiles());
+  }, [dispatch]);
+
   const [filters, setFilters] = useState({
     view: 'grid',
     sortBy: 'lowest',

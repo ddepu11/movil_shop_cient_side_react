@@ -42,10 +42,12 @@ export const listAllMobiles = () => async (dispatch) => {
   try {
     const res = await listAll();
 
+
     if (res) {
       dispatch({ type: MOBILE_LIST_SUCCESS, payload: res.data.mobiles });
     } else {
       dispatch({ type: MOBILE_LIST_ERROR });
+
       dispatch(sendNotification('Sorry could not fetch mobiles!', true));
     }
   } catch (err) {

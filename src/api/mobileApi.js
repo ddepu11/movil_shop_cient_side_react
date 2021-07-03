@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const create = (formData) =>
-  axios.post('/mobiles/create', formData, {
+  axios.post('/mobiles', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

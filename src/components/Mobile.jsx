@@ -25,6 +25,7 @@ const Mobile = ({
   colors,
   mobileId,
   handleDeleteMobile,
+  handlingUpdate,
 }) => {
   const dispatch = useDispatch();
 
@@ -259,24 +260,28 @@ const Mobile = ({
             <li>- &nbsp;&nbsp;{battery}Mah Battery</li>
           </ul>
         </div>
-        <div className="middle">
-          {/* Buttons */}
-          {!wannaEdit && (
-            <Button
-              pt="5px"
-              pb="5px"
-              pl="10px"
-              pr="10px"
-              bgColor="#1e6adb"
-              color="white"
-              handleClick={initiateUpdateProcess}
-              bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
-              fs="0.8em"
-            >
-              Initiate Mobile Update
-            </Button>
-          )}
-        </div>
+
+        {handlingUpdate === 1 && (
+          <div className="middle">
+            {/* Buttons */}
+            {!wannaEdit && (
+              <Button
+                pt="5px"
+                pb="5px"
+                pl="10px"
+                pr="10px"
+                bgColor="#1e6adb"
+                color="white"
+                handleClick={initiateUpdateProcess}
+                bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
+                fs="0.8em"
+              >
+                Initiate Mobile Update
+              </Button>
+            )}
+          </div>
+        )}
+
         <div className="right">
           <h1>{price} &#8377;</h1>
           <div className="color_btns flex">
@@ -417,6 +422,7 @@ Mobile.propTypes = {
   colors: PropTypes.array.isRequired,
   mobileId: PropTypes.string.isRequired,
   handleDeleteMobile: PropTypes.func.isRequired,
+  handlingUpdate: PropTypes.number.isRequired,
 };
 
 export default Mobile;

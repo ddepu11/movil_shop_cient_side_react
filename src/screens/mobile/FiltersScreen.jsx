@@ -236,8 +236,12 @@ const FiltersScreen = ({ handleInput, handleButtons, filters }) => (
 
 const Wrapper = styled.aside`
   .filters_div {
+    position: sticky;
+    top: 1.5rem;
+
     .form-control {
       margin-bottom: 25px;
+
       .price_input {
         width: 100%;
       }
@@ -263,20 +267,25 @@ const Wrapper = styled.aside`
         padding: 3px 10px;
         width: 100%;
       }
+
       ul {
       }
+
       ul li {
         padding: 0px 5px 10px;
       }
+
       ul li button {
         font-size: 0.9em;
         background: transparent;
         color: #4d4d4d;
       }
+
       p {
         color: #474747;
         padding: 5px 0 0;
       }
+
       .internal_storage {
         margin-bottom: 10px;
         padding: 0 0px 0 10px;
@@ -287,6 +296,7 @@ const Wrapper = styled.aside`
           color: #5a5a5a;
         }
       }
+
       .colors {
         justify-content: flex-start;
 
@@ -303,6 +313,7 @@ const Wrapper = styled.aside`
         margin-right: 10px;
       }
     }
+
     .clear_filters {
       padding: 5px 10px;
       display: block;
