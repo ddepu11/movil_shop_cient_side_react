@@ -1,11 +1,12 @@
 import {
   FILTER_MOBILE_GET_ALL,
   FILTER_MOBILE_SET,
+  FILTER_MOBILE_SORT,
 } from '../constants/filterMobileConstants';
 
 const initialState = {
   mobiles: [],
-
+  filteredMobile: [],
   filters: {
     view: 'grid',
     sortBy: 'lowest',
@@ -25,6 +26,7 @@ const filterMobile = (state = initialState, action) => {
       return {
         ...state,
         mobiles: action.payload,
+        filteredMobile: action.payload,
       };
 
     case FILTER_MOBILE_SET:
@@ -35,6 +37,38 @@ const filterMobile = (state = initialState, action) => {
           [action.payload.name]: action.payload.value,
         },
       };
+    case FILTER_MOBILE_SORT:
+      switch (state.filters.sortBy) {
+        case 'lowest':
+          return {
+            ...state,
+            filteredMobile: state.mobiles.sort((a, b) => a.price - b.price),
+          };
+        case 'highest':
+          return {
+            ...state,
+            filteredMobile: state.mobiles.sort((a, b) => b.price - a.price),
+          };
+
+        case 'a-z':
+          return {
+            ...state,
+            filteredMobile: state.mobiles.sort((a, b) =>
+              a.title.toString().localeCompare(b.title.toString())
+            ),
+          };
+
+        case 'z-a':
+          return {
+            ...state,
+            filteredMobile: state.mobiles.sort((a, b) =>
+              b.title.toString().localeCompare(a.title.toString())
+            ),
+          };
+
+        default:
+          return { ...state };
+      }
 
     default:
       return {

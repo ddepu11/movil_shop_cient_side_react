@@ -5,7 +5,7 @@ import Loading from '../../components/Loading';
 import Mobile from '../../components/Mobile';
 
 const GridViewScreen = () => {
-  const { mobiles } = useSelector((state) => state.filterMobile);
+  const { filteredMobile } = useSelector((state) => state.filterMobile);
   const { mobileLoading } = useSelector((state) => state.mobile);
 
   if (mobileLoading) {
@@ -14,7 +14,7 @@ const GridViewScreen = () => {
 
   return (
     <Wrapper>
-      {mobiles.map((mobile) => {
+      {filteredMobile.map((mobile) => {
         const {
           _id,
           pictures,

@@ -10,16 +10,20 @@ import Hero from '../../components/Hero';
 import GridViewScreen from './GridViewScreen';
 import ListViewScreen from './ListViewScreen';
 import { listAllMobiles } from '../../actions/mobileActions';
-import { setFilters } from '../../actions/filterMobileActions';
+import { setFilters, sort } from '../../actions/filterMobileActions';
 
 const MobilesScreen = () => {
   const dispatch = useDispatch();
+
+  const { filters } = useSelector((state) => state.filterMobile);
 
   useEffect(() => {
     dispatch(listAllMobiles());
   }, [dispatch]);
 
-  const { filters } = useSelector((state) => state.filterMobile);
+  useEffect(() => {
+    dispatch(sort());
+  }, [filters.sortBy, dispatch]);
 
   const handleButtons = (name, value) => {
     dispatch(setFilters({ name, value }));
@@ -57,7 +61,7 @@ const MobilesScreen = () => {
               <label htmlFor="sort">Sort By: </label>
               <select name="sortBy" id="sort" onChange={handleInput}>
                 <option value="lowest">Price (lowest)</option>
-                <option value="highest">Price (heighest)</option>
+                <option value="highest">Price (highest)</option>
                 <option value="a-z">Name (A - Z)</option>
                 <option value="z-a">Name (Z - A)</option>
               </select>
