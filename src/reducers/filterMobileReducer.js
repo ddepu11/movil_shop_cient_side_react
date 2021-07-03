@@ -1,5 +1,6 @@
 import {
   FILTER_MOBILE_BY_BRAND,
+  FILTER_MOBILE_BY_COLOR,
   FILTER_MOBILE_BY_PRICE,
   FILTER_MOBILE_BY_RAM,
   FILTER_MOBILE_BY_STAR,
@@ -124,6 +125,20 @@ const filterMobile = (state = initialState, action) => {
         ...state,
         filteredMobile: state.mobiles.filter(
           (m) => m.ram === state.filters.ram
+        ),
+      };
+
+    case FILTER_MOBILE_BY_COLOR:
+      if (state.filters.color === 'all') {
+        return {
+          ...state,
+          filteredMobile: state.mobiles,
+        };
+      }
+      return {
+        ...state,
+        filteredMobile: state.mobiles.filter((m) =>
+          m.colors.includes(state.filters.color)
         ),
       };
 

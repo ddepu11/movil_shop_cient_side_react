@@ -1,5 +1,6 @@
 import {
   FILTER_MOBILE_BY_BRAND,
+  FILTER_MOBILE_BY_COLOR,
   FILTER_MOBILE_BY_PRICE,
   FILTER_MOBILE_BY_RAM,
   FILTER_MOBILE_BY_STAR,
@@ -33,3 +34,6 @@ export const filterByPrice = () => (dispatch) =>
 
 export const filterByRam = () => (dispatch) =>
   dispatch({ type: FILTER_MOBILE_BY_RAM });
+
+export const filterByColor = () => (dispatch) =>
+  dispatch({ type: FILTER_MOBILE_BY_COLOR });
