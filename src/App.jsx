@@ -16,7 +16,7 @@ import MobilesScreen from './screens/mobiles/MobilesScreen';
 import DashboardScreen from './screens/dashboard/DashboardScreen';
 import { authenticateUser } from './actions/userActions';
 import { listAllMobiles } from './actions/mobileActions';
-import MobileScreen from './screens/MobileScreen';
+import MobileScreen from './screens/mobile/MobileScreen';
 
 const App = () => {
   const { isLoading } = useAuth0();
