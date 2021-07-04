@@ -252,8 +252,10 @@ const Mobile = ({
 
         <div className="info flex">
           <h2>{title}</h2>
+
           <p>Price: {price} &#8377;</p>
           <span>Soled by: {sellerName}</span>
+
           <Link to="/">
             <div className="flex">
               <FcSearch className="search" fontSize="1.3em" />
@@ -544,24 +546,35 @@ const Wrapper0 = styled.div`
 Mobile.propTypes = {
   pictures: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
-  os: PropTypes.string.isRequired,
-  internalMemory: PropTypes.number.isRequired,
-  ram: PropTypes.string.isRequired,
-  camera: PropTypes.string.isRequired,
-  processor: PropTypes.string.isRequired,
-  battery: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  userId: PropTypes.string.isRequired,
-  brand: PropTypes.string.isRequired,
-  colors: PropTypes.array.isRequired,
+  os: PropTypes.string,
+  internalMemory: PropTypes.number,
+  ram: PropTypes.string,
+  camera: PropTypes.string,
+  processor: PropTypes.string,
+  battery: PropTypes.string,
+  price: PropTypes.number,
+  userId: PropTypes.string,
+  brand: PropTypes.string,
+  colors: PropTypes.array,
   mobileId: PropTypes.string,
   handleDeleteMobile: PropTypes.func,
   usedFor: PropTypes.string.isRequired,
   sellerName: PropTypes.string,
 };
+
 Mobile.defaultProps = {
   mobileId: '234857asd87s8d',
   sellerName: 'xyz',
+  brand: 'mno',
+  os: 'mno',
+  processor: '1.2',
+  internalMemory: 16,
+  camera: '24',
+  battery: '5000',
+  price: '15000',
+  ram: '8',
+  colors: [],
+  userId: '15748sdj',
   handleDeleteMobile: () => {},
 };
 

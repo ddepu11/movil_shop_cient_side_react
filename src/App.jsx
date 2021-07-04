@@ -12,9 +12,10 @@ import SignUpScreen from './screens/signup/SignUpScreen';
 import SignInScreen from './screens/signin/SignInScreen';
 import Footer from './components/Footer';
 import AccountScreen from './screens/account/AccountScreen';
-import MobilesScreen from './screens/mobile/MobilesScreen';
+import MobilesScreen from './screens/mobiles/MobilesScreen';
 import DashboardScreen from './screens/dashboard/DashboardScreen';
 import { authenticateUser } from './actions/userActions';
+import { listAllMobiles } from './actions/mobileActions';
 
 const App = () => {
   const { isLoading } = useAuth0();
@@ -28,6 +29,7 @@ const App = () => {
   const { hasUserLoggedIn } = useSelector((state) => state.user);
 
   useEffect(() => {
+    dispatch(listAllMobiles());
     !hasUserLoggedIn && dispatch(authenticateUser());
   }, [hasUserLoggedIn, dispatch]);
 

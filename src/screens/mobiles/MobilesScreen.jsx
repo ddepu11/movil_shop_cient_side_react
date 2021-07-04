@@ -9,7 +9,7 @@ import FiltersScreen from './FiltersScreen';
 import Hero from '../../components/Hero';
 import GridViewScreen from './GridViewScreen';
 import ListViewScreen from './ListViewScreen';
-import { listAllMobiles } from '../../actions/mobileActions';
+
 import {
   filterByBrand,
   filterByColor,
@@ -25,10 +25,6 @@ const MobilesScreen = () => {
   const dispatch = useDispatch();
 
   const { filters } = useSelector((state) => state.filterMobile);
-
-  useEffect(() => {
-    dispatch(listAllMobiles());
-  }, [dispatch]);
 
   useEffect(() => {
     dispatch(sort());

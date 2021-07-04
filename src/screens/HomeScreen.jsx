@@ -4,13 +4,16 @@ import { Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useDispatch, useSelector } from 'react-redux';
 import HeroImg from '../assests/home_hero_img.jpg';
-import Product from '../components/Product';
 import Services from '../components/Services';
 import { isUserRegisteredWithThisEmail } from '../actions/userActions';
+import Mobile from '../components/Mobile';
 
 const Home = () => {
   const { user, isAuthenticated } = useAuth0();
+
   const { hasUserLoggedIn } = useSelector((state) => state.user);
+  const { mobiles } = useSelector((state) => state.mobile);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,12 +40,29 @@ const Home = () => {
         </section>
       </div>
 
-      <div className="recent-products">
-        <h2>Recent Products</h2>
-        <div className="r_p_div flex">
-          <Product />
-          <Product />
-          <Product />
+      <div className="recent-mobiles">
+        <h2 className="heading">Recent Products</h2>
+        <div className="mobiles flex">
+          {mobiles.length !== 0 &&
+            mobiles.map((mobile) => {
+              const {
+                pictures,
+                title,
+                price,
+                sellerInfo: { id },
+              } = mobile;
+
+              return (
+                <Mobile
+                  pictures={pictures}
+                  title={title}
+                  price={price}
+                  usedFor="grid"
+                  userId={id}
+                  key={Math.floor(Math.random() * Date.now())}
+                />
+              );
+            })}
         </div>
         <Link to="/" className="link_btn all_products_btn">
           All Products
@@ -99,20 +119,20 @@ const Wrapper = styled.main`
     }
   }
 
-  .recent-products {
+  .recent-mobiles {
     background-color: #c7c7c7;
     padding: 20px;
     text-align: center;
 
-    h2 {
+    .heading {
       margin-bottom: 50px;
       font-size: 1.8em;
       letter-spacing: 2px;
     }
 
-    .r_p_div {
+    .mobiles {
       flex-wrap: wrap;
-      gap: 5rem;
+      gap: 2rem 2rem;
     }
 
     .all_products_btn {
