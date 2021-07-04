@@ -25,7 +25,9 @@ import {
 const MobilesScreen = () => {
   const dispatch = useDispatch();
 
-  const { filters } = useSelector((state) => state.filterMobile);
+  const { filters, filteredMobile } = useSelector(
+    (state) => state.filterMobile
+  );
 
   useEffect(() => {
     dispatch(filterByKeyword());
@@ -89,7 +91,7 @@ const MobilesScreen = () => {
 
         <section className="display_products">
           <header className="header flex">
-            <h2>1200 products found</h2>
+            <h2>{filteredMobile.length} products found</h2>
 
             <div className="sort_by">
               <label htmlFor="sort">Sort By: </label>

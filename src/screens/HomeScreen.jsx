@@ -45,15 +45,17 @@ const Home = () => {
         <div className="mobiles flex">
           {mobiles.length !== 0 &&
             mobiles
-              .sort((a, b) => b.createdAt - a.createdAt)
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
               .map((mobile, index) => {
                 const {
+                  _id,
                   pictures,
                   title,
                   price,
                   sellerInfo: { id },
                 } = mobile;
-                if (index >= 4) {
+
+                if (index < 5) {
                   return (
                     <Mobile
                       pictures={pictures}
@@ -61,17 +63,21 @@ const Home = () => {
                       price={price}
                       usedFor="grid"
                       userId={id}
+                      mobileId={_id}
                       key={Math.floor(Math.random() * Date.now())}
                     />
                   );
                 }
+
                 return null;
               })}
         </div>
+
         <Link to="/mobiles" className="link_btn all_products_btn">
           All Mobiles
         </Link>
       </div>
+
       <Services />
     </Wrapper>
   );

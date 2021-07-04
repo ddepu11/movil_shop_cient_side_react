@@ -256,7 +256,7 @@ const Mobile = ({
           <p>Price: {price} &#8377;</p>
           <span>Soled by: {sellerName}</span>
 
-          <Link to="/">
+          <Link to={`/mobiles/${mobileId}`}>
             <div className="flex">
               <FcSearch className="search" fontSize="1.3em" />
               <span>More Details</span>
@@ -280,7 +280,7 @@ const Mobile = ({
         </div>
 
         <div className="cover">
-          <Link to="/">
+          <Link to={`/mobiles/${mobileId}`}>
             <FcSearch className="search" fontSize="3.2em" />
           </Link>
         </div>
@@ -425,6 +425,7 @@ const GridView = styled.div`
 
   .mobile_pic {
     height: 155px;
+
     img {
       width: 100%;
       height: 100%;

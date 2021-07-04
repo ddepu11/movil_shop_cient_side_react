@@ -34,6 +34,7 @@ const GridViewScreen = () => {
         return (
           <Mobile
             key={_id}
+            mobileId={_id}
             pictures={pictures}
             ram={ram}
             camera={camera}

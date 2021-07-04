@@ -165,9 +165,7 @@ const filterMobile = (state = initialState, action) => {
       }
       return {
         ...state,
-        filteredMobile: state.mobiles.filter(
-          (m) => m.movilShopAssured === false
-        ),
+        filteredMobile: state.mobiles,
       };
 
     case FILTER_MOBILE_CLEAR:

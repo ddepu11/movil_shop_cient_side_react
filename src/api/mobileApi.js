@@ -8,3 +8,5 @@ export const create = (formData) =>
   });
 
 export const listAll = () => axios.get('/mobiles');
+
+export const getMobile = (id) => axios.get(`/mobiles/${id}`);

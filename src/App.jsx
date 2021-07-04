@@ -16,6 +16,7 @@ import MobilesScreen from './screens/mobiles/MobilesScreen';
 import DashboardScreen from './screens/dashboard/DashboardScreen';
 import { authenticateUser } from './actions/userActions';
 import { listAllMobiles } from './actions/mobileActions';
+import MobileScreen from './screens/MobileScreen';
 
 const App = () => {
   const { isLoading } = useAuth0();
@@ -27,11 +28,12 @@ const App = () => {
   const dispatch = useDispatch();
 
   const { hasUserLoggedIn } = useSelector((state) => state.user);
+  const { mobileSaved } = useSelector((state) => state.mobile);
 
   useEffect(() => {
     dispatch(listAllMobiles());
     !hasUserLoggedIn && dispatch(authenticateUser());
-  }, [hasUserLoggedIn, dispatch]);
+  }, [hasUserLoggedIn, dispatch, mobileSaved]);
 
   return (
     <Wrapper>
@@ -75,6 +77,10 @@ const App = () => {
 
             <Route path="/dashboard">
               <DashboardScreen />
+            </Route>
+
+            <Route path="/mobiles/:mobileId">
+              <MobileScreen />
             </Route>
           </Switch>
           <Footer />

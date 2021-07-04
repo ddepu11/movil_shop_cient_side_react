@@ -12,8 +12,10 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
 
   let brands;
   let colors = [];
+  let ram;
 
   if (Object.keys(mobiles).length !== 0) {
+    // Gets brands name not repeting any
     brands = Array.from(new Set(mobiles.map((m) => m.brand)));
 
     for (let i = 0; i < mobiles.length; i += 1) {
@@ -21,8 +23,11 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
         colors.push(mobiles[i].colors[j]);
       }
     }
-
+    // Gets Colors not repeting any
     colors = [...new Set(colors)];
+
+    // Gets ram Not repeting any
+    ram = [...new Set(mobiles.map((m) => m.ram))];
   }
 
   const clearFilters = () => dispatch(clearFilter());
@@ -179,39 +184,23 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
 
           <div className="form-control">
             <h5>Ram</h5>
-
-            <div className="ram">
-              <input
-                onChange={handleInput}
-                type="radio"
-                id="16gb"
-                name="ram"
-                value="16"
-              />
-              <label htmlFor="16gb">16gb</label>
-            </div>
-
-            <div className="ram">
-              <input
-                onChange={handleInput}
-                type="radio"
-                id="8gb"
-                name="ram"
-                value="8"
-              />
-              <label htmlFor="8gb">8gb</label>
-            </div>
-
-            <div className="ram">
-              <input
-                onChange={handleInput}
-                type="radio"
-                id="4gb"
-                name="ram"
-                value="4"
-              />
-              <label htmlFor="4gb">4gb</label>
-            </div>
+            {ram &&
+              ram.map((r) => (
+                <div
+                  className="ram"
+                  key={Math.floor(Math.random() * Date.now())}
+                >
+                  <input
+                    onChange={handleInput}
+                    type="radio"
+                    id={`${r}gb`}
+                    name="ram"
+                    value={r}
+                    checked={filters.ram === r && true}
+                  />
+                  <label htmlFor={`${r}gb`}>{r}gb</label>
+                </div>
+              ))}
           </div>
 
           <div className="form-control">
