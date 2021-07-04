@@ -2,11 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Button from '../../components/Button';
+import { clearFilter } from '../../actions/filterMobileActions';
 
 const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
   const { mobiles } = useSelector((state) => state.mobile);
+  const dispatch = useDispatch();
 
   let brands;
   let colors = [];
@@ -22,6 +24,8 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
 
     colors = [...new Set(colors)];
   }
+
+  const clearFilters = () => dispatch(clearFilter());
 
   return (
     <Wrapper>
@@ -282,6 +286,7 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
             mt="10px"
             width="100%"
             bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
+            handleClick={clearFilters}
           >
             Clear Filter
           </Button>
@@ -299,7 +304,7 @@ FiltersScreen.propTypes = {
 const Wrapper = styled.aside`
   .filters_div {
     position: sticky;
-    top: 1.5rem;
+    top: 1rem;
 
     .form-control {
       margin-bottom: 25px;

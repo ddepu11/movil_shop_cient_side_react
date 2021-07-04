@@ -144,15 +144,14 @@ const Wrapper = styled.main`
     }
 
     .all_products_btn {
-      margin-top: 30px;
+      margin-top: 35px;
       background-color: #0066ff;
       border-radius: 5px;
+      transition: transform 0.5s ease;
     }
 
-    .all_products_btn {
-      margin-top: 30px;
-      background-color: #0066ff;
-      border-radius: 5px;
+    .all_products_btn:hover {
+      transform: scale(1.1);
     }
   }
 `;

@@ -13,6 +13,7 @@ import ListViewScreen from './ListViewScreen';
 import {
   filterByBrand,
   filterByColor,
+  filterByKeyword,
   filterByMovilShopAssured,
   filterByPrice,
   filterByRam,
@@ -25,6 +26,10 @@ const MobilesScreen = () => {
   const dispatch = useDispatch();
 
   const { filters } = useSelector((state) => state.filterMobile);
+
+  useEffect(() => {
+    dispatch(filterByKeyword());
+  }, [filters.search, dispatch]);
 
   useEffect(() => {
     dispatch(sort());
@@ -88,7 +93,12 @@ const MobilesScreen = () => {
 
             <div className="sort_by">
               <label htmlFor="sort">Sort By: </label>
-              <select name="sortBy" id="sort" onChange={handleInput}>
+              <select
+                name="sortBy"
+                id="sort"
+                value={filters.sortBy}
+                onChange={handleInput}
+              >
                 <option value="lowest">Price (lowest)</option>
                 <option value="highest">Price (highest)</option>
                 <option value="a-z">Name (A - Z)</option>

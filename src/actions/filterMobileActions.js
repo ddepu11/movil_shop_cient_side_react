@@ -1,10 +1,12 @@
 import {
   FILTER_MOBILE_BY_BRAND,
   FILTER_MOBILE_BY_COLOR,
+  FILTER_MOBILE_BY_KEYWORD,
   FILTER_MOBILE_BY_MOVILSHOP_ASSURED,
   FILTER_MOBILE_BY_PRICE,
   FILTER_MOBILE_BY_RAM,
   FILTER_MOBILE_BY_STAR,
+  FILTER_MOBILE_CLEAR,
   FILTER_MOBILE_GET_ALL,
   FILTER_MOBILE_SET,
   FILTER_MOBILE_SORT,
@@ -24,6 +26,9 @@ export const setFilters =
 
 export const sort = () => (dispatch) => dispatch({ type: FILTER_MOBILE_SORT });
 
+export const filterByKeyword = () => (dispatch) =>
+  dispatch({ type: FILTER_MOBILE_BY_KEYWORD });
+
 export const filterByBrand = () => (dispatch) =>
   dispatch({ type: FILTER_MOBILE_BY_BRAND });
 
@@ -41,3 +46,6 @@ export const filterByColor = () => (dispatch) =>
 
 export const filterByMovilShopAssured = () => (dispatch) =>
   dispatch({ type: FILTER_MOBILE_BY_MOVILSHOP_ASSURED });
+
+export const clearFilter = () => (dispatch) =>
+  dispatch({ type: FILTER_MOBILE_CLEAR });
