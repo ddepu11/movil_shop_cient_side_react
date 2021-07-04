@@ -61,24 +61,26 @@ const MobileInfoScreen = () => {
           <span>{battery} Mah</span>
         </div>
 
-        <div className="spec flex">
-          <h5>Sold By:</h5>
-          <span>
-            {sellerInfo.name} {sellerInfo.email} Mah
-          </span>
-        </div>
+        {sellerInfo && (
+          <div className="spec sold_by flex">
+            <h5>Sold By:</h5>
+            <span>
+              {sellerInfo.name} {sellerInfo.email}
+            </span>
+          </div>
+        )}
       </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.aside`
-  padding: 0 20px;
+  padding: 0 60px;
 
   .title {
     font-size: 2em;
     letter-spacing: 2px;
-    color: #222;
+    color: #424242;
     margin-bottom: 15px;
   }
 
@@ -115,6 +117,20 @@ const Wrapper = styled.aside`
         color: #505050;
         width: 30%;
         letter-spacing: 1px;
+      }
+    }
+
+    .sold_by {
+      border-top: 1px dashed #5c9cfc;
+      width: 85%;
+      margin-top: 10px;
+      padding-top: 10px;
+
+      h5 {
+        align-self: flex-start;
+      }
+      span {
+        width: 50%;
       }
     }
   }

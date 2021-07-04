@@ -10,7 +10,7 @@ const MobileImagesPreviewScreen = () => {
   const [preview, setPreview] = useState('');
 
   useEffect(() => {
-    setPreview(`/sellers/${sellerInfo.id}/${pictures[0]}`);
+    sellerInfo && setPreview(`/sellers/${sellerInfo.id}/${pictures[0]}`);
   }, [pictures, sellerInfo]);
 
   const handleHover = (e) => {
