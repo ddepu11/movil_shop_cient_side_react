@@ -44,28 +44,32 @@ const Home = () => {
         <h2 className="heading">Recent Products</h2>
         <div className="mobiles flex">
           {mobiles.length !== 0 &&
-            mobiles.map((mobile) => {
-              const {
-                pictures,
-                title,
-                price,
-                sellerInfo: { id },
-              } = mobile;
-
-              return (
-                <Mobile
-                  pictures={pictures}
-                  title={title}
-                  price={price}
-                  usedFor="grid"
-                  userId={id}
-                  key={Math.floor(Math.random() * Date.now())}
-                />
-              );
-            })}
+            mobiles
+              .sort((a, b) => b.createdAt - a.createdAt)
+              .map((mobile, index) => {
+                const {
+                  pictures,
+                  title,
+                  price,
+                  sellerInfo: { id },
+                } = mobile;
+                if (index >= 4) {
+                  return (
+                    <Mobile
+                      pictures={pictures}
+                      title={title}
+                      price={price}
+                      usedFor="grid"
+                      userId={id}
+                      key={Math.floor(Math.random() * Date.now())}
+                    />
+                  );
+                }
+                return null;
+              })}
         </div>
-        <Link to="/" className="link_btn all_products_btn">
-          All Products
+        <Link to="/mobiles" className="link_btn all_products_btn">
+          All Mobiles
         </Link>
       </div>
       <Services />
@@ -132,11 +136,23 @@ const Wrapper = styled.main`
 
     .mobiles {
       flex-wrap: wrap;
-      gap: 2rem 2rem;
+      gap: 2rem 2.5rem;
+
+      .mobile_pic {
+        height: 180px;
+      }
     }
 
     .all_products_btn {
       margin-top: 30px;
+      background-color: #0066ff;
+      border-radius: 5px;
+    }
+
+    .all_products_btn {
+      margin-top: 30px;
+      background-color: #0066ff;
+      border-radius: 5px;
     }
   }
 `;

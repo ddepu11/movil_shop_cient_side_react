@@ -424,7 +424,7 @@ const GridView = styled.div`
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 
   .mobile_pic {
-    height: 150px;
+    height: 155px;
     img {
       width: 100%;
       height: 100%;
