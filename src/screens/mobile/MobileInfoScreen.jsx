@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { BsStar, BsStarHalf, BsStarFill } from 'react-icons/bs';
 
 const MobileInfoScreen = () => {
   const {
@@ -15,12 +16,32 @@ const MobileInfoScreen = () => {
       battery,
       processor,
       sellerInfo,
+      stars,
     },
   } = useSelector((state) => state.mobile);
 
+  const actualStars = Array.from({ length: 5 }, (_, index) => {
+    const number = index + 0.5;
+
+    if (stars >= index + 1) return <BsStarFill />;
+
+    if (stars >= number) return <BsStarHalf />;
+
+    return <BsStar color="#3333" />;
+  });
+
   return (
     <Wrapper>
-      <h1 className="title">{title}</h1>
+      <div className="head flex">
+        <h1>{title}</h1>
+
+        <div className="stars">
+          {actualStars}
+          {/* <BsStarHalf />
+          <BsStar /> */}
+        </div>
+      </div>
+
       <span className="price">&#8377; {price} </span>
 
       <div className="specification flex">
@@ -77,20 +98,34 @@ const MobileInfoScreen = () => {
 const Wrapper = styled.aside`
   padding: 0 60px;
 
-  .title {
-    font-size: 2em;
-    letter-spacing: 2px;
-    color: #424242;
-    margin-bottom: 15px;
+  .head {
+    flex-direction: column;
+    align-items: flex-start;
+
+    h1 {
+      font-size: 2em;
+      letter-spacing: 2px;
+      color: #424242;
+      margin-bottom: 5px;
+    }
+
+    .stars {
+      color: #cbda00f6;
+      padding: 0 0 20px 0px;
+      font-size: 1.5em;
+    }
+    .stars > * {
+      margin-right: 5px;
+    }
   }
 
   .price {
     color: #313131;
-    font-size: 1.5em;
+    font-size: 2em;
   }
 
   .specification {
-    padding: 30px 0 0;
+    margin-top: 50px;
     flex-direction: column;
     align-items: flex-start;
 
@@ -98,13 +133,14 @@ const Wrapper = styled.aside`
       font-size: 1.3em;
       letter-spacing: 2px;
       color: #222;
-      margin-bottom: 16px;
+      margin-bottom: 22px;
     }
 
     .spec {
-      width: 60%;
+      width: 65%;
       margin-bottom: 15px;
       justify-content: space-between;
+      /* border: 1px solid red; */
 
       h5 {
         font-size: 1em;
@@ -122,7 +158,7 @@ const Wrapper = styled.aside`
 
     .sold_by {
       border-top: 1px dashed var(--primary-color);
-      width: 85%;
+      width: 88%;
       margin-top: 10px;
       padding-top: 10px;
 
