@@ -220,7 +220,7 @@ const Mobile = ({
             pr="16px"
             mr="10px"
             handleClick={updateInfo}
-            bgColor="#20913c"
+            bgColor="var(--success-color)"
             fs="0.8em"
           >
             Update!!!
@@ -234,7 +234,7 @@ const Mobile = ({
             mr="10px"
             fs="0.8em"
             handleClick={cancelUpdate}
-            bgColor="#e00926"
+            bgColor="var(--danger-color)"
           >
             Cancel
           </Button>
@@ -318,7 +318,7 @@ const Mobile = ({
               pb="5px"
               pl="10px"
               pr="10px"
-              bgColor="#1e6adb"
+              bgColor="var(--tertiary-color)"
               color="white"
               handleClick={initiateUpdateProcess}
               bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
@@ -365,7 +365,7 @@ const Mobile = ({
           bgColor="tranparent"
           width="22px"
           height="22px"
-          color="#cc3131"
+          color="var(--danger-color)"
           mr="20px"
           bSh=""
           handleClick={() => handleDeleteMobile(mobileId)}

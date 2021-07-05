@@ -103,7 +103,7 @@ const Navbar = () => {
             <li>
               {hasUserLoggedIn || Object.keys(userInfo).length !== 0 ? (
                 <Button
-                  bcgImage="linear-gradient(to right, #bb2032 0%, #df3f51  51%, #D31027  100%)"
+                  bgColor="var(--danger-color)"
                   pt="5px"
                   pb="5px"
                   pl="15px"
@@ -170,11 +170,13 @@ const Wrapper = styled.nav`
 
     ul li span,
     a {
-      color: #666;
+      color: var(--dark-color);
     }
+
     .contact {
       width: 30%;
     }
+
     .contact ul,
     .links ul {
       justify-content: space-between;
@@ -194,7 +196,7 @@ const Wrapper = styled.nav`
   }
 
   .navbar {
-    background-color: #c7c7c7;
+    background-color: var(--primary-color);
     padding: 0 10px;
   }
   .nav_bottom {
@@ -204,13 +206,16 @@ const Wrapper = styled.nav`
     .nav_links {
       width: 40%;
     }
+
     .nav_links ul {
       justify-content: space-between;
     }
+
     .cart_icon {
       font-size: 1.3em;
       transform: translateY(4px);
     }
+
     .cart_container {
       position: relative;
     }
@@ -218,8 +223,8 @@ const Wrapper = styled.nav`
       position: absolute;
       top: -10px;
       left: 5px;
-      background: #0066ff;
-      color: white;
+      background: var(--tertiary-color);
+      color: var(--light-color);
       width: 20px;
       height: 20px;
       border-radius: 50%;
@@ -229,8 +234,8 @@ const Wrapper = styled.nav`
     }
   }
   .nav_bottom a {
-    font-size: 1.2em;
-    color: #111;
+    font-size: 1.3em;
+    color: var(--light-color);
   }
 `;
 

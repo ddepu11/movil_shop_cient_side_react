@@ -85,7 +85,7 @@ const Home = () => {
 
 const Wrapper = styled.main`
   .link_btn {
-    background-color: #fd3a65;
+    background-color: var(--tertiary-color);
     padding: 10px 20px;
     color: white;
   }
@@ -93,7 +93,7 @@ const Wrapper = styled.main`
   .header {
     max-width: 1200px;
     margin: 0 auto;
-    background-color: #db7979;
+    background-color: var(--secondary-color);
     padding: 20px;
     transform: translateY(-35px);
 
@@ -130,7 +130,7 @@ const Wrapper = styled.main`
   }
 
   .recent-mobiles {
-    background-color: #c7c7c7;
+    background-color: var(--primary-color);
     padding: 20px;
     text-align: center;
 
@@ -151,7 +151,7 @@ const Wrapper = styled.main`
 
     .all_products_btn {
       margin-top: 35px;
-      background-color: #0066ff;
+      background-color: var(--tertiary-color);
       border-radius: 5px;
       transition: transform 0.5s ease;
     }

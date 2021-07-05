@@ -10,6 +10,7 @@ import AsideScreen from './AsideScreen';
 import FormFieldUpdate from '../../components/FormFieldUpdate';
 import Button from '../../components/Button';
 import { sendNotification } from '../../actions/notificationActions';
+import Hero from '../../components/Hero';
 
 const AccountScreen = () => {
   const dispatch = useDispatch();
@@ -183,6 +184,8 @@ const AccountScreen = () => {
 
   return (
     <>
+      <Hero title="account" />
+
       {userLoading ? (
         <Loading />
       ) : (
@@ -276,7 +279,7 @@ const AccountScreen = () => {
                 pb="10px"
                 pl="20px"
                 pr="20px"
-                bgColor="#1e6adb"
+                bgColor="var(--tertiary-color)"
                 color="white"
                 handleClick={initiateUpdateProcess}
                 bSh="rgba(0, 0, 0, 0.3) 0px 10px 20px, rgba(0, 0, 0, 0.22) 0px 10px 12px"
@@ -292,7 +295,7 @@ const AccountScreen = () => {
                   pr="20px"
                   mr="10px"
                   handleClick={updateInfo}
-                  bgColor="#20913c"
+                  bgColor="var(--success-color)"
                 >
                   Update!!!
                 </Button>
@@ -303,7 +306,7 @@ const AccountScreen = () => {
                   pr="20px"
                   mr="10px"
                   handleClick={cancelUpdate}
-                  bgColor="#e00926"
+                  bgColor="var(--danger-color)"
                 >
                   Cancel
                 </Button>

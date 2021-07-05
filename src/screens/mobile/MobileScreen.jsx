@@ -6,6 +6,7 @@ import { getMobileById } from '../../actions/mobileActions';
 import Loading from '../../components/Loading';
 import MobileImagesPreviewScreen from './MobileImagesPreviewScreen';
 import MobileInfoScreen from './MobileInfoScreen';
+import Hero from '../../components/Hero';
 
 const MobileScreen = () => {
   const { mobileId } = useParams();
@@ -23,10 +24,13 @@ const MobileScreen = () => {
   }
 
   return (
-    <Wrapper className="w-960">
-      {mobile && <MobileImagesPreviewScreen />}
-      {mobile && <MobileInfoScreen />}
-    </Wrapper>
+    <>
+      <Hero title={`mobiles / ${mobile.title}`} />
+      <Wrapper className="w-960">
+        {mobile && <MobileImagesPreviewScreen />}
+        {mobile && <MobileInfoScreen />}
+      </Wrapper>
+    </>
   );
 };
 

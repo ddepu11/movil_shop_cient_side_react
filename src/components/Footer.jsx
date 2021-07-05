@@ -43,9 +43,9 @@ const Footer = () => (
           pb="10px"
           pl="20px"
           pr="20px"
-          bgColor="#9d9e9e"
+          bgColor="var(--tertiary-color)"
           fs="1.2em"
-          color="#222222"
+          color="#e0e0e0"
           bSh=""
         >
           Join
@@ -73,7 +73,7 @@ const Footer = () => (
 );
 
 const Wrapper = styled.footer`
-  background-color: #c7c7c7;
+  background-color: var(--primary-color);
 
   .f_upper {
     justify-content: space-around;
@@ -89,12 +89,12 @@ const Wrapper = styled.footer`
       .c {
         h2 {
           margin-bottom: 14px;
-          color: #555;
+          color: var(--dark-color);
         }
 
         h3 {
           margin-bottom: 8px;
-          color: #333;
+          color: var(--dark-color);
           font-weight: 500;
         }
       }
@@ -108,7 +108,7 @@ const Wrapper = styled.footer`
         font-size: 1em;
         text-transform: uppercase;
         letter-spacing: 1px;
-        color: #222;
+        color: var(--dark-color);
         padding: 5px 0;
       }
 
@@ -121,7 +121,7 @@ const Wrapper = styled.footer`
   }
 
   .f_bottom {
-    background-color: #555;
+    background-color: var(--secondary-color);
     padding: 20px 10px;
   }
 

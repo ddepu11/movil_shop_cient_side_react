@@ -62,7 +62,8 @@ const Wrapper = styled.section`
     padding: 70px 20px;
     position: relative;
     border-radius: 5px;
-    background: #c7c7c7;
+    background: var(--primary-color);
+
     .s_logo {
       position: absolute;
       top: -40px;
@@ -70,20 +71,22 @@ const Wrapper = styled.section`
       transform: translateX(80px);
       width: 80px;
       height: 80px;
-      background: #cae6f8;
+      background: var(--secondary-color);
+      color: var(--light-color);
       border-radius: 50%;
       display: grid;
       place-content: center;
       font-size: 2em;
     }
+
     h1 {
       font-size: 1.5em;
       letter-spacing: 2px;
       margin-bottom: 10px;
-      color: #222;
+      color: var(--light-color);
     }
     p {
-      color: #444;
+      color: var(--light-color);
     }
   }
 `;

@@ -80,7 +80,7 @@ const SignInScreen = () => {
           <div>
             <h2>Sign In in to Movil Shop</h2>
             <Button
-              bgColor="#3284ff"
+              bgColor="var(--tertiary-color)"
               pt="10px"
               pr="60px"
               pb="10px"
@@ -130,7 +130,7 @@ const SignInScreen = () => {
                 mt="12px"
                 fs="1.2em"
                 width="100%"
-                bgColor="#222222"
+                bgColor="var(--medium-dark-color)"
                 bSh=""
                 tr=""
                 handleClick={handleSubmit}
@@ -189,8 +189,8 @@ const Wrapper = styled.main`
   .sign-up-btn {
     padding: 10px 40px;
     font-size: 1.2em;
-    background-color: #3284ff;
-    color: #ffffff;
+    background-color: var(--tertiary-color);
+    color: var(--light-color);
     margin-top: 12px;
     width: 100%;
   }

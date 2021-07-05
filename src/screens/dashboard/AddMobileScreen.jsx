@@ -440,7 +440,7 @@ const AddMobileScreen = () => {
               pr="20px"
               mt="22px"
               borderRadius="5px"
-              bgColor="rgb(32, 145, 60)"
+              bgColor="var(--success-color)"
               color="white"
               width="15%"
               handleClick={handleSubmit}
@@ -567,12 +567,12 @@ const Wrapper = styled.main`
         }
 
         .message.error {
-          color: red;
+          color: var(--danger-color);
           font-size: 1.2em;
         }
 
         .message.success {
-          color: green;
+          color: var(--success-color);
           font-size: 1.2em;
         }
 
@@ -615,7 +615,7 @@ const Wrapper = styled.main`
       }
 
       .remove_img_btn {
-        color: #ce3813;
+        color: var(--danger-color);
         position: absolute;
         background: transparent;
         top: 4px;
@@ -633,7 +633,7 @@ const Wrapper = styled.main`
         place-items: center;
         font-size: 5em;
         cursor: pointer;
-        color: #0066ff;
+        color: var(--tertiary-color);
         .plus {
           transition: transform 0.4s cubic-bezier(0.65, 0.05, 0.36, 1);
         }

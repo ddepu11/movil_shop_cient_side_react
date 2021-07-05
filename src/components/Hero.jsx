@@ -15,9 +15,9 @@ Hero.propTypes = {
 };
 
 const Wrapper = styled.main`
-  background: #555;
+  background: var(--secondary-color);
   padding: 40px 5px;
-  color: white;
+  color: var(--light-color);
   .w-960 {
     h1 {
       font-size: 2em;

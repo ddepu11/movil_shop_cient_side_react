@@ -80,7 +80,7 @@ const MobilesScreen = () => {
 
   return (
     <>
-      <Hero title="products" />
+      <Hero title="mobiles" />
 
       <Wrapper className="w-960">
         <FiltersScreen
@@ -91,7 +91,7 @@ const MobilesScreen = () => {
 
         <section className="display_products">
           <header className="header flex">
-            <h2>{filteredMobile.length} products found</h2>
+            <h2>{filteredMobile.length} mobiles found</h2>
 
             <div className="sort_by">
               <label htmlFor="sort">Sort By: </label>

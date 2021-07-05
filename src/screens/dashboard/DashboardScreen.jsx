@@ -8,6 +8,7 @@ import { getAccountInfo } from '../../actions/userActions';
 import { clearMobileSaved } from '../../actions/mobileActions';
 import Loading from '../../components/Loading';
 import { sendNotification } from '../../actions/notificationActions';
+import Hero from '../../components/Hero';
 
 const DashboardScreen = () => {
   const history = useHistory();
@@ -42,10 +43,13 @@ const DashboardScreen = () => {
   }
 
   return (
-    <Wrapper className="w-960">
-      <HeaderScreen />
-      <SectionScreen />
-    </Wrapper>
+    <>
+      <Hero title="dashboard" />
+      <Wrapper className="w-960">
+        <HeaderScreen />
+        <SectionScreen />
+      </Wrapper>
+    </>
   );
 };
 

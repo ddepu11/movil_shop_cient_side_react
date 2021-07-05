@@ -55,7 +55,7 @@ const Wrapper = styled.header`
       width: 100%;
       object-fit: cover;
       border-radius: 50%;
-      box-shadow: rgba(35, 185, 255, 0.56) 10px 5px 80px 20px;
+      box-shadow: #23b9ff8e 10px 5px 80px 20px;
       transition: transform 1s ease-out;
     }
 
@@ -75,7 +75,11 @@ const Wrapper = styled.header`
     top: -2px;
     left: -2px;
     border-radius: 50%;
-    background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    background-image: linear-gradient(
+      to right,
+      var(--tertiary-color) 0%,
+      var(--primary-color) 100%
+    );
     animation: round 3s linear 2s infinite;
   }
 

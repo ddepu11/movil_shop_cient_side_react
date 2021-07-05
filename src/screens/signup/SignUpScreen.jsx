@@ -291,7 +291,7 @@ const SignUpScreen = () => {
           pl="10px"
           pr="10px"
           fs="1.2em"
-          bgColor="#2a5be2"
+          bgColor="var(--success-color)"
           width="33%"
           mt="12px"
         >
@@ -429,12 +429,12 @@ const Wrapper = styled.main`
         }
 
         .message.error {
-          color: red;
+          color: var(--danger-color);
           font-size: 1.2em;
         }
 
         .message.success {
-          color: green;
+          color: var(--success-color);
           font-size: 1.2em;
         }
       }

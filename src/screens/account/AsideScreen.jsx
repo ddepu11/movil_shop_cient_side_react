@@ -5,13 +5,14 @@ import { ImCancelCircle } from 'react-icons/im';
 import { changeDisplayPicture } from '../../actions/userActions';
 import Button from '../../components/Button';
 import { sendNotification } from '../../actions/notificationActions';
+import User from '../../assests/user.png';
 
 const AsideScreen = () => {
   const dispatch = useDispatch();
 
   const { userInfo } = useSelector((state) => state.user);
 
-  const [dpSRC, setDpSRC] = useState({ preview: '', file: '' });
+  const [dpSRC, setDpSRC] = useState({ preview: User, file: '' });
 
   useEffect(() => {
     setDpSRC(() => ({ ...dpSRC, preview: `dp/${userInfo.displayPicture}` }));
@@ -80,7 +81,8 @@ const AsideScreen = () => {
                 pr="10px"
                 handleClick={changeDP}
                 width="100%"
-                bgColor="#1c8f0d"
+                color="var(--dark-color)"
+                bgColor="var(--success-color)"
                 tr=""
                 bSh=""
               >
@@ -92,8 +94,8 @@ const AsideScreen = () => {
                 pb="5px"
                 pl="10px"
                 pr="10px"
-                color="red"
-                bgColor="#b9b7b7"
+                color="var(--light-color)"
+                bgColor="var(--danger-color)"
                 width="100%"
                 type="button"
                 handleClick={cancelChangeDPProcess}
@@ -147,7 +149,7 @@ const Wrapper = styled.aside`
       label {
         font-size: 1em;
         padding: 5px 10px;
-        background: #1e6adb;
+        background: var(--tertiary-color);
         border-radius: 2px;
         color: white;
         width: 100%;
@@ -174,7 +176,7 @@ const Wrapper = styled.aside`
 
   .dp::before {
     content: '';
-    background: #1e6adb;
+    background: var(--tertiary-color);
     width: 100%;
     height: 100%;
     position: absolute;
@@ -190,7 +192,7 @@ const Wrapper = styled.aside`
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #1e6adb;
+    background: var(--tertiary-color);
     position: absolute;
     top: 0;
     left: -20px;

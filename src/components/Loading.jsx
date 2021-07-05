@@ -11,9 +11,11 @@ const Wrapper = styled.main`
   display: grid;
   place-items: center;
   height: 100vh;
-  background-color: #d1d0d0;
+  background-color: var(--primary-color);
+
   h1 {
     font-size: 2.8em;
+    color: var(--dark-color);
   }
 `;
 

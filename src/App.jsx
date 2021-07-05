@@ -44,7 +44,7 @@ const App = () => {
           {notificationMessage && (
             <Notification
               msg={notificationMessage.toString()}
-              color={danger ? '#c52525' : '#25c555'}
+              color={danger ? 'var(--danger-color)' : 'var(--success-color)'}
             />
           )}
 

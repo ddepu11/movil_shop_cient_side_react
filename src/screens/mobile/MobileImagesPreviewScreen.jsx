@@ -109,14 +109,14 @@ const Wrapper = styled.aside`
       }
 
       .small_img:hover {
-        border: 2px solid #0f46dd;
+        border: 2px solid var(--primary-color);
       }
     }
 
     .right-sction {
       width: 100%;
       height: 480px;
-      padding: 10px 0px;
+      padding: 30px 0px 0;
 
       img {
         width: 100%;

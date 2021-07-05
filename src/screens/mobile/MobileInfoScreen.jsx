@@ -121,7 +121,7 @@ const Wrapper = styled.aside`
     }
 
     .sold_by {
-      border-top: 1px dashed #5c9cfc;
+      border-top: 1px dashed var(--primary-color);
       width: 85%;
       margin-top: 10px;
       padding-top: 10px;
