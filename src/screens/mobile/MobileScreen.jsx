@@ -33,7 +33,7 @@ const MobileScreen = () => {
 const Wrapper = styled.main`
   display: grid;
   grid-template-columns: 450px 1fr;
-  padding: 10px 10px;
+  padding: 20px 10px;
 `;
 
 export default MobileScreen;
