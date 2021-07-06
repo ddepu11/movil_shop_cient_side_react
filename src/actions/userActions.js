@@ -34,11 +34,11 @@ const authenticateUser = () => async (dispatch) => {
   try {
     const { data } = await user.authenticate();
 
-    const { firstName, lastName, role } = data.user;
+    const { firstName, lastName, role, _id } = data.user;
 
     dispatch({
       type: USER_AUTHENTICATION_SUCCESS,
-      payload: role,
+      payload: { role, id: _id },
     });
 
     dispatch(

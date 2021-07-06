@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { BsStar, BsStarHalf, BsStarFill } from 'react-icons/bs';
+import MobileAvgStarsScreen from './MobileAvgStarsScreen';
+import MovileSubmitReviewScreen from './MovileSubmitReviewScreen';
 
 const MobileInfoScreen = () => {
   const {
@@ -16,30 +17,15 @@ const MobileInfoScreen = () => {
       battery,
       processor,
       sellerInfo,
-      stars,
     },
   } = useSelector((state) => state.mobile);
-
-  const actualStars = Array.from({ length: 5 }, (_, index) => {
-    const number = index + 0.5;
-
-    if (stars >= index + 1) return <BsStarFill />;
-
-    if (stars >= number) return <BsStarHalf />;
-
-    return <BsStar color="#3333" />;
-  });
 
   return (
     <Wrapper>
       <div className="head flex">
         <h1>{title}</h1>
 
-        <div className="stars">
-          {actualStars}
-          {/* <BsStarHalf />
-          <BsStar /> */}
-        </div>
+        <MobileAvgStarsScreen />
       </div>
 
       <span className="price">&#8377; {price} </span>
@@ -91,6 +77,8 @@ const MobileInfoScreen = () => {
           </div>
         )}
       </div>
+
+      <MovileSubmitReviewScreen />
     </Wrapper>
   );
 };
@@ -107,15 +95,6 @@ const Wrapper = styled.aside`
       letter-spacing: 2px;
       color: #424242;
       margin-bottom: 5px;
-    }
-
-    .stars {
-      color: #cbda00f6;
-      padding: 0 0 20px 0px;
-      font-size: 1.5em;
-    }
-    .stars > * {
-      margin-right: 5px;
     }
   }
 

@@ -6,6 +6,9 @@ import {
   MOBILE_GET_BEGIN,
   MOBILE_GET_ERROR,
   MOBILE_GET_SUCCESS,
+  MOBILE_GIVE_REVIEW_BEGIN,
+  MOBILE_GIVE_REVIEW_ERROR,
+  MOBILE_GIVE_REVIEW_SUCCESS,
   MOBILE_LIST_BEGIN,
   MOBILE_LIST_ERROR,
   MOBILE_LIST_SUCCESS,
@@ -77,6 +80,25 @@ const mobile = (mobileState = initialState, action) => {
       };
 
     case MOBILE_GET_ERROR:
+      return {
+        ...mobileState,
+        mobileError: true,
+      };
+
+    case MOBILE_GIVE_REVIEW_BEGIN:
+      return {
+        ...mobileState,
+        mobileLoading: true,
+      };
+
+    case MOBILE_GIVE_REVIEW_SUCCESS:
+      return {
+        ...mobileState,
+        mobileLoading: false,
+        mobile: action.payload,
+      };
+
+    case MOBILE_GIVE_REVIEW_ERROR:
       return {
         ...mobileState,
         mobileError: true,

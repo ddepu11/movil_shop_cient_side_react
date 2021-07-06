@@ -1,4 +1,4 @@
-import { create, getMobile, listAll } from '../api/mobileApi';
+import { create, getMobile, listAll, review } from '../api/mobileApi';
 
 import {
   MOBILE_CLEAR_SAVED,
@@ -8,6 +8,9 @@ import {
   MOBILE_GET_BEGIN,
   MOBILE_GET_ERROR,
   MOBILE_GET_SUCCESS,
+  MOBILE_GIVE_REVIEW_BEGIN,
+  MOBILE_GIVE_REVIEW_ERROR,
+  MOBILE_GIVE_REVIEW_SUCCESS,
   MOBILE_LIST_BEGIN,
   MOBILE_LIST_ERROR,
   MOBILE_LIST_SUCCESS,
@@ -79,6 +82,28 @@ export const getMobileById = (id) => async (dispatch) => {
     const { msg } = err.response.data;
 
     dispatch({ type: MOBILE_GET_ERROR });
+    dispatch(sendNotification(msg, true));
+  }
+};
+
+export const reviewMobile = (id, stars) => async (dispatch) => {
+  dispatch({ type: MOBILE_GIVE_REVIEW_BEGIN });
+
+  try {
+    const res = await review(id, stars);
+
+    if (res) {
+      dispatch({ type: MOBILE_GIVE_REVIEW_SUCCESS, payload: res.data.mobile });
+      dispatch(sendNotification('Submitted a review!', false));
+    } else {
+      dispatch({ type: MOBILE_GIVE_REVIEW_ERROR });
+      dispatch(sendNotification('Could not submit a review!!', true));
+    }
+  } catch (err) {
+    const { msg } = err.response.data;
+
+    dispatch({ type: MOBILE_GIVE_REVIEW_ERROR });
+
     dispatch(sendNotification(msg, true));
   }
 };

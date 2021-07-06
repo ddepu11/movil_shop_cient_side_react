@@ -40,7 +40,8 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         hasUserLoggedIn: true,
-        role: action.payload,
+        role: action.payload.role,
+        id: action.payload.id,
         hasUserError: false,
       };
 
@@ -88,6 +89,7 @@ const user = (userState = initialUser, action) => {
         userLoading: false,
         hasUserError: false,
         role: action.payload.role,
+        id: action.payload._id,
       };
 
     case USER_SIGN_IN_ERROR:
@@ -164,6 +166,7 @@ const user = (userState = initialUser, action) => {
         userInfo: {},
         hasUserError: false,
         role: '',
+        id: '',
       };
 
     case USER_LOG_OUT_ERROR:
