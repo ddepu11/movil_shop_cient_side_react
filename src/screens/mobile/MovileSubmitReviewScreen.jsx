@@ -3,7 +3,7 @@ import { BsStar, BsStarFill } from 'react-icons/bs';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { reviewMobile } from '../../actions/mobileActions';
+import { reviewMobile, updateMobileReview } from '../../actions/mobileActions';
 import { sendNotification } from '../../actions/notificationActions';
 import Button from '../../components/Button';
 
@@ -21,6 +21,11 @@ const MovileSubmitReviewScreen = () => {
   // Submitting Mobile Stars
   const [stars, setStars] = useState(0);
 
+  const [oldReview, setOldReview] = useState({
+    reviewId: '',
+    stars: 0,
+  });
+
   const increaseStar = (value) => {
     setStars(value);
   };
@@ -34,6 +39,7 @@ const MovileSubmitReviewScreen = () => {
       dispatch(sendNotification('Please sign in to give review!', true));
       history.push('/sign-in');
     } else {
+      // mobile ID and Stars
       dispatch(reviewMobile(_id, stars));
     }
   };
@@ -45,6 +51,12 @@ const MovileSubmitReviewScreen = () => {
       reviews.forEach((r) => {
         if (r.id === id) {
           setStars(r.stars);
+
+          setOldReview((prevState) => ({
+            ...prevState,
+            reviewId: r._id,
+            stars: r.stars,
+          }));
           setAlreadyReviewed(true);
         }
       });
@@ -52,6 +64,14 @@ const MovileSubmitReviewScreen = () => {
 
   const handleCancelSubmitReview = () => {
     setStars(0);
+  };
+
+  const handleUpdateReview = () => {
+    if (oldReview.stars === stars) {
+      dispatch(sendNotification("You haven't change the review!!", true));
+    } else {
+      dispatch(updateMobileReview(_id, stars, oldReview.reviewId));
+    }
   };
 
   return (
@@ -112,9 +132,9 @@ const MovileSubmitReviewScreen = () => {
 
         {alreadyReviewed && (
           <Button
-            handleClick={handleReviewSubmit}
-            bgColor="var(--secondary-color)"
-            mt="12px"
+            handleClick={handleUpdateReview}
+            bgColor="var(--success-color)"
+            mt="15px"
             pt="10px"
             pb="10px"
             pl="16px"
@@ -153,10 +173,6 @@ const Wrapper = styled.aside`
   .buttons {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .buttons > * {
-    transition: all 1s ease;
   }
 `;
 

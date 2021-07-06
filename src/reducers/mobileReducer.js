@@ -12,6 +12,9 @@ import {
   MOBILE_LIST_BEGIN,
   MOBILE_LIST_ERROR,
   MOBILE_LIST_SUCCESS,
+  MOBILE_UPDATE_REVIEW_BEGIN,
+  MOBILE_UPDATE_REVIEW_ERROR,
+  MOBILE_UPDATE_REVIEW_SUCCESS,
 } from '../constants/mobileConstants';
 
 const initialState = {
@@ -101,6 +104,26 @@ const mobile = (mobileState = initialState, action) => {
     case MOBILE_GIVE_REVIEW_ERROR:
       return {
         ...mobileState,
+        mobileError: true,
+      };
+
+    case MOBILE_UPDATE_REVIEW_BEGIN:
+      return {
+        ...mobileState,
+        mobileLoading: true,
+      };
+
+    case MOBILE_UPDATE_REVIEW_SUCCESS:
+      return {
+        ...mobileState,
+        mobile: action.payload,
+        mobileLoading: false,
+      };
+
+    case MOBILE_UPDATE_REVIEW_ERROR:
+      return {
+        ...mobileState,
+        mobileLoading: false,
         mobileError: true,
       };
 

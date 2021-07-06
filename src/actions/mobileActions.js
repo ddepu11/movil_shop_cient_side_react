@@ -1,4 +1,10 @@
-import { create, getMobile, listAll, review } from '../api/mobileApi';
+import {
+  create,
+  getMobile,
+  listAll,
+  review,
+  updateReview,
+} from '../api/mobileApi';
 
 import {
   MOBILE_CLEAR_SAVED,
@@ -14,6 +20,9 @@ import {
   MOBILE_LIST_BEGIN,
   MOBILE_LIST_ERROR,
   MOBILE_LIST_SUCCESS,
+  MOBILE_UPDATE_REVIEW_BEGIN,
+  MOBILE_UPDATE_REVIEW_ERROR,
+  MOBILE_UPDATE_REVIEW_SUCCESS,
 } from '../constants/mobileConstants';
 import { loadMobiles } from './filterMobileActions';
 
@@ -86,6 +95,7 @@ export const getMobileById = (id) => async (dispatch) => {
   }
 };
 
+// mobile ID and Stars
 export const reviewMobile = (id, stars) => async (dispatch) => {
   dispatch({ type: MOBILE_GIVE_REVIEW_BEGIN });
 
@@ -107,3 +117,31 @@ export const reviewMobile = (id, stars) => async (dispatch) => {
     dispatch(sendNotification(msg, true));
   }
 };
+
+// mobile ID and Stars and review Id
+export const updateMobileReview =
+  (mobileId, stars, reviewId) => async (dispatch) => {
+    dispatch({ type: MOBILE_UPDATE_REVIEW_BEGIN });
+
+    try {
+      const res = await updateReview(mobileId, stars, reviewId);
+
+      if (res) {
+        dispatch({
+          type: MOBILE_UPDATE_REVIEW_SUCCESS,
+          payload: res.data.mobile,
+        });
+
+        dispatch(sendNotification('Updated a review!', false));
+      } else {
+        dispatch({ type: MOBILE_UPDATE_REVIEW_ERROR });
+        dispatch(sendNotification('Could not update a review!!', true));
+      }
+    } catch (err) {
+      const { msg } = err.response.data;
+
+      dispatch({ type: MOBILE_UPDATE_REVIEW_ERROR });
+
+      dispatch(sendNotification(msg, true));
+    }
+  };

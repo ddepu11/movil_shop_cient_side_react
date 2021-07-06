@@ -13,3 +13,6 @@ export const getMobile = (id) => axios.get(`/mobiles/${id}`);
 
 export const review = (id, stars) =>
   axios.post(`/mobiles/review`, { id, stars });
+
+export const updateReview = (mobileId, stars, reviewId) =>
+  axios.put(`/mobiles/review`, { mobileId, stars, reviewId });
