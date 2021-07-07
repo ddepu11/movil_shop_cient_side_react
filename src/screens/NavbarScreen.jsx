@@ -7,9 +7,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import logo from '../assests/logo.svg';
 import { logOutUser } from '../actions/userActions';
-import Button from './Button';
+import Button from '../components/Button';
 
-const Navbar = () => {
+const NavbarScreen = () => {
   const { logout, isAuthenticated } = useAuth0();
 
   const { hasUserLoggedIn, userInfo, role } = useSelector(
@@ -239,4 +239,4 @@ const Wrapper = styled.nav`
   }
 `;
 
-export default Navbar;
+export default NavbarScreen;

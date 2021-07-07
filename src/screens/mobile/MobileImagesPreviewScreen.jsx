@@ -85,6 +85,9 @@ const MobileImagesPreviewScreen = () => {
 const Wrapper = styled.aside`
   flex-direction: column;
   border: 1px dashed #d1d1d1;
+  /* border: 1px dashed red; */
+  align-self: flex-start;
+  padding: 15px 0 5px;
 
   .previews {
     width: 100%;
@@ -92,20 +95,17 @@ const Wrapper = styled.aside`
 
     .left-section {
       flex-direction: column;
-      padding: 25px 0;
 
       .small_img {
         width: 70px;
         height: 70px;
-        padding: 0px 1px;
         margin-bottom: 10px;
+
         img {
           width: 100%;
           height: 100%;
           object-fit: contain;
         }
-
-        /* transition: all 0.5s ease; */
       }
 
       .small_img:hover {
@@ -116,7 +116,6 @@ const Wrapper = styled.aside`
     .right-sction {
       width: 100%;
       height: 480px;
-      padding: 30px 0px 0;
 
       img {
         width: 100%;
@@ -127,7 +126,7 @@ const Wrapper = styled.aside`
   }
 
   .buttons {
-    padding: 20px 0;
+    padding: 30px 0 0;
 
     div {
       span {

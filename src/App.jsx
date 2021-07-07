@@ -6,11 +6,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import Notification from './components/Notification';
 import Loading from './components/Loading';
 import HomeScreen from './screens/HomeScreen';
-import Navbar from './components/Navbar';
+import NavbarScreen from './screens/NavbarScreen';
 import AboutScreen from './screens/AboutScreen';
 import SignUpScreen from './screens/signup/SignUpScreen';
 import SignInScreen from './screens/signin/SignInScreen';
-import Footer from './components/Footer';
+import FooterScreen from './screens/FooterScreen';
 import AccountScreen from './screens/account/AccountScreen';
 import MobilesScreen from './screens/mobiles/MobilesScreen';
 import DashboardScreen from './screens/dashboard/DashboardScreen';
@@ -48,7 +48,7 @@ const App = () => {
             />
           )}
 
-          <Navbar />
+          <NavbarScreen />
 
           <Switch>
             <Route exact path="/">
@@ -83,7 +83,7 @@ const App = () => {
               <MobileScreen />
             </Route>
           </Switch>
-          <Footer />
+          <FooterScreen />
         </Router>
       )}
     </Wrapper>

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from './Button';
+import Button from '../components/Button';
 
-const Footer = () => (
+const FooterScreen = () => (
   <Wrapper>
     <div className="f_upper flex">
       <div className="left flex">
@@ -147,4 +147,4 @@ const Wrapper = styled.footer`
   }
 `;
 
-export default Footer;
+export default FooterScreen;

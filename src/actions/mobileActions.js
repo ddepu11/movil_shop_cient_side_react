@@ -131,6 +131,7 @@ export const updateMobileReview =
           type: MOBILE_UPDATE_REVIEW_SUCCESS,
           payload: res.data.mobile,
         });
+
         dispatch(sendNotification('Updated a review!', false));
       } else {
         dispatch({ type: MOBILE_UPDATE_REVIEW_ERROR });
