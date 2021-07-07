@@ -67,6 +67,7 @@ const mobile = (mobileState = initialState, action) => {
       return {
         ...mobileState,
         mobileError: true,
+        mobileLoading: false,
       };
 
     case MOBILE_GET_BEGIN:

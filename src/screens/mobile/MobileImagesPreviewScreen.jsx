@@ -29,13 +29,20 @@ const MobileImagesPreviewScreen = ({ color }) => {
 
   const dispatch = useDispatch();
 
+  const { hasUserLoggedIn } = useSelector((state) => state.user);
+
   const handleAddToCart = () => {
     if (!color) {
       dispatch(sendNotification('Please select color!!!', true));
     } else {
-      dispatch(
-        addToCart(_id, pictures[0], title, color, sellerInfo, price, battery)
-      );
+      if (!hasUserLoggedIn) {
+        dispatch(
+          addToCart(_id, pictures[0], title, color, sellerInfo, price, battery)
+        );
+      } else {
+        console.log('User Cart');
+      }
+
       history.push('/cart');
     }
   };
