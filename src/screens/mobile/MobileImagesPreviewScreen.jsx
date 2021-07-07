@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { FiShoppingCart } from 'react-icons/fi';
+import { useHistory } from 'react-router-dom';
 import { AiTwotoneThunderbolt } from 'react-icons/ai';
 import Button from '../../components/Button';
 
@@ -18,6 +19,11 @@ const MobileImagesPreviewScreen = () => {
 
   const handleHover = (e) => {
     setPreview(e.target.src);
+  };
+
+  const history = useHistory();
+  const handleAddToCart = () => {
+    history.push('/cart');
   };
 
   return (
@@ -56,6 +62,7 @@ const MobileImagesPreviewScreen = () => {
           pl="30px"
           mr="15px"
           fs="1em"
+          handleClick={handleAddToCart}
         >
           <div className="flex">
             <FiShoppingCart fontSize="1.15em" />

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const CartScreen = () => {
   console.log('Hello');
   return (
-    <Wrapper>
+    <Wrapper className="w-960">
       <h2>Hello Cart</h2>
     </Wrapper>
   );

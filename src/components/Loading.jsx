@@ -11,11 +11,11 @@ const Wrapper = styled.main`
   display: grid;
   place-items: center;
   height: 100vh;
-  background-color: var(--primary-color);
-
+  background-color: var(--secondary-color);
+  opacity: 0.5;
   h1 {
     font-size: 2.8em;
-    color: var(--dark-color);
+    color: var(--light-color);
   }
 `;
 
