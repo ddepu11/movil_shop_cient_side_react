@@ -80,7 +80,7 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
                 pt="5px"
                 ml="10px"
                 width="55%"
-                handleClick={() => handleButtons('star', '5')}
+                handleClick={() => handleButtons('avgStar', '5')}
               >
                 <div
                   className="flex"
@@ -99,7 +99,7 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
                 pt="5px"
                 ml="10px"
                 width="55%"
-                handleClick={() => handleButtons('star', '4')}
+                handleClick={() => handleButtons('avgStar', '4')}
               >
                 <div
                   className="flex"
@@ -118,7 +118,7 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
                 pt="5px"
                 ml="10px"
                 width="55%"
-                handleClick={() => handleButtons('star', '3')}
+                handleClick={() => handleButtons('avgStar', '3')}
               >
                 <div
                   className="flex"
@@ -137,7 +137,7 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
                 pt="5px"
                 ml="10px"
                 width="55%"
-                handleClick={() => handleButtons('star', '2')}
+                handleClick={() => handleButtons('avgStar', '2')}
               >
                 <div
                   className="flex"
@@ -156,7 +156,7 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
                 pt="5px"
                 ml="10px"
                 width="55%"
-                handleClick={() => handleButtons('star', '1')}
+                handleClick={() => handleButtons('avgStar', '1')}
               >
                 <div
                   className="flex"

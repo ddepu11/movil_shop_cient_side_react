@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FiShoppingCart } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 import { AiTwotoneThunderbolt } from 'react-icons/ai';
+import PropTypes from 'prop-types';
 import Button from '../../components/Button';
+import { addToCart } from '../../actions/cartActions';
+import { sendNotification } from '../../actions/notificationActions';
 
-const MobileImagesPreviewScreen = () => {
+const MobileImagesPreviewScreen = ({ color }) => {
   const {
-    mobile: { pictures, title, sellerInfo },
+    mobile: { pictures, title, sellerInfo, _id, price, battery },
   } = useSelector((state) => state.mobile);
 
   const [preview, setPreview] = useState('');
@@ -21,9 +24,20 @@ const MobileImagesPreviewScreen = () => {
     setPreview(e.target.src);
   };
 
+  // Cart Process ---->>
   const history = useHistory();
+
+  const dispatch = useDispatch();
+
   const handleAddToCart = () => {
-    history.push('/cart');
+    if (!color) {
+      dispatch(sendNotification('Please select color!!!', true));
+    } else {
+      dispatch(
+        addToCart(_id, pictures[0], title, color, sellerInfo, price, battery)
+      );
+      history.push('/cart');
+    }
   };
 
   return (
@@ -145,5 +159,9 @@ const Wrapper = styled.aside`
     }
   }
 `;
+
+MobileImagesPreviewScreen.propTypes = {
+  color: PropTypes.string.isRequired,
+};
 
 export default MobileImagesPreviewScreen;

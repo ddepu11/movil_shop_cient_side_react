@@ -4,6 +4,7 @@ import mobile from './mobileReducer';
 import notification from './notificationReducer';
 import seller from './sellerReducer';
 import filterMobile from './filterMobileReducer';
+import cart from './cartReducer';
 
 export default combineReducers({
   user,
@@ -11,4 +12,5 @@ export default combineReducers({
   notification,
   seller,
   filterMobile,
+  cart,
 });

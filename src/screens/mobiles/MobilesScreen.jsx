@@ -43,7 +43,7 @@ const MobilesScreen = () => {
 
   useEffect(() => {
     dispatch(filterByStars());
-  }, [filters.star, dispatch]);
+  }, [filters.avgStar, dispatch]);
 
   useEffect(() => {
     dispatch(filterByPrice());

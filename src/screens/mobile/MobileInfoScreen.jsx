@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import MobileAvgStarsScreen from './MobileAvgStarsScreen';
 import MovileSubmitReviewScreen from './MovileSubmitReviewScreen';
 import Button from '../../components/Button';
 
-const MobileInfoScreen = () => {
+const MobileInfoScreen = ({ setColor, color }) => {
   const {
     mobile: {
       title,
@@ -84,8 +85,10 @@ const MobileInfoScreen = () => {
                   mb="10px"
                   borderRadius="50%"
                   bSh="rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset"
+                  handleClick={() => setColor(c.toString())}
+                  color={c === 'white' || c === '#FFD700' ? 'black' : 'white'}
                 >
-                  &nbsp;
+                  {color === c ? '✓' : ''}
                 </Button>
               ))}
           </div>
@@ -186,5 +189,10 @@ const Wrapper = styled.aside`
     }
   }
 `;
+
+MobileInfoScreen.propTypes = {
+  setColor: PropTypes.func.isRequired,
+  color: PropTypes.string.isRequired,
+};
 
 export default MobileInfoScreen;

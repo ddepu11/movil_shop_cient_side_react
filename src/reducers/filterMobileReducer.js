@@ -20,7 +20,7 @@ const initialState = {
     sortBy: 'lowest',
     search: '',
     brand: 'all',
-    star: 'all',
+    avgStar: 'all',
     price: '8000',
     ram: 'all',
     color: 'all',
@@ -103,7 +103,7 @@ const filterMobile = (state = initialState, action) => {
       };
 
     case FILTER_MOBILE_BY_STAR:
-      if (state.filters.star === 'all') {
+      if (state.filters.avgStar === 'all') {
         return {
           ...state,
           filteredMobile: state.mobiles,
@@ -113,7 +113,7 @@ const filterMobile = (state = initialState, action) => {
       return {
         ...state,
         filteredMobile: state.mobiles.filter(
-          (m) => m.stars.toString() === state.filters.star
+          (m) => m.avgStar >= state.filters.avgStar
         ),
       };
 
@@ -177,7 +177,7 @@ const filterMobile = (state = initialState, action) => {
           sortBy: 'lowest',
           search: '',
           brand: 'all',
-          star: 'all',
+          avgStar: 'all',
           price: '8000',
           ram: 'all',
           color: 'all',

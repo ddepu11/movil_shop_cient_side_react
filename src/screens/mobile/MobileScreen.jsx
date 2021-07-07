@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,6 +19,8 @@ const MobileScreen = () => {
     dispatch(getMobileById(mobileId));
   }, [dispatch, mobileId]);
 
+  const [color, setColor] = useState('');
+
   if (mobileLoading) {
     return <Loading />;
   }
@@ -27,8 +29,8 @@ const MobileScreen = () => {
     <>
       <Hero title={`mobiles / ${mobile.title}`} />
       <Wrapper className="w-960">
-        {mobile && <MobileImagesPreviewScreen />}
-        {mobile && <MobileInfoScreen />}
+        {mobile && <MobileImagesPreviewScreen color={color} />}
+        {mobile && <MobileInfoScreen setColor={setColor} color={color} />}
       </Wrapper>
     </>
   );
