@@ -2,13 +2,11 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { BsGrid3X3Gap } from 'react-icons/bs';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
-// import Product from '../../components/Product';
-// import Mobile from '../../components/Mobile';
 import { useDispatch, useSelector } from 'react-redux';
 import FiltersScreen from './FiltersScreen';
 import Hero from '../../components/Hero';
-import GridViewScreen from './GridViewScreen';
-import ListViewScreen from './ListViewScreen';
+import GridViewScreen from './views/GridViewScreen';
+import ListViewScreen from './views/ListViewScreen';
 
 import {
   filterByBrand,
@@ -128,8 +126,6 @@ const MobilesScreen = () => {
           </header>
 
           {filters.view === 'grid' ? <GridViewScreen /> : <ListViewScreen />}
-
-          {/* <Mobile /> */}
         </section>
       </Wrapper>
     </>

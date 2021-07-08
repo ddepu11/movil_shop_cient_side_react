@@ -23,6 +23,9 @@ import {
   USER_CHANGE_DP_BEGIN,
   USER_CHANGE_DP_ERROR,
   USER_CHANGE_DP_SUCCESS,
+  USER_CART_ADD_MOBILE_BEGIN,
+  USER_CART_ADD_MOBILE_ERROR,
+  USER_CART_ADD_MOBILE_SUCCESS,
 } from '../constants/userConstants';
 
 const initialUser = {
@@ -42,6 +45,7 @@ const user = (userState = initialUser, action) => {
         hasUserLoggedIn: true,
         role: action.payload.role,
         id: action.payload.id,
+        userInfo: action.payload.user,
         hasUserError: false,
       };
 
@@ -214,6 +218,25 @@ const user = (userState = initialUser, action) => {
       };
 
     case USER_CHANGE_DP_ERROR:
+      return {
+        ...userState,
+        userLoading: false,
+        hasUserError: true,
+      };
+    case USER_CART_ADD_MOBILE_BEGIN:
+      return {
+        ...userState,
+        userLoading: true,
+      };
+
+    case USER_CART_ADD_MOBILE_SUCCESS:
+      return {
+        ...userState,
+        userLoading: false,
+        userInfo: action.payload,
+      };
+
+    case USER_CART_ADD_MOBILE_ERROR:
       return {
         ...userState,
         userLoading: false,

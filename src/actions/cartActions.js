@@ -5,8 +5,9 @@ import {
 } from '../constants/cartConstants';
 import { sendNotification } from './notificationActions';
 
-export const addToCart =
-  (_id, picture, title, color, sellerInfo, price, battery) => (dispatch) => {
+export const addMobileToLocalStorageCart =
+  (mobileId, picture, title, color, sellerName, sellerEmail, price) =>
+  (dispatch) => {
     dispatch({ type: CART_ADD_MOBILE_TO_LOCAL_BEGIN });
 
     const getLocalCart = () => JSON.parse(localStorage.getItem('cart'));
@@ -15,7 +16,15 @@ export const addToCart =
       localStorage.setItem(
         'cart',
         JSON.stringify([
-          { _id, picture, title, color, sellerInfo, price, battery },
+          {
+            mobileId,
+            picture,
+            title,
+            color,
+            sellerName,
+            sellerEmail,
+            price,
+          },
         ])
       );
       dispatch({ type: CART_ADD_MOBILE_TO_LOCAL_SUCCESS });
@@ -25,7 +34,7 @@ export const addToCart =
       let flag = false;
 
       cart.forEach((m) => {
-        if (m._id === _id) flag = true;
+        if (m.mobileId === mobileId) flag = true;
       });
 
       if (flag) {
@@ -33,7 +42,15 @@ export const addToCart =
 
         dispatch({ type: CART_ADD_MOBILE_TO_LOCAL_ERROR });
       } else {
-        cart.push({ _id, picture, title, color, sellerInfo, price, battery });
+        cart.push({
+          mobileId,
+          picture,
+          title,
+          color,
+          sellerName,
+          sellerEmail,
+          price,
+        });
 
         localStorage.setItem('cart', JSON.stringify(cart));
 

@@ -29,6 +29,9 @@ const changeDP = (formData, _id) =>
     },
   });
 
+const addToCart = (userId, mobile) =>
+  axios.put(`/users/${userId}/cart`, mobile);
+
 export {
   logIn,
   signUp,
@@ -38,4 +41,5 @@ export {
   authenticate,
   update,
   changeDP,
+  addToCart,
 };

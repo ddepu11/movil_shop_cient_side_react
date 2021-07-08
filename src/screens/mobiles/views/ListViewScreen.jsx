@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import Loading from '../../components/Loading';
-import Mobile from '../../components/Mobile';
+import Loading from '../../../components/Loading';
+import Mobile from '../../../components/Mobile';
 
-const GridViewScreen = () => {
+const ListViewScreen = () => {
   const { filteredMobile } = useSelector((state) => state.filterMobile);
   const { mobileLoading } = useSelector((state) => state.mobile);
 
@@ -13,7 +13,7 @@ const GridViewScreen = () => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper className="flex">
       {filteredMobile.map((mobile) => {
         const {
           _id,
@@ -28,7 +28,7 @@ const GridViewScreen = () => {
           internalMemory,
           brand,
           colors,
-          sellerInfo: { id },
+          sellerInfo: { id, name },
         } = mobile;
 
         return (
@@ -47,7 +47,9 @@ const GridViewScreen = () => {
             userId={id}
             brand={brand}
             colors={colors}
-            usedFor="grid"
+            handlingUpdate={0}
+            usedFor="list"
+            sellerName={name}
           />
         );
       })}
@@ -56,10 +58,10 @@ const GridViewScreen = () => {
 };
 
 const Wrapper = styled.main`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 30px 00px;
-  padding: 15px 0px 0 15px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 25px 0;
+  padding: 10px 0 0;
 `;
 
-export default GridViewScreen;
+export default ListViewScreen;

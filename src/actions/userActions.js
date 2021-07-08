@@ -23,6 +23,9 @@ import {
   USER_CHANGE_DP_BEGIN,
   USER_CHANGE_DP_ERROR,
   USER_CHANGE_DP_SUCCESS,
+  USER_CART_ADD_MOBILE_BEGIN,
+  USER_CART_ADD_MOBILE_ERROR,
+  USER_CART_ADD_MOBILE_SUCCESS,
 } from '../constants/userConstants';
 
 import * as user from '../api/userApi';
@@ -38,7 +41,7 @@ const authenticateUser = () => async (dispatch) => {
 
     dispatch({
       type: USER_AUTHENTICATION_SUCCESS,
-      payload: { role, id: _id },
+      payload: { role, id: _id, user: data.user },
     });
 
     dispatch(
@@ -192,6 +195,43 @@ const changeDisplayPicture = (formData, _id) => async (dispatch) => {
   }
 };
 
+const addMobileToCart =
+  (userId, mobileId, picture, title, color, sellerName, sellerEmail, price) =>
+  async (dispatch) => {
+    dispatch({ type: USER_CART_ADD_MOBILE_BEGIN });
+
+    try {
+      const res = await user.addToCart(userId, {
+        mobileId,
+        picture,
+        title,
+        color,
+        sellerName,
+        sellerEmail,
+        price,
+      });
+
+      if (res) {
+        dispatch({
+          type: USER_CART_ADD_MOBILE_SUCCESS,
+          payload: res.data.user,
+        });
+
+        dispatch(sendNotification('Successfully added to cart!', false));
+      } else {
+        dispatch({ type: USER_CART_ADD_MOBILE_ERROR });
+
+        dispatch(sendNotification('Could not add to cart!', true));
+      }
+    } catch (err) {
+      const { msg } = err.response.data;
+
+      dispatch({ type: USER_CART_ADD_MOBILE_ERROR });
+
+      dispatch(sendNotification(msg, true));
+    }
+  };
+
 export {
   customUserSignIn,
   signUpUser,
@@ -202,4 +242,5 @@ export {
   authenticateUser,
   updateUser,
   changeDisplayPicture,
+  addMobileToCart,
 };

@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import MobileAvgStarsScreen from './MobileAvgStarsScreen';
-import MovileSubmitReviewScreen from './MovileSubmitReviewScreen';
+import MobileAvgStarsScreen from './star/MobileAvgStarsScreen';
+import MovileSubmitReviewScreen from './star/MovileSubmitReviewScreen';
 import Button from '../../components/Button';
 
 const MobileInfoScreen = ({ setColor, color }) => {

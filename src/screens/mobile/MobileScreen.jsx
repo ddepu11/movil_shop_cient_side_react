@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMobileById } from '../../actions/mobileActions';
 import Loading from '../../components/Loading';
-import MobileImagesPreviewScreen from './MobileImagesPreviewScreen';
+import MobileImagesScreen from './images/MobileImagesScreen';
 import MobileInfoScreen from './MobileInfoScreen';
 import Hero from '../../components/Hero';
 
@@ -29,7 +29,7 @@ const MobileScreen = () => {
     <>
       <Hero title={`mobiles / ${mobile.title}`} />
       <Wrapper className="w-960">
-        {mobile && <MobileImagesPreviewScreen color={color} />}
+        {mobile && <MobileImagesScreen color={color} />}
         {mobile && <MobileInfoScreen setColor={setColor} color={color} />}
       </Wrapper>
     </>
