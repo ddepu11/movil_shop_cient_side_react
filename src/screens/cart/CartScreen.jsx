@@ -11,23 +11,25 @@ const CartScreen = () => {
   return (
     <Wrapper className="w-960">
       <div className="cart_items">
-        {!hasUserLoggedIn && <h1>My Cart ({localStorageCart.length})</h1>}
-
-        {hasUserLoggedIn && !isUserInfoEmpty && (
-          <h1>My Cart ({userInfo.cart.length})</h1>
+        {/* Shows when user has logged in */}
+        {!isUserInfoEmpty && hasUserLoggedIn && (
+          <>
+            <h1>My Cart ({userInfo.cart.length})</h1>
+            {userInfo.cart.map((m) => (
+              <h2 key={Math.floor(Math.random() * Date.now())}>{m.title}</h2>
+            ))}
+          </>
         )}
 
-        {localStorageCart &&
-          !hasUserLoggedIn &&
-          localStorageCart.map((m) => (
-            <h2 key={Math.floor(Math.random() * Date.now())}>{m.title}</h2>
-          ))}
-
-        {!isUserInfoEmpty &&
-          hasUserLoggedIn &&
-          userInfo.cart.map((m) => (
-            <h2 key={Math.floor(Math.random() * Date.now())}>{m.title}</h2>
-          ))}
+        {/* Shows when user has not logged in */}
+        {localStorageCart && !hasUserLoggedIn && (
+          <>
+            <h1>My Cart ({localStorageCart.length})</h1>
+            {localStorageCart.map((m) => (
+              <h2 key={Math.floor(Math.random() * Date.now())}>{m.title}</h2>
+            ))}
+          </>
+        )}
       </div>
     </Wrapper>
   );
