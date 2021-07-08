@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import MobileAvgStarsScreen from './star/MobileAvgStarsScreen';
 import MovileSubmitReviewScreen from './star/MovileSubmitReviewScreen';
 import Button from '../../components/Button';
+import formatePrice from '../../utils/formatePrice';
 
 const MobileInfoScreen = ({ setColor, color }) => {
   const {
@@ -31,7 +32,7 @@ const MobileInfoScreen = ({ setColor, color }) => {
         <MobileAvgStarsScreen />
       </div>
 
-      <span className="price">&#8377; {price} </span>
+      <span className="price"> {formatePrice(price)} </span>
 
       <div className="specification flex">
         <h1>Specifications:</h1>

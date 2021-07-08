@@ -6,7 +6,7 @@ import {
 import { sendNotification } from './notificationActions';
 
 export const addMobileToLocalStorageCart =
-  (mobileId, picture, title, color, sellerName, sellerEmail, price) =>
+  (mobileId, picture, title, color, sellerName, sellerId, price) =>
   (dispatch) => {
     dispatch({ type: CART_ADD_MOBILE_TO_LOCAL_BEGIN });
 
@@ -22,7 +22,7 @@ export const addMobileToLocalStorageCart =
             title,
             color,
             sellerName,
-            sellerEmail,
+            sellerId,
             price,
           },
         ])
@@ -48,7 +48,7 @@ export const addMobileToLocalStorageCart =
           title,
           color,
           sellerName,
-          sellerEmail,
+          sellerId,
           price,
         });
 

@@ -37,7 +37,7 @@ const MobileCartBuyButtons = ({ color }) => {
             title,
             color,
             sellerInfo.name,
-            sellerInfo.email,
+            sellerInfo.id,
             price
           )
         );
@@ -60,7 +60,7 @@ const MobileCartBuyButtons = ({ color }) => {
                 title,
                 color,
                 sellerInfo.name,
-                sellerInfo.email,
+                sellerInfo.id,
                 price
               )
             )

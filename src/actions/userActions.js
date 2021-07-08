@@ -196,7 +196,7 @@ const changeDisplayPicture = (formData, _id) => async (dispatch) => {
 };
 
 const addMobileToCart =
-  (userId, mobileId, picture, title, color, sellerName, sellerEmail, price) =>
+  (userId, mobileId, picture, title, color, sellerName, sellerId, price) =>
   async (dispatch) => {
     dispatch({ type: USER_CART_ADD_MOBILE_BEGIN });
 
@@ -207,7 +207,7 @@ const addMobileToCart =
         title,
         color,
         sellerName,
-        sellerEmail,
+        sellerId,
         price,
       });
 

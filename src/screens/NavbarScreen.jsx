@@ -12,6 +12,7 @@ import Button from '../components/Button';
 const NavbarScreen = () => {
   const { logout, isAuthenticated } = useAuth0();
 
+  const { localStorageCart } = useSelector((state) => state.cart);
   const { hasUserLoggedIn, userInfo, role } = useSelector(
     (state) => state.user
   );
@@ -31,6 +32,7 @@ const NavbarScreen = () => {
       history.push('/');
     }
   };
+  const isUserInfoEmpty = Object.keys(userInfo).length === 0;
 
   return (
     <Wrapper>
@@ -150,7 +152,11 @@ const NavbarScreen = () => {
           </div>
 
           <Link to="/cart" className="cart_container">
-            <span className="cart_count">6</span>
+            <span className="cart_count">
+              {hasUserLoggedIn && !isUserInfoEmpty
+                ? userInfo.cart.length
+                : localStorageCart.length}
+            </span>
             <BiCart className="cart_icon" />
             Cart
           </Link>

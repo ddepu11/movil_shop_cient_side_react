@@ -11,6 +11,7 @@ import validateMobileForm from '../utils/validateMobileForm';
 import clearAllSetTimeOut from '../utils/clearAllSetTimeOut';
 import { updateSellerMobile } from '../actions/sellerActions';
 import { sendNotification } from '../actions/notificationActions';
+import formatePrice from '../utils/formatePrice';
 
 const Mobile = ({
   pictures,
@@ -253,7 +254,7 @@ const Mobile = ({
         <div className="info flex">
           <h2>{title}</h2>
 
-          <p>Price: {price} &#8377;</p>
+          <p>Price: {formatePrice(price)}</p>
           <span>Soled by: {sellerName}</span>
 
           <Link to={`/mobiles/${mobileId}`}>
@@ -276,7 +277,7 @@ const Mobile = ({
 
         <div className="info">
           <h2>{title}</h2>
-          <span>{price} &#8377;</span>
+          <span>{formatePrice(price)}</span>
         </div>
 
         <div className="cover">
@@ -330,7 +331,7 @@ const Mobile = ({
         </div>
 
         <div className="right">
-          <h1>{price} &#8377;</h1>
+          <h1>{formatePrice(price)}</h1>
           <div className="color_btns flex">
             {colors.map((c) => (
               <Button
