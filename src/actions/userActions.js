@@ -26,6 +26,9 @@ import {
   USER_CART_ADD_MOBILE_BEGIN,
   USER_CART_ADD_MOBILE_ERROR,
   USER_CART_ADD_MOBILE_SUCCESS,
+  USER_CART_MOBILE_INC_QUANTITY_BEGIN,
+  USER_CART_MOBILE_INC_QUANTITY_ERROR,
+  USER_CART_MOBILE_INC_QUANTITY_SUCCESS,
 } from '../constants/userConstants';
 
 import * as user from '../api/userApi';
@@ -232,6 +235,37 @@ const addMobileToCart =
     }
   };
 
+const increaseOrDecreaseCartItemQuantity =
+  (userId, cartItemId, action) => async (dispatch) => {
+    dispatch({ type: USER_CART_MOBILE_INC_QUANTITY_BEGIN });
+
+    try {
+      const res = await user.increaseOrDecreaseCartItemQuantity(
+        userId,
+        cartItemId,
+        action
+      );
+
+      if (res) {
+        dispatch({
+          type: USER_CART_MOBILE_INC_QUANTITY_SUCCESS,
+          payload: res.data.user,
+        });
+
+        dispatch(sendNotification('Increased the quantity!', false));
+      } else {
+        dispatch({ type: USER_CART_MOBILE_INC_QUANTITY_ERROR });
+
+        dispatch(sendNotification('Could not increase the quantity!', true));
+      }
+    } catch (err) {
+      const { msg } = err.response.data;
+      dispatch({ type: USER_CART_MOBILE_INC_QUANTITY_ERROR });
+
+      dispatch(sendNotification(msg, true));
+    }
+  };
+
 export {
   customUserSignIn,
   signUpUser,
@@ -243,4 +277,5 @@ export {
   updateUser,
   changeDisplayPicture,
   addMobileToCart,
+  increaseOrDecreaseCartItemQuantity,
 };

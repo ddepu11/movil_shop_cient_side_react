@@ -32,6 +32,9 @@ const changeDP = (formData, _id) =>
 const addToCart = (userId, mobile) =>
   axios.put(`/users/${userId}/cart`, mobile);
 
+const increaseOrDecreaseCartItemQuantity = (userId, cartItemId, action) =>
+  axios.put(`/users/${userId}/cart/item/${cartItemId}`, { action });
+
 export {
   logIn,
   signUp,
@@ -42,4 +45,5 @@ export {
   update,
   changeDP,
   addToCart,
+  increaseOrDecreaseCartItemQuantity,
 };
