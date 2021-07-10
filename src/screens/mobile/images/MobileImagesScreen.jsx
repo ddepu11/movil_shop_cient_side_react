@@ -58,6 +58,7 @@ const Wrapper = styled.aside`
   .previews {
     width: 100%;
     align-items: flex-start;
+    gap: 0 20px;
 
     .left-section {
       flex-direction: column;
