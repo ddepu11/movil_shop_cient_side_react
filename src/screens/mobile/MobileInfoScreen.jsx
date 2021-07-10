@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import MobileAvgStarsScreen from './star/MobileAvgStarsScreen';
-import MovileSubmitReviewScreen from './star/MovileSubmitReviewScreen';
+import MobileSubmitReviewScreen from './star/MobileSubmitReviewScreen';
 import Button from '../../components/Button';
 import formatePrice from '../../utils/formatePrice';
 
@@ -105,7 +105,7 @@ const MobileInfoScreen = ({ setColor, color }) => {
         )}
       </div>
 
-      <MovileSubmitReviewScreen />
+      <MobileSubmitReviewScreen />
     </Wrapper>
   );
 };

@@ -2,13 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiFillPlusSquare, AiFillMinusSquare } from 'react-icons/ai';
-import { ImBin } from 'react-icons/im';
+import { RiDeleteBin6Line } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 import Button from '../../components/Button';
 import { increaseOrDecreaseCartItemQuantity } from '../../actions/userActions';
+import CircleLoader from '../../components/CircleLoader';
+import { incDecQuantity, removeCartItem } from '../../actions/cartActions';
 
 const CartScreen = () => {
-  const { localStorageCart } = useSelector((state) => state.cart);
-  const { hasUserLoggedIn, userInfo } = useSelector((state) => state.user);
+  const { localStorageCart, cartLoading } = useSelector((state) => state.cart);
+  const { hasUserLoggedIn, userInfo, userLoading } = useSelector(
+    (state) => state.user
+  );
 
   const isUserInfoEmpty = Object.keys(userInfo).length === 0;
 
@@ -27,147 +32,287 @@ const CartScreen = () => {
     );
   };
 
+  const handleLocalCartQuantity = (cartItemId, action) => {
+    dispatch(incDecQuantity(cartItemId, action));
+  };
+
   return (
     <Wrapper className="w-960">
       {/* Shows when user has logged in */}
       {/* Shows when user has not logged in */}
+      <div className="cart">
+        {!isUserInfoEmpty && hasUserLoggedIn ? (
+          <>
+            <h1>My Cart ({userInfo.cart.length})</h1>
 
-      {!isUserInfoEmpty && hasUserLoggedIn ? (
-        <div className="cart">
-          <h1>My Cart ({userInfo.cart.length})</h1>
-          {userInfo.cart.map((m) => {
-            const {
-              _id,
-              picture,
-              title,
-              sellerId,
-              color,
-              sellerName,
-              price,
-              quantity,
-            } = m;
+            {userInfo.cart.length === 0 && (
+              <div className="empty_cart">
+                <h3>Your cart is empty!</h3>
+                <Button
+                  mt="15px"
+                  color="var(--light-color)"
+                  pt="5px"
+                  pb="5px"
+                  pl="16px"
+                  pr="16px"
+                  bgColor="var(--tertiary-color)"
+                  fs="1.2em"
+                  bSh="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+                >
+                  <Link to="/mobiles">Fill It</Link>
+                </Button>
+              </div>
+            )}
 
-            return (
-              <div
-                className="outer-section flex"
-                key={Math.floor(Math.random() * Date.now())}
-              >
-                <div className="mobile flex">
-                  <div className="image">
-                    <img src={`/sellers/${sellerId}/${picture}`} alt={title} />
-                  </div>
+            {userInfo.cart.map((m) => {
+              const {
+                _id,
+                picture,
+                title,
+                sellerId,
+                color,
+                sellerName,
+                price,
+                quantity,
+              } = m;
 
-                  <div className="info flex">
-                    <div>
-                      <h2>{title}</h2>
-                      <Button
-                        bgColor={color}
-                        mt="5px"
-                        mb="8px"
-                        width="20px"
-                        height="20px"
-                        borderRadius="50%"
-                        bSh=" rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 1.5px"
-                      >
-                        &nbsp;
-                      </Button>
-                      <p>
-                        Seller: &nbsp;<span>{sellerName}</span>
-                      </p>
+              return (
+                <div
+                  className="outer-section flex"
+                  key={Math.floor(Math.random() * Date.now())}
+                >
+                  <div className="mobile flex">
+                    <div className="image">
+                      <img
+                        src={`/sellers/${sellerId}/${picture}`}
+                        alt={title}
+                      />
                     </div>
 
-                    <h4 className="price">{formatePrice(price)}</h4>
-                  </div>
-                </div>
+                    <div className="info flex">
+                      <div>
+                        <h2>{title}</h2>
+                        <Button
+                          bgColor={color}
+                          mt="5px"
+                          mb="8px"
+                          width="20px"
+                          height="20px"
+                          borderRadius="50%"
+                          bSh=" rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 1.5px"
+                        >
+                          &nbsp;
+                        </Button>
+                        <p>
+                          Seller: &nbsp;<span>{sellerName}</span>
+                        </p>
+                      </div>
 
-                <div className="inc_dec_remove_div flex">
-                  <div className="inc_dec flex">
+                      <h4 className="price">{formatePrice(price)}</h4>
+                    </div>
+                  </div>
+
+                  <div className="inc_dec_remove_div flex">
+                    <div className="inc_dec flex">
+                      {!userLoading ? (
+                        <Button
+                          width="25px"
+                          height="25px"
+                          color={
+                            quantity <= 1
+                              ? 'var(--tertiary-color)'
+                              : 'var(--dark-color)'
+                          }
+                          borderRadius="50%"
+                          bgColor="var(--light-color)"
+                          fs="1.5em"
+                          isDisabled={quantity <= 1 && true}
+                          handleClick={() => handleQuantity(_id, 'DEC')}
+                        >
+                          <AiFillMinusSquare />
+                        </Button>
+                      ) : (
+                        <CircleLoader />
+                      )}
+
+                      <span className="quantity"> {quantity}</span>
+
+                      {!userLoading ? (
+                        <Button
+                          width="25px"
+                          height="25px"
+                          borderRadius="50%"
+                          bgColor="var(--light-color)"
+                          color={
+                            quantity >= 10
+                              ? 'var(--tertiary-color)'
+                              : 'var(--dark-color)'
+                          }
+                          isDisabled={quantity >= 10 && true}
+                          fs="1.5em"
+                          handleClick={() => handleQuantity(_id, 'INC')}
+                        >
+                          <AiFillPlusSquare />
+                        </Button>
+                      ) : (
+                        <CircleLoader />
+                      )}
+                    </div>
+
                     <Button
                       width="25px"
                       height="25px"
-                      color="var(--dark-color)"
+                      color="var(--danger-color)"
                       borderRadius="50%"
                       bgColor="var(--light-color)"
                       fs="1.5em"
-                      handleClick={() => handleQuantity(_id, 'INC')}
                     >
-                      <AiFillPlusSquare />
+                      <RiDeleteBin6Line />
                     </Button>
+                  </div>
+                </div>
+              );
+            })}
+          </>
+        ) : (
+          <>
+            <h1>My Cart ({localStorageCart.length})</h1>
 
-                    <span className="quantity"> {quantity}</span>
+            {localStorageCart.length === 0 && (
+              <div className="empty_cart">
+                <h3>Your cart is empty!</h3>
+                <Button
+                  mt="15px"
+                  color="var(--light-color)"
+                  pt="5px"
+                  pb="5px"
+                  pl="16px"
+                  pr="16px"
+                  bgColor="var(--tertiary-color)"
+                  fs="1.2em"
+                  bSh="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+                >
+                  <Link to="/mobiles">Fill It</Link>
+                </Button>
+              </div>
+            )}
+
+            {localStorageCart.map((m) => {
+              const {
+                mobileId,
+                picture,
+                title,
+                sellerId,
+                color,
+                sellerName,
+                price,
+                quantity,
+              } = m;
+
+              return (
+                <div
+                  className="outer-section flex"
+                  key={Math.floor(Math.random() * Date.now())}
+                >
+                  <div className="mobile flex">
+                    <div className="image">
+                      <img
+                        src={`/sellers/${sellerId}/${picture}`}
+                        alt={title}
+                      />
+                    </div>
+
+                    <div className="info flex">
+                      <div>
+                        <h2>{title}</h2>
+                        <Button
+                          bgColor={color}
+                          mt="5px"
+                          mb="8px"
+                          width="20px"
+                          height="20px"
+                          borderRadius="50%"
+                          bSh=" rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 1.5px"
+                        >
+                          &nbsp;
+                        </Button>
+                        <p>
+                          Seller: &nbsp;<span>{sellerName}</span>
+                        </p>
+                      </div>
+
+                      <h4 className="price">{formatePrice(price)}</h4>
+                    </div>
+                  </div>
+                  <div className="inc_dec_remove_div flex">
+                    <div className="inc_dec flex">
+                      {!cartLoading ? (
+                        <Button
+                          width="25px"
+                          height="25px"
+                          color={
+                            quantity <= 1
+                              ? 'var(--tertiary-color)'
+                              : 'var(--dark-color)'
+                          }
+                          borderRadius="50%"
+                          bgColor="var(--light-color)"
+                          fs="1.5em"
+                          isDisabled={quantity <= 1 && true}
+                          handleClick={() =>
+                            handleLocalCartQuantity(mobileId, 'DEC')
+                          }
+                        >
+                          <AiFillMinusSquare />
+                        </Button>
+                      ) : (
+                        <CircleLoader />
+                      )}
+
+                      <span className="quantity"> {quantity}</span>
+
+                      {!cartLoading ? (
+                        <Button
+                          width="25px"
+                          height="25px"
+                          borderRadius="50%"
+                          bgColor="var(--light-color)"
+                          color={
+                            quantity >= 10
+                              ? 'var(--tertiary-color)'
+                              : 'var(--dark-color)'
+                          }
+                          isDisabled={quantity >= 10 && true}
+                          fs="1.5em"
+                          handleClick={() =>
+                            handleLocalCartQuantity(mobileId, 'INC')
+                          }
+                        >
+                          <AiFillPlusSquare />
+                        </Button>
+                      ) : (
+                        <CircleLoader />
+                      )}
+                    </div>
 
                     <Button
                       width="25px"
                       height="25px"
-                      color="var(--dark-color)"
+                      color="var(--danger-color)"
                       borderRadius="50%"
                       bgColor="var(--light-color)"
                       fs="1.5em"
-                      handleClick={() => handleQuantity(_id, 'DEC')}
+                      handleClick={() => dispatch(removeCartItem(mobileId))}
                     >
-                      <AiFillMinusSquare />
+                      <RiDeleteBin6Line />
                     </Button>
                   </div>
-
-                  <Button
-                    width="25px"
-                    height="25px"
-                    color="var(--danger-color)"
-                    borderRadius="50%"
-                    bgColor="var(--light-color)"
-                    fs="1.5em"
-                  >
-                    <ImBin />
-                  </Button>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        <div className="cart">
-          <h1>My Cart ({localStorageCart.length})</h1>
-
-          {localStorageCart.map((m) => {
-            const { picture, title, sellerId, color, sellerName, price } = m;
-
-            return (
-              <div
-                className="outer-section flex"
-                key={Math.floor(Math.random() * Date.now())}
-              >
-                <div className="mobile flex">
-                  <div className="image">
-                    <img src={`/sellers/${sellerId}/${picture}`} alt={title} />
-                  </div>
-
-                  <div className="info flex">
-                    <div>
-                      <h2>{title}</h2>
-                      <Button
-                        bgColor={color}
-                        mt="5px"
-                        mb="8px"
-                        width="20px"
-                        height="20px"
-                        borderRadius="50%"
-                        bSh=" rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 1.5px"
-                      >
-                        &nbsp;
-                      </Button>
-                      <p>
-                        Seller: &nbsp;<span>{sellerName}</span>
-                      </p>
-                    </div>
-
-                    <h4 className="price">{formatePrice(price)}</h4>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+              );
+            })}
+          </>
+        )}
+      </div>
     </Wrapper>
   );
 };
@@ -179,6 +324,21 @@ const Wrapper = styled.main`
     padding: 8px 0px 2px;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
       rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    min-height: 60vh;
+
+    .empty_cart {
+      text-align: center;
+
+      h3 {
+        padding: 50px 0 0;
+        font-size: 2em;
+        color: var(--secondary-color);
+      }
+
+      a {
+        color: var(--light-color);
+      }
+    }
 
     h1 {
       padding: 10px 0 10px 40px;
@@ -186,6 +346,7 @@ const Wrapper = styled.main`
       font-size: 1.4em;
       color: var(--medium-dark-color);
     }
+
     .outer-section {
       flex-direction: column;
       align-items: flex-start;

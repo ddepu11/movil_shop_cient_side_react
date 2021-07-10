@@ -3,11 +3,14 @@ import { BsStar, BsStarFill } from 'react-icons/bs';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { reviewMobile, updateMobileReview } from '../../../actions/mobileActions';
+import {
+  reviewMobile,
+  updateMobileReview,
+} from '../../../actions/mobileActions';
 import { sendNotification } from '../../../actions/notificationActions';
 import Button from '../../../components/Button';
 
-const MovileSubmitReviewScreen = () => {
+const MobileSubmitReviewScreen = () => {
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -176,4 +179,4 @@ const Wrapper = styled.aside`
   }
 `;
 
-export default MovileSubmitReviewScreen;
+export default MobileSubmitReviewScreen;

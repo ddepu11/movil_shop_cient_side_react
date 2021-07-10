@@ -26,9 +26,9 @@ import {
   USER_CART_ADD_MOBILE_BEGIN,
   USER_CART_ADD_MOBILE_ERROR,
   USER_CART_ADD_MOBILE_SUCCESS,
-  USER_CART_MOBILE_INC_QUANTITY_ERROR,
-  USER_CART_MOBILE_INC_QUANTITY_BEGIN,
-  USER_CART_MOBILE_INC_QUANTITY_SUCCESS,
+  USER_CART_ITEM_INC_DEC_QUANTITY_ERROR,
+  USER_CART_ITEM_INC_DEC_QUANTITY_BEGIN,
+  USER_CART_ITEM_INC_DEC_QUANTITY_SUCCESS,
 } from '../constants/userConstants';
 
 const initialUser = {
@@ -249,20 +249,20 @@ const user = (userState = initialUser, action) => {
       };
 
     // Increase Cart's item quantity
-    case USER_CART_MOBILE_INC_QUANTITY_BEGIN:
+    case USER_CART_ITEM_INC_DEC_QUANTITY_BEGIN:
       return {
         ...userState,
         userLoading: true,
       };
 
-    case USER_CART_MOBILE_INC_QUANTITY_SUCCESS:
+    case USER_CART_ITEM_INC_DEC_QUANTITY_SUCCESS:
       return {
         ...userState,
         userLoading: false,
         userInfo: action.payload,
       };
 
-    case USER_CART_MOBILE_INC_QUANTITY_ERROR:
+    case USER_CART_ITEM_INC_DEC_QUANTITY_ERROR:
       return {
         ...userState,
         userLoading: false,

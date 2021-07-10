@@ -30,16 +30,18 @@ const MobileCartBuyButtons = ({ color }) => {
       dispatch(sendNotification('Please select color!!!', true));
     } else {
       if (!hasUserLoggedIn) {
+        const quantity = 0;
         dispatch(
-          addMobileToLocalStorageCart(
+          addMobileToLocalStorageCart({
             mobileId,
-            pictures[0],
+            picture: pictures[0],
             title,
             color,
-            sellerInfo.name,
-            sellerInfo.id,
-            price
-          )
+            sellerName: sellerInfo.name,
+            sellerId: sellerInfo.id,
+            price,
+            quantity,
+          })
         );
       } else {
         // If user logged in then save car to db

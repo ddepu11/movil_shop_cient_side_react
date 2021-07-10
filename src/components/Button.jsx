@@ -28,6 +28,7 @@ const Button = ({
   fromRight,
   fromBottom,
   fromLeft,
+  isDisabled,
 }) => {
   useEffect(() => {});
 
@@ -36,6 +37,7 @@ const Button = ({
       onClick={handleClick}
       type="button"
       data-value={dataVal}
+      disabled={isDisabled}
       style={{
         paddingTop: pt,
         paddingBottom: pb,
@@ -98,6 +100,7 @@ Button.propTypes = {
   fromTop: PropTypes.string,
   fromLeft: PropTypes.string,
   fromRight: PropTypes.string,
+  isDisabled: PropTypes.bool,
 };
 
 Button.defaultProps = {
@@ -127,6 +130,7 @@ Button.defaultProps = {
   fromLeft: '',
   fromBottom: '',
   fromTop: '',
+  isDisabled: false,
 };
 
 export default Button;
