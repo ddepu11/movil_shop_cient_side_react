@@ -5,7 +5,10 @@ import { AiFillPlusSquare, AiFillMinusSquare } from 'react-icons/ai';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Button';
-import { increaseOrDecreaseCartItemQuantity } from '../../actions/userActions';
+import {
+  deleteCartItem,
+  increaseOrDecreaseCartItemQuantity,
+} from '../../actions/userActions';
 import CircleLoader from '../../components/CircleLoader';
 import { incDecQuantity, removeCartItem } from '../../actions/cartActions';
 
@@ -158,17 +161,23 @@ const CartScreen = () => {
                         <CircleLoader />
                       )}
                     </div>
-
-                    <Button
-                      width="25px"
-                      height="25px"
-                      color="var(--danger-color)"
-                      borderRadius="50%"
-                      bgColor="var(--light-color)"
-                      fs="1.5em"
-                    >
-                      <RiDeleteBin6Line />
-                    </Button>
+                    {!userLoading ? (
+                      <Button
+                        width="25px"
+                        height="25px"
+                        color="var(--danger-color)"
+                        borderRadius="50%"
+                        bgColor="var(--light-color)"
+                        fs="1.5em"
+                        handleClick={() =>
+                          dispatch(deleteCartItem(userInfo._id, _id))
+                        }
+                      >
+                        <RiDeleteBin6Line />
+                      </Button>
+                    ) : (
+                      <CircleLoader />
+                    )}
                   </div>
                 </div>
               );

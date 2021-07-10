@@ -29,6 +29,9 @@ import {
   USER_CART_ITEM_INC_DEC_QUANTITY_BEGIN,
   USER_CART_ITEM_INC_DEC_QUANTITY_ERROR,
   USER_CART_ITEM_INC_DEC_QUANTITY_SUCCESS,
+  USER_CART_ITEM_DELETE_BEGIN,
+  USER_CART_ITEM_DELETE_ERROR,
+  USER_CART_ITEM_DELETE_SUCCESS,
 } from '../constants/userConstants';
 
 import * as user from '../api/userApi';
@@ -266,6 +269,26 @@ const increaseOrDecreaseCartItemQuantity =
     }
   };
 
+const deleteCartItem = (userId, cartItemId) => async (dispatch) => {
+  dispatch({ type: USER_CART_ITEM_DELETE_BEGIN });
+
+  try {
+    const res = await user.deleteCartItem(userId, cartItemId);
+
+    if (res) {
+      dispatch({ type: USER_CART_ITEM_DELETE_SUCCESS, payload: res.data.user });
+      dispatch(sendNotification('Successfully deleted the cart item!', false));
+    } else {
+      dispatch({ type: USER_CART_ITEM_DELETE_ERROR });
+      dispatch(sendNotification('Could not delete cart item!', true));
+    }
+  } catch (err) {
+    const { msg } = err.response.data;
+    dispatch({ type: USER_CART_ITEM_DELETE_ERROR });
+    dispatch(sendNotification(msg, true));
+  }
+};
+
 export {
   customUserSignIn,
   signUpUser,
@@ -278,4 +301,5 @@ export {
   changeDisplayPicture,
   addMobileToCart,
   increaseOrDecreaseCartItemQuantity,
+  deleteCartItem,
 };

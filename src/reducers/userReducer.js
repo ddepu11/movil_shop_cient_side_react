@@ -29,6 +29,9 @@ import {
   USER_CART_ITEM_INC_DEC_QUANTITY_ERROR,
   USER_CART_ITEM_INC_DEC_QUANTITY_BEGIN,
   USER_CART_ITEM_INC_DEC_QUANTITY_SUCCESS,
+  USER_CART_ITEM_DELETE_BEGIN,
+  USER_CART_ITEM_DELETE_ERROR,
+  USER_CART_ITEM_DELETE_SUCCESS,
 } from '../constants/userConstants';
 
 const initialUser = {
@@ -267,6 +270,26 @@ const user = (userState = initialUser, action) => {
         ...userState,
         userLoading: false,
         hasUserError: true,
+      };
+
+    // Remove Cart Item
+    case USER_CART_ITEM_DELETE_BEGIN:
+      return {
+        ...userState,
+        userLoading: true,
+      };
+
+    case USER_CART_ITEM_DELETE_SUCCESS:
+      return {
+        ...userState,
+        userLoading: false,
+        userInfo: action.payload,
+      };
+
+    case USER_CART_ITEM_DELETE_ERROR:
+      return {
+        ...userState,
+        userLoading: false,
       };
 
     default:

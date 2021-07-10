@@ -35,6 +35,9 @@ const addToCart = (userId, mobile) =>
 const increaseOrDecreaseCartItemQuantity = (userId, cartItemId, action) =>
   axios.put(`/users/${userId}/cart/item/${cartItemId}`, { action });
 
+const deleteCartItem = (userId, cartItemId) =>
+  axios.delete(`/users/${userId}/cart/item/${cartItemId}`);
+
 export {
   logIn,
   signUp,
@@ -46,4 +49,5 @@ export {
   changeDP,
   addToCart,
   increaseOrDecreaseCartItemQuantity,
+  deleteCartItem,
 };
