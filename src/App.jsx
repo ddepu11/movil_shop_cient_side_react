@@ -18,6 +18,7 @@ import { authenticateUser } from './actions/userActions';
 import { listAllMobiles } from './actions/mobileActions';
 import MobileScreen from './screens/mobile/MobileScreen';
 import CartScreen from './screens/cart/CartScreen';
+import CheckOutScreen from './screens/checkout/CheckOutScreen';
 
 const App = () => {
   const { isLoading } = useAuth0();
@@ -83,8 +84,13 @@ const App = () => {
             <Route path="/mobiles/:mobileId">
               <MobileScreen />
             </Route>
+
             <Route path="/cart">
               <CartScreen />
+            </Route>
+
+            <Route path="/checkout">
+              <CheckOutScreen />
             </Route>
           </Switch>
           <FooterScreen />

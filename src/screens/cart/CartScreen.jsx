@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiFillPlusSquare, AiFillMinusSquare } from 'react-icons/ai';
@@ -6,6 +6,7 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Button';
 import {
+  addMobileToCart,
   deleteCartItem,
   increaseOrDecreaseCartItemQuantity,
 } from '../../actions/userActions';
@@ -42,6 +43,28 @@ const CartScreen = () => {
     dispatch(incDecQuantity(cartItemId, action));
   };
 
+  useEffect(() => {
+    // get cart item which is not in db cart
+    if (!isUserInfoEmpty && localStorageCart.length !== 0) {
+      const comparer = (otherArray) => (current) =>
+        otherArray.filter((other) => other.mobileId === current.mobileId)
+          .length === 0;
+
+      const arr = localStorageCart.filter(comparer(userInfo.cart));
+
+      // if there is any then save it to db cart
+      if (arr.length !== 0) {
+        arr.forEach((e) => dispatch(addMobileToCart(userInfo._id, e)));
+      }
+    }
+  }, [
+    isUserInfoEmpty,
+    userInfo.cart,
+    localStorageCart,
+    userInfo._id,
+    dispatch,
+  ]);
+
   return (
     <>
       <Hero title="cart" />
@@ -57,6 +80,7 @@ const CartScreen = () => {
                   <h3>Your cart is empty!</h3>
                   <Button
                     mt="15px"
+                    mb="15px"
                     color="var(--light-color)"
                     pt="5px"
                     pb="5px"
@@ -66,7 +90,7 @@ const CartScreen = () => {
                     fs="1.2em"
                     bSh="rgba(0, 0, 0, 0.24) 0px 3px 8px"
                   >
-                    <Link to="/mobiles">Fill It</Link>
+                    <Link to="/mobiles">Shop Now</Link>
                   </Button>
                 </div>
               )}
@@ -197,6 +221,7 @@ const CartScreen = () => {
                   <h3>Your cart is empty!</h3>
                   <Button
                     mt="15px"
+                    mb="15px"
                     color="var(--light-color)"
                     pt="5px"
                     pb="5px"
@@ -206,7 +231,7 @@ const CartScreen = () => {
                     fs="1.2em"
                     bSh="rgba(0, 0, 0, 0.24) 0px 3px 8px"
                   >
-                    <Link to="/mobiles">Fill It</Link>
+                    <Link to="/mobiles">Shop Now</Link>
                   </Button>
                 </div>
               )}
@@ -326,8 +351,42 @@ const CartScreen = () => {
               })}
             </>
           )}
+
+          {!isUserInfoEmpty && userInfo.cart.length !== 0 && (
+            <div className="proceed">
+              <Button
+                width="100%"
+                pt="10px"
+                pb="10px"
+                pl="20px"
+                pr="20px"
+                mb="10px"
+                bSh="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px"
+                bgColor="var(--secondary-color)"
+              >
+                <Link to="/checkout">Proceed to checkout</Link>
+              </Button>
+            </div>
+          )}
+
+          {localStorageCart.length !== 0 && !hasUserLoggedIn && (
+            <div className="proceed">
+              <Button
+                width="100%"
+                pt="10px"
+                pb="10px"
+                pl="20px"
+                pr="20px"
+                mb="10px"
+                bSh="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px"
+                bgColor="var(--secondary-color)"
+              >
+                <Link to="/checkout">Proceed to checkout</Link>
+              </Button>
+            </div>
+          )}
         </div>
-        <CartPriceDetais />
+        <CartPriceDetais width="35%" />
       </Wrapper>
     </>
   );
@@ -341,7 +400,7 @@ const Wrapper = styled.main`
   min-height: 60vh;
 
   .cart {
-    padding: 8px 0px 30px;
+    padding: 8px 0px 5px;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
       rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
     width: 65%;
@@ -433,6 +492,16 @@ const Wrapper = styled.main`
             font-weight: bold;
           }
         }
+      }
+    }
+
+    .proceed {
+      position: sticky;
+      bottom: 2px;
+      margin: 0 auto;
+      width: 30%;
+      a {
+        color: var(--light-color);
       }
     }
   }

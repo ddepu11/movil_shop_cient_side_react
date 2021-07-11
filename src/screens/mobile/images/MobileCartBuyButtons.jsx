@@ -30,7 +30,7 @@ const MobileCartBuyButtons = ({ color }) => {
       dispatch(sendNotification('Please select color!!!', true));
     } else {
       if (!hasUserLoggedIn) {
-        const quantity = 0;
+        const quantity = 1;
         dispatch(
           addMobileToLocalStorageCart({
             mobileId,
@@ -55,16 +55,15 @@ const MobileCartBuyButtons = ({ color }) => {
 
         !mobileExistsInCart
           ? dispatch(
-              addMobileToCart(
-                userId,
+              addMobileToCart(userId, {
                 mobileId,
-                pictures[0],
+                picture: pictures[0],
                 title,
                 color,
-                sellerInfo.name,
-                sellerInfo.id,
-                price
-              )
+                sellerName: sellerInfo.name,
+                sellerId: sellerInfo.id,
+                price,
+              })
             )
           : dispatch(
               sendNotification('You have already added to cart!', false)

@@ -141,9 +141,11 @@ const NavbarScreen = () => {
                 <Link to="/mobiles">Mobiles</Link>
               </li>
 
-              <li>
-                <Link to="/checkout">Checkout</Link>
-              </li>
+              {hasUserLoggedIn && Object.keys(userInfo).length !== 0 && (
+                <li>
+                  <Link to="/checkout">Checkout</Link>
+                </li>
+              )}
 
               <li>
                 <Link to="/about">About</Link>
@@ -210,7 +212,7 @@ const Wrapper = styled.nav`
     padding: 20px 0 60px 0;
 
     .nav_links {
-      width: 40%;
+      width: 35%;
     }
 
     .nav_links ul {

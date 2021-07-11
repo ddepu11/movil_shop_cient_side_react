@@ -201,42 +201,32 @@ const changeDisplayPicture = (formData, _id) => async (dispatch) => {
   }
 };
 
-const addMobileToCart =
-  (userId, mobileId, picture, title, color, sellerName, sellerId, price) =>
-  async (dispatch) => {
-    dispatch({ type: USER_CART_ADD_MOBILE_BEGIN });
+const addMobileToCart = (userId, mobileInfo) => async (dispatch) => {
+  dispatch({ type: USER_CART_ADD_MOBILE_BEGIN });
 
-    try {
-      const res = await user.addToCart(userId, {
-        mobileId,
-        picture,
-        title,
-        color,
-        sellerName,
-        sellerId,
-        price,
+  try {
+    const res = await user.addToCart(userId, mobileInfo);
+
+    if (res) {
+      dispatch({
+        type: USER_CART_ADD_MOBILE_SUCCESS,
+        payload: res.data.user,
       });
 
-      if (res) {
-        dispatch({
-          type: USER_CART_ADD_MOBILE_SUCCESS,
-          payload: res.data.user,
-        });
-
-        dispatch(sendNotification('Successfully added to cart!', false));
-      } else {
-        dispatch({ type: USER_CART_ADD_MOBILE_ERROR });
-
-        dispatch(sendNotification('Could not add to cart!', true));
-      }
-    } catch (err) {
-      const { msg } = err.response.data;
-
+      dispatch(sendNotification('Successfully added to cart!', false));
+    } else {
       dispatch({ type: USER_CART_ADD_MOBILE_ERROR });
 
-      dispatch(sendNotification(msg, true));
+      dispatch(sendNotification('Could not add to cart!', true));
     }
-  };
+  } catch (err) {
+    const { msg } = err.response.data;
+
+    dispatch({ type: USER_CART_ADD_MOBILE_ERROR });
+
+    dispatch(sendNotification(msg, true));
+  }
+};
 
 const increaseOrDecreaseCartItemQuantity =
   (userId, cartItemId, action) => async (dispatch) => {

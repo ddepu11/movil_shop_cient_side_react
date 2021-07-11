@@ -1,0 +1,134 @@
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import CartPriceDetais from '../cart/CartPriceDetails';
+import Loading from '../../components/Loading';
+import { sendNotification } from '../../actions/notificationActions';
+import Button from '../../components/Button';
+
+const CheckOutScreen = () => {
+  const { userInfo, userLoading, hasUserLoggedIn } = useSelector(
+    (state) => state.user
+  );
+  const history = useHistory();
+
+  const dispatch = useDispatch();
+  const [address, setAddress] = useState('');
+
+  const handleAddress = (e) => {
+    setAddress(e.target.value);
+  };
+
+  useEffect(() => {
+    if (!hasUserLoggedIn) {
+      history.push('/sign-in');
+      dispatch(sendNotification('Please sign in to buy!', true));
+    }
+  }, [hasUserLoggedIn, history, dispatch]);
+
+  const loadRazorPay = () => {
+    if (address === '' || address.length < 30) {
+      dispatch(sendNotification('Please fill your full address!!', true));
+    } else {
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      document.body.appendChild(script);
+    }
+  };
+
+  if (userLoading) {
+    return <Loading />;
+  }
+
+  return (
+    <Wrapper className="w-960">
+      <div className="user_info">
+        <div className="row flex">
+          <h3>Name:</h3>
+          <span>{`${userInfo.firstName} ${userInfo.lastName}`}</span>
+        </div>
+
+        <div className="row flex">
+          <h3>Email:</h3>
+          <span>{userInfo.email}</span>
+        </div>
+
+        <div className="row flex">
+          <h3>Address:</h3>
+          <textarea
+            name="address"
+            rows="7"
+            cols="30"
+            value={address}
+            onChange={handleAddress}
+          />
+        </div>
+        <div className="row buy-now">
+          <Button
+            pt="12px"
+            pb="12px"
+            pl="30px"
+            pr="30px"
+            fs="1.3em"
+            width="100%"
+            mt="20px"
+            handleClick={loadRazorPay}
+          >
+            Buy Now
+          </Button>
+        </div>
+      </div>
+      <CartPriceDetais />
+    </Wrapper>
+  );
+};
+
+const Wrapper = styled.main`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  gap: 0 5rem;
+  padding: 15px 0;
+
+  .user_info {
+    padding: 10px 00px;
+    /* border: 1px solid red; */
+
+    .row {
+      justify-content: space-between;
+      padding: 0px 0 25px;
+      align-items: flex-start;
+
+      h3 {
+        font-size: 1.2em;
+        color: var(--little-dark-color);
+        letter-spacing: 2px;
+      }
+
+      span {
+        font-size: 1em;
+        color: #333;
+        letter-spacing: 1px;
+        display: block;
+        width: 50%;
+      }
+      textarea {
+        width: 50%;
+        font-size: 1.1em;
+        border: 1px solid var(--little-light-color);
+        padding: 4px 5px;
+        color: var(--medium-dark-color);
+      }
+
+      textarea:focus {
+        border: 0;
+      }
+    }
+    .buy-now {
+      margin: 0 auto;
+      width: 50%;
+    }
+  }
+`;
+
+export default CheckOutScreen;
