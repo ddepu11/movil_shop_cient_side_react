@@ -6,6 +6,7 @@ import CartPriceDetais from '../cart/CartPriceDetails';
 import Loading from '../../components/Loading';
 import { sendNotification } from '../../actions/notificationActions';
 import Button from '../../components/Button';
+import { createAnOrderId } from '../../actions/paymentActions';
 
 const CheckOutScreen = () => {
   const { userInfo, userLoading, hasUserLoggedIn } = useSelector(
@@ -27,13 +28,12 @@ const CheckOutScreen = () => {
     }
   }, [hasUserLoggedIn, history, dispatch]);
 
-  const loadRazorPay = () => {
+  const handlePay = () => {
     if (address === '' || address.length < 30) {
       dispatch(sendNotification('Please fill your full address!!', true));
     } else {
-      const script = document.createElement('script');
-      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-      document.body.appendChild(script);
+      dispatch(createAnOrderId({}));
+      console.log('Paying...');
     }
   };
 
@@ -73,7 +73,7 @@ const CheckOutScreen = () => {
             fs="1.3em"
             width="100%"
             mt="20px"
-            handleClick={loadRazorPay}
+            handleClick={handlePay}
           >
             Buy Now
           </Button>

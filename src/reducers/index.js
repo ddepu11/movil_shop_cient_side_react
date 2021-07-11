@@ -5,6 +5,8 @@ import notification from './notificationReducer';
 import seller from './sellerReducer';
 import filterMobile from './filterMobileReducer';
 import cart from './cartReducer';
+import payment from './paymentReducer';
+import orderTotal from './orderTotalReducer';
 
 export default combineReducers({
   user,
@@ -13,4 +15,6 @@ export default combineReducers({
   seller,
   filterMobile,
   cart,
+  payment,
+  orderTotal,
 });

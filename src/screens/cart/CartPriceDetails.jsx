@@ -1,80 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import PropType from 'prop-types';
 import formatePrice from '../../utils/formatePrice';
+import {
+  calculateOrderTotal,
+  setDefaultOrderTotal,
+} from '../../actions/orderTotalActions';
 
 const CartPriceDetais = ({ width }) => {
   const { localStorageCart } = useSelector((state) => state.cart);
   const { userInfo, hasUserLoggedIn } = useSelector((state) => state.user);
+  const { totalPrice, totalItems, discount } = useSelector(
+    (state) => state.order
+  );
 
-  const [priceDetails, setPriceDetails] = useState({
-    totalPrice: 0,
-    totalItems: 0,
-    discount: 0,
-  });
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (localStorageCart.length) {
-      const totals = localStorageCart.reduce(
-        (total, currVal) => {
-          const { quantity, price } = currVal;
-
-          return {
-            totalPrice: total.totalPrice + quantity * price,
-            totalItems: quantity + total.totalItems,
-            discount: Math.floor(Math.random() * 1000),
-          };
-        },
-        { totalPrice: 0, totalItems: 0, discount: 0 }
-      );
-
-      setPriceDetails((prevState) => ({ ...prevState, ...totals }));
+      dispatch(calculateOrderTotal(localStorageCart));
     }
 
     if (Object.keys(userInfo).length !== 0 && hasUserLoggedIn) {
-      const totals = userInfo.cart.reduce(
-        (total, currVal) => {
-          const { quantity, price } = currVal;
-
-          return {
-            totalPrice: quantity * price + total.totalPrice,
-            totalItems: total.totalItems + quantity,
-            discount: Math.floor(Math.random() * 1000),
-          };
-        },
-        {
-          totalPrice: 0,
-          totalItems: 0,
-          discount: 0,
-        }
-      );
-
-      setPriceDetails((prevState) => ({ ...prevState, ...totals }));
+      dispatch(calculateOrderTotal(userInfo.cart));
     }
 
     !localStorageCart.length &&
       Object.keys(userInfo).length === 0 &&
-      setPriceDetails({
-        totalPrice: 0,
-        totalItems: 0,
-        discount: 0,
-      });
-  }, [localStorageCart, userInfo, hasUserLoggedIn]);
+      dispatch(setDefaultOrderTotal());
+  }, [localStorageCart, userInfo, hasUserLoggedIn, dispatch]);
 
   return (
     <Wrapper style={{ width: `${width}` }}>
       <h1>Price Details</h1>
       <div className="price_details">
         <div className="one flex">
-          <h4>Price ({priceDetails.totalItems} items)</h4>
-          <span>{formatePrice(priceDetails.totalPrice)}</span>
+          <h4>Price ({totalItems} items)</h4>
+          <span>{formatePrice(totalPrice)}</span>
         </div>
 
         <div className="one flex">
           <h4>Discount</h4>
           <span style={{ color: 'var(--success-color)' }}>
-            - {formatePrice(priceDetails.discount)}
+            - {formatePrice(discount)}
           </span>
         </div>
 
@@ -85,9 +54,7 @@ const CartPriceDetais = ({ width }) => {
       </div>
       <div className="total flex">
         <h3>Total Amount</h3>
-        <span>
-          {formatePrice(priceDetails.totalPrice - priceDetails.discount)}
-        </span>
+        <span>{formatePrice(totalPrice - discount)}</span>
       </div>
     </Wrapper>
   );

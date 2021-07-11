@@ -12,6 +12,7 @@ import { getLocalCart } from '../utils/getLocalCart';
 const initiateState = {
   localStorageCart: [],
   cartLoading: false,
+  orderId: '',
 };
 
 const localsCartcart = getLocalCart();
