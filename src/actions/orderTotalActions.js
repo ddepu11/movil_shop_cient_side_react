@@ -1,5 +1,5 @@
 import {
-  ORDER_TOTAL_CALCULATE_TOTAL_SUCCESS,
+  ORDER_CALCULATE_TOTAL_SUCCESS,
   ORDER_TOTAL_SET_DEFAULT_VALUE,
 } from '../constants/orderTotalConstants';
 
@@ -17,7 +17,7 @@ export const calculateOrderTotal = (cart) => (dispatch) => {
     { totalPrice: 0, totalItems: 0, discount: 0 }
   );
 
-  dispatch({ type: ORDER_TOTAL_CALCULATE_TOTAL_SUCCESS, payload: totals });
+  dispatch({ type: ORDER_CALCULATE_TOTAL_SUCCESS, payload: totals });
 };
 
 export const setDefaultOrderTotal = () => (dispatch) => {

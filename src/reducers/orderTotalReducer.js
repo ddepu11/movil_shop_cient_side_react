@@ -1,5 +1,5 @@
 import {
-  ORDER_TOTAL_CALCULATE_TOTAL_SUCCESS,
+  ORDER_CALCULATE_TOTAL_SUCCESS,
   ORDER_TOTAL_SET_DEFAULT_VALUE,
 } from '../constants/orderTotalConstants';
 
@@ -11,7 +11,7 @@ const initialState = {
 
 const orderTotal = (state = initialState, action) => {
   switch (action.type) {
-    case ORDER_TOTAL_CALCULATE_TOTAL_SUCCESS:
+    case ORDER_CALCULATE_TOTAL_SUCCESS:
       return {
         ...state,
         totalPrice: action.payload.totalPrice,

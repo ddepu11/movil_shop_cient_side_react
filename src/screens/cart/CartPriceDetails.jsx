@@ -12,7 +12,7 @@ const CartPriceDetais = ({ width }) => {
   const { localStorageCart } = useSelector((state) => state.cart);
   const { userInfo, hasUserLoggedIn } = useSelector((state) => state.user);
   const { totalPrice, totalItems, discount } = useSelector(
-    (state) => state.order
+    (state) => state.orderTotal
   );
 
   const dispatch = useDispatch();
