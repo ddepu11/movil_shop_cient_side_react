@@ -6,7 +6,7 @@ import CartPriceDetais from '../cart/CartPriceDetails';
 import Loading from '../../components/Loading';
 import { sendNotification } from '../../actions/notificationActions';
 import Button from '../../components/Button';
-import { createAnOrderId } from '../../actions/paymentActions';
+import { createAnOrder } from '../../actions/paymentActions';
 
 const CheckOutScreen = () => {
   const { userInfo, userLoading, hasUserLoggedIn } = useSelector(
@@ -28,11 +28,21 @@ const CheckOutScreen = () => {
     }
   }, [hasUserLoggedIn, history, dispatch]);
 
+  const { totalPrice, discount } = useSelector((state) => state.orderTotal);
+
   const handlePay = () => {
     if (address === '' || address.length < 30) {
       dispatch(sendNotification('Please fill your full address!!', true));
     } else {
-      dispatch(createAnOrderId({}));
+      dispatch(
+        createAnOrder({
+          totalPrice: totalPrice - discount,
+          name: `${userInfo.firstName} ${userInfo.lastName}`,
+          email: userInfo.email,
+          contact: userInfo.phoneNumber,
+        })
+      );
+
       console.log('Paying...');
     }
   };

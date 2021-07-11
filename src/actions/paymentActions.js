@@ -6,63 +6,92 @@ import {
 import * as payment from '../api/paymentApi';
 import { sendNotification } from './notificationActions';
 
-export const createAnOrderId = (orderDetails) => async (dispatch) => {
+export const makePayment =
+  (orderId, amount, currency, name, email, contact) => async () => {
+    const { RAZORPAY_KEY_ID } = process.env;
+
+    payment
+      .loadRazorPay()
+      .then(() => {
+        const options = {
+          key: RAZORPAY_KEY_ID,
+          amount,
+
+          currency,
+          name: 'Movil Shop',
+          description: 'Movil Shop Payment',
+          image: '/static/media/logo.9c9eff40.svg',
+
+          order_id: orderId,
+
+          handler(response) {
+            alert(response.razorpay_payment_id);
+            alert(response.razorpay_order_id);
+            alert(response.razorpay_signature);
+          },
+
+          prefill: {
+            name,
+            email,
+            contact,
+          },
+
+          notes: {
+            address: 'Razorpay Corporate Office',
+          },
+
+          theme: {
+            color: '#3399cc',
+          },
+        };
+
+        const rzp1 = new window.Razorpay(options);
+
+        rzp1.on('payment.failed', (response) => {
+          alert(response.error.code);
+          alert(response.error.description);
+          alert(response.error.source);
+          alert(response.error.step);
+          alert(response.error.reason);
+          alert(response.error.metadata.order_id);
+          alert(response.error.metadata.payment_id);
+        });
+
+        rzp1.open();
+      })
+      .catch((err) => {
+        sendNotification(err.message, true);
+      });
+  };
+
+export const createAnOrder = (orderDetails) => async (dispatch) => {
+  const { totalPrice, name, email, contact } = orderDetails;
+
+  console.log(orderDetails);
+
   dispatch({ type: PAYMENT_RAZORPAY_CREATE_AN_ORDER_BEGIN });
+
   try {
-    const res = await payment.createAnOrderId(orderDetails);
+    const res = await payment.createAnOrder(totalPrice);
 
     if (res) {
+      //
+      const { id, amount, currency } = res.data.order;
       dispatch({
         type: PAYMENT_RAZORPAY_CREATE_AN_ORDER_SUCCESS,
-        payload: res.data.order.id,
+        payload: id,
       });
+
+      dispatch(makePayment(id, amount, currency, name, email, contact));
     } else {
       dispatch(sendNotification('Could not create order id!', true));
       dispatch({ type: PAYMENT_RAZORPAY_CREATE_AN_ORDER_ERROR });
     }
   } catch (err) {
+    console.log(err);
     const { msg } = err.response.data;
     dispatch({ type: PAYMENT_RAZORPAY_CREATE_AN_ORDER_ERROR });
 
     dispatch(sendNotification(msg, true));
   }
-};
-
-export const makePayment = () => async () => {
-  // Load Razor Pay Script
-  const script = document.createElement('script');
-  script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-  document.body.appendChild(script);
-
-  // const { RAZORPAY_KEY_ID } = process.env;
-
-  // const options = {
-  //   key: RAZORPAY_KEY_ID,
-  //   amount: '50000', // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-
-  //   currency: 'INR',
-  //   name: 'Movil Shop',
-  //   description: 'Test Transaction',
-  //   image: '/static/media/logo.9c9eff40.svg',
-
-  //   order_id: 'order_9A33XWu170gUtm', // This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-
-  //   handler(response) {
-  //     alert(response.razorpay_payment_id);
-  //     alert(response.razorpay_order_id);
-  //     alert(response.razorpay_signature);
-  //   },
-
-  //   prefill: {
-  //     name: 'Gaurav Kumar',
-  //     email: 'gaurav.kumar@example.com',
-  //     contact: '9999999999',
-  //   },
-  //   notes: {
-  //     address: 'Razorpay Corporate Office',
-  //   },
-  //   theme: {
-  //     color: '#3399cc',
-  //   },
-  // };
 };
