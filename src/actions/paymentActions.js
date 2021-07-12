@@ -67,19 +67,15 @@ export const makePayment =
 export const createAnOrder = (orderDetails) => async (dispatch) => {
   const { totalPrice, name, email, contact } = orderDetails;
 
-  console.log(orderDetails);
-
   dispatch({ type: PAYMENT_RAZORPAY_CREATE_AN_ORDER_BEGIN });
 
   try {
     const res = await payment.createAnOrder(totalPrice);
 
     if (res) {
-      //
       const { id, amount, currency } = res.data.order;
       dispatch({
         type: PAYMENT_RAZORPAY_CREATE_AN_ORDER_SUCCESS,
-        payload: id,
       });
 
       dispatch(makePayment(id, amount, currency, name, email, contact));
@@ -88,7 +84,6 @@ export const createAnOrder = (orderDetails) => async (dispatch) => {
       dispatch({ type: PAYMENT_RAZORPAY_CREATE_AN_ORDER_ERROR });
     }
   } catch (err) {
-    console.log(err);
     const { msg } = err.response.data;
     dispatch({ type: PAYMENT_RAZORPAY_CREATE_AN_ORDER_ERROR });
 

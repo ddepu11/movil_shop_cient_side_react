@@ -86,9 +86,10 @@ const About = () => (
 
 const Wrapper = styled.main`
   text-align: center;
-  padding: 30px 0;
-  width: 1200px;
+  padding: 30px 10px;
+  max-width: 1200px;
   margin: 0 auto;
+
   h2 {
     color: #222;
     font-size: 3em;

@@ -5,9 +5,8 @@ import {
 } from '../constants/paymentConstants';
 
 const initialState = {
-  paymentLoading: false,
+  paymentLoading: true,
   paymentError: false,
-  paymentOrderId: '',
 };
 
 const payment = (state = initialState, action) => {
@@ -23,7 +22,6 @@ const payment = (state = initialState, action) => {
       return {
         ...state,
         paymentLoading: false,
-        paymentOrderId: action.payload,
       };
 
     case PAYMENT_RAZORPAY_CREATE_AN_ORDER_ERROR:

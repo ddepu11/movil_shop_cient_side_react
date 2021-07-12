@@ -3,15 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import CartPriceDetais from '../cart/CartPriceDetails';
-import Loading from '../../components/Loading';
 import { sendNotification } from '../../actions/notificationActions';
 import Button from '../../components/Button';
 import { createAnOrder } from '../../actions/paymentActions';
+import CircleLoader from '../../components/CircleLoader';
 
 const CheckOutScreen = () => {
   const { userInfo, userLoading, hasUserLoggedIn } = useSelector(
     (state) => state.user
   );
+
+  const { paymentLoading } = useSelector((state) => state.payment);
+
   const history = useHistory();
 
   const dispatch = useDispatch();
@@ -42,13 +45,20 @@ const CheckOutScreen = () => {
           contact: userInfo.phoneNumber,
         })
       );
-
-      console.log('Paying...');
     }
   };
 
-  if (userLoading) {
-    return <Loading />;
+  if (userLoading || paymentLoading) {
+    return (
+      <CircleLoader
+        bgColor="var(--secondary-color)"
+        wrapperH="80vh"
+        spW="90px"
+        spH="90px"
+        cirW="90px"
+        cirH="90px"
+      />
+    );
   }
 
   return (
@@ -98,7 +108,7 @@ const Wrapper = styled.main`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, auto));
   gap: 0 5rem;
-  padding: 15px 0;
+  padding: 15px 12px;
 
   .user_info {
     padding: 10px 00px;
@@ -128,6 +138,7 @@ const Wrapper = styled.main`
         border: 1px solid var(--little-light-color);
         padding: 4px 5px;
         color: var(--medium-dark-color);
+        resize: none;
       }
 
       textarea:focus {

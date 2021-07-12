@@ -98,6 +98,7 @@ const CartScreen = () => {
               {userInfo.cart.map((m) => {
                 const {
                   _id,
+                  mobileId,
                   picture,
                   title,
                   sellerId,
@@ -197,9 +198,10 @@ const CartScreen = () => {
                           borderRadius="50%"
                           bgColor="var(--light-color)"
                           fs="1.5em"
-                          handleClick={() =>
-                            dispatch(deleteCartItem(userInfo._id, _id))
-                          }
+                          handleClick={() => {
+                            dispatch(removeCartItem(mobileId));
+                            dispatch(deleteCartItem(userInfo._id, _id));
+                          }}
                         >
                           <RiDeleteBin6Line />
                         </Button>
