@@ -11,6 +11,7 @@ import FormFieldUpdate from '../../components/FormFieldUpdate';
 import Button from '../../components/Button';
 import { sendNotification } from '../../actions/notificationActions';
 import Hero from '../../components/Hero';
+import { clearPaymentState } from '../../actions/paymentActions';
 
 const AccountScreen = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,8 @@ const AccountScreen = () => {
     if (!hasUserLoggedIn && isUserObjEmpty) {
       history.push('/sign-in');
     }
+
+    dispatch(clearPaymentState());
 
     isUserObjEmpty && dispatch(getAccountInfo());
 

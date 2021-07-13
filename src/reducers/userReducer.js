@@ -32,6 +32,9 @@ import {
   USER_CART_ITEM_DELETE_BEGIN,
   USER_CART_ITEM_DELETE_ERROR,
   USER_CART_ITEM_DELETE_SUCCESS,
+  USER_CART_REMOVE_ALL_BEGIN,
+  USER_CART_REMOVE_ALL_SUCCESS,
+  USER_CART_REMOVE_ALL_ERROR,
 } from '../constants/userConstants';
 
 const initialUser = {
@@ -290,6 +293,26 @@ const user = (userState = initialUser, action) => {
       return {
         ...userState,
         userLoading: false,
+      };
+    // Remove all items
+    case USER_CART_REMOVE_ALL_BEGIN:
+      return {
+        ...userState,
+        userLoading: true,
+      };
+
+    case USER_CART_REMOVE_ALL_SUCCESS:
+      return {
+        ...userState,
+        userLoading: false,
+        userInfo: action.payload,
+      };
+
+    case USER_CART_REMOVE_ALL_ERROR:
+      return {
+        ...userState,
+        userLoading: false,
+        hasUserError: true,
       };
 
     default:

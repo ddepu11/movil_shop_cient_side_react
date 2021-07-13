@@ -13,7 +13,9 @@ const CheckOutScreen = () => {
     (state) => state.user
   );
 
-  const { paymentLoading } = useSelector((state) => state.payment);
+  const { paymentLoading, paymentSuccess } = useSelector(
+    (state) => state.payment
+  );
 
   const history = useHistory();
 
@@ -29,7 +31,11 @@ const CheckOutScreen = () => {
       history.push('/sign-in');
       dispatch(sendNotification('Please sign in to buy!', true));
     }
-  }, [hasUserLoggedIn, history, dispatch]);
+
+    if (paymentSuccess && hasUserLoggedIn) {
+      history.push('/account');
+    }
+  }, [hasUserLoggedIn, history, dispatch, paymentSuccess]);
 
   const { totalPrice, discount } = useSelector((state) => state.orderTotal);
 
@@ -43,6 +49,7 @@ const CheckOutScreen = () => {
           name: `${userInfo.firstName} ${userInfo.lastName}`,
           email: userInfo.email,
           contact: userInfo.phoneNumber,
+          userId: userInfo._id,
         })
       );
     }
@@ -84,6 +91,7 @@ const CheckOutScreen = () => {
             onChange={handleAddress}
           />
         </div>
+
         <div className="row buy-now">
           <Button
             pt="12px"

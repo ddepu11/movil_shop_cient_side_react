@@ -4,6 +4,7 @@ import {
   CART_ADD_MOBILE_TO_LOCAL_SUCCESS,
   CART_INC_DEC_QUANTITY_BEGIN,
   CART_INC_DEC_QUANTITY_SUCCESS,
+  CART_REMOVE_ITEMS_SUCCESS,
   CART_REMOVE_ITEM_BEGIN,
   CART_REMOVE_ITEM_SUCCESS,
 } from '../constants/cartConstants';
@@ -16,6 +17,7 @@ const initiateState = {
 };
 
 const localsCartcart = getLocalCart();
+
 if (localsCartcart) initiateState.localStorageCart = localsCartcart;
 
 const cart = (state = initiateState, action) => {
@@ -67,6 +69,13 @@ const cart = (state = initiateState, action) => {
         ...state,
         cartLoading: false,
         localStorageCart: action.payload,
+      };
+
+    // Remove All Items
+    case CART_REMOVE_ITEMS_SUCCESS:
+      return {
+        ...state,
+        localStorageCart: [],
       };
 
     default:

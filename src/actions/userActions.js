@@ -32,6 +32,9 @@ import {
   USER_CART_ITEM_DELETE_BEGIN,
   USER_CART_ITEM_DELETE_ERROR,
   USER_CART_ITEM_DELETE_SUCCESS,
+  USER_CART_REMOVE_ALL_BEGIN,
+  USER_CART_REMOVE_ALL_ERROR,
+  USER_CART_REMOVE_ALL_SUCCESS,
 } from '../constants/userConstants';
 
 import * as user from '../api/userApi';
@@ -279,6 +282,26 @@ const deleteCartItem = (userId, cartItemId) => async (dispatch) => {
   }
 };
 
+const emptyUserCart = (userId) => async (dispatch) => {
+  dispatch({ type: USER_CART_REMOVE_ALL_BEGIN });
+
+  try {
+    const res = await user.removeAllCartItems(userId);
+
+    if (res) {
+      dispatch({ type: USER_CART_REMOVE_ALL_SUCCESS, payload: res.data.user });
+    } else {
+      dispatch({ type: USER_CART_REMOVE_ALL_ERROR });
+    }
+  } catch (err) {
+    const { msg } = err.response.data;
+
+    dispatch(sendNotification(msg, true));
+
+    dispatch({ type: USER_CART_REMOVE_ALL_ERROR });
+  }
+};
+
 export {
   customUserSignIn,
   signUpUser,
@@ -292,4 +315,5 @@ export {
   addMobileToCart,
   increaseOrDecreaseCartItemQuantity,
   deleteCartItem,
+  emptyUserCart,
 };

@@ -6,6 +6,7 @@ import {
   CART_INC_DEC_QUANTITY_SUCCESS,
   CART_REMOVE_ITEM_BEGIN,
   CART_REMOVE_ITEM_SUCCESS,
+  CART_REMOVE_ITEMS_SUCCESS,
 } from '../constants/cartConstants';
 
 import { sendNotification } from './notificationActions';
@@ -75,4 +76,9 @@ export const removeCartItem = (mobileId) => (dispatch) => {
   setLocalCart(cart);
 
   dispatch({ type: CART_REMOVE_ITEM_SUCCESS, payload: cart });
+};
+
+export const removeAllLocalCartItems = () => (dispatch) => {
+  setLocalCart([]);
+  dispatch({ type: CART_REMOVE_ITEMS_SUCCESS });
 };

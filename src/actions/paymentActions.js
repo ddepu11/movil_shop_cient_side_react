@@ -1,13 +1,22 @@
 import {
+  PAYMENT_CLEAR_STATE,
+  PAYMENT_MAKE_BEGIN,
+  PAYMENT_MAKE_ERROR,
+  PAYMENT_MAKE_SUCCESS,
   PAYMENT_RAZORPAY_CREATE_AN_ORDER_BEGIN,
   PAYMENT_RAZORPAY_CREATE_AN_ORDER_ERROR,
   PAYMENT_RAZORPAY_CREATE_AN_ORDER_SUCCESS,
 } from '../constants/paymentConstants';
 import * as payment from '../api/paymentApi';
 import { sendNotification } from './notificationActions';
+import { removeAllLocalCartItems } from './cartActions';
+import { emptyUserCart } from './userActions';
 
-export const makePayment =
-  (orderId, amount, currency, name, email, contact) => async () => {
+export const makeAPayment =
+  (orderId, amount, currency, name, email, contact, userId) =>
+  async (dispatch) => {
+    dispatch({ type: PAYMENT_MAKE_BEGIN });
+
     const { RAZORPAY_KEY_ID } = process.env;
 
     payment
@@ -25,9 +34,14 @@ export const makePayment =
           order_id: orderId,
 
           handler(response) {
-            alert(response.razorpay_payment_id);
-            alert(response.razorpay_order_id);
-            alert(response.razorpay_signature);
+            dispatch(emptyUserCart(userId));
+            dispatch(removeAllLocalCartItems());
+            dispatch({ type: PAYMENT_MAKE_SUCCESS });
+            dispatch(sendNotification('Payment Successfull!', false));
+
+            console.log(response.razorpay_payment_id);
+            console.log(response.razorpay_order_id);
+            console.log(response.razorpay_signature);
           },
 
           prefill: {
@@ -41,31 +55,37 @@ export const makePayment =
           },
 
           theme: {
-            color: '#3399cc',
+            color: '#231e23',
           },
         };
 
         const rzp1 = new window.Razorpay(options);
 
         rzp1.on('payment.failed', (response) => {
-          alert(response.error.code);
-          alert(response.error.description);
-          alert(response.error.source);
-          alert(response.error.step);
-          alert(response.error.reason);
-          alert(response.error.metadata.order_id);
-          alert(response.error.metadata.payment_id);
+          dispatch({ type: PAYMENT_MAKE_ERROR });
+
+          dispatch(sendNotification('Sorry Could not make a payment!!', true));
+
+          console.log(response.error.code);
+          console.log(response.error.description);
+          console.log(response.error.source);
+          console.log(response.error.step);
+          console.log(response.error.reason);
+          console.log(response.error.metadata.order_id);
+          console.log(response.error.metadata.payment_id);
         });
 
         rzp1.open();
       })
-      .catch((err) => {
-        sendNotification(err.message, true);
+      .catch(() => {
+        dispatch({ type: PAYMENT_MAKE_ERROR });
+
+        sendNotification('Sorry Could not make a payment!!', true);
       });
   };
 
 export const createAnOrder = (orderDetails) => async (dispatch) => {
-  const { totalPrice, name, email, contact } = orderDetails;
+  const { totalPrice, name, email, contact, userId } = orderDetails;
 
   dispatch({ type: PAYMENT_RAZORPAY_CREATE_AN_ORDER_BEGIN });
 
@@ -74,19 +94,27 @@ export const createAnOrder = (orderDetails) => async (dispatch) => {
 
     if (res) {
       const { id, amount, currency } = res.data.order;
+
       dispatch({
         type: PAYMENT_RAZORPAY_CREATE_AN_ORDER_SUCCESS,
       });
 
-      dispatch(makePayment(id, amount, currency, name, email, contact));
+      dispatch(
+        makeAPayment(id, amount, currency, name, email, contact, userId)
+      );
     } else {
       dispatch(sendNotification('Could not create order id!', true));
+
       dispatch({ type: PAYMENT_RAZORPAY_CREATE_AN_ORDER_ERROR });
     }
   } catch (err) {
     const { msg } = err.response.data;
+
     dispatch({ type: PAYMENT_RAZORPAY_CREATE_AN_ORDER_ERROR });
 
     dispatch(sendNotification(msg, true));
   }
 };
+
+export const clearPaymentState = () => (dispatch) =>
+  dispatch({ type: PAYMENT_CLEAR_STATE });
