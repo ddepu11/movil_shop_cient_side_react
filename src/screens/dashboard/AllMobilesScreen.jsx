@@ -1,24 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
 import Loading from '../../components/Loading';
 import Mobile from '../../components/Mobile';
-import { listMobiles, removeMobile } from '../../actions/sellerActions';
+import AllMobilesScreenLogic from './logic/AllMobilesScreenLogic';
 
 const AllMobileScreen = () => {
-  const { userInfo } = useSelector((state) => state.user);
-  const { sellerLoading, sellerMobiles } = useSelector((state) => state.seller);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (Object.keys(userInfo).length !== 0 && sellerMobiles.length === 0)
-      dispatch(listMobiles(userInfo._id));
-  }, [dispatch, userInfo, sellerMobiles]);
-
-  const handleDeleteMobile = (id) => {
-    dispatch(removeMobile(id));
-  };
+  const { handleDeleteMobile, sellerLoading, userInfo, sellerMobiles } =
+    AllMobilesScreenLogic();
 
   if (sellerLoading) {
     return <Loading />;

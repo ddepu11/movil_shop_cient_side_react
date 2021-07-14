@@ -1,35 +1,11 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import styled from 'styled-components';
 import PropType from 'prop-types';
 import formatePrice from '../../utils/formatePrice';
-import {
-  calculateOrderTotal,
-  setDefaultOrderTotal,
-} from '../../actions/orderTotalActions';
+import CartPriceDetailsLogic from './Logic/CartPriceDetailsLogic';
 
 const CartPriceDetais = ({ width }) => {
-  const { localStorageCart } = useSelector((state) => state.cart);
-  const { userInfo, hasUserLoggedIn } = useSelector((state) => state.user);
-  const { totalPrice, totalItems, discount } = useSelector(
-    (state) => state.orderTotal
-  );
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (localStorageCart.length) {
-      dispatch(calculateOrderTotal(localStorageCart));
-    }
-
-    if (Object.keys(userInfo).length !== 0 && hasUserLoggedIn) {
-      dispatch(calculateOrderTotal(userInfo.cart));
-    }
-
-    !localStorageCart.length &&
-      Object.keys(userInfo).length === 0 &&
-      dispatch(setDefaultOrderTotal());
-  }, [localStorageCart, userInfo, hasUserLoggedIn, dispatch]);
+  const { totalPrice, totalItems, discount } = CartPriceDetailsLogic();
 
   return (
     <Wrapper style={{ width: `${width}` }}>

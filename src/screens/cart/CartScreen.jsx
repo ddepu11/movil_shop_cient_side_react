@@ -1,69 +1,29 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
 import { AiFillPlusSquare, AiFillMinusSquare } from 'react-icons/ai';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Button';
-import {
-  addMobileToCart,
-  deleteCartItem,
-  increaseOrDecreaseCartItemQuantity,
-} from '../../actions/userActions';
 import CircleLoader from '../../components/CircleLoader';
-import { incDecQuantity, removeCartItem } from '../../actions/cartActions';
 import Hero from '../../components/Hero';
 import CartPriceDetais from './CartPriceDetails';
+import CartScreenLogic from './Logic/CartScreenLogic';
 
 const CartScreen = () => {
-  const { localStorageCart, cartLoading } = useSelector((state) => state.cart);
-
-  const { hasUserLoggedIn, userInfo, userLoading } = useSelector(
-    (state) => state.user
-  );
-
-  const isUserInfoEmpty = Object.keys(userInfo).length === 0;
-
-  const formatePrice = (price) =>
-    new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'INR',
-      minimumFractionDigits: 0,
-    }).format(price);
-
-  const dispatch = useDispatch();
-
-  const handleQuantity = (cartItemId, action) => {
-    dispatch(
-      increaseOrDecreaseCartItemQuantity(userInfo._id, cartItemId, action)
-    );
-  };
-
-  const handleLocalCartQuantity = (cartItemId, action) => {
-    dispatch(incDecQuantity(cartItemId, action));
-  };
-
-  useEffect(() => {
-    // get cart item which is not in db cart
-    if (!isUserInfoEmpty && localStorageCart.length !== 0) {
-      const comparer = (otherArray) => (current) =>
-        otherArray.filter((other) => other.mobileId === current.mobileId)
-          .length === 0;
-
-      const arr = localStorageCart.filter(comparer(userInfo.cart));
-
-      // if there is any then save it to db cart
-      if (arr.length !== 0) {
-        arr.forEach((e) => dispatch(addMobileToCart(userInfo._id, e)));
-      }
-    }
-  }, [
-    isUserInfoEmpty,
-    userInfo.cart,
-    localStorageCart,
-    userInfo._id,
+  const {
+    handleLocalCartQuantity,
+    handleQuantity,
+    formatePrice,
+    hasUserLoggedIn,
+    userLoading,
+    cartLoading,
+    removeCartItem,
+    deleteCartItem,
+    userInfo,
     dispatch,
-  ]);
+    localStorageCart,
+    isUserInfoEmpty,
+  } = CartScreenLogic();
 
   return (
     <>

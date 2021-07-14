@@ -1,60 +1,74 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
 import CartPriceDetais from '../cart/CartPriceDetails';
-import { sendNotification } from '../../actions/notificationActions';
 import Button from '../../components/Button';
-import { createAnOrder } from '../../actions/paymentActions';
 import CircleLoader from '../../components/CircleLoader';
+import CheckOutScreenLogic from './Logic/CheckOutScreenLogic';
 
 const CheckOutScreen = () => {
-  const { userInfo, userLoading, hasUserLoggedIn } = useSelector(
-    (state) => state.user
-  );
+  // const { userInfo, userLoading, hasUserLoggedIn } = useSelector(
+  //   (state) => state.user
+  // );
 
-  const { paymentLoading, paymentSuccess } = useSelector(
-    (state) => state.payment
-  );
+  // const { paymentLoading, paymentSuccess } = useSelector(
+  //   (state) => state.payment
+  // );
 
-  const history = useHistory();
+  // const history = useHistory();
 
-  const dispatch = useDispatch();
-  const [address, setAddress] = useState('');
+  // const dispatch = useDispatch();
+  // const [address, setAddress] = useState('');
 
-  const handleAddress = (e) => {
-    setAddress(e.target.value);
-  };
+  // const handleAddress = (e) => {
+  //   setAddress(e.target.value);
+  // };
 
-  useEffect(() => {
-    if (!hasUserLoggedIn) {
-      history.push('/sign-in');
-      dispatch(sendNotification('Please sign in to buy!', true));
-    }
+  // useEffect(() => {
+  //   if (Object.keys(userInfo).length !== 0 && userInfo.cart.length === 0) {
+  //     history.push('/cart');
+  //     dispatch(
+  //       sendNotification('Nothing to checkout,your cart is empty !', true)
+  //     );
+  //   }
 
-    if (paymentSuccess && hasUserLoggedIn) {
-      history.push('/account');
-    }
-  }, [hasUserLoggedIn, history, dispatch, paymentSuccess]);
+  //   if (!hasUserLoggedIn) {
+  //     history.push('/sign-in');
+  //     dispatch(
+  //       sendNotification('Please add somemobile in the cart to checkout!', true)
+  //     );
+  //   }
 
-  const { totalPrice, discount } = useSelector((state) => state.orderTotal);
+  //   if (paymentSuccess && hasUserLoggedIn) {
+  //     history.push('/account');
+  //   }
+  // }, [hasUserLoggedIn, history, dispatch, paymentSuccess, userInfo]);
 
-  const handlePay = () => {
-    if (address === '' || address.length < 30) {
-      dispatch(sendNotification('Please fill your full address!!', true));
-    } else {
-      dispatch(
-        createAnOrder({
-          totalPrice: totalPrice - discount,
-          name: `${userInfo.firstName} ${userInfo.lastName}`,
-          email: userInfo.email,
-          contact: userInfo.phoneNumber,
-          userId: userInfo._id,
-        })
-      );
-    }
-  };
+  // const { totalPrice, discount } = useSelector((state) => state.orderTotal);
 
+  // const handlePay = () => {
+  //   if (address === '' || address.length < 30) {
+  //     dispatch(sendNotification('Please fill your full address!!', true));
+  //   } else {
+  //     dispatch(
+  //       createAnOrder({
+  //         totalPrice: totalPrice - discount,
+  //         name: `${userInfo.firstName} ${userInfo.lastName}`,
+  //         email: userInfo.email,
+  //         contact: userInfo.phoneNumber,
+  //         userId: userInfo._id,
+  //       })
+  //     );
+  //   }
+  // };
+
+  const {
+    userLoading,
+    paymentLoading,
+    handleAddress,
+    handlePay,
+    userInfo,
+    address,
+  } = CheckOutScreenLogic();
   if (userLoading || paymentLoading) {
     return (
       <CircleLoader

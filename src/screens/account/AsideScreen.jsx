@@ -1,60 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
 import { ImCancelCircle } from 'react-icons/im';
-import { changeDisplayPicture } from '../../actions/userActions';
 import Button from '../../components/Button';
-import { sendNotification } from '../../actions/notificationActions';
-import User from '../../assests/user.png';
+import AsideScreenLogic from './logic/AsideScreenLogic';
 
 const AsideScreen = () => {
-  const dispatch = useDispatch();
-
-  const { userInfo } = useSelector((state) => state.user);
-
-  const [dpSRC, setDpSRC] = useState({ preview: User, file: '' });
-
-  useEffect(() => {
-    setDpSRC(() => ({ ...dpSRC, preview: `dp/${userInfo.displayPicture}` }));
-
-    // eslint-disable-next-line
-  }, [userInfo]);
-
-  const [wannaChangeDP, setWannaChangeDP] = useState(false);
-
-  const initiateChangeDPProcess = (e) => {
-    setWannaChangeDP(true);
-    const file = e.target.files[0];
-
-    if (file.size < 5242880) {
-      const fileSRC = URL.createObjectURL(file);
-      setDpSRC({ ...dpSRC, preview: fileSRC, file });
-    } else {
-      dispatch(
-        sendNotification('Image size should not be geater then 5mb!!!', true)
-      );
-    }
-  };
-
-  // Uploading the New User DP
-  const changeDP = () => {
-    const { file } = dpSRC;
-    if (file) {
-      const formData = new FormData();
-      formData.append('dp', file);
-
-      dispatch(changeDisplayPicture(formData, userInfo._id));
-    }
-    setWannaChangeDP(false);
-    setDpSRC({ ...dpSRC, preview: `dp/${userInfo.displayPicture}` });
-  };
-
-  const cancelChangeDPProcess = () => {
-    setWannaChangeDP(false);
-    setDpSRC({ ...dpSRC, preview: `dp/${userInfo.displayPicture}` });
-  };
-
-  const { firstName, lastName } = userInfo;
+  const {
+    firstName,
+    lastName,
+    cancelChangeDPProcess,
+    changeDP,
+    initiateChangeDPProcess,
+    wannaChangeDP,
+    dpSRC,
+  } = AsideScreenLogic();
 
   return (
     <Wrapper className="flex">
