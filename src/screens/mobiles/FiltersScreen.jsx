@@ -2,35 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
 import Button from '../../components/Button';
-import { clearFilter } from '../../actions/filterMobileActions';
+import FilterScreenLogic from './logic/FilterScreenLogic';
 
 const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
-  const { mobiles } = useSelector((state) => state.mobile);
-  const dispatch = useDispatch();
-
-  let brands;
-  let colors = [];
-  let ram;
-
-  if (Object.keys(mobiles).length !== 0) {
-    // Gets brands name not repeting any
-    brands = Array.from(new Set(mobiles.map((m) => m.brand)));
-
-    for (let i = 0; i < mobiles.length; i += 1) {
-      for (let j = 0; j < mobiles[i].colors.length; j += 1) {
-        colors.push(mobiles[i].colors[j]);
-      }
-    }
-    // Gets Colors not repeting any
-    colors = [...new Set(colors)];
-
-    // Gets ram Not repeting any
-    ram = [...new Set(mobiles.map((m) => m.ram))];
-  }
-
-  const clearFilters = () => dispatch(clearFilter());
+  const { clearFilters, colors, ram, brands } = FilterScreenLogic();
 
   return (
     <Wrapper>
@@ -284,6 +260,7 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
     </Wrapper>
   );
 };
+
 FiltersScreen.propTypes = {
   handleButtons: PropTypes.func.isRequired,
   handleInput: PropTypes.func.isRequired,

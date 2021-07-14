@@ -1,23 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import MobileCartBuyButtons from './MobileCartBuyButtons';
+import MobileImagesScreenLogic from './logic/MobileImagesScreenLogic';
 
 const MobileImagesScreen = ({ color }) => {
-  const {
-    mobile: { pictures, title, sellerInfo },
-  } = useSelector((state) => state.mobile);
-
-  const [preview, setPreview] = useState('');
-
-  useEffect(() => {
-    sellerInfo && setPreview(`/sellers/${sellerInfo.id}/${pictures[0]}`);
-  }, [pictures, sellerInfo]);
-
-  const handleHover = (e) => {
-    setPreview(e.target.src);
-  };
+  const { handleHover, preview, title, pictures, sellerInfo } =
+    MobileImagesScreenLogic();
 
   return (
     <Wrapper className="flex">

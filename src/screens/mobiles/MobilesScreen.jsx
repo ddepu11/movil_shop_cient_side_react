@@ -1,80 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { BsGrid3X3Gap } from 'react-icons/bs';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
-import { useDispatch, useSelector } from 'react-redux';
 import FiltersScreen from './FiltersScreen';
 import Hero from '../../components/Hero';
 import GridViewScreen from './views/GridViewScreen';
 import ListViewScreen from './views/ListViewScreen';
 
-import {
-  filterByBrand,
-  filterByColor,
-  filterByKeyword,
-  filterByMovilShopAssured,
-  filterByPrice,
-  filterByRam,
-  filterByStars,
-  setFilters,
-  sort,
-} from '../../actions/filterMobileActions';
+import MobileScreenLogic from './logic/MobileScreenLogic';
 
 const MobilesScreen = () => {
-  const dispatch = useDispatch();
-
-  const { filters, filteredMobile } = useSelector(
-    (state) => state.filterMobile
-  );
-
-  useEffect(() => {
-    dispatch(filterByKeyword());
-  }, [filters.search, dispatch]);
-
-  useEffect(() => {
-    dispatch(sort());
-  }, [filters.sortBy, dispatch]);
-
-  useEffect(() => {
-    dispatch(filterByBrand());
-  }, [filters.brand, dispatch]);
-
-  useEffect(() => {
-    dispatch(filterByStars());
-  }, [filters.avgStar, dispatch]);
-
-  useEffect(() => {
-    dispatch(filterByPrice());
-  }, [filters.price, dispatch]);
-
-  useEffect(() => {
-    dispatch(filterByRam());
-  }, [filters.ram, dispatch]);
-
-  useEffect(() => {
-    dispatch(filterByColor());
-  }, [filters.color, dispatch]);
-
-  useEffect(() => {
-    dispatch(filterByMovilShopAssured());
-  }, [filters.movilShopAssured, dispatch]);
-
-  const handleButtons = (name, value) => {
-    dispatch(setFilters({ name, value }));
-  };
-
-  const handleInput = (e) => {
-    let { value } = e.target;
-    const { name } = e.target;
-
-    if (name === 'movilShopAssured') {
-      value = !filters.movilShopAssured;
-
-      dispatch(setFilters({ name, value }));
-    } else {
-      dispatch(setFilters({ name, value }));
-    }
-  };
+  const { filteredMobile, handleInput, handleButtons, filters } =
+    MobileScreenLogic();
 
   return (
     <>
