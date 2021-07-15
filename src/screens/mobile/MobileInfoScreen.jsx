@@ -78,7 +78,7 @@ const MobileInfoScreen = ({ setColor, color }) => {
             {colors &&
               colors.map((c) => (
                 <Button
-                  key={Math.floor(Math.random() * Date.now())}
+                  key={c}
                   bgColor={c}
                   width="20px"
                   height="20px"

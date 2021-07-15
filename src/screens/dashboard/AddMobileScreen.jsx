@@ -32,6 +32,7 @@ const AddMobileScreen = () => {
   return (
     <Wrapper>
       <h1>Add a new mobile</h1>
+
       <div className="form">
         <div className="row flex">
           <FormControl
@@ -214,7 +215,7 @@ const AddMobileScreen = () => {
             <div className="colors_top">
               {mobileColors.map((e) => (
                 <Button
-                  key={Math.floor(Math.random() * Date.now() + e.length)}
+                  key={e}
                   pt="0px"
                   pb="0px"
                   pl="0px"
@@ -241,7 +242,7 @@ const AddMobileScreen = () => {
         {mobileInfo.previews.length !== 0 ? (
           <div className="row flex images_preview">
             {mobileInfo.previews.map((e, index) => (
-              <div className="img" key={Math.floor(Math.random() * Date.now())}>
+              <div className="img" key={e}>
                 <img src={e} alt={e} />
 
                 <IoTrashBin
@@ -253,6 +254,7 @@ const AddMobileScreen = () => {
                 />
               </div>
             ))}
+
             <div className="add_btn">
               <label htmlFor="upload_more">
                 <AiOutlineFileAdd className="plus" />

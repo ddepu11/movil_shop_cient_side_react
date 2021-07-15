@@ -70,7 +70,8 @@ const CartScreenLogic = () => {
     deleteCartItem,
     userInfo,
     dispatch,
-    localStorageCart,isUserInfoEmpty
+    localStorageCart,
+    isUserInfoEmpty,
   };
 };
 

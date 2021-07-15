@@ -64,7 +64,7 @@ const Home = () => {
                       usedFor="grid"
                       userId={id}
                       mobileId={_id}
-                      key={Math.floor(Math.random() * Date.now())}
+                      key={_id}
                     />
                   );
                 }

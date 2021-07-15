@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import PropType from 'prop-types';
 import formatePrice from '../../utils/formatePrice';
-import CartPriceDetailsLogic from './Logic/CartPriceDetailsLogic';
+import CartPriceDetailsLogic from './logic/CartPriceDetailsLogic';
 
-const CartPriceDetais = ({ width }) => {
+const CartPriceDetais = ({ width, height }) => {
   const { totalPrice, totalItems, discount } = CartPriceDetailsLogic();
 
   return (
-    <Wrapper style={{ width: `${width}` }}>
+    <Wrapper style={{ width: `${width}`, height: `${height}` }}>
       <h1>Price Details</h1>
       <div className="price_details">
         <div className="one flex">
@@ -52,6 +52,7 @@ const Wrapper = styled.div`
 
   .price_details {
     padding: 14px 22px;
+
     .one {
       justify-content: space-between;
       align-items: flex-start;
@@ -69,6 +70,7 @@ const Wrapper = styled.div`
         letter-spacing: 1px;
       }
     }
+
     border-bottom: 1px solid #cfcfcf;
   }
 
@@ -92,10 +94,12 @@ const Wrapper = styled.div`
 
 CartPriceDetais.propTypes = {
   width: PropType.string,
+  height: PropType.string,
 };
 
 CartPriceDetais.defaultProps = {
   width: 'auto',
+  height: 'auto',
 };
 
 export default CartPriceDetais;

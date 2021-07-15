@@ -332,10 +332,11 @@ const Mobile = ({
 
         <div className="right">
           <h1>{formatePrice(price)}</h1>
+
           <div className="color_btns flex">
             {colors.map((c) => (
               <Button
-                key={Math.floor(Math.random() * c.length * 1500)}
+                key={c}
                 pt="0px"
                 pb="0px"
                 pl="0px"

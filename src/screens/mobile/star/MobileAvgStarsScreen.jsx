@@ -13,15 +13,11 @@ const MobileAvgStarsScreen = () => {
       {Array.from({ length: 5 }, (_, index) => {
         const number = index + 0.5;
 
-        if (avgStar >= index + 1)
-          return <BsStarFill key={Math.floor(Math.random() * Date.now())} />;
+        if (avgStar >= index + 1) return <BsStarFill key={index} />;
 
-        if (avgStar >= number)
-          return <BsStarHalf key={Math.floor(Math.random() * Date.now())} />;
+        if (avgStar >= number) return <BsStarHalf key={index} />;
 
-        return (
-          <BsStar color="#3333" key={Math.floor(Math.random() * Date.now())} />
-        );
+        return <BsStar color="#3333" key={index} />;
       })}
     </Wrapper>
   );

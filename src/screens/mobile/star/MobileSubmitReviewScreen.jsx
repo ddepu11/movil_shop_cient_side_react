@@ -22,20 +22,10 @@ const MobileSubmitReviewScreen = () => {
       <div className="stars">
         {Array.from({ length: 5 }, (_, index) => {
           if (stars >= index + 1) {
-            return (
-              <BsStarFill
-                key={Math.floor(Math.random() * Date.now())}
-                onClick={() => decreaseStar()}
-              />
-            );
+            return <BsStarFill key={index} onClick={() => decreaseStar()} />;
           }
 
-          return (
-            <BsStar
-              key={Math.floor(Math.random() * Date.now())}
-              onClick={() => increaseStar(index + 1)}
-            />
-          );
+          return <BsStar key={index} onClick={() => increaseStar(index + 1)} />;
         })}
       </div>
 

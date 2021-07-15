@@ -34,10 +34,7 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
               <option value="all">All</option>
               {brands &&
                 brands.map((b) => (
-                  <option
-                    key={Math.floor(Math.random() * b.length * Date.now())}
-                    value={b}
-                  >
+                  <option key={b} value={b}>
                     {b}
                   </option>
                 ))}
@@ -162,10 +159,7 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
             <h5>Ram</h5>
             {ram &&
               ram.map((r) => (
-                <div
-                  className="ram"
-                  key={Math.floor(Math.random() * Date.now())}
-                >
+                <div className="ram" key={r}>
                   <input
                     onChange={handleInput}
                     type="radio"
@@ -210,7 +204,7 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
               {colors &&
                 colors.map((c) => (
                   <Button
-                    key={Math.floor(Math.random() * c.length * Date.now())}
+                    key={c}
                     bgColor={c}
                     color={c === 'white' || c === '#FFD700' ? 'black' : 'white'}
                     fs="1.2em"

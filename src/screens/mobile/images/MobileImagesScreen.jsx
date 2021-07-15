@@ -14,10 +14,7 @@ const MobileImagesScreen = ({ color }) => {
         <div className="left-section flex">
           {pictures &&
             pictures.map((p) => (
-              <div
-                className="small_img"
-                key={Math.floor(Math.random() * Date.now())}
-              >
+              <div className="small_img" key={p}>
                 <img
                   onMouseEnter={handleHover}
                   alt={title}

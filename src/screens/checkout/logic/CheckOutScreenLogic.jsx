@@ -16,10 +16,18 @@ const CheckOutScreenLogic = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const [address, setAddress] = useState('');
 
-  const handleAddress = (e) => {
-    setAddress(e.target.value);
+  const [deliveryAddress, setDeliveryAddress] = useState({
+    state: '',
+    city: '',
+    address: '',
+    pincode: '',
+  });
+
+  const handleDeliveryAddress = (e) => {
+    const { name, value } = e.target;
+
+    setDeliveryAddress((prevState) => ({ ...prevState, [name]: value }));
   };
 
   useEffect(() => {
@@ -45,7 +53,7 @@ const CheckOutScreenLogic = () => {
   const { totalPrice, discount } = useSelector((state) => state.orderTotal);
 
   const handlePay = () => {
-    if (address === '' || address.length < 30) {
+    if (deliveryAddress.address === '' || deliveryAddress.address.length < 30) {
       dispatch(sendNotification('Please fill your full address!!', true));
     } else {
       dispatch(
@@ -60,13 +68,34 @@ const CheckOutScreenLogic = () => {
     }
   };
 
+  const saveDeliveryAddress = () => {
+    const { state, city, address, pincode } = deliveryAddress;
+
+    if (!state) {
+      console.log('State Empty');
+    }
+
+    if (!city) {
+      console.log('City Empty');
+    }
+
+    if (!address) {
+      console.log('Address Empty');
+    }
+
+    if (!pincode) {
+      console.log('Pincode Empty');
+    }
+  };
+
   return {
     userLoading,
     paymentLoading,
-    handleAddress,
+    handleDeliveryAddress,
     handlePay,
     userInfo,
-    address,
+    deliveryAddress,
+    saveDeliveryAddress,
   };
 };
 

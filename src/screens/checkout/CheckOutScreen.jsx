@@ -3,72 +3,19 @@ import styled from 'styled-components';
 import CartPriceDetais from '../cart/CartPriceDetails';
 import Button from '../../components/Button';
 import CircleLoader from '../../components/CircleLoader';
-import CheckOutScreenLogic from './Logic/CheckOutScreenLogic';
+import CheckOutScreenLogic from './logic/CheckOutScreenLogic';
 
 const CheckOutScreen = () => {
-  // const { userInfo, userLoading, hasUserLoggedIn } = useSelector(
-  //   (state) => state.user
-  // );
-
-  // const { paymentLoading, paymentSuccess } = useSelector(
-  //   (state) => state.payment
-  // );
-
-  // const history = useHistory();
-
-  // const dispatch = useDispatch();
-  // const [address, setAddress] = useState('');
-
-  // const handleAddress = (e) => {
-  //   setAddress(e.target.value);
-  // };
-
-  // useEffect(() => {
-  //   if (Object.keys(userInfo).length !== 0 && userInfo.cart.length === 0) {
-  //     history.push('/cart');
-  //     dispatch(
-  //       sendNotification('Nothing to checkout,your cart is empty !', true)
-  //     );
-  //   }
-
-  //   if (!hasUserLoggedIn) {
-  //     history.push('/sign-in');
-  //     dispatch(
-  //       sendNotification('Please add somemobile in the cart to checkout!', true)
-  //     );
-  //   }
-
-  //   if (paymentSuccess && hasUserLoggedIn) {
-  //     history.push('/account');
-  //   }
-  // }, [hasUserLoggedIn, history, dispatch, paymentSuccess, userInfo]);
-
-  // const { totalPrice, discount } = useSelector((state) => state.orderTotal);
-
-  // const handlePay = () => {
-  //   if (address === '' || address.length < 30) {
-  //     dispatch(sendNotification('Please fill your full address!!', true));
-  //   } else {
-  //     dispatch(
-  //       createAnOrder({
-  //         totalPrice: totalPrice - discount,
-  //         name: `${userInfo.firstName} ${userInfo.lastName}`,
-  //         email: userInfo.email,
-  //         contact: userInfo.phoneNumber,
-  //         userId: userInfo._id,
-  //       })
-  //     );
-  //   }
-  // };
-
   const {
     userLoading,
     paymentLoading,
-    handleAddress,
+    handleDeliveryAddress,
     handlePay,
     userInfo,
-    address,
+    deliveryAddress,
+    saveDeliveryAddress,
   } = CheckOutScreenLogic();
+
   if (userLoading || paymentLoading) {
     return (
       <CircleLoader
@@ -96,32 +43,114 @@ const CheckOutScreen = () => {
         </div>
 
         <div className="row flex">
-          <h3>Address:</h3>
-          <textarea
-            name="address"
-            rows="7"
-            cols="30"
-            value={address}
-            onChange={handleAddress}
-          />
+          <h3>Pincode:</h3>
+          <div className="right">
+            <input
+              type="number"
+              name="pincode"
+              onChange={handleDeliveryAddress}
+            />
+            <p className="message">xcv</p>
+          </div>
+        </div>
+
+        <div className="row flex">
+          <h3>State</h3>
+          <div className="right">
+            <select name="state" onChange={handleDeliveryAddress}>
+              <option disabled>--Select State--</option>
+              <option value="Andaman &amp; Nicobar Islands">
+                Andaman &amp; Nicobar Islands
+              </option>
+              <option value="Andhra Pradesh">Andhra Pradesh</option>
+              <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+              <option value="Assam">Assam</option>
+              <option value="Bihar">Bihar</option>
+              <option value="Chandigarh">Chandigarh</option>
+              <option value="Chhattisgarh">Chhattisgarh</option>
+              <option value="Dadra &amp; Nagar Haveli &amp; Daman &amp; Diu">
+                Dadra &amp; Nagar Haveli &amp; Daman &amp; Diu
+              </option>
+              <option value="Delhi">Delhi</option>
+              <option value="Goa">Goa</option>
+              <option value="Gujarat">Gujarat</option>
+              <option value="Haryana">Haryana</option>
+              <option value="Himachal Pradesh">Himachal Pradesh</option>
+              <option value="Jammu &amp; Kashmir">Jammu &amp; Kashmir</option>
+              <option value="Jharkhand">Jharkhand</option>
+              <option value="Karnataka">Karnataka</option>
+              <option value="Kerala">Kerala</option>
+              <option value="Ladakh">Ladakh</option>
+              <option value="Lakshadweep">Lakshadweep</option>
+              <option value="Madhya Pradesh">Madhya Pradesh</option>
+              <option value="Maharashtra">Maharashtra</option>
+              <option value="Manipur">Manipur</option>
+              <option value="Meghalaya">Meghalaya</option>
+              <option value="Mizoram">Mizoram</option>
+              <option value="Nagaland">Nagaland</option>
+              <option value="Odisha">Odisha</option>
+              <option value="Puducherry">Puducherry</option>
+              <option value="Punjab">Punjab</option>
+              <option value="Rajasthan">Rajasthan</option>
+              <option value="Sikkim">Sikkim</option>
+              <option value="Tamil Nadu">Tamil Nadu</option>
+              <option value="Telangana">Telangana</option>
+              <option value="Tripura">Tripura</option>
+              <option value="Uttarakhand">Uttarakhand</option>
+              <option value="Uttar Pradesh">Uttar Pradesh</option>
+              <option value="West Bengal">West Bengal</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="row flex">
+          <h3>City/ District/ Town:</h3>
+          <div className="right">
+            <input type="text" name="city" onChange={handleDeliveryAddress} />
+          </div>
+        </div>
+
+        <div className="row flex">
+          <h3>Address(Area and Street)</h3>
+          <div className="right">
+            <textarea
+              name="address"
+              rows="7"
+              cols="29"
+              value={deliveryAddress.address}
+              onChange={handleDeliveryAddress}
+            />
+          </div>
         </div>
 
         <div className="row buy-now">
           <Button
-            pt="12px"
-            pb="12px"
+            pt="10px"
+            pb="10px"
             pl="30px"
             pr="30px"
-            fs="1.3em"
+            fs="1em"
             width="100%"
-            mt="20px"
+            bgColor="var( --success-color)"
+            handleClick={saveDeliveryAddress}
+          >
+            Save Delivery Address
+          </Button>
+          <Button
+            pt="10px"
+            pb="10px"
+            pl="30px"
+            pr="30px"
+            fs="1em"
+            width="100%"
+            mt="15px"
             handleClick={handlePay}
           >
             Buy Now
           </Button>
         </div>
       </div>
-      <CartPriceDetais />
+      <CartPriceDetais height="280px" />
     </Wrapper>
   );
 };
@@ -129,12 +158,12 @@ const CheckOutScreen = () => {
 const Wrapper = styled.main`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  /* grid-template-rows: repeat(1, minmax(100px, auto)); */
   gap: 0 5rem;
   padding: 15px 12px;
 
   .user_info {
     padding: 10px 00px;
-    /* border: 1px solid red; */
 
     .row {
       justify-content: space-between;
@@ -152,15 +181,38 @@ const Wrapper = styled.main`
         color: #333;
         letter-spacing: 1px;
         display: block;
-        width: 50%;
+        justify-self: flex-start;
+        width: 45%;
       }
-      textarea {
-        width: 50%;
-        font-size: 1.1em;
-        border: 1px solid var(--little-light-color);
-        padding: 4px 5px;
-        color: var(--medium-dark-color);
-        resize: none;
+
+      .right {
+        width: 45%;
+
+        input {
+          justify-self: flex-start;
+          border: 1px dashed var(--little-light-color);
+          padding: 6px 5px;
+          color: var(--little-dark-color);
+          width: 100%;
+          font-size: 1em;
+        }
+
+        select {
+          padding: 6px 5px;
+          justify-self: flex-start;
+          border: 1px dashed var(--little-light-color);
+          font-size: 1em;
+          width: 100%;
+        }
+
+        textarea {
+          font-size: 1.1em;
+          border: 1px dashed var(--little-light-color);
+          padding: 4px 5px;
+          color: var(--little-dark-color);
+          resize: none;
+          width: 100%;
+        }
       }
 
       textarea:focus {
@@ -169,7 +221,7 @@ const Wrapper = styled.main`
     }
     .buy-now {
       margin: 0 auto;
-      width: 50%;
+      width: 100%;
     }
   }
 `;

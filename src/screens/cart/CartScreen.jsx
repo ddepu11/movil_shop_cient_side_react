@@ -7,7 +7,7 @@ import Button from '../../components/Button';
 import CircleLoader from '../../components/CircleLoader';
 import Hero from '../../components/Hero';
 import CartPriceDetais from './CartPriceDetails';
-import CartScreenLogic from './Logic/CartScreenLogic';
+import CartScreenLogic from './logic/CartScreenLogic';
 
 const CartScreen = () => {
   const {
@@ -69,10 +69,7 @@ const CartScreen = () => {
                 } = m;
 
                 return (
-                  <div
-                    className="outer-section flex"
-                    key={Math.floor(Math.random() * Date.now())}
-                  >
+                  <div className="outer-section flex" key={_id}>
                     <div className="mobile flex">
                       <div className="image">
                         <img
@@ -211,10 +208,7 @@ const CartScreen = () => {
                 } = m;
 
                 return (
-                  <div
-                    className="outer-section flex"
-                    key={Math.floor(Math.random() * Date.now())}
-                  >
+                  <div className="outer-section flex" key={mobileId}>
                     <div className="mobile flex">
                       <div className="image">
                         <img
