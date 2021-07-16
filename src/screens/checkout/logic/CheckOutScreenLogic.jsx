@@ -55,7 +55,7 @@ const CheckOutScreenLogic = () => {
     }
 
     if (paymentSuccess && hasUserLoggedIn) {
-      history.push('/account');
+      history.push('/orders');
     }
 
     if (
