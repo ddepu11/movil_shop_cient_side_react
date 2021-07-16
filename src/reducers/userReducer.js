@@ -35,6 +35,9 @@ import {
   USER_CART_REMOVE_ALL_BEGIN,
   USER_CART_REMOVE_ALL_SUCCESS,
   USER_CART_REMOVE_ALL_ERROR,
+  USER_DELIVERY_ADDRESS_SAVE_BEGIN,
+  USER_DELIVERY_ADDRESS_SAVE_ERROR,
+  USER_DELIVERY_ADDRESS_SAVE_SUCCESS,
 } from '../constants/userConstants';
 
 const initialUser = {
@@ -294,6 +297,7 @@ const user = (userState = initialUser, action) => {
         ...userState,
         userLoading: false,
       };
+
     // Remove all items
     case USER_CART_REMOVE_ALL_BEGIN:
       return {
@@ -309,6 +313,27 @@ const user = (userState = initialUser, action) => {
       };
 
     case USER_CART_REMOVE_ALL_ERROR:
+      return {
+        ...userState,
+        userLoading: false,
+        hasUserError: true,
+      };
+
+    // Save delivery Address
+    case USER_DELIVERY_ADDRESS_SAVE_BEGIN:
+      return {
+        ...userState,
+        userLoading: true,
+      };
+
+    case USER_DELIVERY_ADDRESS_SAVE_SUCCESS:
+      return {
+        ...userState,
+        userLoading: false,
+        userInfo: action.payload,
+      };
+
+    case USER_DELIVERY_ADDRESS_SAVE_ERROR:
       return {
         ...userState,
         userLoading: false,

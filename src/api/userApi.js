@@ -41,6 +41,9 @@ const deleteCartItem = (userId, cartItemId) =>
 const removeAllCartItems = (userId) =>
   axios.delete(`/users/${userId}/cart/items`);
 
+const saveDeliveryAddress = (userId, deliveryAddress) =>
+  axios.put(`/users/${userId}/deliveryAddress`, deliveryAddress);
+
 export {
   logIn,
   signUp,
@@ -54,4 +57,5 @@ export {
   increaseOrDecreaseCartItemQuantity,
   deleteCartItem,
   removeAllCartItems,
+  saveDeliveryAddress,
 };

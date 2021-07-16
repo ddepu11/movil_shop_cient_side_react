@@ -14,6 +14,10 @@ const CheckOutScreen = () => {
     userInfo,
     deliveryAddress,
     saveDeliveryAddress,
+    pinCodeValidationMessageRef,
+    stateValidationMessageRef,
+    cityValidationMessageRef,
+    addressValidationMessageRef,
   } = CheckOutScreenLogic();
 
   if (userLoading || paymentLoading) {
@@ -28,6 +32,8 @@ const CheckOutScreen = () => {
       />
     );
   }
+
+  const { state, city, pincode, address } = deliveryAddress;
 
   return (
     <Wrapper className="w-960">
@@ -49,16 +55,17 @@ const CheckOutScreen = () => {
               type="number"
               name="pincode"
               onChange={handleDeliveryAddress}
+              value={pincode}
             />
-            <p className="message">xcv</p>
+            <p className="message" ref={pinCodeValidationMessageRef} />
           </div>
         </div>
 
         <div className="row flex">
           <h3>State</h3>
           <div className="right">
-            <select name="state" onChange={handleDeliveryAddress}>
-              <option disabled>--Select State--</option>
+            <select name="state" onChange={handleDeliveryAddress} value={state}>
+              <option>--Select State--</option>
               <option value="Andaman &amp; Nicobar Islands">
                 Andaman &amp; Nicobar Islands
               </option>
@@ -100,13 +107,20 @@ const CheckOutScreen = () => {
               <option value="Uttar Pradesh">Uttar Pradesh</option>
               <option value="West Bengal">West Bengal</option>
             </select>
+            <p ref={stateValidationMessageRef} className="message" />
           </div>
         </div>
 
         <div className="row flex">
           <h3>City/ District/ Town:</h3>
           <div className="right">
-            <input type="text" name="city" onChange={handleDeliveryAddress} />
+            <input
+              type="text"
+              name="city"
+              value={city}
+              onChange={handleDeliveryAddress}
+            />
+            <p ref={cityValidationMessageRef} className="message" />
           </div>
         </div>
 
@@ -117,9 +131,10 @@ const CheckOutScreen = () => {
               name="address"
               rows="7"
               cols="29"
-              value={deliveryAddress.address}
+              value={address}
               onChange={handleDeliveryAddress}
             />
+            <p ref={addressValidationMessageRef} className="message" />
           </div>
         </div>
 
@@ -136,6 +151,7 @@ const CheckOutScreen = () => {
           >
             Save Delivery Address
           </Button>
+
           <Button
             pt="10px"
             pb="10px"
@@ -212,6 +228,16 @@ const Wrapper = styled.main`
           color: var(--little-dark-color);
           resize: none;
           width: 100%;
+        }
+
+        .message {
+          font-size: 1em;
+          display: none;
+        }
+
+        .message.error {
+          display: block;
+          color: var(--danger-color);
         }
       }
 

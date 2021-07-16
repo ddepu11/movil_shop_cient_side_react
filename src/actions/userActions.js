@@ -35,6 +35,9 @@ import {
   USER_CART_REMOVE_ALL_BEGIN,
   USER_CART_REMOVE_ALL_ERROR,
   USER_CART_REMOVE_ALL_SUCCESS,
+  USER_DELIVERY_ADDRESS_SAVE_BEGIN,
+  USER_DELIVERY_ADDRESS_SAVE_ERROR,
+  USER_DELIVERY_ADDRESS_SAVE_SUCCESS,
 } from '../constants/userConstants';
 
 import * as user from '../api/userApi';
@@ -302,6 +305,36 @@ const emptyUserCart = (userId) => async (dispatch) => {
   }
 };
 
+const saveUserDeliveryAddress =
+  (userId, deliveryAddress) => async (dispatch) => {
+    dispatch({ type: USER_DELIVERY_ADDRESS_SAVE_BEGIN });
+
+    try {
+      const res = await user.saveDeliveryAddress(userId, deliveryAddress);
+
+      if (res) {
+        dispatch(
+          sendNotification('Successfuly saved delivery Address!', false)
+        );
+
+        dispatch({
+          type: USER_DELIVERY_ADDRESS_SAVE_SUCCESS,
+          payload: res.data.user,
+        });
+      } else {
+        dispatch(sendNotification('Could not save delivery Address!', true));
+
+        dispatch({ type: USER_DELIVERY_ADDRESS_SAVE_ERROR });
+      }
+    } catch (err) {
+      const { msg } = err.response.data;
+
+      dispatch(sendNotification(msg, true));
+
+      dispatch({ type: USER_DELIVERY_ADDRESS_SAVE_ERROR });
+    }
+  };
+
 export {
   customUserSignIn,
   signUpUser,
@@ -316,4 +349,5 @@ export {
   increaseOrDecreaseCartItemQuantity,
   deleteCartItem,
   emptyUserCart,
+  saveUserDeliveryAddress,
 };

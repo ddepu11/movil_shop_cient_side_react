@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { sendNotification } from '../../../actions/notificationActions';
 import { createAnOrder } from '../../../actions/paymentActions';
+import { saveUserDeliveryAddress } from '../../../actions/userActions';
+import clearAllSetTimeOut from '../../../utils/clearAllSetTimeOut';
+import validateDeliveryAddress from '../../../utils/validateDeliveryAddress';
 
 const CheckOutScreenLogic = () => {
   const { userInfo, userLoading, hasUserLoggedIn } = useSelector(
@@ -27,12 +30,19 @@ const CheckOutScreenLogic = () => {
   const handleDeliveryAddress = (e) => {
     const { name, value } = e.target;
 
-    setDeliveryAddress((prevState) => ({ ...prevState, [name]: value }));
+    if (name === 'pincode') {
+      setDeliveryAddress((prevState) => ({ ...prevState, [name]: +value }));
+    } else {
+      setDeliveryAddress((prevState) => ({ ...prevState, [name]: value }));
+    }
   };
+
+  const setTimeOutId = useRef();
 
   useEffect(() => {
     if (Object.keys(userInfo).length !== 0 && userInfo.cart.length === 0) {
       history.push('/cart');
+
       dispatch(
         sendNotification('Nothing to checkout,your cart is empty !', true)
       );
@@ -40,14 +50,25 @@ const CheckOutScreenLogic = () => {
 
     if (!hasUserLoggedIn) {
       history.push('/sign-in');
-      dispatch(
-        sendNotification('Please add somemobile in the cart to checkout!', true)
-      );
+
+      dispatch(sendNotification('Please log in to checkout!', true));
     }
 
     if (paymentSuccess && hasUserLoggedIn) {
       history.push('/account');
     }
+
+    if (
+      Object.keys(userInfo).length !== 0 &&
+      Object.keys(userInfo.deliveryAddress).length !== 0
+    ) {
+      setDeliveryAddress((prevState) => ({
+        ...prevState,
+        ...userInfo.deliveryAddress,
+      }));
+    }
+
+    return () => clearAllSetTimeOut(setTimeOutId);
   }, [hasUserLoggedIn, history, dispatch, paymentSuccess, userInfo]);
 
   const { totalPrice, discount } = useSelector((state) => state.orderTotal);
@@ -68,23 +89,35 @@ const CheckOutScreenLogic = () => {
     }
   };
 
+  const pinCodeValidationMessageRef = useRef();
+  const stateValidationMessageRef = useRef(null);
+  const cityValidationMessageRef = useRef(null);
+  const addressValidationMessageRef = useRef(null);
+
   const saveDeliveryAddress = () => {
-    const { state, city, address, pincode } = deliveryAddress;
+    const errorFlag = validateDeliveryAddress(
+      {
+        pinCodeValidationMessageRef,
+        stateValidationMessageRef,
+        cityValidationMessageRef,
+        addressValidationMessageRef,
+      },
+      deliveryAddress,
+      setTimeOutId
+    );
 
-    if (!state) {
-      console.log('State Empty');
-    }
-
-    if (!city) {
-      console.log('City Empty');
-    }
-
-    if (!address) {
-      console.log('Address Empty');
-    }
-
-    if (!pincode) {
-      console.log('Pincode Empty');
+    if (
+      !errorFlag &&
+      deliveryAddress.pincode === userInfo.deliveryAddress.pincode &&
+      deliveryAddress.state === userInfo.deliveryAddress.state &&
+      deliveryAddress.city === userInfo.deliveryAddress.city &&
+      deliveryAddress.address === userInfo.deliveryAddress.address
+    ) {
+      dispatch(
+        sendNotification('Address has not changed, nothing to change!', true)
+      );
+    } else if (!errorFlag) {
+      dispatch(saveUserDeliveryAddress(userInfo._id, deliveryAddress));
     }
   };
 
@@ -96,6 +129,10 @@ const CheckOutScreenLogic = () => {
     userInfo,
     deliveryAddress,
     saveDeliveryAddress,
+    pinCodeValidationMessageRef,
+    stateValidationMessageRef,
+    cityValidationMessageRef,
+    addressValidationMessageRef,
   };
 };
 

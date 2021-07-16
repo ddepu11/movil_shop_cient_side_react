@@ -6,7 +6,9 @@ import validateForm from '../../../utils/validateForm';
 
 const SignUpScreenLogic = () => {
   const { userSignUpSuccess } = useSelector((state) => state.user);
+
   const setTimeOutId = useRef();
+
   const dispatch = useDispatch();
 
   useEffect(
