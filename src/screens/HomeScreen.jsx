@@ -7,6 +7,7 @@ import HeroImg from '../assests/home_hero_img.jpg';
 import Services from '../components/Services';
 import { isUserRegisteredWithThisEmail } from '../actions/userActions';
 import Mobile from '../components/Mobile';
+import CircleLoader from '../components/CircleLoader';
 
 const Home = () => {
   const { user, isAuthenticated } = useAuth0();
@@ -43,7 +44,8 @@ const Home = () => {
       <div className="recent-mobiles">
         <h2 className="heading">Recent Products</h2>
         <div className="mobiles flex">
-          {mobiles.length !== 0 &&
+          {mobiles ? (
+            mobiles.length !== 0 &&
             mobiles
               .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
               .map((mobile, index) => {
@@ -70,7 +72,16 @@ const Home = () => {
                 }
 
                 return null;
-              })}
+              })
+          ) : (
+            <CircleLoader
+              wrapperH="100px"
+              spW="100px"
+              spH="100px"
+              cirW="100px"
+              cirH="100px"
+            />
+          )}
         </div>
 
         <Link to="/mobiles" className="link_btn all_products_btn">
