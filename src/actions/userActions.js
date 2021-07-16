@@ -38,6 +38,9 @@ import {
   USER_DELIVERY_ADDRESS_SAVE_BEGIN,
   USER_DELIVERY_ADDRESS_SAVE_ERROR,
   USER_DELIVERY_ADDRESS_SAVE_SUCCESS,
+  USER_ORDERS_SAVE_BEGIN,
+  USER_ORDERS_SAVE_ERROR,
+  USER_ORDERS_SAVE_SUCCESS,
 } from '../constants/userConstants';
 
 import * as user from '../api/userApi';
@@ -335,6 +338,24 @@ const saveUserDeliveryAddress =
     }
   };
 
+const saveUserOrders = (userId, cart) => async (dispatch) => {
+  dispatch({ type: USER_ORDERS_SAVE_BEGIN });
+
+  try {
+    const res = await user.saveUserOrders(userId, cart);
+
+    if (res) {
+      dispatch({ type: USER_ORDERS_SAVE_SUCCESS, payload: res.data.user });
+    } else {
+      dispatch({ type: USER_ORDERS_SAVE_ERROR });
+    }
+  } catch (err) {
+    const { msg } = err.response.data;
+    dispatch({ type: USER_ORDERS_SAVE_ERROR });
+    dispatch(sendNotification(msg, true));
+  }
+};
+
 export {
   customUserSignIn,
   signUpUser,
@@ -350,4 +371,5 @@ export {
   deleteCartItem,
   emptyUserCart,
   saveUserDeliveryAddress,
+  saveUserOrders,
 };

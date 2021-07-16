@@ -38,6 +38,9 @@ import {
   USER_DELIVERY_ADDRESS_SAVE_BEGIN,
   USER_DELIVERY_ADDRESS_SAVE_ERROR,
   USER_DELIVERY_ADDRESS_SAVE_SUCCESS,
+  USER_ORDERS_SAVE_BEGIN,
+  USER_ORDERS_SAVE_ERROR,
+  USER_ORDERS_SAVE_SUCCESS,
 } from '../constants/userConstants';
 
 const initialUser = {
@@ -340,6 +343,26 @@ const user = (userState = initialUser, action) => {
         hasUserError: true,
       };
 
+    // Save orders
+    case USER_ORDERS_SAVE_BEGIN:
+      return {
+        ...userState,
+        userLoading: true,
+      };
+
+    case USER_ORDERS_SAVE_SUCCESS:
+      return {
+        ...userState,
+        userLoading: false,
+        userInfo: action.payload,
+      };
+
+    case USER_ORDERS_SAVE_ERROR:
+      return {
+        ...userState,
+        userLoading: false,
+        hasUserError: true,
+      };
     default:
       return userState;
   }

@@ -10,10 +10,10 @@ import {
 import * as payment from '../api/paymentApi';
 import { sendNotification } from './notificationActions';
 import { removeAllLocalCartItems } from './cartActions';
-import { emptyUserCart } from './userActions';
+import { emptyUserCart, saveUserOrders } from './userActions';
 
 export const makeAPayment =
-  (orderId, amount, currency, name, email, contact, userId) =>
+  (orderId, amount, currency, name, email, contact, userId, cart) =>
   async (dispatch) => {
     dispatch({ type: PAYMENT_MAKE_BEGIN });
 
@@ -34,10 +34,11 @@ export const makeAPayment =
           order_id: orderId,
 
           handler(response) {
-            dispatch(emptyUserCart(userId));
-            dispatch(removeAllLocalCartItems());
+            dispatch(saveUserOrders(userId, cart));
             dispatch({ type: PAYMENT_MAKE_SUCCESS });
             dispatch(sendNotification('Payment Successfull!', false));
+            dispatch(removeAllLocalCartItems());
+            dispatch(emptyUserCart(userId));
 
             console.log(response.razorpay_payment_id);
             console.log(response.razorpay_order_id);
@@ -84,7 +85,7 @@ export const makeAPayment =
       });
   };
 
-export const createAnOrder = (orderDetails) => async (dispatch) => {
+export const createAnOrder = (orderDetails, cart) => async (dispatch) => {
   const { totalPrice, name, email, contact, userId } = orderDetails;
 
   dispatch({ type: PAYMENT_RAZORPAY_CREATE_AN_ORDER_BEGIN });
@@ -100,7 +101,7 @@ export const createAnOrder = (orderDetails) => async (dispatch) => {
       });
 
       dispatch(
-        makeAPayment(id, amount, currency, name, email, contact, userId)
+        makeAPayment(id, amount, currency, name, email, contact, userId, cart)
       );
     } else {
       dispatch(sendNotification('Could not create order id!', true));

@@ -74,17 +74,23 @@ const CheckOutScreenLogic = () => {
   const { totalPrice, discount } = useSelector((state) => state.orderTotal);
 
   const handlePay = () => {
-    if (deliveryAddress.address === '' || deliveryAddress.address.length < 30) {
+    if (
+      deliveryAddress.address === '' ||
+      Object.keys(userInfo.deliveryAddress).length === 0
+    ) {
       dispatch(sendNotification('Please fill your full address!!', true));
     } else {
       dispatch(
-        createAnOrder({
-          totalPrice: totalPrice - discount,
-          name: `${userInfo.firstName} ${userInfo.lastName}`,
-          email: userInfo.email,
-          contact: userInfo.phoneNumber,
-          userId: userInfo._id,
-        })
+        createAnOrder(
+          {
+            totalPrice: totalPrice - discount,
+            name: `${userInfo.firstName} ${userInfo.lastName}`,
+            email: userInfo.email,
+            contact: userInfo.phoneNumber,
+            userId: userInfo._id,
+          },
+          { cart: userInfo.cart }
+        )
       );
     }
   };
