@@ -2,7 +2,6 @@
   "name": "movil_shop",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
   "dependencies": {
     "@auth0/auth0-react": "^1.5.0",
     "@testing-library/jest-dom": "^5.11.10",
@@ -26,7 +25,8 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "browserslist": {
     "production": [
