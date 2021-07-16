@@ -32,6 +32,7 @@ const NavbarScreen = () => {
       history.push('/');
     }
   };
+
   const isUserInfoEmpty = Object.keys(userInfo).length === 0;
 
   return (
@@ -103,7 +104,7 @@ const NavbarScreen = () => {
             )}
 
             <li>
-              {hasUserLoggedIn || Object.keys(userInfo).length !== 0 ? (
+              {hasUserLoggedIn || !isUserInfoEmpty ? (
                 <Button
                   bgColor="var(--danger-color)"
                   pt="5px"
@@ -131,6 +132,7 @@ const NavbarScreen = () => {
           <Link to="/">
             <img src={logo} alt="" />
           </Link>
+
           <div className="nav_links">
             <ul className="flex">
               <li>
@@ -141,11 +143,19 @@ const NavbarScreen = () => {
                 <Link to="/mobiles">Mobiles</Link>
               </li>
 
-              {hasUserLoggedIn && Object.keys(userInfo).length !== 0 && (
+              {hasUserLoggedIn && !isUserInfoEmpty && (
                 <li>
                   <Link to="/checkout">Checkout</Link>
                 </li>
               )}
+
+              {hasUserLoggedIn &&
+                !isUserInfoEmpty &&
+                Object.keys(userInfo.orders).length !== 0 && (
+                  <li>
+                    <Link to="/orders">Orders</Link>
+                  </li>
+                )}
 
               <li>
                 <Link to="/about">About</Link>
@@ -207,12 +217,13 @@ const Wrapper = styled.nav`
     background-color: var(--primary-color);
     padding: 0 10px;
   }
+
   .nav_bottom {
     justify-content: space-between;
     padding: 20px 0 60px 0;
 
     .nav_links {
-      width: 35%;
+      width: 45%;
     }
 
     .nav_links ul {
@@ -227,6 +238,7 @@ const Wrapper = styled.nav`
     .cart_container {
       position: relative;
     }
+
     .cart_count {
       position: absolute;
       top: -10px;
@@ -241,6 +253,7 @@ const Wrapper = styled.nav`
       font-size: 0.7em;
     }
   }
+
   .nav_bottom a {
     font-size: 1.3em;
     color: var(--light-color);
