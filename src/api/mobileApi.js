@@ -1,25 +1,21 @@
 import axios from 'axios';
-import apiUrl, { options } from './apiUrl';
+import apiUrl from './apiUrl';
+
+axios.defaults.withCredentials = true;
 
 export const create = (formData) =>
   axios.post(`${apiUrl}/mobiles`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
-    ...options,
   });
 
-export const listAll = () => axios.get(`${apiUrl}/mobiles`, { ...options });
+export const listAll = () => axios.get(`${apiUrl}/mobiles`);
 
-export const getMobile = (id) =>
-  axios.get(`${apiUrl}/mobiles/${id}`, { ...options });
+export const getMobile = (id) => axios.get(`${apiUrl}/mobiles/${id}`);
 
 export const review = (id, stars) =>
-  axios.post(`${apiUrl}/mobiles/review`, { id, stars }, { ...options });
+  axios.post(`${apiUrl}/mobiles/review`, { id, stars });
 
 export const updateReview = (mobileId, stars, reviewId) =>
-  axios.put(
-    `${apiUrl}/mobiles/review`,
-    { mobileId, stars, reviewId },
-    { ...options }
-  );
+  axios.put(`${apiUrl}/mobiles/review`, { mobileId, stars, reviewId });

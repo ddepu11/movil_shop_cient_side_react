@@ -1,11 +1,12 @@
 import axios from 'axios';
-import apiUrl, { options } from './apiUrl';
+import apiUrl from './apiUrl';
 
-const authenticate = () =>
-  axios.get(`${apiUrl}/users/authenticate`, { ...options });
+axios.defaults.withCredentials = true;
+
+const authenticate = () => axios.get(`${apiUrl}/users/authenticate`);
 
 const logIn = (email, password) =>
-  axios.post(`${apiUrl}/users/sign-in`, { email, password }, { ...options });
+  axios.post(`${apiUrl}/users/sign-in`, { email, password });
 
 // Signing up with credentials and an image
 const signUp = (formData) =>
@@ -13,55 +14,41 @@ const signUp = (formData) =>
     headers: {
       'Content-Type': 'multipart/form-data',
     },
-    ...options,
   });
 
-const accountInfo = () =>
-  axios.get(`${apiUrl}/users/account-info`, { ...options });
+const accountInfo = () => axios.get(`${apiUrl}/users/account-info`);
 
-const logOut = () =>
-  axios.get(`${apiUrl}/users/log-out`, {
-    ...options,
-  });
+const logOut = () => axios.get(`${apiUrl}/users/log-out`, {});
 
 const checkIsEmailRegistered = (email) =>
-  axios.post(`${apiUrl}/users/exists`, { email }, { ...options });
+  axios.post(`${apiUrl}/users/exists`, { email });
 
-const update = (data, _id) => axios.put(`/users/${_id}`, data, { ...options });
+const update = (data, _id) => axios.put(`/users/${_id}`, data);
 
 const changeDP = (formData, _id) =>
   axios.put(`${apiUrl}/users/${_id}/dp`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
-    ...options,
   });
 
 const addToCart = (userId, mobile) =>
-  axios.put(`${apiUrl}/users/${userId}/cart`, mobile, { ...options });
+  axios.put(`${apiUrl}/users/${userId}/cart`, mobile);
 
 const increaseOrDecreaseCartItemQuantity = (userId, cartItemId, action) =>
-  axios.put(
-    `${apiUrl}/users/${userId}/cart/item/${cartItemId}`,
-    { action },
-    { ...options }
-  );
+  axios.put(`${apiUrl}/users/${userId}/cart/item/${cartItemId}`, { action });
 
 const deleteCartItem = (userId, cartItemId) =>
-  axios.delete(`${apiUrl}/users/${userId}/cart/item/${cartItemId}`, {
-    ...options,
-  });
+  axios.delete(`${apiUrl}/users/${userId}/cart/item/${cartItemId}`);
 
 const removeAllCartItems = (userId) =>
-  axios.delete(`${apiUrl}/users/${userId}/cart/items`, { ...options });
+  axios.delete(`${apiUrl}/users/${userId}/cart/items`);
 
 const saveDeliveryAddress = (userId, deliveryAddress) =>
-  axios.put(`${apiUrl}/users/${userId}/deliveryAddress`, deliveryAddress, {
-    ...options,
-  });
+  axios.put(`${apiUrl}/users/${userId}/deliveryAddress`, deliveryAddress);
 
 const saveUserOrders = (userId, cart) =>
-  axios.put(`${apiUrl}/users/${userId}/orders`, cart, { ...options });
+  axios.put(`${apiUrl}/users/${userId}/orders`, cart);
 
 export {
   logIn,
