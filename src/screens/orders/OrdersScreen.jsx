@@ -12,7 +12,6 @@ const OrdersScreen = () => {
 
   // useEffect(() => {
   //   if (
-  //     Object.keys(userInfo).length !== 0 &&
   //     Object.keys(userInfo.orders).length === 0
   //   ) {
   //     history.push('');
@@ -34,10 +33,16 @@ const OrdersScreen = () => {
 
   return (
     <Wrapper className="w-960">
-      <h1>Your Orders</h1>
-
+      {Object.keys(userInfo).length !== 0 && userInfo.orders.length !== 0 ? (
+        <h1>Your Orders</h1>
+      ) : (
+        <h1 className="no_order_heading">
+          Your Have not orderd anything yet!!!
+        </h1>
+      )}
       <div className="orders">
         {Object.keys(userInfo).length !== 0 &&
+          userInfo.orders.length !== 0 &&
           userInfo.orders.map((m) => {
             const {
               title,
@@ -92,6 +97,7 @@ const OrdersScreen = () => {
 
 const Wrapper = styled.main`
   padding: 10px 10px;
+  height: 50vh;
 
   h1 {
     color: var(--little-dark-color);
@@ -100,7 +106,10 @@ const Wrapper = styled.main`
     text-align: center;
     padding: 15px 0;
   }
-
+  .no_order_heading {
+    padding: 50px 0;
+    letter-spacing: 2px;
+  }
   .orders {
     padding: 15px 0;
 

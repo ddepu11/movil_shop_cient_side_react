@@ -2,15 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 import HeaderScreen from './HeaderScreen';
 import SectionScreen from './SectionScreen';
-import Loading from '../../components/Loading';
 import Hero from '../../components/Hero';
 import DashboardScreenLogic from './logic/DashboardScreenLogic';
+import CircleLoader from '../../components/CircleLoader';
 
 const DashboardScreen = () => {
   const { mobileLoading } = DashboardScreenLogic();
 
   if (mobileLoading) {
-    return <Loading />;
+    return (
+      <CircleLoader
+        bgColor="var(--secondary-color)"
+        wrapperH="80vh"
+        spW="90px"
+        spH="90px"
+        cirW="90px"
+        cirH="90px"
+      />
+    );
   }
 
   return (

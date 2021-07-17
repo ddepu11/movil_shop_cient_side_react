@@ -16,6 +16,8 @@ import {
 const MobileScreenLogic = () => {
   const dispatch = useDispatch();
 
+  const { mobileLoading } = useSelector((state) => state.mobile);
+
   const { filters, filteredMobile } = useSelector(
     (state) => state.filterMobile
   );
@@ -69,7 +71,7 @@ const MobileScreenLogic = () => {
     }
   };
 
-  return { filteredMobile, handleInput, handleButtons, filters };
+  return { filteredMobile, handleInput, handleButtons, filters, mobileLoading };
 };
 
 export default MobileScreenLogic;

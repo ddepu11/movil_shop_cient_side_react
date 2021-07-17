@@ -8,11 +8,24 @@ import GridViewScreen from './views/GridViewScreen';
 import ListViewScreen from './views/ListViewScreen';
 
 import MobileScreenLogic from './logic/MobileScreenLogic';
+import CircleLoader from '../../components/CircleLoader';
 
 const MobilesScreen = () => {
-  const { filteredMobile, handleInput, handleButtons, filters } =
+  const { filteredMobile, handleInput, handleButtons, filters, mobileLoading } =
     MobileScreenLogic();
 
+  if (mobileLoading) {
+    return (
+      <CircleLoader
+        bgColor="var(--secondary-color)"
+        wrapperH="80vh"
+        spW="90px"
+        spH="90px"
+        cirW="90px"
+        cirH="90px"
+      />
+    );
+  }
   return (
     <>
       <Hero title="mobiles" />

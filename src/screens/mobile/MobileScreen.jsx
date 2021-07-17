@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMobileById } from '../../actions/mobileActions';
-import Loading from '../../components/Loading';
 import MobileImagesScreen from './images/MobileImagesScreen';
 import MobileInfoScreen from './MobileInfoScreen';
 import Hero from '../../components/Hero';
+import CircleLoader from '../../components/CircleLoader';
 
 const MobileScreen = () => {
   const { mobileId } = useParams();
@@ -22,9 +22,17 @@ const MobileScreen = () => {
   const [color, setColor] = useState('');
 
   if (mobileLoading) {
-    return <Loading />;
+    return (
+      <CircleLoader
+        bgColor="var(--secondary-color)"
+        wrapperH="80vh"
+        spW="90px"
+        spH="90px"
+        cirW="90px"
+        cirH="90px"
+      />
+    );
   }
-
   return (
     <>
       <Hero title={`mobiles / ${mobile.title}`} />

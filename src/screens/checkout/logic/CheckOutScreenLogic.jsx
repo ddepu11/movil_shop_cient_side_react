@@ -40,7 +40,9 @@ const CheckOutScreenLogic = () => {
   const setTimeOutId = useRef();
 
   useEffect(() => {
-    if (Object.keys(userInfo).length !== 0 && userInfo.cart.length === 0) {
+    const userInfoEmpty = Object.keys(userInfo).length === 0;
+
+    if (!userInfoEmpty && userInfo.cart.length === 0) {
       history.push('/cart');
 
       dispatch(
@@ -58,10 +60,7 @@ const CheckOutScreenLogic = () => {
       history.push('/orders');
     }
 
-    if (
-      Object.keys(userInfo).length !== 0 &&
-      Object.keys(userInfo.deliveryAddress).length !== 0
-    ) {
+    if (!userInfoEmpty && userInfo.deliveryAddress) {
       setDeliveryAddress((prevState) => ({
         ...prevState,
         ...userInfo.deliveryAddress,
