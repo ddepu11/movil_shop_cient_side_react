@@ -40,7 +40,6 @@ const App = () => {
 
   return (
     <Wrapper>
-      {console.log(process.env.PUBLIC_URL)}
       {isLoading ? (
         <Loading />
       ) : (

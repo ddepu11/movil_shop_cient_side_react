@@ -1,9 +1,11 @@
 import axios from 'axios';
 
-export const mobiles = (sellerId) =>
-  axios.get(`/sellers/${sellerId}/mobiles/list`);
+const apiUrl = 'https://movil-shop.herokuapp.com';
 
-export const remove = (id) => axios.delete(`/sellers/mobiles/${id}`);
+export const mobiles = (sellerId) =>
+  axios.get(`${apiUrl}/sellers/${sellerId}/mobiles/list`);
+
+export const remove = (id) => axios.delete(`${apiUrl}/sellers/mobiles/${id}`);
 
 export const update = (mobileInfo, mobileId) =>
-  axios.put(`/sellers/mobiles/${mobileId}`, mobileInfo);
+  axios.put(`${apiUrl}/sellers/mobiles/${mobileId}`, mobileInfo);

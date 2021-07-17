@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://ddepu.github.io/movil_shop_client_side_react",
-  "proxy": "https://movil-shop.herokuapp.com",
   "dependencies": {
     "@auth0/auth0-react": "^1.5.0",
     "@testing-library/jest-dom": "^5.11.10",
