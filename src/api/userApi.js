@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const authenticate = () => axios.get('/users/authenticate');
+const authenticate = () => axios.get(`/users/authenticate`);
 
 const logIn = (email, password) =>
-  axios.post('/users/sign-in', { email, password });
+  axios.post(`/users/sign-in`, { email, password });
 
 // Signing up with credentials and an image
 const signUp = (formData) =>
-  axios.post('/users/sign-up', formData, {
+  axios.post(`/users/sign-up`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -15,10 +15,10 @@ const signUp = (formData) =>
 
 const accountInfo = () => axios.get(`/users/account-info`);
 
-const logOut = () => axios.get('/users/log-out');
+const logOut = () => axios.get(`/users/log-out`);
 
 const checkIsEmailRegistered = (email) =>
-  axios.post('/users/exists', { email });
+  axios.post(`/users/exists`, { email });
 
 const update = (data, _id) => axios.put(`/users/${_id}`, data);
 

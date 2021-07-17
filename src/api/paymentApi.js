@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const createAnOrder = async (totalPrice) =>
-  axios.post('/orders', { amount: totalPrice });
+  axios.post(`/orders`, { amount: totalPrice });
 
 // Load Razor Pay Script
 export const loadRazorPay = () =>
