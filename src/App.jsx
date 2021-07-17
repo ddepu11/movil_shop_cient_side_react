@@ -43,7 +43,7 @@ const App = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <Router>
+        <Router basename="/">
           {notificationMessage && (
             <Notification
               msg={notificationMessage.toString()}
