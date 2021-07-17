@@ -8,6 +8,7 @@ import {
   deleteCartItem,
   increaseOrDecreaseCartItemQuantity,
 } from '../../../actions/userActions';
+import { getLocalCart } from '../../../utils/getLocalCart';
 
 const CartScreenLogic = () => {
   const { localStorageCart, cartLoading } = useSelector((state) => state.cart);
@@ -17,13 +18,6 @@ const CartScreenLogic = () => {
   );
 
   const isUserInfoEmpty = Object.keys(userInfo).length === 0;
-
-  const formatePrice = (price) =>
-    new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'INR',
-      minimumFractionDigits: 0,
-    }).format(price);
 
   const dispatch = useDispatch();
 
@@ -59,19 +53,28 @@ const CartScreenLogic = () => {
     dispatch,
   ]);
 
+  const handleUserCartItemRemove = (userId, mobileId) => {
+    const cart = getLocalCart();
+
+    if (cart) {
+      dispatch(removeCartItem(mobileId));
+    }
+
+    dispatch(deleteCartItem(userId, mobileId));
+  };
+
   return {
     handleLocalCartQuantity,
     handleQuantity,
-    formatePrice,
     hasUserLoggedIn,
     userLoading,
     cartLoading,
     removeCartItem,
-    deleteCartItem,
     userInfo,
     dispatch,
     localStorageCart,
     isUserInfoEmpty,
+    handleUserCartItemRemove,
   };
 };
 

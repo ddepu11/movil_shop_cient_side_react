@@ -9,17 +9,17 @@ import Hero from '../../components/Hero';
 import CartPriceDetais from './CartPriceDetails';
 import CartScreenLogic from './logic/CartScreenLogic';
 import apiUrl from '../../api/apiUrl';
+import formatePrice from '../../utils/formatePrice';
 
 const CartScreen = () => {
   const {
     handleLocalCartQuantity,
     handleQuantity,
-    formatePrice,
     hasUserLoggedIn,
     userLoading,
     cartLoading,
     removeCartItem,
-    deleteCartItem,
+    handleUserCartItemRemove,
     userInfo,
     dispatch,
     localStorageCart,
@@ -156,10 +156,9 @@ const CartScreen = () => {
                           borderRadius="50%"
                           bgColor="var(--light-color)"
                           fs="1.5em"
-                          handleClick={() => {
-                            dispatch(removeCartItem(mobileId));
-                            dispatch(deleteCartItem(userInfo._id, _id));
-                          }}
+                          handleClick={() =>
+                            handleUserCartItemRemove(userInfo._id, mobileId)
+                          }
                         >
                           <RiDeleteBin6Line />
                         </Button>
