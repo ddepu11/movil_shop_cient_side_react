@@ -43,7 +43,7 @@ const App = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <Router basename="/">
+        <Router basename={process.env.PUBLIC_URL}>
           {notificationMessage && (
             <Notification
               msg={notificationMessage.toString()}
