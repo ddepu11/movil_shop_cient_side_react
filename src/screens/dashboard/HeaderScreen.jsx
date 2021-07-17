@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Loading from '../../components/Loading';
 import UserDefaultPic from '../../assests/user.png';
+import apiUrl from '../../api/apiUrl';
 
 const HeaderScreen = () => {
   const { userInfo } = useSelector((state) => state.user);
@@ -17,7 +18,9 @@ const HeaderScreen = () => {
     <Wrapper className="flex card">
       <div className="dp">
         <img
-          src={displayPicture ? `/dp/${displayPicture}` : UserDefaultPic}
+          src={
+            displayPicture ? `${apiUrl}/dp/${displayPicture}` : UserDefaultPic
+          }
           alt={firstName}
         />
       </div>

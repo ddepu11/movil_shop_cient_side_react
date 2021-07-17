@@ -8,6 +8,7 @@ import CircleLoader from '../../components/CircleLoader';
 import Hero from '../../components/Hero';
 import CartPriceDetais from './CartPriceDetails';
 import CartScreenLogic from './logic/CartScreenLogic';
+import apiUrl from '../../api/apiUrl';
 
 const CartScreen = () => {
   const {
@@ -73,7 +74,7 @@ const CartScreen = () => {
                     <div className="mobile flex">
                       <div className="image">
                         <img
-                          src={`/sellers/${sellerId}/${picture}`}
+                          src={`${apiUrl}/sellers/${sellerId}/${picture}`}
                           alt={title}
                         />
                       </div>
@@ -212,7 +213,7 @@ const CartScreen = () => {
                     <div className="mobile flex">
                       <div className="image">
                         <img
-                          src={`/sellers/${sellerId}/${picture}`}
+                          src={`${apiUrl}/sellers/${sellerId}/${picture}`}
                           alt={title}
                         />
                       </div>

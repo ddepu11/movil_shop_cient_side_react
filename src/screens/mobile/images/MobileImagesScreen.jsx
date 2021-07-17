@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import MobileCartBuyButtons from './MobileCartBuyButtons';
 import MobileImagesScreenLogic from './logic/MobileImagesScreenLogic';
+import apiUrl from '../../../api/apiUrl';
 
 const MobileImagesScreen = ({ color }) => {
   const { handleHover, preview, title, pictures, sellerInfo } =
@@ -18,7 +19,7 @@ const MobileImagesScreen = ({ color }) => {
                 <img
                   onMouseEnter={handleHover}
                   alt={title}
-                  src={`/sellers/${sellerInfo.id}/${p}`}
+                  src={`${apiUrl}/sellers/${sellerInfo.id}/${p}`}
                 />
               </div>
             ))}
@@ -26,7 +27,7 @@ const MobileImagesScreen = ({ color }) => {
 
         {preview && (
           <div className="right-sction">
-            <img alt="s" src={preview} />
+            <img alt="mobile_preview" src={preview} />
           </div>
         )}
       </div>

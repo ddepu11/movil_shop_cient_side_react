@@ -12,6 +12,7 @@ import clearAllSetTimeOut from '../utils/clearAllSetTimeOut';
 import { updateSellerMobile } from '../actions/sellerActions';
 import { sendNotification } from '../actions/notificationActions';
 import formatePrice from '../utils/formatePrice';
+import apiUrl from '../api/apiUrl';
 
 const Mobile = ({
   pictures,
@@ -248,7 +249,7 @@ const Mobile = ({
     return (
       <ListView className="flex">
         <div className="mobile_pic">
-          <img src={`/sellers/${userId}/${pictures[0]}`} alt={title} />
+          <img src={`${apiUrl}/sellers/${userId}/${pictures[0]}`} alt={title} />
         </div>
 
         <div className="info flex">
@@ -272,7 +273,7 @@ const Mobile = ({
     return (
       <GridView>
         <div className="mobile_pic">
-          <img src={`/sellers/${userId}/${pictures[0]}`} alt={title} />
+          <img src={`${apiUrl}/sellers/${userId}/${pictures[0]}`} alt={title} />
         </div>
 
         <div className="info">
@@ -292,7 +293,7 @@ const Mobile = ({
   return (
     <Wrapper0 className="flex">
       <div className="mobile_pic">
-        <img src={`/sellers/${userId}/${pictures[0]}`} alt={title} />
+        <img src={`${apiUrl}/sellers/${userId}/${pictures[0]}`} alt={title} />
       </div>
 
       <div className="mobile_info flex">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import apiUrl from '../../api/apiUrl';
 import Button from '../../components/Button';
 import CircleLoader from '../../components/CircleLoader';
 import formatePrice from '../../utils/formatePrice';
@@ -52,7 +53,10 @@ const OrdersScreen = () => {
             return (
               <div key={_id} className="order flex">
                 <div className="pic">
-                  <img src={`/sellers/${sellerId}/${picture}`} alt={title} />
+                  <img
+                    src={`${apiUrl}/sellers/${sellerId}/${picture}`}
+                    alt={title}
+                  />
                 </div>
 
                 <div className="info">

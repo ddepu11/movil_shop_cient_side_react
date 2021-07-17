@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { sendNotification } from '../../../actions/notificationActions';
 import { changeDisplayPicture } from '../../../actions/userActions';
+import apiUrl from '../../../api/apiUrl';
 import User from '../../../assests/user.png';
 
 const AsideScreenLogic = () => {
@@ -12,7 +13,10 @@ const AsideScreenLogic = () => {
   const [dpSRC, setDpSRC] = useState({ preview: User, file: '' });
 
   useEffect(() => {
-    setDpSRC(() => ({ ...dpSRC, preview: `dp/${userInfo.displayPicture}` }));
+    setDpSRC(() => ({
+      ...dpSRC,
+      preview: `${apiUrl}/dp/${userInfo.displayPicture}`,
+    }));
 
     // eslint-disable-next-line
   }, [userInfo]);
@@ -43,12 +47,12 @@ const AsideScreenLogic = () => {
       dispatch(changeDisplayPicture(formData, userInfo._id));
     }
     setWannaChangeDP(false);
-    setDpSRC({ ...dpSRC, preview: `dp/${userInfo.displayPicture}` });
+    setDpSRC({ ...dpSRC, preview: `${apiUrl}/dp/${userInfo.displayPicture}` });
   };
 
   const cancelChangeDPProcess = () => {
     setWannaChangeDP(false);
-    setDpSRC({ ...dpSRC, preview: `dp/${userInfo.displayPicture}` });
+    setDpSRC({ ...dpSRC, preview: `${apiUrl}/dp/${userInfo.displayPicture}` });
   };
 
   const { firstName, lastName } = userInfo;
