@@ -149,13 +149,11 @@ const NavbarScreen = () => {
                 </li>
               )}
 
-              {hasUserLoggedIn &&
-                !isUserInfoEmpty &&
-                Object.keys(userInfo.orders).length !== 0 && (
-                  <li>
-                    <Link to="/orders">Orders</Link>
-                  </li>
-                )}
+              {hasUserLoggedIn && !isUserInfoEmpty && (
+                <li>
+                  <Link to="/orders">Orders</Link>
+                </li>
+              )}
 
               <li>
                 <Link to="/about">About</Link>

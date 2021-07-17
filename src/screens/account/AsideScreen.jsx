@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ImCancelCircle } from 'react-icons/im';
 import Button from '../../components/Button';
 import AsideScreenLogic from './logic/AsideScreenLogic';
+import CircleLoader from '../../components/CircleLoader';
 
 const AsideScreen = () => {
   const {
@@ -13,12 +14,37 @@ const AsideScreen = () => {
     initiateChangeDPProcess,
     wannaChangeDP,
     dpSRC,
+    userLoading,
   } = AsideScreenLogic();
+
+  if (userLoading) {
+    return (
+      <CircleLoader
+        bgColor="var(--secondary-color)"
+        wrapperH="80vh"
+        spW="90px"
+        spH="90px"
+        cirW="90px"
+        cirH="90px"
+      />
+    );
+  }
 
   return (
     <Wrapper className="flex">
       <div className="dp">
-        <img src={dpSRC.preview} alt={`${firstName} ${lastName}`} />
+        {dpSRC.preview ? (
+          <img src={dpSRC.preview} alt={`${firstName} ${lastName}`} />
+        ) : (
+          <CircleLoader
+            bgColor="var(--secondary-color)"
+            wrapperH="180px"
+            spW="50px"
+            spH="50px"
+            cirW="50px"
+            cirH="50px"
+          />
+        )}
 
         <div className="change_dp_div flex">
           <label htmlFor="change_dp">Change DP</label>

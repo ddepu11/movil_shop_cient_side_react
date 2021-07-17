@@ -8,15 +8,6 @@ import formatePrice from '../../utils/formatePrice';
 
 const OrdersScreen = () => {
   const { userInfo, userLoading } = useSelector((state) => state.user);
-  // const history = useHistory();
-
-  // useEffect(() => {
-  //   if (
-  //     Object.keys(userInfo.orders).length === 0
-  //   ) {
-  //     history.push('');
-  //   }
-  // }, [userInfo, history]);
 
   if (userLoading) {
     return (
@@ -37,9 +28,10 @@ const OrdersScreen = () => {
         <h1>Your Orders</h1>
       ) : (
         <h1 className="no_order_heading">
-          Your Have not orderd anything yet!!!
+          Your Have not ordered anything yet!!!
         </h1>
       )}
+
       <div className="orders">
         {Object.keys(userInfo).length !== 0 &&
           userInfo.orders.length !== 0 &&
@@ -97,7 +89,6 @@ const OrdersScreen = () => {
 
 const Wrapper = styled.main`
   padding: 10px 10px;
-  height: 50vh;
 
   h1 {
     color: var(--little-dark-color);
@@ -106,10 +97,14 @@ const Wrapper = styled.main`
     text-align: center;
     padding: 15px 0;
   }
+
   .no_order_heading {
-    padding: 50px 0;
+    padding: 150px 0 0 0;
     letter-spacing: 2px;
+    height: 50vh;
+    font-size: 2.2em;
   }
+
   .orders {
     padding: 15px 0;
 

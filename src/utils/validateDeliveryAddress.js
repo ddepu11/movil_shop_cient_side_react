@@ -84,7 +84,7 @@ const validateDeliveryAddress = (
     flag = true;
   }
 
-  if (address.length > 60) {
+  if (address.length > 200) {
     setValidationMessage(
       addressValidationMessageRef,
       'Address is Too long!',

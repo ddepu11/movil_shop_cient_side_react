@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useSelector, useDispatch } from 'react-redux';
 import Notification from './components/Notification';
-import Loading from './components/Loading';
 import HomeScreen from './screens/HomeScreen';
 import NavbarScreen from './screens/NavbarScreen';
 import AboutScreen from './screens/AboutScreen';
@@ -20,6 +19,7 @@ import MobileScreen from './screens/mobile/MobileScreen';
 import CartScreen from './screens/cart/CartScreen';
 import CheckOutScreen from './screens/checkout/CheckOutScreen';
 import OrdersScreen from './screens/orders/OrdersScreen';
+import CircleLoader from './components/CircleLoader';
 
 const App = () => {
   const { isLoading } = useAuth0();
@@ -41,7 +41,14 @@ const App = () => {
   return (
     <Wrapper>
       {isLoading ? (
-        <Loading />
+        <CircleLoader
+          bgColor="var(--secondary-color)"
+          wrapperH="80vh"
+          spW="90px"
+          spH="90px"
+          cirW="90px"
+          cirH="90px"
+        />
       ) : (
         <Router basename={process.env.PUBLIC_URL}>
           {notificationMessage && (

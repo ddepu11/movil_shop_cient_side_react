@@ -3,22 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { sendNotification } from '../../../actions/notificationActions';
 import { changeDisplayPicture } from '../../../actions/userActions';
 import apiUrl from '../../../api/apiUrl';
-import User from '../../../assests/user.png';
 
 const AsideScreenLogic = () => {
   const dispatch = useDispatch();
 
-  const { userInfo } = useSelector((state) => state.user);
+  const { userInfo, userLoading } = useSelector((state) => state.user);
 
-  const [dpSRC, setDpSRC] = useState({ preview: User, file: '' });
+  const [dpSRC, setDpSRC] = useState({ preview: '', file: '' });
 
   useEffect(() => {
-    setDpSRC(() => ({
-      ...dpSRC,
+    setDpSRC((prevState) => ({
+      ...prevState,
       preview: `${apiUrl}/dp/${userInfo.displayPicture}`,
     }));
-
-    // eslint-disable-next-line
   }, [userInfo]);
 
   const [wannaChangeDP, setWannaChangeDP] = useState(false);
@@ -65,6 +62,7 @@ const AsideScreenLogic = () => {
     initiateChangeDPProcess,
     wannaChangeDP,
     dpSRC,
+    userLoading,
   };
 };
 

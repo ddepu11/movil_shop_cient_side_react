@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import aboutUs1 from '../assests/about_us_images/aboutUs1.jpg';
+import aboutUs2 from '../assests/about_us_images/aboutUs2.jpg';
+import aboutUs3 from '../assests/about_us_images/aboutUs3.jpg';
 
 const About = () => (
   <>
@@ -26,16 +29,10 @@ const About = () => (
             doloremque.
           </p>
         </div>
-        <img
-          src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1093&q=80"
-          alt=""
-        />
+        <img src={aboutUs1} alt="aboutus_1" />
       </div>
       <div className="approach flex">
-        <img
-          src="https://images.unsplash.com/photo-1580783226135-9cbcae976a18?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-          alt=""
-        />
+        <img src={aboutUs2} alt="aboutus_1" />
         <div className="right">
           <h1>Our Approach</h1>
           <p>
@@ -75,10 +72,7 @@ const About = () => (
             sint doloremque.
           </p>
         </div>
-        <img
-          src="https://images.unsplash.com/photo-1587440871875-191322ee64b0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80"
-          alt=""
-        />
+        <img src={aboutUs3} alt="aboutus_3" />
       </div>
     </Wrapper>
   </>

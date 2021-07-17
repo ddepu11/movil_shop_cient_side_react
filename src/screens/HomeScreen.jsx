@@ -13,7 +13,7 @@ const Home = () => {
   const { user, isAuthenticated } = useAuth0();
 
   const { hasUserLoggedIn } = useSelector((state) => state.user);
-  const { mobiles } = useSelector((state) => state.mobile);
+  const { mobiles, mobileLoading } = useSelector((state) => state.mobile);
 
   const dispatch = useDispatch();
 
@@ -43,9 +43,17 @@ const Home = () => {
 
       <div className="recent-mobiles">
         <h2 className="heading">Recent Products</h2>
+
         <div className="mobiles flex">
-          {mobiles ? (
-            mobiles.length !== 0 &&
+          {mobileLoading ? (
+            <CircleLoader
+              wrapperH="200px"
+              spW="100px"
+              spH="100px"
+              cirW="100px"
+              cirH="100px"
+            />
+          ) : (
             mobiles
               .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
               .map((mobile, index) => {
@@ -73,14 +81,6 @@ const Home = () => {
 
                 return null;
               })
-          ) : (
-            <CircleLoader
-              wrapperH="100px"
-              spW="100px"
-              spH="100px"
-              cirW="100px"
-              cirH="100px"
-            />
           )}
         </div>
 
