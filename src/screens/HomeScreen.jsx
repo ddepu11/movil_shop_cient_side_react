@@ -26,9 +26,11 @@ const Home = () => {
   return (
     <Wrapper>
       <div className="header">
-        <section className="flex w-960">
+        <section className="hero flex w-960">
           <aside>
-            <h2>MovilShop Number#1 Trusted Mobile Website.</h2>
+            <h2 className="hero_heading">
+              MovilShop Number#1 Trusted Mobile Website.
+            </h2>
 
             <p>Comming soon in your door with huge discount</p>
 
@@ -110,14 +112,11 @@ const Wrapper = styled.main`
     padding: 20px;
     transform: translateY(-15px);
 
-    .flex {
-      justify-content: space-between;
-
+    .hero {
       aside {
-        align-self: center;
         color: white;
 
-        h2 {
+        .hero_heading {
           font-size: 2.2em;
           letter-spacing: 4px;
           line-height: 1.4;
@@ -140,7 +139,7 @@ const Wrapper = styled.main`
         height: 400px;
 
         img {
-          object-fit: contain;
+          object-fit: cover;
           width: 100%;
           height: 100%;
         }
@@ -156,7 +155,8 @@ const Wrapper = styled.main`
     .heading {
       margin-bottom: 50px;
       font-size: 1.8em;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
+      color: var(--light-color);
     }
 
     .mobiles {
@@ -177,6 +177,35 @@ const Wrapper = styled.main`
 
     .all_products_btn:hover {
       transform: scale(1.1);
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    .header {
+      .hero {
+        aside {
+          text-align: center;
+          padding: 30px 0;
+
+          .hero_heading {
+            font-size: 1.9em;
+            letter-spacing: 3px;
+            line-height: 1.4;
+          }
+        }
+
+        .hero_img {
+          display: none;
+        }
+      }
+    }
+
+    .recent-mobiles {
+      padding: 10px 10px 15px;
+      .heading {
+        margin-bottom: 35px;
+        font-size: 1.5em;
+      }
     }
   }
 `;

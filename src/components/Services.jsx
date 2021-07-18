@@ -55,38 +55,71 @@ const Wrapper = styled.section`
   .service_div {
     flex-wrap: wrap;
     gap: 5rem;
+
+    .service {
+      width: 250px;
+      padding: 70px 20px;
+      position: relative;
+      border-radius: 5px;
+      background: var(--primary-color);
+
+      .s_logo {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        transform: translateX(80px);
+        width: 80px;
+        height: 80px;
+        background: var(--secondary-color);
+        color: var(--light-color);
+        border-radius: 50%;
+        display: grid;
+        place-content: center;
+        font-size: 2em;
+      }
+
+      h1 {
+        font-size: 1.5em;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+        color: var(--light-color);
+      }
+      p {
+        color: var(--light-color);
+      }
+    }
   }
 
-  .service {
-    width: 250px;
-    padding: 70px 20px;
-    position: relative;
-    border-radius: 5px;
-    background: var(--primary-color);
-
-    .s_logo {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      transform: translateX(80px);
-      width: 80px;
-      height: 80px;
-      background: var(--secondary-color);
-      color: var(--light-color);
-      border-radius: 50%;
-      display: grid;
-      place-content: center;
-      font-size: 2em;
-    }
-
+  @media screen and (max-width: 750px) {
     h1 {
+      padding: 5px;
       font-size: 1.5em;
       letter-spacing: 2px;
-      margin-bottom: 10px;
-      color: var(--light-color);
+      margin-bottom: 60px;
     }
-    p {
-      color: var(--light-color);
+
+    .service_div {
+      gap: 2rem 3rem;
+
+      .service {
+        width: 200px;
+        padding: 40px 15px;
+
+        .s_logo {
+          top: -30px;
+          width: 50px;
+          height: 50px;
+          font-size: 1.5em;
+        }
+
+        h1 {
+          font-size: 1.3em;
+        }
+
+        p {
+          font-size: 0.9em;
+        }
+      }
     }
   }
 `;
