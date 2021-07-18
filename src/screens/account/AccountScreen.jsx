@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Loading from '../../components/Loading';
 import AsideScreen from './AsideScreen';
 import FormFieldUpdate from '../../components/FormFieldUpdate';
 import Button from '../../components/Button';
 import Hero from '../../components/Hero';
 import AccountScreenLogic from './logic/AccountScreenLogic';
+import CircleLoader from '../../components/CircleLoader';
 
 const AccountScreen = () => {
   const {
@@ -34,7 +34,14 @@ const AccountScreen = () => {
       <Hero title="account" />
 
       {userLoading ? (
-        <Loading />
+        <CircleLoader
+          bgColor="var(--secondary-color)"
+          wrapperH="80vh"
+          spW="90px"
+          spH="90px"
+          cirW="90px"
+          cirH="90px"
+        />
       ) : (
         <Wrapper className="w-960">
           <header>

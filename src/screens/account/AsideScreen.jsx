@@ -14,21 +14,7 @@ const AsideScreen = () => {
     initiateChangeDPProcess,
     wannaChangeDP,
     dpSRC,
-    userLoading,
   } = AsideScreenLogic();
-
-  if (userLoading) {
-    return (
-      <CircleLoader
-        bgColor="var(--secondary-color)"
-        wrapperH="80vh"
-        spW="90px"
-        spH="90px"
-        cirW="90px"
-        cirH="90px"
-      />
-    );
-  }
 
   return (
     <Wrapper className="flex">

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
-import Loading from '../../components/Loading';
 import FormControl from '../../components/FormControl';
 import Button from '../../components/Button';
 import SignUpScreenLogic from './logic/SignUpScreenLogic';
+import CircleLoader from '../../components/CircleLoader';
 
 const SignUpScreen = () => {
   const {
@@ -26,7 +26,16 @@ const SignUpScreen = () => {
   } = SignUpScreenLogic();
 
   if (userLoading) {
-    return <Loading />;
+    return (
+      <CircleLoader
+        bgColor="var(--secondary-color)"
+        wrapperH="80vh"
+        spW="90px"
+        spH="90px"
+        cirW="90px"
+        cirH="90px"
+      />
+    );
   }
 
   if (userSignUpSuccess) {

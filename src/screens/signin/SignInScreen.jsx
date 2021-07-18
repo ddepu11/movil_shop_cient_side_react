@@ -2,11 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { AiOutlineGoogle } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-
-import Loading from '../../components/Loading';
 import FormControl from '../../components/FormControl';
 import Button from '../../components/Button';
 import SignInScreenLogic from './logic/SignInScreenLogic';
+import CircleLoader from '../../components/CircleLoader';
 
 const SignInScreen = () => {
   const {
@@ -22,7 +21,14 @@ const SignInScreen = () => {
   return (
     <>
       {userLoading ? (
-        <Loading />
+        <CircleLoader
+          bgColor="var(--secondary-color)"
+          wrapperH="80vh"
+          spW="90px"
+          spH="90px"
+          cirW="90px"
+          cirH="90px"
+        />
       ) : (
         <Wrapper className="w-960 flex">
           <div>
