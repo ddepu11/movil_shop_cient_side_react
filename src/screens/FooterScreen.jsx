@@ -27,7 +27,7 @@ const FooterScreen = () => (
           <h3>Pricing</h3>
         </div>
 
-        <div className="common last-commont">
+        <div className="common last-common">
           <h2>Connect Us</h2>
           <h3>Twitter</h3>
           <h3>Instagram</h3>
@@ -101,7 +101,7 @@ const Wrapper = styled.footer`
         }
       }
 
-      .last-commont {
+      .last-common {
         margin-right: 0px;
       }
     }
@@ -127,25 +127,96 @@ const Wrapper = styled.footer`
   .f_bottom {
     background-color: var(--secondary-color);
     padding: 20px 10px;
+
+    .f_lover {
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      color: white;
+
+      .left {
+        p {
+          font-size: 1.1em;
+          letter-spacing: 1px;
+        }
+      }
+
+      .right {
+        span {
+          margin-left: 15px;
+          font-size: 1em;
+        }
+      }
+    }
   }
 
-  .f_lover {
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    color: white;
+  @media screen and (max-width: 750px) {
+    .f_upper {
+      padding: 30px 12px;
+      justify-content: center;
+      max-width: 1100px;
+      gap: 25px 0;
 
-    .left {
-      p {
-        font-size: 1.1em;
-        letter-spacing: 1px;
+      .left {
+        .common {
+          margin-right: 50px;
+
+          h2 {
+            font-size: 1.2em;
+            margin-bottom: 18px;
+          }
+
+          h3 {
+            font-size: 1em;
+            margin-bottom: 12px;
+            color: var(--light-color);
+            font-weight: 500;
+          }
+        }
+
+        .last-common {
+          margin-right: 0px;
+        }
+      }
+
+      .right {
+        width: 91%;
+
+        label {
+          font-size: 1.2em;
+          letter-spacing: 2px;
+          padding: 5px 0 20px;
+        }
+
+        input {
+          padding: 15px 20px;
+          font-size: 1.1em;
+          width: 100%;
+          margin-bottom: 20px;
+        }
+
+        button {
+          width: 100% !important;
+        }
       }
     }
 
-    .right {
-      span {
-        margin-left: 15px;
-        font-size: 1em;
+    .f_bottom {
+      padding: 15px 15px;
+
+      .f_lover {
+        .left {
+          p {
+            font-size: 0.8em;
+          }
+        }
+
+        .right {
+          span {
+            margin-left: 18px;
+            font-size: 0.9em;
+          }
+        }
       }
     }
   }
