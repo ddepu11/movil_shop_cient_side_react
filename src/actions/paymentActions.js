@@ -11,6 +11,10 @@ import * as payment from '../api/paymentApi';
 import { sendNotification } from './notificationActions';
 import { removeAllLocalCartItems } from './cartActions';
 import { emptyUserCart, saveUserOrders } from './userActions';
+import logo from '../assests/logo.svg';
+
+export const clearPaymentState = () => (dispatch) =>
+  dispatch({ type: PAYMENT_CLEAR_STATE });
 
 export const makeAPayment =
   (orderId, amount, currency, name, email, contact, userId, cart) =>
@@ -29,20 +33,22 @@ export const makeAPayment =
           currency,
           name: 'Movil Shop',
           description: 'Movil Shop Payment',
-          image: '/static/media/logo.9c9eff40.svg',
+          image: logo,
 
           order_id: orderId,
 
-          handler(response) {
+          // response
+          handler() {
             dispatch(saveUserOrders(userId, cart));
             dispatch({ type: PAYMENT_MAKE_SUCCESS });
             dispatch(sendNotification('Payment Successfull!', false));
             dispatch(removeAllLocalCartItems());
             dispatch(emptyUserCart(userId));
 
-            console.log(response.razorpay_payment_id);
-            console.log(response.razorpay_order_id);
-            console.log(response.razorpay_signature);
+            dispatch(clearPaymentState());
+            // console.log(response.razorpay_payment_id);
+            // console.log(response.razorpay_order_id);
+            // console.log(response.razorpay_signature);
           },
 
           prefill: {
@@ -62,18 +68,19 @@ export const makeAPayment =
 
         const rzp1 = new window.Razorpay(options);
 
-        rzp1.on('payment.failed', (response) => {
+        // response
+        rzp1.on('payment.failed', () => {
           dispatch({ type: PAYMENT_MAKE_ERROR });
 
           dispatch(sendNotification('Sorry Could not make a payment!!', true));
 
-          console.log(response.error.code);
-          console.log(response.error.description);
-          console.log(response.error.source);
-          console.log(response.error.step);
-          console.log(response.error.reason);
-          console.log(response.error.metadata.order_id);
-          console.log(response.error.metadata.payment_id);
+          // console.log(response.error.code);
+          // console.log(response.error.description);
+          // console.log(response.error.source);
+          // console.log(response.error.step);
+          // console.log(response.error.reason);
+          // console.log(response.error.metadata.order_id);
+          // console.log(response.error.metadata.payment_id);
         });
 
         rzp1.open();
@@ -116,6 +123,3 @@ export const createAnOrder = (orderDetails, cart) => async (dispatch) => {
     dispatch(sendNotification(msg, true));
   }
 };
-
-export const clearPaymentState = () => (dispatch) =>
-  dispatch({ type: PAYMENT_CLEAR_STATE });
