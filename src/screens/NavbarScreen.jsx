@@ -214,47 +214,48 @@ const Wrapper = styled.nav`
   .navbar {
     background-color: var(--primary-color);
     padding: 0 10px;
-  }
+    /* border: 1px solid red; */
 
-  .nav_bottom {
-    justify-content: space-between;
-    padding: 20px 0 60px 0;
-
-    .nav_links {
-      width: 45%;
-    }
-
-    .nav_links ul {
+    .nav_bottom {
       justify-content: space-between;
+      padding: 20px 0 30px 0;
+
+      .nav_links {
+        width: 45%;
+      }
+
+      .nav_links ul {
+        justify-content: space-between;
+      }
+
+      .cart_icon {
+        font-size: 1.3em;
+        transform: translateY(4px);
+      }
+
+      .cart_container {
+        position: relative;
+      }
+
+      .cart_count {
+        position: absolute;
+        top: -10px;
+        left: 5px;
+        background: var(--tertiary-color);
+        color: var(--light-color);
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: grid;
+        place-content: center;
+        font-size: 0.7em;
+      }
     }
 
-    .cart_icon {
+    .nav_bottom a {
       font-size: 1.3em;
-      transform: translateY(4px);
-    }
-
-    .cart_container {
-      position: relative;
-    }
-
-    .cart_count {
-      position: absolute;
-      top: -10px;
-      left: 5px;
-      background: var(--tertiary-color);
       color: var(--light-color);
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: grid;
-      place-content: center;
-      font-size: 0.7em;
     }
-  }
-
-  .nav_bottom a {
-    font-size: 1.3em;
-    color: var(--light-color);
   }
 `;
 

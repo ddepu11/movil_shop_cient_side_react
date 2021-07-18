@@ -37,7 +37,9 @@ const Home = () => {
             </Link>
           </aside>
 
-          <img src={HeroImg} alt="" />
+          <div className="hero_img">
+            <img src={HeroImg} alt="hero" />
+          </div>
         </section>
       </div>
 
@@ -106,7 +108,7 @@ const Wrapper = styled.main`
     margin: 0 auto;
     background-color: var(--secondary-color);
     padding: 20px;
-    transform: translateY(-35px);
+    transform: translateY(-15px);
 
     .flex {
       justify-content: space-between;
@@ -133,9 +135,15 @@ const Wrapper = styled.main`
         }
       }
 
-      img {
-        width: 50%;
-        height: 100%;
+      .hero_img {
+        width: 410px;
+        height: 400px;
+
+        img {
+          object-fit: contain;
+          width: 100%;
+          height: 100%;
+        }
       }
     }
   }
