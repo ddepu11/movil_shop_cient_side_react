@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useSelector, useDispatch } from 'react-redux';
 import Notification from './components/Notification';
@@ -50,7 +50,7 @@ const App = () => {
           cirH="90px"
         />
       ) : (
-        <Router basename="/">
+        <Router>
           {notificationMessage && (
             <Notification
               msg={notificationMessage.toString()}
