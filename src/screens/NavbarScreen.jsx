@@ -35,106 +35,127 @@ const NavbarScreen = () => {
 
   const isUserInfoEmpty = Object.keys(userInfo).length === 0;
 
-  const outerDiv = useRef(null);
-  const innerDiv = useRef(null);
+  const topNavOuterDiv = useRef(null);
+  const topNavInnerDiv = useRef(null);
+
+  // Bottom Nav Section
+  const bottomNavOuterDiv = useRef(null);
+  const bottomNavInnerDiv = useRef(null);
 
   const sideBarToggle = () => {
-    const outerDivHeight = outerDiv.current.getBoundingClientRect().height;
-    const innerDivHeight = innerDiv.current.getBoundingClientRect().height;
+    // Top Nav Section
+    const topNavOuterHeight =
+      topNavOuterDiv.current.getBoundingClientRect().height;
+    const topNavInnerHeight =
+      topNavInnerDiv.current.getBoundingClientRect().height;
+
+    if (topNavOuterHeight === 0) {
+      topNavOuterDiv.current.style.height = `${topNavInnerHeight}px`;
+    } else {
+      topNavOuterDiv.current.style.height = `0px`;
+    }
+
+    // Bottom Nav Section
+    const outerDivHeight =
+      bottomNavOuterDiv.current.getBoundingClientRect().height;
+    const innerDivHeight =
+      bottomNavInnerDiv.current.getBoundingClientRect().height;
 
     if (outerDivHeight === 0) {
-      outerDiv.current.style.height = `${innerDivHeight}px`;
+      bottomNavOuterDiv.current.style.height = `${innerDivHeight}px`;
     } else {
-      outerDiv.current.style.height = `0px`;
+      bottomNavOuterDiv.current.style.height = `0px`;
     }
   };
 
   return (
     <Wrapper>
-      <div className="nav_top flex w-960">
-        <ul className="contact_ul flex">
-          <li>
-            <span>8268116588</span>
-          </li>
-          <li>
-            <span>movilshop@gmail.com</span>
-          </li>
-        </ul>
-
-        <ul className="top_right_links flex">
-          {/* Seller Batch Button */}
-          {(userInfo.role === 'SELLER' || role === 'SELLER') && (
+      <div className="nav_top_outer" ref={topNavOuterDiv}>
+        <div className="nav_top_inner flex w-960" ref={topNavInnerDiv}>
+          <ul className="contact_ul flex">
             <li>
-              <Button
-                pt="6px"
-                pb="6px"
-                pl="12px"
-                pr="1px"
-                fs="1.05em"
-                color="white"
-                bSh="rgba(0, 0, 0, 0.3) 0px 10px 20px, rgba(0, 0, 0, 0.22) 0px 10px 12px"
-                bgColor="#333"
-                borderRadius="5px"
-                cursor="auto"
-              >
-                <GiBowTieRibbon />
-                <span
-                  style={{
-                    color: 'white',
-                    marginLeft: '5px',
-                    padding: '0px  5px',
-                  }}
+              <span>8268116588</span>
+            </li>
+            <li>
+              <span>movilshop@gmail.com</span>
+            </li>
+          </ul>
+
+          <ul className="top_right_links flex">
+            {/* Seller Batch Button */}
+            {(userInfo.role === 'SELLER' || role === 'SELLER') && (
+              <li>
+                <Button
+                  pt="6px"
+                  pb="6px"
+                  pl="12px"
+                  pr="1px"
+                  fs="1.05em"
+                  color="white"
+                  bSh="rgba(0, 0, 0, 0.3) 0px 10px 20px, rgba(0, 0, 0, 0.22) 0px 10px 12px"
+                  bgColor="#333"
+                  borderRadius="5px"
+                  cursor="auto"
                 >
-                  You are a seller
-                </span>
-              </Button>
-            </li>
-          )}
-
-          {/* Dashboard page link */}
-          {(userInfo.role === 'SELLER' ||
-            userInfo.role === 'ADMIN' ||
-            role === 'SELLER' ||
-            role === 'ADMIN') && (
-            <li>
-              <Link to="/dashboard/all-mobiles">Dashboard</Link>
-            </li>
-          )}
-
-          {/* Account Page Link */}
-          {hasUserLoggedIn && (
-            <li>
-              <Link to="/account">Account</Link>
-            </li>
-          )}
-
-          {!hasUserLoggedIn && (
-            <li>
-              <Link to="/sign-up">Sign Up</Link>
-            </li>
-          )}
-
-          <li>
-            {hasUserLoggedIn || !isUserInfoEmpty ? (
-              <Button
-                bgColor="var(--danger-color)"
-                pt="5px"
-                pb="5px"
-                pl="15px"
-                pr="15px"
-                fs="1em"
-                color="white"
-                handleClick={handleLogOut}
-                borderRadius="5px"
-                bSh="rgba(0, 0, 0, 0.3) 0px 10px 20px, rgba(0, 0, 0, 0.22) 0px 10px 10px"
-              >
-                Log Out
-              </Button>
-            ) : (
-              <Link to="/sign-in">Sign In</Link>
+                  <GiBowTieRibbon />
+                  <span
+                    style={{
+                      color: 'white',
+                      marginLeft: '5px',
+                      padding: '0px  5px',
+                    }}
+                  >
+                    You are a seller
+                  </span>
+                </Button>
+              </li>
             )}
-          </li>
-        </ul>
+
+            {/* Dashboard page link */}
+            {(userInfo.role === 'SELLER' ||
+              userInfo.role === 'ADMIN' ||
+              role === 'SELLER' ||
+              role === 'ADMIN') && (
+              <li>
+                <Link to="/dashboard/all-mobiles">Dashboard</Link>
+              </li>
+            )}
+
+            {/* Account Page Link */}
+            {hasUserLoggedIn && (
+              <li>
+                <Link to="/account">Account</Link>
+              </li>
+            )}
+
+            {!hasUserLoggedIn && (
+              <li>
+                <Link to="/sign-up">Sign Up</Link>
+              </li>
+            )}
+
+            <li>
+              {hasUserLoggedIn || !isUserInfoEmpty ? (
+                <Button
+                  bgColor="var(--danger-color)"
+                  pt="5px"
+                  pb="5px"
+                  pl="15px"
+                  pr="15px"
+                  fs="1em"
+                  color="white"
+                  handleClick={handleLogOut}
+                  borderRadius="5px"
+                  bSh="rgba(0, 0, 0, 0.3) 0px 10px 20px, rgba(0, 0, 0, 0.22) 0px 10px 10px"
+                >
+                  Log Out
+                </Button>
+              ) : (
+                <Link to="/sign-in">Sign In</Link>
+              )}
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div className="nav_bottom">
@@ -143,8 +164,8 @@ const NavbarScreen = () => {
             <img src={logo} alt="" />
           </Link>
 
-          <div ref={outerDiv} className="links_outer_div">
-            <div className="links_inner_div flex" ref={innerDiv}>
+          <div ref={bottomNavOuterDiv} className="links_outer_div">
+            <div className="links_inner_div flex" ref={bottomNavInnerDiv}>
               <ul className="flex">
                 <li>
                   <Link to="/">Home</Link>
@@ -193,28 +214,30 @@ const Wrapper = styled.nav`
   max-width: 100%;
   margin: 0 auto;
 
-  .nav_top {
-    justify-content: space-between;
-    padding: 20px 10px;
-
-    ul li span,
-    a {
-      color: var(--dark-color);
-    }
-
-    .contact_ul {
+  .nav_top_outer {
+    .nav_top_inner {
       justify-content: space-between;
-      width: 35%;
-    }
+      padding: 20px 10px;
 
-    .top_right_links {
-      width: 60%;
-      justify-content: space-between;
+      ul li span,
+      a {
+        color: var(--dark-color);
+      }
 
-      button {
-        display: flex;
+      .contact_ul {
         justify-content: space-between;
-        align-items: center;
+        width: 35%;
+      }
+
+      .top_right_links {
+        width: 60%;
+        justify-content: space-between;
+
+        button {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
       }
     }
   }
@@ -277,8 +300,26 @@ const Wrapper = styled.nav`
   }
 
   @media screen and (max-width: 850px) {
-    .nav_top {
-      display: none;
+    .nav_top_outer {
+      height: 0;
+      overflow: hidden;
+      transition: all 0.5s ease-in-out;
+
+      .nav_top_inner {
+        padding: 10px 5px;
+        align-items: flex-start;
+
+        .contact_ul,
+        .top_right_links {
+          flex-direction: column;
+          align-items: flex-start;
+          width: auto;
+
+          li {
+            padding: 2px 0 10px 0px;
+          }
+        }
+      }
     }
 
     .nav_bottom {
@@ -305,19 +346,19 @@ const Wrapper = styled.nav`
   }
 
   @media screen and (max-width: 830px) {
-    .nav_top {
-      padding: 15px 10px;
+    .nav_top_outer {
+      .nav_top_inner {
+        ul li span,
+        a {
+          font-size: 0.9em;
+        }
 
-      ul li span,
-      a {
-        font-size: 0.9em;
-      }
-
-      .top_right_links {
-        li {
-          button {
-            padding: 4px 8px !important;
-            font-size: 0.8em !important;
+        .top_right_links {
+          li {
+            button {
+              padding: 4px 8px !important;
+              font-size: 0.8em !important;
+            }
           }
         }
       }
@@ -377,6 +418,10 @@ const Wrapper = styled.nav`
   }
 
   @media screen and (min-width: 830px) {
+    .nav_top_outer {
+      height: auto !important;
+    }
+
     .links_outer_div {
       height: auto !important;
     }

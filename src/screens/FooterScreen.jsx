@@ -154,7 +154,7 @@ const Wrapper = styled.footer`
 
   @media screen and (max-width: 750px) {
     .f_upper {
-      padding: 30px 12px;
+      padding: 30px 0px;
       justify-content: center;
       max-width: 1100px;
       gap: 25px 0;
@@ -187,7 +187,7 @@ const Wrapper = styled.footer`
         label {
           font-size: 1.2em;
           letter-spacing: 2px;
-          padding: 5px 0 20px;
+          padding: 5px 0 15px;
         }
 
         input {
