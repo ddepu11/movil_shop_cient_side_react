@@ -1,25 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AiFillStar } from 'react-icons/ai';
+import { AiFillStar, AiOutlineClose } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 import Button from '../../components/Button';
 import FilterScreenLogic from './logic/FilterScreenLogic';
 
-const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
-  const { clearFilters, colors, ram, brands } = FilterScreenLogic();
+const FiltersScreen = ({
+  handleButtons,
+  handleInput,
+  filters,
+  filterBarRef,
+}) => {
+  const { clearFilters, colors, ram, brands, closeFilterSideBar } =
+    FilterScreenLogic(filterBarRef);
 
   return (
-    <Wrapper>
+    <Wrapper ref={filterBarRef}>
       <div className="filters_div">
         <form>
-          <div className="form-control">
+          <div className="form-control flex search">
             <input
               type="text"
               onChange={handleInput}
-              className="search"
               placeholder="search"
               name="search"
             />
+            <AiOutlineClose className="close" onClick={closeFilterSideBar} />
           </div>
 
           <div className="form-control">
@@ -52,13 +58,10 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
                 pb="5px"
                 pt="5px"
                 ml="10px"
-                width="55%"
+                width="100%"
                 handleClick={() => handleButtons('avgStar', '5')}
               >
-                <div
-                  className="flex"
-                  style={{ justifyContent: 'space-between' }}
-                >
+                <div className="flex" style={{ justifyContent: 'flex-start' }}>
                   <span>5</span>&nbsp; <AiFillStar />
                   <span>and above</span>
                 </div>
@@ -71,13 +74,10 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
                 pb="5px"
                 pt="5px"
                 ml="10px"
-                width="55%"
+                width="100%"
                 handleClick={() => handleButtons('avgStar', '4')}
               >
-                <div
-                  className="flex"
-                  style={{ justifyContent: 'space-between' }}
-                >
+                <div className="flex" style={{ justifyContent: 'flex-start' }}>
                   <span>4</span>&nbsp; <AiFillStar />
                   <span>and above</span>
                 </div>
@@ -90,13 +90,10 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
                 pb="5px"
                 pt="5px"
                 ml="10px"
-                width="55%"
+                width="100%"
                 handleClick={() => handleButtons('avgStar', '3')}
               >
-                <div
-                  className="flex"
-                  style={{ justifyContent: 'space-between' }}
-                >
+                <div className="flex" style={{ justifyContent: 'flex-start' }}>
                   <span>3</span>&nbsp; <AiFillStar />
                   <span>and above</span>
                 </div>
@@ -109,13 +106,10 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
                 pb="5px"
                 pt="5px"
                 ml="10px"
-                width="55%"
+                width="100%"
                 handleClick={() => handleButtons('avgStar', '2')}
               >
-                <div
-                  className="flex"
-                  style={{ justifyContent: 'space-between' }}
-                >
+                <div className="flex" style={{ justifyContent: 'flex-start' }}>
                   <span>2</span>&nbsp; <AiFillStar />
                   <span>and above</span>
                 </div>
@@ -128,13 +122,10 @@ const FiltersScreen = ({ handleButtons, handleInput, filters }) => {
                 pb="5px"
                 pt="5px"
                 ml="10px"
-                width="55%"
+                width="100%"
                 handleClick={() => handleButtons('avgStar', '1')}
               >
-                <div
-                  className="flex"
-                  style={{ justifyContent: 'space-between' }}
-                >
+                <div className="flex" style={{ justifyContent: 'flex-start' }}>
                   <span>1</span>&nbsp; <AiFillStar />
                   <span>and above</span>
                 </div>
@@ -259,13 +250,15 @@ FiltersScreen.propTypes = {
   handleButtons: PropTypes.func.isRequired,
   handleInput: PropTypes.func.isRequired,
   filters: PropTypes.object.isRequired,
+  filterBarRef: PropTypes.func.isRequired,
 };
 
 const Wrapper = styled.aside`
-  .filters_div {
-    position: sticky;
-    top: 1rem;
+  width: 20%;
+  position: sticky;
+  top: 1rem;
 
+  .filters_div {
     .form-control {
       margin-bottom: 25px;
 
@@ -278,14 +271,6 @@ const Wrapper = styled.aside`
         margin-bottom: 10px;
         color: rgb(94, 94, 94);
         letter-spacing: 2px;
-      }
-
-      .search {
-        font-size: 1.2em;
-        padding: 5px 10px;
-        border: 1px solid rgba(0, 0, 0, 0.35);
-        color: #333;
-        width: 100%;
       }
 
       select {
@@ -341,15 +326,131 @@ const Wrapper = styled.aside`
       }
     }
 
-    .clear_filters {
-      padding: 5px 10px;
-      display: block;
-      width: 50%;
-      margin: 0 auto;
-      font-size: 1.2em;
-      margin-top: 30px;
-      background: #222;
-      color: white;
+    .search {
+      input {
+        font-size: 1.2em;
+        padding: 5px 10px;
+        border: 1px solid rgba(0, 0, 0, 0.35);
+        color: #333;
+        width: 100%;
+      }
+      .close {
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: 760px) {
+    position: absolute;
+    left: 0;
+    top: 1px;
+    z-index: 10;
+    background-color: var(--secondary-color);
+    width: 70%;
+    padding: 6px 12px;
+    transform: translateX(-100%);
+    transition: all 0.5s ease-in-out;
+
+    .filters_div {
+      .form-control {
+        .price_input {
+          width: 100%;
+        }
+
+        h5 {
+          font-size: 1.1em;
+          margin-bottom: 10px;
+          color: var(--light-color);
+          letter-spacing: 2px;
+        }
+
+        select {
+          font-size: 1.1em;
+          border: 1px solid rgba(0, 0, 0, 0.35);
+          padding: 3px 10px;
+          width: 100%;
+          background: var(--little-dark-color);
+          color: var(--light-color);
+        }
+
+        .custumer_rating_btns {
+          button {
+            div {
+              color: var(--light-color);
+            }
+          }
+        }
+
+        ul li {
+          padding: 0px 5px 10px;
+        }
+
+        ul li button {
+          font-size: 0.9em;
+          background: transparent;
+          color: var(--light-color);
+        }
+
+        p {
+          color: var(--light-color);
+          padding: 5px 0 0;
+        }
+
+        .ram {
+          margin-bottom: 10px;
+          padding: 0 0px 0 10px;
+          input {
+            margin-right: 8px;
+          }
+          label {
+            color: var(--light-color);
+          }
+        }
+
+        .colors {
+          button {
+            span {
+              color: var(--light-color);
+            }
+          }
+
+          .all_color {
+            font-size: 1.1em;
+            background: transparent;
+            color: var(--light-color);
+            margin-right: 5px;
+          }
+        }
+
+        .assured {
+          display: inline;
+          margin-right: 10px;
+          color: var(--light-color);
+        }
+      }
+      .search {
+        input {
+          font-size: 1.2em;
+          border: 1px solid rgba(0, 0, 0, 0.35);
+          color: var(--light-color);
+          background: var(--little-dark-color);
+        }
+
+        .close {
+          display: block;
+          color: var(--danger-color);
+          font-size: 2em;
+          margin-left: 5px;
+          cursor: pointer;
+        }
+      }
+
+      form {
+        button {
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+            rgba(0, 0, 0, 0.3) 0px 3px 7px -3px !important;
+        }
+      }
     }
   }
 `;

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -71,7 +71,21 @@ const MobileScreenLogic = () => {
     }
   };
 
-  return { filteredMobile, handleInput, handleButtons, filters, mobileLoading };
+  const filterBarRef = useRef(null);
+
+  const showFilterSideBar = () => {
+    filterBarRef.current.classList.add('show_filter_bar');
+  };
+
+  return {
+    filteredMobile,
+    handleInput,
+    handleButtons,
+    filters,
+    mobileLoading,
+    showFilterSideBar,
+    filterBarRef,
+  };
 };
 
 export default MobileScreenLogic;

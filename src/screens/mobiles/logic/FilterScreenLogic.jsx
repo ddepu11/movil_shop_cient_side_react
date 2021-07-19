@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { clearFilter } from '../../../actions/filterMobileActions';
 
-const FilterScreenLogic = () => {
+const FilterScreenLogic = (filterBarRef) => {
   const { mobiles } = useSelector((state) => state.mobile);
 
   const dispatch = useDispatch();
@@ -28,7 +28,11 @@ const FilterScreenLogic = () => {
 
   const clearFilters = () => dispatch(clearFilter());
 
-  return { clearFilters, colors, ram, brands };
+  const closeFilterSideBar = () => {
+    filterBarRef.current.classList.remove('show_filter_bar');
+  };
+
+  return { clearFilters, colors, ram, brands, closeFilterSideBar };
 };
 
 export default FilterScreenLogic;

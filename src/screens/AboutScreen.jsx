@@ -29,10 +29,15 @@ const About = () => (
             doloremque.
           </p>
         </div>
-        <img src={aboutUs1} alt="aboutus_1" />
+        <div className="image">
+          <img src={aboutUs1} alt="aboutus_1" />
+        </div>
       </div>
+
       <div className="approach flex">
-        <img src={aboutUs2} alt="aboutus_1" />
+        <div className="image">
+          <img src={aboutUs2} alt="aboutus_1" />
+        </div>
         <div className="right">
           <h1>Our Approach</h1>
           <p>
@@ -52,6 +57,7 @@ const About = () => (
           </p>
         </div>
       </div>
+
       <div className="vision flex">
         <div className="left">
           <h1>Our Process</h1>
@@ -72,7 +78,9 @@ const About = () => (
             sint doloremque.
           </p>
         </div>
-        <img src={aboutUs3} alt="aboutus_3" />
+        <div className="image">
+          <img src={aboutUs3} alt="aboutus_3" />
+        </div>
       </div>
     </Wrapper>
   </>
@@ -88,17 +96,21 @@ const Wrapper = styled.main`
     color: #222;
     font-size: 3em;
   }
+
   P {
     font-size: 1em;
     margin-bottom: 50px;
   }
+
   .vision {
     margin-bottom: 100px;
+    align-items: flex-start;
+
     .left {
       text-align: start;
       align-self: center;
       margin-right: 10px;
-      padding: 0 150px 0 0;
+      /* padding: 0 150px 0 0; */
       h1 {
         font-size: 2.5em;
         margin-bottom: 20px;
@@ -110,19 +122,37 @@ const Wrapper = styled.main`
         color: #444;
       }
     }
-    img {
-      width: 550px;
-      height: 600px;
-      object-fit: cover;
+
+    .image {
+      width: auto;
+      height: 400px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
+
   .approach {
     margin-bottom: 100px;
+    align-items: flex-start;
+
+    .image {
+      width: auto;
+      height: 400px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
     .right {
       text-align: start;
       align-self: center;
       margin-left: 10px;
-      padding: 0 0px 0 150px;
+      /* padding: 0 0px 0 150px; */
       h1 {
         font-size: 2.5em;
         margin-bottom: 20px;
@@ -134,10 +164,52 @@ const Wrapper = styled.main`
         color: #444;
       }
     }
-    img {
-      width: 550px;
-      height: 600px;
-      object-fit: cover;
+  }
+
+  @media screen and (max-width: 660px) {
+    padding: 10px 00px;
+
+    h2 {
+      color: #222;
+      font-size: 1.8em;
+    }
+
+    P {
+      font-size: 0.9em;
+      margin-bottom: 40px;
+    }
+
+    .vision,
+    .approach {
+      flex-direction: column;
+      .left,
+      .right {
+        text-align: center;
+
+        h1 {
+          font-size: 1.8em;
+          margin-bottom: 10px;
+        }
+
+        p {
+          margin-bottom: 18px;
+          line-height: 1.2;
+        }
+      }
+
+      .image {
+        /* display: none; */
+        padding: 0 10px;
+      }
+      border-bottom: 1px dashed var(--little-light-color);
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+
+    .approach {
+      .right {
+        margin-top: 15px;
+      }
     }
   }
 `;

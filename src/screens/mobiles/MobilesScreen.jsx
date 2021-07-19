@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { BsGrid3X3Gap } from 'react-icons/bs';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
+import { MdFilterList } from 'react-icons/md';
 import FiltersScreen from './FiltersScreen';
 import Hero from '../../components/Hero';
 import GridViewScreen from './views/GridViewScreen';
@@ -11,8 +12,15 @@ import MobileScreenLogic from './logic/MobileScreenLogic';
 import CircleLoader from '../../components/CircleLoader';
 
 const MobilesScreen = () => {
-  const { filteredMobile, handleInput, handleButtons, filters, mobileLoading } =
-    MobileScreenLogic();
+  const {
+    filteredMobile,
+    handleInput,
+    handleButtons,
+    filters,
+    mobileLoading,
+    showFilterSideBar,
+    filterBarRef,
+  } = MobileScreenLogic();
 
   if (mobileLoading) {
     return (
@@ -26,12 +34,14 @@ const MobilesScreen = () => {
       />
     );
   }
+
   return (
     <>
       <Hero title="mobiles" />
 
-      <Wrapper className="w-960">
+      <Wrapper className="w-960 flex">
         <FiltersScreen
+          filterBarRef={filterBarRef}
           filters={filters}
           handleButtons={handleButtons}
           handleInput={handleInput}
@@ -39,6 +49,7 @@ const MobilesScreen = () => {
 
         <section className="display_products">
           <header className="header flex">
+            <MdFilterList className="filter_icon" onClick={showFilterSideBar} />
             <h2>{filteredMobile.length} mobiles found</h2>
 
             <div className="sort_by">
@@ -83,23 +94,28 @@ const MobilesScreen = () => {
 };
 
 const Wrapper = styled.main`
-  padding: 40px 6px;
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 20px;
+  padding: 30px 6px;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
 
   .display_products {
-    position: sticky;
-    top: 5rem;
+    width: 78%;
     .header {
       justify-content: space-between;
       margin-bottom: 20px;
+
+      .filter_icon {
+        display: none;
+      }
+
       h2 {
         font-size: 1.2em;
         letter-spacing: 1px;
         text-transform: capitalize;
         font-weight: 500;
       }
+
       .sort_by {
         h2 {
           font-size: 1.1em;
@@ -123,6 +139,54 @@ const Wrapper = styled.main`
           font-size: 1.2em;
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 760px) {
+    display: block;
+    padding: 15px 6px;
+
+    .display_products {
+      width: 100%;
+
+      .header {
+        .filter_icon {
+          display: block;
+          font-size: 1.8em;
+          cursor: pointer;
+          color: var(--secondary-color);
+        }
+
+        h2 {
+          font-size: 1.1em;
+        }
+
+        .sort_by {
+          h2 {
+            font-size: 1em;
+          }
+
+          select {
+            padding: 4px 8px;
+          }
+        }
+
+        .view_by {
+          width: 20%;
+
+          span {
+            font-size: 1em;
+          }
+
+          button {
+            font-size: 1.1em;
+          }
+        }
+      }
+    }
+
+    .show_filter_bar {
+      transform: translateX(0%);
     }
   }
 `;

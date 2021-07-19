@@ -80,15 +80,16 @@ const Wrapper = styled.footer`
     padding: 50px 10px;
     align-items: flex-start;
     justify-content: space-between;
-    max-width: 1100px;
+    max-width: 1150px;
     flex-wrap: wrap;
     gap: 20px 0;
 
     .left {
       flex-wrap: wrap;
       gap: 1rem 0.5rem;
+
       .common {
-        margin-right: 20px;
+        margin-right: 12px;
 
         h2 {
           margin-bottom: 18px;
@@ -187,11 +188,11 @@ const Wrapper = styled.footer`
         label {
           font-size: 1.2em;
           letter-spacing: 2px;
-          padding: 5px 0 15px;
+          padding: 5px 0 12px;
         }
 
         input {
-          padding: 15px 20px;
+          padding: 10px 20px;
           font-size: 1.1em;
           width: 100%;
           margin-bottom: 20px;
@@ -199,6 +200,7 @@ const Wrapper = styled.footer`
 
         button {
           width: 100% !important;
+          padding: 7px 0 !important;
         }
       }
     }
@@ -223,9 +225,14 @@ const Wrapper = styled.footer`
     }
   }
 
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: 493px) {
     .f_upper {
+      padding: 30px 0px;
       .left {
+        gap: 1rem 0rem;
+        .common {
+          width: 180px;
+        }
       }
     }
   }
