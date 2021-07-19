@@ -42,7 +42,7 @@ const NavbarScreen = () => {
   const bottomNavOuterDiv = useRef(null);
   const bottomNavInnerDiv = useRef(null);
 
-  const sideBarToggle = () => {
+  const navBarToggle = () => {
     // Top Nav Section
     const topNavOuterHeight =
       topNavOuterDiv.current.getBoundingClientRect().height;
@@ -66,6 +66,11 @@ const NavbarScreen = () => {
     } else {
       bottomNavOuterDiv.current.style.height = `0px`;
     }
+  };
+
+  const closeNavbar = () => {
+    topNavOuterDiv.current.style.height = `0px`;
+    bottomNavOuterDiv.current.style.height = `0px`;
   };
 
   return (
@@ -117,20 +122,26 @@ const NavbarScreen = () => {
               role === 'SELLER' ||
               role === 'ADMIN') && (
               <li>
-                <Link to="/dashboard/all-mobiles">Dashboard</Link>
+                <Link to="/dashboard/all-mobiles" onClick={closeNavbar}>
+                  Dashboard
+                </Link>
               </li>
             )}
 
             {/* Account Page Link */}
             {hasUserLoggedIn && (
               <li>
-                <Link to="/account">Account</Link>
+                <Link to="/account" onClick={closeNavbar}>
+                  Account
+                </Link>
               </li>
             )}
 
             {!hasUserLoggedIn && (
               <li>
-                <Link to="/sign-up">Sign Up</Link>
+                <Link to="/sign-up" onClick={closeNavbar}>
+                  Sign Up
+                </Link>
               </li>
             )}
 
@@ -144,14 +155,19 @@ const NavbarScreen = () => {
                   pr="10px"
                   fs="0.9em"
                   color="white"
-                  handleClick={handleLogOut}
+                  handleClick={() => {
+                    handleLogOut();
+                    closeNavbar();
+                  }}
                   borderRadius="5px"
                   bSh="rgba(0, 0, 0, 0.3) 0px 10px 20px, rgba(0, 0, 0, 0.22) 0px 10px 10px"
                 >
                   Log Out
                 </Button>
               ) : (
-                <Link to="/sign-in">Sign In</Link>
+                <Link to="/sign-in" onClick={closeNavbar}>
+                  Sign In
+                </Link>
               )}
             </li>
           </ul>
@@ -160,7 +176,7 @@ const NavbarScreen = () => {
 
       <div className="nav_bottom">
         <div className="nav_bottom_inner_div w-960 flex">
-          <Link to="/" className="logo">
+          <Link to="/" className="logo" onClick={closeNavbar}>
             <img src={logo} alt="" />
           </Link>
 
@@ -168,30 +184,40 @@ const NavbarScreen = () => {
             <div className="links_inner_div flex" ref={bottomNavInnerDiv}>
               <ul className="flex">
                 <li>
-                  <Link to="/">Home</Link>
+                  <Link to="/" onClick={closeNavbar}>
+                    Home
+                  </Link>
                 </li>
 
                 <li>
-                  <Link to="/mobiles">Mobiles</Link>
+                  <Link to="/mobiles" onClick={closeNavbar}>
+                    Mobiles
+                  </Link>
                 </li>
 
                 {hasUserLoggedIn && !isUserInfoEmpty && (
                   <li>
-                    <Link to="/checkout">Checkout</Link>
+                    <Link to="/checkout" onClick={closeNavbar}>
+                      Checkout
+                    </Link>
                   </li>
                 )}
 
                 {hasUserLoggedIn && !isUserInfoEmpty && (
                   <li>
-                    <Link to="/orders">Orders</Link>
+                    <Link to="/orders" onClick={closeNavbar}>
+                      Orders
+                    </Link>
                   </li>
                 )}
 
                 <li>
-                  <Link to="/about">About</Link>
+                  <Link to="/about" onClick={closeNavbar}>
+                    About
+                  </Link>
                 </li>
               </ul>
-              <Link to="/cart" className="cart_container">
+              <Link to="/cart" className="cart_container" onClick={closeNavbar}>
                 <span className="cart_count">
                   {hasUserLoggedIn && !isUserInfoEmpty
                     ? userInfo.cart.length
@@ -203,7 +229,7 @@ const NavbarScreen = () => {
             </div>
           </div>
 
-          <GiHamburgerMenu className="menu" onClick={sideBarToggle} />
+          <GiHamburgerMenu className="menu" onClick={navBarToggle} />
         </div>
       </div>
     </Wrapper>
@@ -226,12 +252,15 @@ const Wrapper = styled.nav`
 
       .contact_ul {
         justify-content: space-between;
-        width: 30%;
+        li {
+          margin-right: 15px;
+        }
       }
 
       .top_right_links {
-        width: 60%;
-        justify-content: space-between;
+        li {
+          margin-left: 20px;
+        }
 
         button {
           display: flex;
@@ -313,7 +342,6 @@ const Wrapper = styled.nav`
         .top_right_links {
           flex-direction: column;
           align-items: flex-start;
-          width: auto;
 
           li {
             padding: 2px 0 10px 0px;
