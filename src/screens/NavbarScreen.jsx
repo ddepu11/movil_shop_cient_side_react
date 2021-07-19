@@ -86,11 +86,11 @@ const NavbarScreen = () => {
             {(userInfo.role === 'SELLER' || role === 'SELLER') && (
               <li>
                 <Button
-                  pt="6px"
-                  pb="6px"
-                  pl="12px"
-                  pr="1px"
-                  fs="1.05em"
+                  pt="3px"
+                  pb="3px"
+                  pl="10px"
+                  pr="10px"
+                  fs="0.9em"
                   color="white"
                   bSh="rgba(0, 0, 0, 0.3) 0px 10px 20px, rgba(0, 0, 0, 0.22) 0px 10px 12px"
                   bgColor="#333"
@@ -138,11 +138,11 @@ const NavbarScreen = () => {
               {hasUserLoggedIn || !isUserInfoEmpty ? (
                 <Button
                   bgColor="var(--danger-color)"
-                  pt="5px"
-                  pb="5px"
-                  pl="15px"
-                  pr="15px"
-                  fs="1em"
+                  pt="2px"
+                  pb="2px"
+                  pl="10px"
+                  pr="10px"
+                  fs="0.9em"
                   color="white"
                   handleClick={handleLogOut}
                   borderRadius="5px"
@@ -226,7 +226,7 @@ const Wrapper = styled.nav`
 
       .contact_ul {
         justify-content: space-between;
-        width: 35%;
+        width: 30%;
       }
 
       .top_right_links {
