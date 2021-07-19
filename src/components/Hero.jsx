@@ -18,11 +18,24 @@ const Wrapper = styled.main`
   background: var(--secondary-color);
   padding: 25px 5px;
   color: var(--light-color);
+
   .w-960 {
     h1 {
       font-size: 2em;
       letter-spacing: 2px;
       font-weight: 300;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 15px 10px;
+
+    .w-960 {
+      h1 {
+        font-size: 1.4em;
+        letter-spacing: 2px;
+        font-weight: 300;
+      }
     }
   }
 `;

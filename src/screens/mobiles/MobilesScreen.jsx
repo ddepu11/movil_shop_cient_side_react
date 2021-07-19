@@ -158,16 +158,17 @@ const Wrapper = styled.main`
         }
 
         h2 {
-          font-size: 1.1em;
+          font-size: 1em;
+          letter-spacing: 0px;
         }
 
         .sort_by {
           h2 {
-            font-size: 1em;
+            font-size: 0.9em;
           }
 
           select {
-            padding: 4px 8px;
+            padding: 2px 5px;
           }
         }
 
@@ -175,11 +176,11 @@ const Wrapper = styled.main`
           width: 20%;
 
           span {
-            font-size: 1em;
+            font-size: 0.9em;
           }
 
           button {
-            font-size: 1.1em;
+            font-size: 1em;
           }
         }
       }
@@ -187,6 +188,44 @@ const Wrapper = styled.main`
 
     .show_filter_bar {
       transform: translateX(0%);
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    .display_products {
+      .header {
+        .filter_icon {
+          font-size: 1.4em;
+        }
+
+        h2 {
+          font-size: 0.9em;
+        }
+
+        .sort_by {
+          label {
+            display: none;
+          }
+
+          select {
+            padding: 2px 5px;
+            font-size: 0.8em;
+          }
+        }
+
+        .view_by {
+          width: 10%;
+
+          span {
+            font-size: 0.9em;
+            display: none;
+          }
+
+          button {
+            font-size: 1em;
+          }
+        }
+      }
     }
   }
 `;

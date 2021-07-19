@@ -346,7 +346,7 @@ const Wrapper = styled.aside`
     top: 1px;
     z-index: 10;
     background-color: var(--secondary-color);
-    width: 70%;
+    width: 60%;
     padding: 6px 12px;
     transform: translateX(-100%);
     transition: all 0.5s ease-in-out;
@@ -452,6 +452,10 @@ const Wrapper = styled.aside`
         }
       }
     }
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
   }
 `;
 

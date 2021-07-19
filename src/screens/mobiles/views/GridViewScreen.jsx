@@ -60,6 +60,16 @@ const Wrapper = styled.main`
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 30px 00px;
   padding: 15px 0px 0 15px;
+
+  @media screen and (max-width: 760px) {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 20px 00px;
+    padding: 8px 0px 0 10px;
+
+    .mobile_pic {
+      height: 130px;
+    }
+  }
 `;
 
 export default GridViewScreen;
