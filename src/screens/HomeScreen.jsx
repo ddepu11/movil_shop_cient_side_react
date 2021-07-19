@@ -201,10 +201,25 @@ const Wrapper = styled.main`
     }
 
     .recent-mobiles {
-      padding: 10px 10px 15px;
+      padding: 12px 10px 15px;
+
       .heading {
         margin-bottom: 35px;
         font-size: 1.5em;
+      }
+
+      .mobiles {
+        gap: 1.5rem 2rem;
+
+        .mobile_pic {
+          height: 185px;
+        }
+      }
+
+      .all_products_btn {
+        margin-top: 40px;
+        /* padding: 15px 40px; */
+        font-size: 1.2em;
       }
     }
   }

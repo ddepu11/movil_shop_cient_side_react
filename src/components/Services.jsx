@@ -99,10 +99,10 @@ const Wrapper = styled.section`
     }
 
     .service_div {
-      gap: 2rem 3rem;
+      gap: 2rem 1.4rem;
 
       .service {
-        width: 200px;
+        width: 205px;
         padding: 40px 15px;
 
         .s_logo {
@@ -113,7 +113,7 @@ const Wrapper = styled.section`
         }
 
         h1 {
-          font-size: 1.3em;
+          font-size: 1.2em;
         }
 
         p {

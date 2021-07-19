@@ -85,6 +85,8 @@ const Wrapper = styled.footer`
     gap: 20px 0;
 
     .left {
+      flex-wrap: wrap;
+      gap: 1rem 0.5rem;
       .common {
         margin-right: 20px;
 
@@ -159,7 +161,7 @@ const Wrapper = styled.footer`
 
       .left {
         .common {
-          margin-right: 50px;
+          justify-self: flex-start;
 
           h2 {
             font-size: 1.2em;
@@ -217,6 +219,13 @@ const Wrapper = styled.footer`
             font-size: 0.9em;
           }
         }
+      }
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    .f_upper {
+      .left {
       }
     }
   }
