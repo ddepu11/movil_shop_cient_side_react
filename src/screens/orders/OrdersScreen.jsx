@@ -113,8 +113,9 @@ const Wrapper = styled.main`
     padding: 15px 0;
 
     .order {
-      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
+        rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+        rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
       justify-content: flex-start;
       align-items: flex-start;
       padding: 18px 5px;
@@ -196,6 +197,13 @@ const Wrapper = styled.main`
   @media screen and (max-width: 645px) {
     h1 {
       font-size: 1.8em;
+    }
+
+    .no_order_heading {
+      padding: 80px 0 0 0;
+      letter-spacing: 1px;
+      height: 50vh;
+      font-size: 1.7em;
     }
 
     .orders {

@@ -235,6 +235,22 @@ const Wrapper = styled.footer`
         }
       }
     }
+
+    .f_bottom {
+      padding: 15px 5px;
+
+      .f_lover {
+        .right {
+          display: flex;
+          flex-direction: column;
+
+          span {
+            margin-left: 0px;
+            margin-bottom: 4px;
+          }
+        }
+      }
+    }
   }
 `;
 
