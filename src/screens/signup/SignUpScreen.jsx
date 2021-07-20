@@ -217,7 +217,7 @@ const SignUpScreen = () => {
 };
 
 const Wrapper = styled.main`
-  padding: 35px 0;
+  padding: 35px 10px;
 
   h1 {
     letter-spacing: 2px;
@@ -228,6 +228,7 @@ const Wrapper = styled.main`
 
   form {
     margin-top: 25px;
+
     .row {
       align-items: stretch;
 
@@ -317,6 +318,7 @@ const Wrapper = styled.main`
           background: #fff;
           border-radius: 0.25rem;
           box-shadow: inset 0 0.2rem 0.4rem #cacaca;
+
           .browse_btn {
             background: #c9c3c3;
             color: #303030;
@@ -338,6 +340,7 @@ const Wrapper = styled.main`
             background: #303030;
           }
         }
+
         .dp {
           display: none;
         }
@@ -351,6 +354,104 @@ const Wrapper = styled.main`
           color: var(--success-color);
           font-size: 1.2em;
         }
+      }
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    padding: 20px 10px;
+
+    h1 {
+      font-size: 1.6em;
+    }
+
+    form {
+      margin-top: 12px;
+
+      .row {
+        .gender_seller_div {
+          .role-div {
+            .role_inputs {
+              input {
+                width: 20%;
+              }
+            }
+          }
+        }
+
+        .form-control {
+          label,
+          h2,
+          .gender_heading,
+          p {
+            font-size: 1.1em;
+          }
+
+          input {
+            font-size: 1.1em;
+            width: 90%;
+          }
+
+          .dp-label {
+            width: 45%;
+            padding: 8px 0px 8px 4px;
+          }
+        }
+      }
+
+      button {
+        width: 100% !important;
+      }
+    }
+  }
+
+  @media screen and (max-width: 555px) {
+    padding: 12px 10px;
+
+    h1 {
+      font-size: 1.3em;
+    }
+
+    form {
+      .row {
+        flex-direction: column;
+
+        .form-control {
+          margin-bottom: 10px;
+
+          label,
+          h2,
+          .gender_heading,
+          p {
+            font-size: 1.2em;
+          }
+
+          input {
+            width: 100%;
+          }
+
+          .dp-label {
+            width: 100%;
+          }
+        }
+
+        .gender_seller_div {
+          .role-div {
+            margin-top: 5px;
+            margin-bottom: 15px;
+          }
+        }
+
+        .fn_ln_div {
+          .form-control {
+            margin-bottom: 0px;
+          }
+        }
+      }
+
+      button {
+        font-size: 1.1em !important;
+        padding: 5px 0 !important;
       }
     }
   }
