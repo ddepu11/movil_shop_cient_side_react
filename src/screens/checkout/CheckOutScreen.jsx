@@ -36,7 +36,7 @@ const CheckOutScreen = () => {
   const { state, city, pincode, address } = deliveryAddress;
 
   return (
-    <Wrapper className="w-960">
+    <Wrapper className="w-960 flex">
       <div className="user_info">
         <div className="row flex">
           <h3>Name:</h3>
@@ -146,6 +146,7 @@ const CheckOutScreen = () => {
             pr="30px"
             fs="1em"
             width="100%"
+            bSh=""
             bgColor="var( --success-color)"
             handleClick={saveDeliveryAddress}
           >
@@ -160,26 +161,30 @@ const CheckOutScreen = () => {
             fs="1em"
             width="100%"
             mt="15px"
+            bSh=""
             handleClick={handlePay}
           >
             Buy Now
           </Button>
         </div>
       </div>
-      <CartPriceDetais height="310px" />
+
+      <CartPriceDetais height="310px" width="30%" />
     </Wrapper>
   );
 };
 
 const Wrapper = styled.main`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
-  /* grid-template-rows: repeat(1, minmax(100px, auto)); */
-  gap: 0 5rem;
-  padding: 15px 12px;
+  padding: 10px 5px;
+  align-items: flex-start;
+  justify-content: space-between;
 
   .user_info {
-    padding: 10px 00px;
+    width: 65%;
+    padding: 15px 15px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
+      rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+      rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 
     .row {
       justify-content: space-between;
@@ -248,6 +253,140 @@ const Wrapper = styled.main`
     .buy-now {
       margin: 0 auto;
       width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column-reverse;
+
+    .price_details_div,
+    .user_info {
+      width: 100% !important;
+      margin-bottom: 20px;
+    }
+
+    .price_details_div {
+      position: static;
+    }
+  }
+
+  @media screen and (max-width: 578px) {
+    .user_info {
+      padding: 15px 2px;
+
+      .row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px 10px 25px;
+
+        h3 {
+          font-size: 1.2em;
+          margin-bottom: 8px;
+        }
+
+        span {
+          font-size: 1em;
+          width: 100%;
+        }
+
+        .right {
+          width: 100%;
+
+          input {
+            justify-self: flex-start;
+            border: 1px dashed var(--little-light-color);
+            padding: 6px 5px;
+            color: var(--little-dark-color);
+            width: 100%;
+            font-size: 1em;
+          }
+
+          select {
+            padding: 6px 5px;
+            font-size: 1em;
+            width: 100%;
+          }
+
+          textarea {
+            font-size: 1.1em;
+            padding: 4px 5px;
+            width: 100%;
+          }
+
+          .message {
+            font-size: 1em;
+            display: none;
+          }
+
+          .message.error {
+            display: block;
+            color: var(--danger-color);
+          }
+        }
+
+        textarea:focus {
+          border: 0;
+        }
+      }
+
+      .buy-now {
+        margin: 0 auto;
+        width: 100%;
+
+        button {
+          padding: 8px 0 !important;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 430px) {
+    .user_info {
+      padding: 15px 2px;
+
+      .row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px 10px 25px;
+
+        h3 {
+          font-size: 1.1em;
+          margin-bottom: 6px;
+        }
+
+        span {
+          font-size: 1em;
+          width: 100%;
+        }
+
+        .right {
+          width: 100%;
+
+          input {
+            justify-self: flex-start;
+            padding: 4px 5px;
+            font-size: 1em;
+          }
+
+          select {
+            padding: 4px 5px;
+            font-size: 1em;
+            width: 100%;
+          }
+
+          textarea {
+            font-size: 1em;
+            padding: 4px 5px;
+          }
+        }
+      }
+
+      .buy-now {
+        padding: 0 5px;
+        button {
+          padding: 5px 0 !important;
+        }
+      }
     }
   }
 `;
