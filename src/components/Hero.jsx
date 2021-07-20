@@ -28,11 +28,11 @@ const Wrapper = styled.main`
   }
 
   @media screen and (max-width: 600px) {
-    padding: 15px 10px;
+    padding: 12px 10px;
 
     .w-960 {
       h1 {
-        font-size: 1.4em;
+        font-size: 1.2em;
         letter-spacing: 2px;
         font-weight: 300;
       }

@@ -166,7 +166,7 @@ const CheckOutScreen = () => {
           </Button>
         </div>
       </div>
-      <CartPriceDetais height="280px" />
+      <CartPriceDetais height="310px" />
     </Wrapper>
   );
 };

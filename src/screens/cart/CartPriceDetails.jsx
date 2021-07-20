@@ -8,7 +8,10 @@ const CartPriceDetais = ({ width, height }) => {
   const { totalPrice, totalItems, discount } = CartPriceDetailsLogic();
 
   return (
-    <Wrapper style={{ width: `${width}`, height: `${height}` }}>
+    <Wrapper
+      style={{ width: `${width}`, height: `${height}` }}
+      className="price_details_div"
+    >
       <h1>Price Details</h1>
       <div className="price_details">
         <div className="one flex">
@@ -88,6 +91,44 @@ const Wrapper = styled.div`
       font-weight: bold;
       color: var(--medium-dark-color);
       letter-spacing: 1px;
+    }
+  }
+
+  @media screen and (max-width: 460px) {
+    h1 {
+      padding: 10px 0 10px 15px;
+      font-size: 1.3em;
+    }
+
+    .price_details {
+      padding: 14px 15px;
+
+      .one {
+        padding: 11px 0px;
+
+        h4 {
+          font-size: 1.1em;
+          color: var(--little-dark-color);
+        }
+
+        span {
+          font-size: 0.98em;
+        }
+      }
+
+      border-bottom: 1px solid #cfcfcf;
+    }
+
+    .total {
+      padding: 18px 15px 15px;
+
+      h3 {
+        font-size: 1.2em;
+      }
+
+      span {
+        font-size: 1.1em;
+      }
     }
   }
 `;

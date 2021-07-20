@@ -70,7 +70,7 @@ const CartScreen = () => {
                 } = m;
 
                 return (
-                  <div className="outer-section flex" key={_id}>
+                  <div className="middle-section flex" key={_id}>
                     <div className="mobile flex">
                       <div className="image">
                         <img
@@ -106,6 +106,7 @@ const CartScreen = () => {
                       <div className="inc_dec flex">
                         {!userLoading ? (
                           <Button
+                            mr="12px"
                             width="25px"
                             height="25px"
                             color={
@@ -129,6 +130,7 @@ const CartScreen = () => {
 
                         {!userLoading ? (
                           <Button
+                            ml="16px"
                             width="25px"
                             height="25px"
                             borderRadius="50%"
@@ -150,6 +152,7 @@ const CartScreen = () => {
                       </div>
                       {!userLoading ? (
                         <Button
+                          ml="30px"
                           width="25px"
                           height="25px"
                           color="var(--danger-color)"
@@ -208,7 +211,7 @@ const CartScreen = () => {
                 } = m;
 
                 return (
-                  <div className="outer-section flex" key={mobileId}>
+                  <div className="middle-section flex" key={mobileId}>
                     <div className="mobile flex">
                       <div className="image">
                         <img
@@ -243,6 +246,7 @@ const CartScreen = () => {
                       <div className="inc_dec flex">
                         {!cartLoading ? (
                           <Button
+                            mr="12px"
                             width="25px"
                             height="25px"
                             color={
@@ -268,6 +272,7 @@ const CartScreen = () => {
 
                         {!cartLoading ? (
                           <Button
+                            ml="14px"
                             width="25px"
                             height="25px"
                             borderRadius="50%"
@@ -291,6 +296,7 @@ const CartScreen = () => {
                       </div>
 
                       <Button
+                        ml="30px"
                         width="25px"
                         height="25px"
                         color="var(--danger-color)"
@@ -352,15 +358,21 @@ const Wrapper = styled.main`
   padding: 5px 0;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 0 15px;
+  gap: 0 20px;
   min-height: 60vh;
 
   .cart {
     padding: 8px 0px 5px;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
       rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-    width: 65%;
-    /* border: 1px soli d red; */
+    width: 60%;
+
+    h1 {
+      padding: 10px 0 10px 40px;
+      border-bottom: 1px solid #cfcfcf;
+      font-size: 1.4em;
+      color: var(--medium-dark-color);
+    }
 
     .empty_cart {
       text-align: center;
@@ -376,14 +388,7 @@ const Wrapper = styled.main`
       }
     }
 
-    h1 {
-      padding: 10px 0 10px 40px;
-      border-bottom: 1px solid #cfcfcf;
-      font-size: 1.4em;
-      color: var(--medium-dark-color);
-    }
-
-    .outer-section {
+    .middle-section {
       flex-direction: column;
       align-items: flex-start;
       box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
@@ -435,14 +440,11 @@ const Wrapper = styled.main`
 
       .inc_dec_remove_div {
         margin-top: 25px;
-        justify-content: space-between;
-        padding: 0px 20px 0;
-        width: 30%;
+        justify-content: flex-start;
+        padding: 0px 25px 0;
 
         .inc_dec {
-          justify-content: space-between;
-          width: 60%;
-
+          justify-content: flex-start;
           .quantity {
             font-size: 1.22em;
             font-weight: bold;
@@ -455,9 +457,123 @@ const Wrapper = styled.main`
       position: sticky;
       bottom: 2px;
       margin: 0 auto;
-      width: 30%;
+      width: 50%;
+
       a {
         color: var(--light-color);
+      }
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    padding: 10px 5px;
+
+    .price_details_div,
+    .cart {
+      width: 100% !important;
+      margin-bottom: 20px;
+    }
+
+    .cart {
+      padding: 5px 0px 5px;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
+      h1 {
+        padding: 10px 0 10px 30px;
+        font-size: 1.4em;
+      }
+
+      .empty_cart {
+        h3 {
+          height: 15vh;
+          padding: 40px 0 0;
+          font-size: 2em;
+        }
+
+        a {
+          font-size: 1em;
+        }
+      }
+
+      .middle-section {
+        .mobile {
+          .info {
+            padding: 0 2px;
+          }
+        }
+
+        .inc_dec_remove_div {
+          margin-top: 25px;
+          justify-content: flex-start;
+          padding: 0px 25px 0;
+
+          .inc_dec {
+            justify-content: flex-start;
+            .quantity {
+              font-size: 1.22em;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+
+      .proceed {
+        width: 100%;
+      }
+    }
+  }
+
+  @media screen and (max-width: 460px) {
+    .cart {
+      h1 {
+        padding: 8px 0 8px 20px;
+        font-size: 1.1em;
+      }
+
+      .middle-section {
+        padding: 30px 0px 12px;
+        margin-bottom: 20px;
+
+        .mobile {
+          .image {
+            width: 140px;
+            height: 140px;
+          }
+
+          .info {
+            height: 140px;
+            padding: 0 0px;
+
+            div {
+              h2 {
+                margin-bottom: 2px;
+                font-size: 1.3em;
+              }
+
+              p {
+                margin-top: 2px;
+                font-size: 1em;
+              }
+            }
+
+            h4 {
+              font-size: 1.1em;
+            }
+          }
+        }
+
+        .inc_dec_remove_div {
+          padding: 0px 18px 0;
+
+          .inc_dec {
+            justify-content: flex-start;
+            .quantity {
+              font-size: 1.15em;
+            }
+          }
+        }
       }
     }
   }
