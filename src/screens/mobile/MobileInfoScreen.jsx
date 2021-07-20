@@ -283,6 +283,10 @@ const Wrapper = styled.aside`
       .colors {
         width: 100%;
 
+        button {
+          margin-right: 12px !important;
+        }
+
         div {
           width: 100%;
         }

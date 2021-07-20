@@ -86,7 +86,7 @@ const Wrapper = styled.aside`
 
       .left-section {
         .small_img {
-          width: 50px;
+          width: 60px;
           height: 70px;
           margin-bottom: 10px;
         }
@@ -94,7 +94,7 @@ const Wrapper = styled.aside`
 
       .right-sction {
         margin-left: 10px;
-        width: 180px;
+        width: 200px;
         height: 470px;
       }
     }
