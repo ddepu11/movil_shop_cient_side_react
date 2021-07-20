@@ -352,86 +352,9 @@ const Wrapper = styled.aside`
     transition: all 0.5s ease-in-out;
 
     .filters_div {
-      .form-control {
-        .price_input {
-          width: 100%;
-        }
-
-        h5 {
-          font-size: 1.1em;
-          margin-bottom: 10px;
-          color: var(--light-color);
-          letter-spacing: 2px;
-        }
-
-        select {
-          font-size: 1.1em;
-          border: 1px solid rgba(0, 0, 0, 0.35);
-          padding: 3px 10px;
-          width: 100%;
-          background: var(--little-dark-color);
-          color: var(--light-color);
-        }
-
-        .custumer_rating_btns {
-          button {
-            div {
-              color: var(--light-color);
-            }
-          }
-        }
-
-        ul li {
-          padding: 0px 5px 10px;
-        }
-
-        ul li button {
-          font-size: 0.9em;
-          background: transparent;
-          color: var(--light-color);
-        }
-
-        p {
-          color: var(--light-color);
-          padding: 5px 0 0;
-        }
-
-        .ram {
-          margin-bottom: 10px;
-          padding: 0 0px 0 10px;
-          input {
-            margin-right: 8px;
-          }
-          label {
-            color: var(--light-color);
-          }
-        }
-
-        .colors {
-          button {
-            span {
-              color: var(--light-color);
-            }
-          }
-
-          .all_color {
-            font-size: 1.1em;
-            background: transparent;
-            color: var(--light-color);
-            margin-right: 5px;
-          }
-        }
-
-        .assured {
-          display: inline;
-          margin-right: 10px;
-          color: var(--light-color);
-        }
-      }
       .search {
         input {
-          font-size: 1.2em;
-          border: 1px solid rgba(0, 0, 0, 0.35);
+          border: 1px solid rgba(189, 186, 186, 0.35);
           color: var(--light-color);
           background: var(--little-dark-color);
         }
@@ -445,10 +368,54 @@ const Wrapper = styled.aside`
         }
       }
 
+      .form-control {
+        h5 {
+          color: var(--light-color);
+        }
+
+        select {
+          border: 1px solid rgba(189, 186, 186, 0.35);
+          background: var(--little-dark-color);
+          color: var(--light-color);
+        }
+
+        .custumer_rating_btns {
+          button {
+            div {
+              color: var(--light-color);
+            }
+          }
+        }
+
+        p {
+          color: var(--light-color);
+        }
+
+        .ram {
+          label {
+            color: var(--light-color);
+          }
+        }
+
+        .colors {
+          button {
+            span {
+              color: var(--light-color);
+            }
+          }
+        }
+
+        .assured {
+          color: var(--light-color);
+        }
+      }
+
       form {
         button {
           box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
             rgba(0, 0, 0, 0.3) 0px 3px 7px -3px !important;
+          font-size: 1em !important;
+          padding: 5px 10px !important;
         }
       }
     }
@@ -456,6 +423,40 @@ const Wrapper = styled.aside`
 
   @media screen and (max-width: 500px) {
     width: 100%;
+
+    .filters_div {
+      .search {
+        input {
+          font-size: 1.1em;
+          border: 1px solid rgba(189, 186, 186, 0.35);
+        }
+
+        .close {
+          margin-left: 10px;
+        }
+      }
+
+      .form-control {
+        h5 {
+          font-size: 1em;
+          letter-spacing: 3px;
+        }
+
+        select {
+          font-size: 1.1em;
+          border: 1px solid rgba(189, 186, 186, 0.35);
+          padding: 3px 5px;
+        }
+
+        .colors {
+          button {
+            span {
+              color: var(--light-color);
+            }
+          }
+        }
+      }
+    }
   }
 `;
 
