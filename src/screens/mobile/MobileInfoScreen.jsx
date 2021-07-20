@@ -111,7 +111,12 @@ const MobileInfoScreen = ({ setColor, color }) => {
 };
 
 const Wrapper = styled.aside`
-  padding: 0 60px;
+  padding: 5px 40px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
+    rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+    rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+
+  width: 55%;
 
   .head {
     flex-direction: column;
@@ -143,10 +148,9 @@ const Wrapper = styled.aside`
     }
 
     .spec {
-      width: 65%;
+      width: 80%;
       margin-bottom: 15px;
       justify-content: space-between;
-      /* border: 1px solid red; */
 
       h5 {
         font-size: 1em;
@@ -164,14 +168,14 @@ const Wrapper = styled.aside`
 
     .colors {
       padding: 8px 0;
-      width: 75%;
+      width: 80%;
 
       h5 {
         align-self: flex-start;
       }
 
       div {
-        width: 40%;
+        width: 30%;
       }
     }
 
@@ -186,6 +190,117 @@ const Wrapper = styled.aside`
       }
       span {
         width: 50%;
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    padding: 8px 15px;
+
+    .head {
+      h1 {
+        font-size: 1.6em;
+        margin-bottom: 5px;
+      }
+    }
+
+    .price {
+      color: #313131;
+      font-size: 1.8em;
+    }
+
+    .specification {
+      margin-top: 30px;
+
+      h1 {
+        font-size: 1.2em;
+      }
+
+      .spec {
+        width: 100%;
+        margin-bottom: 15px;
+
+        h5 {
+          font-size: 1em;
+        }
+
+        span {
+          font-size: 1em;
+          width: 30%;
+          letter-spacing: 1px;
+        }
+      }
+
+      .colors {
+        width: 100%;
+
+        div {
+          width: 30%;
+        }
+      }
+
+      .sold_by {
+        border-top: 1px dashed var(--primary-color);
+        width: 100%;
+        margin-top: 4px;
+        padding-top: 10px;
+
+        h5 {
+          align-self: flex-start;
+        }
+
+        span {
+          width: 50%;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 425px) {
+    .specification {
+      margin-top: 20px;
+
+      h1 {
+        font-size: 1.2em;
+      }
+
+      .spec {
+        margin-bottom: 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        border-bottom: 2px dashed #0f0f0f21;
+
+        h5 {
+          margin-bottom: 10px;
+        }
+
+        span {
+          width: 100%;
+          padding: 0 0 0 5px;
+        }
+      }
+
+      .colors {
+        width: 100%;
+
+        div {
+          width: 100%;
+        }
+      }
+
+      .sold_by {
+        border-top: none;
+        width: 100%;
+        margin-top: 0px;
+        padding-top: 10px;
+
+        h5 {
+          align-self: flex-start;
+        }
+
+        span {
+          width: 100%;
+        }
       }
     }
   }

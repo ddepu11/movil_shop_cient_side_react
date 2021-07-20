@@ -105,6 +105,19 @@ const Wrapper = styled.aside`
     flex-direction: column;
     align-items: flex-start;
   }
+
+  @media screen and (max-width: 485px) {
+    h2 {
+      font-size: 1.2em;
+    }
+
+    .buttons {
+      font-size: 0.9em;
+      button {
+        padding: 8px 0 !important;
+      }
+    }
+  }
 `;
 
 export default MobileSubmitReviewScreen;

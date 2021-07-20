@@ -57,6 +57,13 @@ const Wrapper = styled.aside`
       letter-spacing: 0.9px;
     }
   }
+
+  @media screen and (max-width: 420px) {
+    button {
+      padding: 10px 15px !important;
+      font-size: 0.9em !important;
+    }
+  }
 `;
 
 MobileCartBuyButtons.propTypes = {

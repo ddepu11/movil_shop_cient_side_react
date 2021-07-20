@@ -36,7 +36,7 @@ const MobileScreen = () => {
   return (
     <>
       <Hero title={`mobiles / ${mobile.title}`} />
-      <Wrapper className="w-960">
+      <Wrapper className="w-960 flex">
         {mobile && <MobileImagesScreen color={color} />}
         {mobile && <MobileInfoScreen setColor={setColor} color={color} />}
       </Wrapper>
@@ -45,9 +45,17 @@ const MobileScreen = () => {
 };
 
 const Wrapper = styled.main`
-  display: grid;
-  grid-template-columns: 450px 1fr;
-  padding: 20px 10px;
+  padding: 20px 5px;
+  justify-content: space-between;
+
+  @media screen and (max-width: 1005px) {
+    flex-direction: column;
+
+    aside {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
 `;
 
 export default MobileScreen;

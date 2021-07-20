@@ -41,6 +41,7 @@ const Wrapper = styled.aside`
   border: 1px dashed #d1d1d1;
   align-self: flex-start;
   padding: 15px 0 5px;
+  width: 40%;
 
   .previews {
     width: 100%;
@@ -75,6 +76,26 @@ const Wrapper = styled.aside`
         width: 100%;
         height: 100%;
         object-fit: contain;
+      }
+    }
+  }
+
+  @media screen and (max-width: 420px) {
+    .previews {
+      justify-content: flex-start;
+
+      .left-section {
+        .small_img {
+          width: 50px;
+          height: 70px;
+          margin-bottom: 10px;
+        }
+      }
+
+      .right-sction {
+        margin-left: 10px;
+        width: 180px;
+        height: 470px;
       }
     }
   }
