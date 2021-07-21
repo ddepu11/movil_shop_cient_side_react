@@ -58,6 +58,8 @@ const SignUpScreen = () => {
               type="text"
               name="firstName"
               label="First Name"
+              inputW="65%"
+              inputFs="1.1em"
             />
 
             <FormControl
@@ -69,12 +71,14 @@ const SignUpScreen = () => {
               type="text"
               name="lastName"
               label="Last Name"
+              inputW="65%"
+              inputFs="1.1em"
             />
           </div>
 
           <div className="flex gender_seller_div">
             {/* Gender >>>> */}
-            <div className="form-control">
+            <div className="gender-section">
               <h2 className="gender_heading">
                 Gender{' '}
                 <span style={{ color: 'red', fontSize: '1.1em' }}> *</span>
@@ -111,7 +115,7 @@ const SignUpScreen = () => {
             {/* Gender Ends */}
 
             {/* Seeler >>>> */}
-            <div className="form-control role-div flex">
+            <div className="role-div flex">
               <p>Do you want to be a seller?</p>
 
               <div className="role_inputs flex">
@@ -139,6 +143,8 @@ const SignUpScreen = () => {
             type="text"
             name="phoneNumber"
             label="Phone Number"
+            inputW="65%"
+            inputFs="1.1em"
           />
 
           <FormControl
@@ -150,6 +156,8 @@ const SignUpScreen = () => {
             type="text"
             name="email"
             label="Email Address"
+            inputW="65%"
+            inputFs="1.1em"
           />
         </div>
 
@@ -163,6 +171,8 @@ const SignUpScreen = () => {
             type="password"
             name="password"
             label="Password"
+            inputW="65%"
+            inputFs="1.1em"
           />
 
           <FormControl
@@ -174,12 +184,14 @@ const SignUpScreen = () => {
             type="password"
             name="confirmPassword"
             label="Confirm Password"
+            inputW="65%"
+            inputFs="1.1em"
           />
         </div>
 
         {/* File Upload  */}
         <div className="row flex">
-          <div className="form-control">
+          <div className="dp-upload-section">
             <p>Upload your display picture</p>
             <label htmlFor="dp" className="dp-label" ref={dbLabelRef}>
               Choose file...
@@ -207,7 +219,7 @@ const SignUpScreen = () => {
           fs="1.2em"
           bgColor="var(--success-color)"
           width="33%"
-          mt="12px"
+          mt="20px"
         >
           Create Account
         </Button>
@@ -217,7 +229,7 @@ const SignUpScreen = () => {
 };
 
 const Wrapper = styled.main`
-  padding: 35px 10px;
+  padding: 30px 10px;
 
   h1 {
     letter-spacing: 2px;
@@ -230,7 +242,7 @@ const Wrapper = styled.main`
     margin-top: 25px;
 
     .row {
-      align-items: stretch;
+      align-items: flex-start;
 
       .fn_ln_div {
         flex-direction: column;
@@ -246,6 +258,7 @@ const Wrapper = styled.main`
           font-size: 1.3em;
           color: #222;
           font-weight: 400;
+          margin-top: 10px;
           margin-bottom: 5px;
         }
 
@@ -261,10 +274,27 @@ const Wrapper = styled.main`
           }
         }
 
+        .message.error {
+          color: red;
+          font-size: 1.2em;
+        }
+
+        .message.success {
+          color: green;
+          font-size: 1.2em;
+        }
+
         .role-div {
           align-items: flex-start;
           justify-content: space-between;
-          margin-top: 20px;
+          flex-direction: column;
+          width: 100%;
+          margin-top: 15px;
+
+          p {
+            margin-bottom: 5px;
+            font-size: 1.3em;
+          }
 
           .role_inputs {
             width: 30%;
@@ -292,20 +322,18 @@ const Wrapper = styled.main`
         }
       }
 
-      .form-control {
+      .gender-section,
+      .dp-upload-section {
         display: flex;
         flex-direction: column;
         width: 100%;
+      }
+
+      .dp-upload-section {
+        padding: 12px 0 10px;
 
         p {
           font-size: 1.3em;
-          padding: 0px 0px 10px;
-          color: #222;
-        }
-
-        input {
-          font-size: 1.1em;
-          width: 65%;
         }
 
         .dp-label {
@@ -318,7 +346,6 @@ const Wrapper = styled.main`
           background: #fff;
           border-radius: 0.25rem;
           box-shadow: inset 0 0.2rem 0.4rem #cacaca;
-
           .browse_btn {
             background: #c9c3c3;
             color: #303030;
@@ -342,27 +369,18 @@ const Wrapper = styled.main`
         }
 
         .dp {
-          display: none;
-        }
-
-        .message.error {
-          color: var(--danger-color);
-          font-size: 1.2em;
-        }
-
-        .message.success {
-          color: var(--success-color);
-          font-size: 1.2em;
+          /* display: none; */
         }
       }
     }
   }
 
   @media screen and (max-width: 700px) {
-    padding: 20px 10px;
+    padding: 22px 10px;
 
     h1 {
       font-size: 1.6em;
+      letter-spacing: 1px;
     }
 
     form {
@@ -379,19 +397,7 @@ const Wrapper = styled.main`
           }
         }
 
-        .form-control {
-          label,
-          h2,
-          .gender_heading,
-          p {
-            font-size: 1.1em;
-          }
-
-          input {
-            font-size: 1.1em;
-            width: 90%;
-          }
-
+        .form-section {
           .dp-label {
             width: 45%;
             padding: 8px 0px 8px 4px;
@@ -406,45 +412,36 @@ const Wrapper = styled.main`
   }
 
   @media screen and (max-width: 555px) {
-    padding: 12px 10px;
+    padding: 15px 10px;
 
     h1 {
-      font-size: 1.3em;
+      font-size: 1.4em;
+      text-align: center;
     }
 
     form {
       .row {
         flex-direction: column;
 
-        .form-control {
-          margin-bottom: 10px;
-
-          label,
-          h2,
-          .gender_heading,
-          p {
-            font-size: 1.2em;
-          }
-
-          input {
-            width: 100%;
-          }
-
+        .dp-upload-section {
           .dp-label {
             width: 100%;
+            margin-top: 10px;
           }
         }
 
         .gender_seller_div {
+          margin-top: 12px;
+          margin-bottom: 22px;
+
           .role-div {
-            margin-top: 5px;
-            margin-bottom: 15px;
+            margin-top: 15px;
           }
         }
 
         .fn_ln_div {
-          .form-control {
-            margin-bottom: 0px;
+          .form-section {
+            margin-bottom: 10px;
           }
         }
       }
@@ -453,6 +450,18 @@ const Wrapper = styled.main`
         font-size: 1.1em !important;
         padding: 5px 0 !important;
       }
+    }
+  }
+
+  @media screen and (max-width: 555px) {
+    padding: 14px 10px;
+
+    h1 {
+      font-size: 1.2em;
+    }
+
+    form {
+      margin-top: 12px;
     }
   }
 `;
