@@ -102,6 +102,25 @@ const Wrapper = styled.div`
     height: auto;
     width: auto;
   }
+
+  @media screen and (max-width: 511px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 0 30px;
+
+    h4 {
+      font-size: 1.2em;
+      margin-bottom: 5px;
+    }
+
+    div {
+      width: 100%;
+
+      span,
+      input {
+      }
+    }
+  }
 `;
 
 export default FormFieldUpdate;

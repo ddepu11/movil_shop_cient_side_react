@@ -52,7 +52,7 @@ const AccountScreen = () => {
 
           <AsideScreen />
 
-          <main className="card">
+          <main>
             <FormFieldUpdate
               heading="First Name:"
               wannaEdit={wannaEdit}
@@ -196,6 +196,9 @@ const Wrapper = styled.main`
   main {
     grid-area: m;
     padding: 5px 15px 20px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
+      rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+      rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 
     .gender_row {
       justify-content: space-between;
@@ -219,6 +222,43 @@ const Wrapper = styled.main`
     .update_btn:hover,
     .cancel_btn:hover {
       transform: scale(1.1);
+    }
+  }
+
+  @media screen and (max-width: 744px) {
+    grid-template-areas: 'h h h' 'as as as' 'm m m';
+    padding: 15px 10px 20px;
+
+    header {
+      padding: 10px 0 40px;
+
+      h1 {
+        text-align: center;
+        font-size: 2em;
+        letter-spacing: 3px;
+      }
+    }
+
+    main {
+      padding: 15px 15px 20px;
+      margin-top: 15px;
+
+      .gender_row {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 0px 0 25px;
+      }
+
+      button:hover {
+        transform: scale(1.05);
+        transition: transform 0.5s ease;
+      }
+
+      button {
+        margin-top: 10px !important;
+        width: 100% !important;
+        padding: 8px 0 !important;
+      }
     }
   }
 `;
