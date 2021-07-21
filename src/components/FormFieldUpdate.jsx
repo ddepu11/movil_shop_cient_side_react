@@ -121,6 +121,10 @@ const Wrapper = styled.div`
       }
     }
   }
+
+  @media screen and (max-width: 341px) {
+    padding: 0 0 27px;
+  }
 `;
 
 export default FormFieldUpdate;

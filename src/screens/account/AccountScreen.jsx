@@ -261,6 +261,38 @@ const Wrapper = styled.main`
       }
     }
   }
+
+  @media screen and (max-width: 473px) {
+    padding: 15px 10px 20px;
+
+    header {
+      padding: 5px 0 25px;
+
+      h1 {
+        text-align: center;
+        font-size: 1.5em;
+        letter-spacing: 1px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 341px) {
+    padding: 15px 5px 20px;
+
+    main {
+      padding: 15px 10px 20px;
+      margin-top: 15px;
+
+      .gender_row {
+        padding: 0px 0 20px;
+      }
+
+      button {
+        margin-top: 5px !important;
+        font-size: 0.95em !important;
+      }
+    }
+  }
 `;
 
 export default AccountScreen;
