@@ -250,7 +250,7 @@ FiltersScreen.propTypes = {
   handleButtons: PropTypes.func.isRequired,
   handleInput: PropTypes.func.isRequired,
   filters: PropTypes.object.isRequired,
-  filterBarRef: PropTypes.func.isRequired,
+  filterBarRef: PropTypes.object.isRequired,
 };
 
 const Wrapper = styled.aside`

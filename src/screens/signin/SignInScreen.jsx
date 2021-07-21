@@ -35,18 +35,22 @@ const SignInScreen = () => {
             <h2>Sign In in to Movil Shop</h2>
             <Button
               bgColor="var(--tertiary-color)"
-              pt="10px"
-              pr="60px"
-              pb="10px"
-              pl="12px"
+              pt="8px"
+              pr="10px"
+              pb="8px"
+              pl="10px"
               width="100%"
               borderRadius="5px"
-              fs="1.1em"
+              fs="1em"
               handleClick={() => loginWithRedirect()}
+              bSh=""
             >
-              <AiOutlineGoogle className="google" />
-              <span>Log in with Google</span>
+              <div className="center flex">
+                <AiOutlineGoogle className="google" />
+                <span>Sign in with Google</span>
+              </div>
             </Button>
+
             <div className="or flex">
               <div className="left" />
               <span>Or</span>
@@ -77,14 +81,14 @@ const SignInScreen = () => {
               />
 
               <Button
-                pt="10px"
-                pb="10px"
-                pl="40px"
-                pr="40px"
+                pt="8px"
+                pb="8px"
+                pl="0px"
+                pr="0px"
                 mt="12px"
                 fs="1.2em"
                 width="100%"
-                bgColor="var(--medium-dark-color)"
+                bgColor="var(--success-color)"
                 bSh=""
                 tr=""
                 handleClick={handleSubmit}
@@ -92,13 +96,29 @@ const SignInScreen = () => {
                 Log In
               </Button>
             </form>
+
             <div className="or flex">
               <div className="left" />
               <span>Or</span>
               <div className="right" />
             </div>
+
             <Link className="sign-up-btn" to="/sign-up">
-              Don&apos;t have an account? Sign Up Now !
+              <Button
+                pt="8px"
+                pb="8px"
+                pl="30px"
+                pr="30px"
+                mt="12px"
+                fs="1.15em"
+                width="100%"
+                bgColor="var(--medium-dark-color)"
+                bSh=""
+                tr=""
+                handleClick={handleSubmit}
+              >
+                Don&apos;t have an account? Sign Up Now !
+              </Button>
             </Link>
           </div>
         </Wrapper>
@@ -110,43 +130,121 @@ const SignInScreen = () => {
 const Wrapper = styled.main`
   padding: 10px 0 40px 0;
 
-  h2 {
-    font-size: 2.2em;
-    padding: 15px 0;
+  div {
+    h2 {
+      font-size: 2em;
+      padding: 15px 0;
+      color: var(--little-dark-color);
+      text-align: center;
+    }
+
+    button {
+      .center {
+        .google {
+          font-size: 1.6em;
+          margin-right: 15px;
+        }
+
+        span {
+          font-size: 1.25em;
+        }
+      }
+    }
+
+    .or {
+      padding: 15px 0;
+      color: #555;
+      justify-content: space-between;
+      .left,
+      .right {
+        height: 1.6px;
+        width: 44%;
+        background-color: #888;
+        border-radius: 5px;
+      }
+    }
+
+    form {
+      input {
+        font-size: 1.1em;
+      }
+
+      label {
+        font-size: 1.2em;
+      }
+    }
+
+    .sign-up-btn {
+    }
   }
 
-  button {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    .google {
-      font-size: 1.8em;
-    }
-    span {
-      font-size: 1.2em;
+  @media screen and (max-width: 450px) {
+    padding: 5px 10px 40px;
+
+    div {
+      h2 {
+        font-size: 1.8em;
+        padding: 5px 0 10px;
+      }
+
+      button {
+        padding: 5px 0px !important;
+        .center {
+          .google {
+            font-size: 1.4em;
+            margin-right: 15px;
+          }
+
+          span {
+            font-size: 1.1em;
+          }
+        }
+      }
+
+      .or {
+        padding: 15px 0;
+        .left,
+        .right {
+          height: 1.6px;
+          width: 44%;
+          border-radius: 5px;
+        }
+      }
+
+      form {
+        label {
+          font-size: 1.1em !important;
+        }
+
+        input {
+          font-size: 1em;
+        }
+      }
+
+      .sign-up-btn {
+        button {
+          font-size: 1em !important;
+          padding: 5px 10px !important;
+        }
+      }
     }
   }
 
-  .or {
-    padding: 15px 0;
-    color: #555;
-    justify-content: space-between;
-    .left,
-    .right {
-      height: 1.6px;
-      width: 44%;
-      background-color: #888;
-      border-radius: 5px;
-    }
-  }
+  @media screen and (max-width: 350px) {
+    div {
+      h2 {
+        font-size: 1.45em;
+        padding: 6px 0 12px;
+      }
 
-  .sign-up-btn {
-    padding: 10px 40px;
-    font-size: 1.2em;
-    background-color: var(--tertiary-color);
-    color: var(--light-color);
-    margin-top: 12px;
-    width: 100%;
+      .sign-up-btn {
+        button {
+          font-size: 1em !important;
+          padding: 5px 10px !important;
+          border-radius: 5px !important;
+        }
+      }
+    }
   }
 `;
 
