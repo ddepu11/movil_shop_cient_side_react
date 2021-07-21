@@ -67,10 +67,10 @@ FormControl.propTypes = {
 FormControl.defaultProps = {
   labelFs: '1.3em',
   inputFs: '1.2em',
+  inputW: '100%',
   messageFs: '1.1em',
   inputPadding: '8px 5px',
   fcPadding: '10px 0px  10px',
-  inputW: 'auto',
   fcMargin: 'auto',
   fcWidth: '100%',
 };
@@ -113,7 +113,7 @@ const Wrapper = styled.div`
     input {
       padding: 8px 5px;
       font-size: 8em;
-      width: 75% !important;
+      /* width: 75% !important; */
     }
   }
 

@@ -369,7 +369,7 @@ const Wrapper = styled.main`
         }
 
         .dp {
-          /* display: none; */
+          display: none;
         }
       }
     }
@@ -401,6 +401,12 @@ const Wrapper = styled.main`
           .dp-label {
             width: 45%;
             padding: 8px 0px 8px 4px;
+          }
+        }
+
+        .form-control {
+          input {
+            width: 85% !important;
           }
         }
       }
@@ -453,7 +459,7 @@ const Wrapper = styled.main`
     }
   }
 
-  @media screen and (max-width: 555px) {
+  @media screen and (max-width: 400px) {
     padding: 14px 10px;
 
     h1 {
@@ -461,7 +467,7 @@ const Wrapper = styled.main`
     }
 
     form {
-      margin-top: 12px;
+      margin-top: 5px;
     }
   }
 `;

@@ -152,7 +152,7 @@ const Wrapper = styled.main`
     }
 
     .or {
-      padding: 15px 0;
+      padding: 18px 0 0px;
       color: #555;
       justify-content: space-between;
       .left,
@@ -163,19 +163,6 @@ const Wrapper = styled.main`
         border-radius: 5px;
       }
     }
-
-    form {
-      input {
-        font-size: 1.1em;
-      }
-
-      label {
-        font-size: 1.2em;
-      }
-    }
-
-    .sign-up-btn {
-    }
   }
 
   @media screen and (max-width: 450px) {
@@ -183,12 +170,13 @@ const Wrapper = styled.main`
 
     div {
       h2 {
-        font-size: 1.8em;
-        padding: 5px 0 10px;
+        font-size: 1.7em;
+        padding: 8px 0 15px;
       }
 
       button {
-        padding: 5px 0px !important;
+        padding: 8px 0px !important;
+
         .center {
           .google {
             font-size: 1.4em;
@@ -202,7 +190,7 @@ const Wrapper = styled.main`
       }
 
       .or {
-        padding: 15px 0;
+        padding: 18px 0 0px;
         .left,
         .right {
           height: 1.6px;
@@ -212,19 +200,15 @@ const Wrapper = styled.main`
       }
 
       form {
-        label {
-          font-size: 1.1em !important;
-        }
-
-        input {
-          font-size: 1em;
+        button {
+          padding: 4px 0px !important;
         }
       }
 
       .sign-up-btn {
         button {
           font-size: 1em !important;
-          padding: 5px 10px !important;
+          padding: 9px 16px !important;
         }
       }
     }
