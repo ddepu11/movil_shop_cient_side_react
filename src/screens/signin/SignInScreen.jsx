@@ -166,7 +166,7 @@ const Wrapper = styled.main`
   }
 
   @media screen and (max-width: 450px) {
-    padding: 5px 10px 40px;
+    padding: 5px 4px 25px;
 
     div {
       h2 {
@@ -208,7 +208,7 @@ const Wrapper = styled.main`
       .sign-up-btn {
         button {
           font-size: 1em !important;
-          padding: 9px 16px !important;
+          padding: 9px 10px !important;
         }
       }
     }
@@ -217,14 +217,14 @@ const Wrapper = styled.main`
   @media screen and (max-width: 350px) {
     div {
       h2 {
-        font-size: 1.45em;
+        font-size: 1.6em;
         padding: 6px 0 12px;
       }
 
       .sign-up-btn {
         button {
-          font-size: 1em !important;
-          padding: 5px 10px !important;
+          font-size: 0.95em !important;
+          padding: 6px 5px !important;
           border-radius: 5px !important;
         }
       }
