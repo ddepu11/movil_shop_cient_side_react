@@ -4,7 +4,7 @@ import { sendNotification } from '../../../actions/notificationActions';
 import { changeDisplayPicture } from '../../../actions/userActions';
 import apiUrl from '../../../api/apiUrl';
 
-const AsideScreenLogic = () => {
+const AccountAsideScreenLogic = () => {
   const dispatch = useDispatch();
 
   const { userInfo, userLoading } = useSelector((state) => state.user);
@@ -66,4 +66,4 @@ const AsideScreenLogic = () => {
   };
 };
 
-export default AsideScreenLogic;
+export default AccountAsideScreenLogic;

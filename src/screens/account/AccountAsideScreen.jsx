@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { ImCancelCircle } from 'react-icons/im';
 import Button from '../../components/Button';
-import AsideScreenLogic from './logic/AsideScreenLogic';
+import AccountAsideScreenLogic from './logic/AccountAsideScreenLogic';
 import CircleLoader from '../../components/CircleLoader';
 
-const AsideScreen = () => {
+const AccountAsideScreen = () => {
   const {
     firstName,
     lastName,
@@ -14,7 +14,7 @@ const AsideScreen = () => {
     initiateChangeDPProcess,
     wannaChangeDP,
     dpSRC,
-  } = AsideScreenLogic();
+  } = AccountAsideScreenLogic();
 
   return (
     <Wrapper className="flex">
@@ -178,4 +178,4 @@ const Wrapper = styled.aside`
   }
 `;
 
-export default AsideScreen;
+export default AccountAsideScreen;

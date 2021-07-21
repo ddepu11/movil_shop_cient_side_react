@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import AsideScreen from './AsideScreen';
+import AsideScreen from './AccountAsideScreen';
 import FormFieldUpdate from '../../components/FormFieldUpdate';
 import Button from '../../components/Button';
 import Hero from '../../components/Hero';
