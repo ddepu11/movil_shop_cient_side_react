@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { createMobile } from '../../../actions/mobileActions';
-import { sendNotification } from '../../../actions/notificationActions';
-import clearAllSetTimeOut from '../../../utils/clearAllSetTimeOut';
-import validateMobileForm from '../../../utils/validateMobileForm';
+import { createMobile } from '../../../../actions/mobileActions';
+import { sendNotification } from '../../../../actions/notificationActions';
+import clearAllSetTimeOut from '../../../../utils/clearAllSetTimeOut';
+import validateMobileForm from '../../../../utils/validateMobileForm';
 
 const AddMobileScreenLogic = () => {
   const history = useHistory();

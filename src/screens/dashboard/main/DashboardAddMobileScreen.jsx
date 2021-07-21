@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { IoTrashBin } from 'react-icons/io5';
 import { AiOutlineFileAdd } from 'react-icons/ai';
-import Button from '../../components/Button';
-import FormControl from '../../components/FormControl';
+import Button from '../../../components/Button';
+import FormControl from '../../../components/FormControl';
 import AddMobileScreenLogic from './logic/AddMobileScreenLogic';
 
-const AddMobileScreen = () => {
+const DashboardAddMobileScreen = () => {
   const {
     handleSubmit,
     handleColors,
@@ -489,4 +489,4 @@ const Wrapper = styled.main`
   }
 `;
 
-export default AddMobileScreen;
+export default DashboardAddMobileScreen;

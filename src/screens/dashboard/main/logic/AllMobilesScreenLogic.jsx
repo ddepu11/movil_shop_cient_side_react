@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { listMobiles, removeMobile } from '../../../actions/sellerActions';
+import { listMobiles, removeMobile } from '../../../../actions/sellerActions';
 
 const AllMobilesScreenLogic = () => {
   const { userInfo } = useSelector((state) => state.user);

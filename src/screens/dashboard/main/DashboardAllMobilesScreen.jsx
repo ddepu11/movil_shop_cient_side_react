@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Loading from '../../components/Loading';
-import Mobile from '../../components/Mobile';
+import Loading from '../../../components/Loading';
+import Mobile from '../../../components/Mobile';
 import AllMobilesScreenLogic from './logic/AllMobilesScreenLogic';
 
-const AllMobileScreen = () => {
+const DashboardAllMobilesScreen = () => {
   const { handleDeleteMobile, sellerLoading, userInfo, sellerMobiles } =
     AllMobilesScreenLogic();
 
@@ -70,4 +70,4 @@ const Wrapper = styled.main`
   }
 `;
 
-export default AllMobileScreen;
+export default DashboardAllMobilesScreen;

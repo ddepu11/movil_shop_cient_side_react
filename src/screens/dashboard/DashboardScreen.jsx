@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import HeaderScreen from './HeaderScreen';
-import SectionScreen from './SectionScreen';
+import DashboardHeaderScreen from './DashboardHeaderScreen';
+import DashboardMainScreen from './main/DashboardMainScreen';
 import Hero from '../../components/Hero';
 import DashboardScreenLogic from './logic/DashboardScreenLogic';
 import CircleLoader from '../../components/CircleLoader';
@@ -26,8 +26,8 @@ const DashboardScreen = () => {
     <>
       <Hero title="dashboard" />
       <Wrapper className="w-960">
-        <HeaderScreen />
-        <SectionScreen />
+        <DashboardHeaderScreen />
+        <DashboardMainScreen />
       </Wrapper>
     </>
   );

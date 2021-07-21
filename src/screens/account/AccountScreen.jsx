@@ -245,7 +245,6 @@ const Wrapper = styled.main`
 
       .gender_row {
         align-items: flex-start;
-        flex-direction: column;
         padding: 0px 0 25px;
       }
 
@@ -258,6 +257,14 @@ const Wrapper = styled.main`
         margin-top: 10px !important;
         width: 100% !important;
         padding: 8px 0 !important;
+      }
+    }
+  }
+
+  @media screen and (max-width: 511px) {
+    main {
+      .gender_row {
+        flex-direction: column;
       }
     }
   }

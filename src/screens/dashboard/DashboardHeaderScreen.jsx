@@ -5,7 +5,7 @@ import Loading from '../../components/Loading';
 import UserDefaultPic from '../../assests/user.png';
 import apiUrl from '../../api/apiUrl';
 
-const HeaderScreen = () => {
+const DashboardHeaderScreen = () => {
   const { userInfo } = useSelector((state) => state.user);
 
   const { displayPicture, firstName, lastName, email, userLoading } = userInfo;
@@ -121,4 +121,4 @@ const Wrapper = styled.header`
   }
 `;
 
-export default HeaderScreen;
+export default DashboardHeaderScreen;

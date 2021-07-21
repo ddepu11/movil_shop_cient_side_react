@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FcAddDatabase } from 'react-icons/fc';
 import { BiSpreadsheet } from 'react-icons/bi';
 
-const NavigationScreen = () => (
+const DashboardNavigationScreen = () => (
   <Wrapper>
     <ul className="flex">
       <li>
@@ -48,4 +48,4 @@ const Wrapper = styled.section`
   }
 `;
 
-export default NavigationScreen;
+export default DashboardNavigationScreen;
