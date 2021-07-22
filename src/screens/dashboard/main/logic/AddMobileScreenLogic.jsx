@@ -5,6 +5,7 @@ import { createMobile } from '../../../../actions/mobileActions';
 import { sendNotification } from '../../../../actions/notificationActions';
 import clearAllSetTimeOut from '../../../../utils/clearAllSetTimeOut';
 import validateMobileForm from '../../../../utils/validateMobileForm';
+import releaseImageObjectUrl from '../../../../utils/releaseImageObject';
 
 const AddMobileScreenLogic = () => {
   const history = useHistory();
@@ -57,10 +58,8 @@ const AddMobileScreenLogic = () => {
   const colorsMessageRefTag = useRef(null);
 
   const handleMobileImages = (e) => {
+    // First of all Empty previews and files in mobileInfo
     const { previews, files: prevFiles } = mobileInfo;
-
-    const { files } = e.target;
-    const pics = Array.from(files);
 
     previews.length = 0;
     prevFiles.length = 0;
@@ -71,10 +70,15 @@ const AddMobileScreenLogic = () => {
       files: [...prevFiles],
     });
 
-    pics.forEach(async (el, index) => {
-      const fileSRC = URL.createObjectURL(el);
+    // ################ Empty previews and files Ends #################
 
+    const { files } = e.target;
+    const pics = Array.from(files);
+
+    pics.forEach((el, index) => {
       if (index < 6) {
+        const fileSRC = URL.createObjectURL(el);
+
         setMobileInfo((prevState) => ({
           ...prevState,
           previews: [...prevState.previews, fileSRC],
@@ -89,6 +93,7 @@ const AddMobileScreenLogic = () => {
   const addMoreImages = (e) => {
     const { files: prevFiles } = mobileInfo;
     const { files } = e.target;
+
     let pics = Array.from(files);
 
     for (let i = 0; i < prevFiles.length; i += 1) {
@@ -205,6 +210,7 @@ const AddMobileScreenLogic = () => {
     cameraMessageRefTag,
     osMessageRefTag,
     brandMessageRefTag,
+    releaseImageObjectUrl,
   };
 };
 

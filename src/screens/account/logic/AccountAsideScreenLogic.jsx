@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { sendNotification } from '../../../actions/notificationActions';
 import { changeDisplayPicture } from '../../../actions/userActions';
 import apiUrl from '../../../api/apiUrl';
+import releaseImageObjectUrl from '../../../../utils/releaseImageObject';
 
 const AccountAsideScreenLogic = () => {
   const dispatch = useDispatch();
@@ -63,6 +64,7 @@ const AccountAsideScreenLogic = () => {
     wannaChangeDP,
     dpSRC,
     userLoading,
+    releaseImageObjectUrl,
   };
 };
 

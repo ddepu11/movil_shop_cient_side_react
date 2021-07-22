@@ -14,13 +14,18 @@ const AccountAsideScreen = () => {
     initiateChangeDPProcess,
     wannaChangeDP,
     dpSRC,
+    releaseImageObjectUrl,
   } = AccountAsideScreenLogic();
 
   return (
     <Wrapper className="flex">
       <div className="dp">
         {dpSRC.preview.length !== 0 ? (
-          <img src={dpSRC.preview} alt={`${firstName} ${lastName}`} />
+          <img
+            src={dpSRC.preview}
+            alt={`${firstName} ${lastName}`}
+            onLoad={releaseImageObjectUrl}
+          />
         ) : (
           <CircleLoader
             bgColor="var(--secondary-color)"

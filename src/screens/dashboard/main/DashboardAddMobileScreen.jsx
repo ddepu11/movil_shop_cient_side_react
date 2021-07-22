@@ -27,6 +27,7 @@ const DashboardAddMobileScreen = () => {
     cameraMessageRefTag,
     osMessageRefTag,
     brandMessageRefTag,
+    releaseImageObjectUrl,
   } = AddMobileScreenLogic();
 
   return (
@@ -268,7 +269,11 @@ const DashboardAddMobileScreen = () => {
           <div className="row flex images_preview">
             {mobileInfo.previews.map((e, index) => (
               <div className="img" key={e}>
-                <img src={e} alt={e} />
+                <img
+                  src={e}
+                  alt={`Preview ${index}`}
+                  onLoad={releaseImageObjectUrl}
+                />
 
                 <IoTrashBin
                   className="remove_img_btn"
