@@ -77,6 +77,13 @@ const Wrapper = styled.main`
     letter-spacing: 1.4px;
     padding: 2px 0 35px;
   }
+
+  @media screen and (max-width: 370px) {
+    .heading {
+      font-size: 1em;
+      padding: 2px 0 30px;
+    }
+  }
 `;
 
 export default DashboardAllMobilesScreen;

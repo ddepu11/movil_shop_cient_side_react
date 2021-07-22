@@ -482,6 +482,27 @@ const Wrapper1 = styled.div`
   .update_cancel_btn {
     padding: 0px 0 20px;
   }
+
+  @media screen and (max-width: 511px) {
+    width: 100%;
+    padding: 10px 10px;
+
+    .heading {
+      font-size: 1.1em;
+    }
+
+    .update_cancel_btn {
+      flex-direction: column;
+      padding: 0px 0 20px;
+
+      button {
+        width: 100% !important;
+        padding: 10px 0 !important;
+        font-size: 1.1em !important;
+        margin-bottom: 10px !important;
+      }
+    }
+  }
 `;
 
 const Wrapper0 = styled.div`
@@ -529,10 +550,6 @@ const Wrapper0 = styled.div`
       }
     }
 
-    .middle {
-      justify-self: end;
-    }
-
     .right {
       align-self: flex-start;
       color: #444;
@@ -543,6 +560,99 @@ const Wrapper0 = styled.div`
         margin-top: 20px;
         justify-content: space-between;
         flex-direction: column;
+      }
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    padding: 20px 10px 10px;
+
+    .mobile_pic {
+      width: 100%;
+      height: 250px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: scale-down;
+        border-radius: 5px;
+      }
+    }
+
+    .mobile_info {
+      flex-direction: column;
+      align-items: center;
+      padding: 15px 0px 10px 0px;
+
+      .left {
+        padding: 12px 0;
+        h1 {
+          font-size: 1.7em;
+          letter-spacing: 2px;
+        }
+
+        ul {
+          padding: 12px 0 0;
+          li {
+            padding: 0 0 8px;
+            letter-spacing: 1px;
+          }
+        }
+      }
+
+      .middle {
+        width: 100%;
+        padding: 10px 0;
+        button {
+          width: 100% !important;
+          padding: 8px 0px !important;
+          font-size: 1.1em !important;
+        }
+      }
+
+      .right {
+        align-self: center;
+        padding: 20px 0;
+        letter-spacing: 1.1px;
+        font-size: 1.4em;
+
+        .color_btns {
+          margin-top: 20px;
+          justify-content: space-between;
+          flex-direction: row;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 370px) {
+    .mobile_info {
+      .left {
+        h1 {
+          font-size: 1.5em;
+          letter-spacing: 1px;
+        }
+
+        ul {
+          li {
+            letter-spacing: 0px;
+          }
+        }
+      }
+
+      .middle {
+        padding: 5px 0;
+      }
+
+      .right {
+        padding: 15px 0;
+        letter-spacing: 1px;
+        font-size: 1.3em;
+
+        .color_btns {
+          margin-top: 15px;
+        }
       }
     }
   }

@@ -665,6 +665,27 @@ const Wrapper = styled.main`
           }
         }
       }
+
+      .images_preview {
+        gap: 1.5rem 10px;
+        padding: 10px 10px;
+
+        .img {
+          width: 100%;
+          height: 400px;
+
+          img:hover {
+            transform: scale(1.08) translateY(-3px);
+          }
+        }
+
+        .add_btn {
+          font-size: 4em;
+          .plus:hover {
+            transform: scale(1.5);
+          }
+        }
+      }
     }
   }
 
@@ -720,27 +741,6 @@ const Wrapper = styled.main`
         .submit_btn_div {
           button {
             padding: 8px 10px !important;
-          }
-        }
-      }
-
-      .images_preview {
-        gap: 1.5rem 10px;
-        padding: 10px 10px;
-
-        .img {
-          width: 100%;
-          height: 400px;
-
-          img:hover {
-            transform: scale(1.08) translateY(-3px);
-          }
-        }
-
-        .add_btn {
-          font-size: 4em;
-          .plus:hover {
-            transform: scale(1.5);
           }
         }
       }
