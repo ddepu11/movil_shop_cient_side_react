@@ -36,12 +36,15 @@ const DashboardScreen = () => {
 const Wrapper = styled.main`
   padding: 10px 0;
   display: grid;
-  grid-template-columns: repeat(4, minmax(80px, 1fr));
+  grid-template-columns: repeat(4, minmax(50px, 1fr));
   grid-template-rows: minmax(200px, auto);
   gap: 1.5rem;
   grid-template-areas:
     'h h h h'
     's s s s';
+
+  @media screen and (max-width: 435px) {
+  }
 `;
 
 export default DashboardScreen;

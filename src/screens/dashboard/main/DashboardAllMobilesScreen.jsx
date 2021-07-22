@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Loading from '../../../components/Loading';
+import CircleLoader from '../../../components/CircleLoader';
 import Mobile from '../../../components/Mobile';
 import AllMobilesScreenLogic from './logic/AllMobilesScreenLogic';
 
@@ -9,7 +9,16 @@ const DashboardAllMobilesScreen = () => {
     AllMobilesScreenLogic();
 
   if (sellerLoading) {
-    return <Loading />;
+    return (
+      <CircleLoader
+        bgColor="var(--little-light-color)"
+        wrapperH="80vh"
+        spW="90px"
+        spH="90px"
+        cirW="90px"
+        cirH="90px"
+      />
+    );
   }
 
   return (

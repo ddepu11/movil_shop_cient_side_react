@@ -81,6 +81,7 @@ const Wrapper = styled.div`
 
   .fc_top {
     padding: 8px 0;
+
     .must {
       color: red;
       font-size: 1.25em;
@@ -113,7 +114,6 @@ const Wrapper = styled.div`
     input {
       padding: 8px 5px;
       font-size: 8em;
-      /* width: 75% !important; */
     }
   }
 

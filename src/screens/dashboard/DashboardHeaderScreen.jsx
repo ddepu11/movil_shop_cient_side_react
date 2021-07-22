@@ -41,14 +41,6 @@ const Wrapper = styled.header`
   justify-content: flex-start;
   padding: 20px 0 10px;
 
-  button {
-    transition: transform 0.5s ease;
-  }
-
-  button:hover {
-    transform: scale(1.1);
-  }
-
   .dp {
     width: 180px;
     height: 180px;
@@ -117,6 +109,49 @@ const Wrapper = styled.header`
       padding: 8px 0 0;
       font-size: 1em;
       color: #444;
+    }
+  }
+
+  @media screen and (max-width: 555px) {
+    .dp {
+      width: 150px;
+      height: 150px;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: #23b9ff8e 10px 5px 80px 20px;
+        transition: transform 1s ease-out;
+      }
+
+      img:hover {
+        transform: scale(1.2);
+      }
+    }
+
+    .dp::before {
+      animation: round 2.8s linear 2s infinite;
+    }
+
+    .info {
+      p {
+        font-size: 1.5em;
+        letter-spacing: 5px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 435px) {
+    .info {
+      p {
+        font-size: 1.4em;
+        letter-spacing: 4px;
+      }
+      span {
+        font-size: 0.9em;
+      }
     }
   }
 `;

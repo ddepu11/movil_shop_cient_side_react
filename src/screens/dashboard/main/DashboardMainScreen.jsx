@@ -19,7 +19,7 @@ const DashboardMainScreen = () => (
 );
 
 const Wrapper = styled.main`
-  padding: 12px 10px;
+  padding: 12px 8px;
   grid-area: s;
 `;
 

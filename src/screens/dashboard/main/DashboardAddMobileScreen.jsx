@@ -44,6 +44,7 @@ const DashboardAddMobileScreen = () => {
             name="title"
             label="Title"
             refObj={titleMessageRefTag}
+            inputW="85%"
           />
 
           <FormControl
@@ -55,6 +56,7 @@ const DashboardAddMobileScreen = () => {
             name="price"
             label="Price (INR) "
             refObj={priceMessageRefTag}
+            inputW="85%"
           />
         </div>
 
@@ -68,6 +70,7 @@ const DashboardAddMobileScreen = () => {
             name="brand"
             label="Brand"
             refObj={brandMessageRefTag}
+            inputW="85%"
           />
 
           <FormControl
@@ -79,11 +82,12 @@ const DashboardAddMobileScreen = () => {
             name="internalMemory"
             label="Internal Memory (GB)"
             refObj={internalMemoryMessageRefTag}
+            inputW="85%"
           />
         </div>
 
         <div className="row flex">
-          <div className="form-control">
+          <div className="os_section">
             <div className="os-top flex">
               <p>Operating System</p>
               <span
@@ -129,6 +133,7 @@ const DashboardAddMobileScreen = () => {
             name="ram"
             label="Ram (GB)"
             refObj={ramMessageRefTag}
+            inputW="85%"
           />
         </div>
 
@@ -142,6 +147,7 @@ const DashboardAddMobileScreen = () => {
             name="processor"
             label="Processor (GHz)"
             refObj={processorMessageRefTag}
+            inputW="85%"
           />
           <FormControl
             inputValue={mobileInfo.camera}
@@ -152,6 +158,7 @@ const DashboardAddMobileScreen = () => {
             name="camera"
             label="Camera (MP)"
             refObj={cameraMessageRefTag}
+            inputW="85%"
           />
         </div>
 
@@ -165,9 +172,10 @@ const DashboardAddMobileScreen = () => {
             name="battery"
             label="Battery (Mah)"
             refObj={batteryMessageRefTag}
+            inputW="85%"
           />
 
-          <div className="form-control">
+          <div className="upload_images_section">
             <div className="upload_images flex">
               <div className="header flex">
                 <p>Upload Images</p>{' '}
@@ -202,8 +210,8 @@ const DashboardAddMobileScreen = () => {
           </div>
         </div>
 
-        <div className="row flex">
-          <div className="form-control">
+        <div className="row color_row flex">
+          <div className="color_section">
             <div className="colors_top flex">
               <p>Colors</p>
               <span
@@ -236,6 +244,23 @@ const DashboardAddMobileScreen = () => {
               ))}
             </div>
             <p ref={colorsMessageRefTag} className="message" />
+          </div>
+
+          <div className="submit_btn_div">
+            <Button
+              pt="10px"
+              pb="10px"
+              pl="20px"
+              pr="20px"
+              mt="22px"
+              borderRadius="5px"
+              bgColor="var(--success-color)"
+              color="white"
+              width="85%"
+              handleClick={handleSubmit}
+            >
+              Submit
+            </Button>
           </div>
         </div>
 
@@ -271,25 +296,6 @@ const DashboardAddMobileScreen = () => {
         ) : (
           ''
         )}
-
-        <div className="row flex">
-          <div className="form-control">
-            <Button
-              pt="10px"
-              pb="10px"
-              pl="20px"
-              pr="20px"
-              mt="22px"
-              borderRadius="5px"
-              bgColor="var(--success-color)"
-              color="white"
-              width="15%"
-              handleClick={handleSubmit}
-            >
-              Submit
-            </Button>
-          </div>
-        </div>
       </div>
     </Wrapper>
   );
@@ -306,11 +312,17 @@ const Wrapper = styled.main`
   }
 
   .form {
+    margin: 0 auto;
+    width: 85%;
+
     .row {
       justify-content: space-between;
+      width: 100%;
+      margin-left: 50px;
 
-      .form-control {
-        margin-bottom: 20px;
+      .color_section,
+      .os_section {
+        width: 100%;
 
         .os-top,
         .colors_top {
@@ -323,8 +335,21 @@ const Wrapper = styled.main`
           }
         }
 
+        .message.error {
+          color: var(--danger-color);
+          font-size: 1.2em;
+        }
+
+        .message.success {
+          color: var(--success-color);
+          font-size: 1.2em;
+        }
+      }
+
+      .os_section {
         .os-middle {
           width: 40%;
+
           .android {
             padding: 0 0 8px;
           }
@@ -332,7 +357,6 @@ const Wrapper = styled.main`
           .android,
           .ios {
             justify-content: space-between;
-            /* border: 1px solid red; */
 
             label {
               font-size: 1.05em;
@@ -343,6 +367,10 @@ const Wrapper = styled.main`
             }
           }
         }
+      }
+
+      .upload_images_section {
+        width: 100%;
 
         .upload_images {
           flex-direction: column;
@@ -352,6 +380,7 @@ const Wrapper = styled.main`
             padding: 8px 0 10px;
             width: 80%;
             justify-content: flex-start;
+
             p {
               font-size: 1.3em;
               color: #222;
@@ -390,6 +419,8 @@ const Wrapper = styled.main`
 
             .file_msg {
               align-self: flex-start;
+              color: var(--danger-color);
+              font-size: 1.1em;
             }
 
             label:hover {
@@ -406,24 +437,12 @@ const Wrapper = styled.main`
             }
           }
         }
+      }
+    }
 
-        .message.error {
-          color: var(--danger-color);
-          font-size: 1.2em;
-        }
-
-        .message.success {
-          color: var(--success-color);
-          font-size: 1.2em;
-        }
-
-        padding: 0 0px 0 80px;
-        width: 80%;
-
-        input,
-        .fc_top {
-          width: 80%;
-        }
+    .color_row {
+      .submit_btn_div {
+        width: 100%;
       }
     }
 
@@ -483,6 +502,241 @@ const Wrapper = styled.main`
         }
         input {
           display: none;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 850px) {
+    h1 {
+      padding: 10px 0 12px;
+    }
+
+    .form {
+      width: 100%;
+
+      .row {
+        margin-left: 30px;
+      }
+
+      .images_preview {
+        padding: 25px 00px;
+        margin-top: 20px;
+        gap: 1.5rem 25px;
+
+        .img {
+          width: 200px;
+          height: 200px;
+          img:hover {
+            transform: scale(1.2) translateY(-5px);
+          }
+        }
+
+        .add_btn {
+          width: 200px;
+          height: 200px;
+          display: grid;
+          place-items: center;
+          font-size: 5em;
+          cursor: pointer;
+          color: var(--tertiary-color);
+          .plus {
+            transition: transform 0.4s cubic-bezier(0.65, 0.05, 0.36, 1);
+          }
+          .plus:hover {
+            transform: scale(1.8);
+          }
+          input {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 555px) {
+    h1 {
+      padding: 10px 0;
+      letter-spacing: 2px;
+    }
+
+    .form {
+      width: 100%;
+
+      .row {
+        flex-direction: column;
+        margin-left: 0px;
+
+        .os_section {
+          padding: 10px 0;
+          .os-middle {
+            width: 40%;
+            .android {
+              padding: 0 0 8px;
+            }
+
+            .android,
+            .ios {
+              justify-content: space-between;
+
+              label {
+                font-size: 1.05em;
+              }
+
+              input {
+                width: 10%;
+              }
+            }
+          }
+        }
+
+        .upload_images_section {
+          padding: 10px 0px;
+          .upload_images {
+            .header {
+              padding: 8px 0 10px;
+              width: 100%;
+              justify-content: flex-start;
+
+              p {
+                font-size: 1.3em;
+                color: #222;
+              }
+            }
+
+            .footer {
+              width: 100%;
+
+              label {
+                width: 100%;
+                padding: 11px 0px 11px 3px;
+                border: 1px solid #a7a7a7;
+                font-size: 0.8em;
+                position: relative;
+                color: #808080;
+                background: #fff;
+                border-radius: 0.25rem;
+                box-shadow: inset 0 0.2rem 0.4rem #cacaca;
+
+                .browse_btn {
+                  background: #a8aaaa;
+                  color: #111;
+                  position: absolute;
+                  right: 0;
+                  top: 0;
+                  bottom: 0;
+                  display: grid;
+                  place-items: center;
+                  padding: 0 15px;
+                  font-size: 1.2em;
+                  letter-spacing: 0.1px;
+                }
+              }
+
+              .file_msg {
+                align-self: flex-start;
+              }
+
+              label:hover {
+                box-shadow: inset 0 0.2rem 0.4rem #b4b4b4;
+
+                .browse_btn {
+                  color: #c9c3c3;
+                  background: #303030;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .color_row {
+        .color_section {
+          padding: 15px 0 10px;
+        }
+        .submit_btn_div {
+          button {
+            width: 100% !important;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 435px) {
+    h1 {
+      padding: 2px 0;
+      letter-spacing: 2px;
+      font-size: 1.3em;
+    }
+
+    .form {
+      .form-control {
+        label {
+          font-size: 1.2em !important;
+        }
+
+        input {
+          padding: 6px 4px !important;
+        }
+      }
+
+      .row {
+        .color_section,
+        .os_section {
+          .os-top,
+          .colors_top {
+            p {
+              font-size: 1.2em;
+            }
+          }
+
+          .message.error {
+            font-size: 1.1em;
+          }
+
+          .message.success {
+            font-size: 1.1em;
+          }
+        }
+
+        .upload_images_section {
+          .upload_images {
+            .header {
+              p {
+                font-size: 1.2em;
+              }
+            }
+          }
+        }
+      }
+
+      .color_row {
+        .submit_btn_div {
+          button {
+            padding: 8px 10px !important;
+          }
+        }
+      }
+
+      .images_preview {
+        gap: 1.5rem 10px;
+        padding: 10px 10px;
+
+        .img {
+          width: 100%;
+          height: 400px;
+
+          img:hover {
+            transform: scale(1.08) translateY(-3px);
+          }
+        }
+
+        .add_btn {
+          font-size: 4em;
+          .plus:hover {
+            transform: scale(1.5);
+          }
         }
       }
     }

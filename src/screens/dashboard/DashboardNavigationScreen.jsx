@@ -26,7 +26,6 @@ const DashboardNavigationScreen = () => (
 
 const Wrapper = styled.section`
   grid-area: n;
-  padding: 0px 0 0px;
 
   ul {
     gap: 0 20px;
@@ -42,6 +41,26 @@ const Wrapper = styled.section`
         box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
         span {
           margin-right: 8px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 435px) {
+    ul {
+      gap: 0 8px;
+
+      li {
+        padding: 0px 0 25px;
+
+        a {
+          padding: 4px 0px;
+          font-size: 1em;
+          box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 2px;
+
+          span {
+            margin-right: 4px;
+          }
         }
       }
     }
