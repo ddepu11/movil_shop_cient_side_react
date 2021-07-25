@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import { BiCart } from 'react-icons/bi';
@@ -19,11 +19,6 @@ const NavbarScreen = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
-
-  useEffect(() => {
-    googleAuth &&
-      console.log(googleAuth.currentUser.get(), googleAuth.isSignedIn.get());
-  }, [googleAuth]);
 
   const handleLogOut = () => {
     const hasLoggedInViaGoogle = googleAuth.isSignedIn.get();
