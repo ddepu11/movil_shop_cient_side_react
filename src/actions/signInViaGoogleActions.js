@@ -11,9 +11,11 @@ const loadAuth2Library = () =>
     window.gapi.load('auth2', async () => {
       const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
+      console.log(clientId);
+
       window.gapi.auth2
         .init({
-          client_id: clientId.trim(),
+          client_id: clientId,
         })
         .then(
           () => {

@@ -18,7 +18,6 @@ import MobileScreen from './screens/mobile/MobileScreen';
 import CartScreen from './screens/cart/CartScreen';
 import CheckOutScreen from './screens/checkout/CheckOutScreen';
 import OrdersScreen from './screens/orders/OrdersScreen';
-import CircleLoader from './components/CircleLoader';
 import loadGoogleAPILibrary from './actions/signInViaGoogleActions';
 
 const App = () => {
@@ -28,9 +27,7 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  const { hasUserLoggedIn, role, id, userLoading } = useSelector(
-    (state) => state.user
-  );
+  const { hasUserLoggedIn, role, id } = useSelector((state) => state.user);
   const { mobileSaved } = useSelector((state) => state.mobile);
 
   useEffect(() => {
@@ -46,73 +43,62 @@ const App = () => {
 
   return (
     <Wrapper>
-      {userLoading ? (
-        <CircleLoader
-          bgColor="var(--secondary-color)"
-          wrapperH="80vh"
-          spW="90px"
-          spH="90px"
-          cirW="90px"
-          cirH="90px"
-        />
-      ) : (
-        <Router>
-          {notificationMessage && (
-            <Notification
-              msg={notificationMessage.toString()}
-              color={danger ? 'var(--danger-color)' : 'var(--success-color)'}
-            />
-          )}
+      <Router>
+        {notificationMessage && (
+          <Notification
+            msg={notificationMessage.toString()}
+            color={danger ? 'var(--danger-color)' : 'var(--success-color)'}
+          />
+        )}
 
-          <NavbarScreen />
+        <NavbarScreen />
 
-          <Switch>
-            <Route exact path="/">
-              <HomeScreen />
-            </Route>
+        <Switch>
+          <Route exact path="/">
+            <HomeScreen />
+          </Route>
 
-            <Route exact path="/about">
-              <AboutScreen />
-            </Route>
+          <Route exact path="/about">
+            <AboutScreen />
+          </Route>
 
-            <Route exact path="/sign-in">
-              <SignInScreen />
-            </Route>
+          <Route exact path="/sign-in">
+            <SignInScreen />
+          </Route>
 
-            <Route exact path="/sign-up">
-              <SignUpScreen />
-            </Route>
+          <Route exact path="/sign-up">
+            <SignUpScreen />
+          </Route>
 
-            <Route exact path="/mobiles">
-              <MobilesScreen />
-            </Route>
+          <Route exact path="/mobiles">
+            <MobilesScreen />
+          </Route>
 
-            <Route exact path="/account">
-              <AccountScreen />
-            </Route>
+          <Route exact path="/account">
+            <AccountScreen />
+          </Route>
 
-            <Route path="/dashboard">
-              <DashboardScreen />
-            </Route>
+          <Route path="/dashboard">
+            <DashboardScreen />
+          </Route>
 
-            <Route path="/mobiles/:mobileId">
-              <MobileScreen />
-            </Route>
+          <Route path="/mobiles/:mobileId">
+            <MobileScreen />
+          </Route>
 
-            <Route path="/cart">
-              <CartScreen />
-            </Route>
+          <Route path="/cart">
+            <CartScreen />
+          </Route>
 
-            <Route path="/checkout">
-              <CheckOutScreen />
-            </Route>
-            <Route path="/orders">
-              <OrdersScreen />
-            </Route>
-          </Switch>
-          <FooterScreen />
-        </Router>
-      )}
+          <Route path="/checkout">
+            <CheckOutScreen />
+          </Route>
+          <Route path="/orders">
+            <OrdersScreen />
+          </Route>
+        </Switch>
+        <FooterScreen />
+      </Router>
     </Wrapper>
   );
 };

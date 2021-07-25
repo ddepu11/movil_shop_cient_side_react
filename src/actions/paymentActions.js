@@ -21,13 +21,14 @@ export const makeAPayment =
   async (dispatch) => {
     dispatch({ type: PAYMENT_MAKE_BEGIN });
 
-    const { RAZORPAY_KEY_ID } = process.env;
+    const { REACT_APP_RAZORPAY_KEY_ID } = process.env;
+
 
     payment
       .loadRazorPay()
       .then(() => {
         const options = {
-          key: RAZORPAY_KEY_ID,
+          key: REACT_APP_RAZORPAY_KEY_ID,
           amount,
 
           currency,

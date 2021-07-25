@@ -42,6 +42,10 @@ const CheckOutScreenLogic = () => {
   useEffect(() => {
     const userInfoEmpty = Object.keys(userInfo).length === 0;
 
+    if (paymentSuccess && hasUserLoggedIn) {
+      history.push('/orders');
+    }
+
     if (!userInfoEmpty && userInfo.cart.length === 0) {
       history.push('/cart');
 
@@ -54,10 +58,6 @@ const CheckOutScreenLogic = () => {
       history.push('/sign-in');
 
       dispatch(sendNotification('Please log in to checkout!', true));
-    }
-
-    if (paymentSuccess && hasUserLoggedIn) {
-      history.push('/orders');
     }
 
     if (!userInfoEmpty && userInfo.deliveryAddress) {
