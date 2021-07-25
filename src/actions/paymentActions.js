@@ -23,7 +23,6 @@ export const makeAPayment =
 
     const { REACT_APP_RAZORPAY_KEY_ID } = process.env;
 
-
     payment
       .loadRazorPay()
       .then(() => {
