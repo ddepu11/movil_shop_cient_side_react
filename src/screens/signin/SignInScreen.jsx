@@ -63,6 +63,7 @@ const SignInScreen = () => {
                 )}
               </div>
             </Button>
+
             <div className="or flex">
               <div className="left" />
               <span>Or</span>
@@ -107,11 +108,13 @@ const SignInScreen = () => {
                 Log In
               </Button>
             </form>
+
             <div className="or flex">
               <div className="left" />
               <span>Or</span>
               <div className="right" />
             </div>
+
             <Link className="sign-up-btn" to="/sign-up">
               <Button
                 pt="8px"

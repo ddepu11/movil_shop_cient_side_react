@@ -1,4 +1,5 @@
 import loadGoogleAPIPlatformLibrary from '../api/signInViaGoogleApi';
+
 import {
   SIGN_IN_VIA_GOOGLE_BEGIN,
   SIGN_IN_VIA_GOOGLE_ERROR,
@@ -12,7 +13,7 @@ const loadAuth2Library = () =>
 
       window.gapi.auth2
         .init({
-          client_id: clientId,
+          client_id: clientId.trim(),
         })
         .then(
           () => {
@@ -20,7 +21,7 @@ const loadAuth2Library = () =>
           },
 
           () => {
-            reject(new Error('Could not initialize auth2.'));
+            reject(new Error('Could not initialize auth2'));
           }
         );
     });
