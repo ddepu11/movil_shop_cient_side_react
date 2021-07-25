@@ -1,4 +1,3 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -6,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import {
   clearUserSignUpSuccess,
   customUserSignIn,
+  isUserRegisteredWithThisEmail,
 } from '../../../actions/userActions';
 
 import clearAllSetTimeOut from '../../../utils/clearAllSetTimeOut';
@@ -17,12 +17,14 @@ const SignInScreenLogic = () => {
     (state) => state.user
   );
 
+  const { googleAuth, googleAuthLoading } = useSelector(
+    (state) => state.signInViaGoogle
+  );
+
   const emailValidationMessageTag = useRef(null);
   const passwordValidationMessageTag = useRef(null);
 
   const setTimeOutId = useRef();
-
-  const { loginWithRedirect } = useAuth0();
 
   const dispatch = useDispatch();
 
@@ -44,7 +46,6 @@ const SignInScreenLogic = () => {
 
   const handleInput = (e) => {
     const { value, name } = e.target;
-
     setUserCredentials({ ...userCredentials, [name]: value });
   };
 
@@ -69,14 +70,25 @@ const SignInScreenLogic = () => {
     }
   };
 
+  const handleLoginViaGoogle = async () => {
+    await googleAuth.signIn();
+
+    const {
+      Ts: { Et },
+    } = googleAuth.currentUser.get();
+
+    dispatch(isUserRegisteredWithThisEmail(Et, googleAuth));
+  };
+
   return {
     userLoading,
     handleSubmit,
     handleInput,
-    loginWithRedirect,
     userCredentials,
     emailValidationMessageTag,
     passwordValidationMessageTag,
+    handleLoginViaGoogle,
+    googleAuthLoading,
   };
 };
 

@@ -2,6 +2,7 @@ import {
   create,
   getMobile,
   listAll,
+  listForSeller,
   review,
   updateReview,
 } from '../api/mobileApi';
@@ -19,6 +20,9 @@ import {
   MOBILE_GIVE_REVIEW_SUCCESS,
   MOBILE_LIST_BEGIN,
   MOBILE_LIST_ERROR,
+  MOBILE_LIST_FOR_SELLER_BEGIN,
+  MOBILE_LIST_FOR_SELLER_ERROR,
+  MOBILE_LIST_FOR_SELLER_SUCCESS,
   MOBILE_LIST_SUCCESS,
   MOBILE_UPDATE_REVIEW_BEGIN,
   MOBILE_UPDATE_REVIEW_ERROR,
@@ -146,3 +150,27 @@ export const updateMobileReview =
       dispatch(sendNotification(msg, true));
     }
   };
+
+// If seller logs in he will only be able to see other sellers mobiles not his
+export const listMobileForSeller = (userId) => async (dispatch) => {
+  dispatch({ type: MOBILE_LIST_FOR_SELLER_BEGIN });
+
+  try {
+    const res = await listForSeller(userId);
+
+    if (res) {
+      dispatch({
+        type: MOBILE_LIST_FOR_SELLER_SUCCESS,
+        payload: res.data.mobiles,
+      });
+    } else {
+      dispatch(sendNotification('Could not fetch mobiles!', true));
+      dispatch({ type: MOBILE_LIST_FOR_SELLER_ERROR });
+    }
+  } catch (err) {
+    const { msg } = err.response.data;
+    dispatch({ type: MOBILE_LIST_FOR_SELLER_ERROR });
+
+    dispatch(sendNotification(msg, true));
+  }
+};

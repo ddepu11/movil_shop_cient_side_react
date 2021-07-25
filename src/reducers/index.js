@@ -7,6 +7,7 @@ import filterMobile from './filterMobileReducer';
 import cart from './cartReducer';
 import payment from './paymentReducer';
 import orderTotal from './orderTotalReducer';
+import signInViaGoogle from './signInViaGoogleReducer';
 
 export default combineReducers({
   user,
@@ -17,4 +18,5 @@ export default combineReducers({
   cart,
   payment,
   orderTotal,
+  signInViaGoogle,
 });

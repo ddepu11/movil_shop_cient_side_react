@@ -19,3 +19,7 @@ export const review = (id, stars) =>
 
 export const updateReview = (mobileId, stars, reviewId) =>
   axios.put(`${apiUrl}/mobiles/review`, { mobileId, stars, reviewId });
+
+// If seller logs in he will only be able to see other sellers mobiles not his
+export const listForSeller = (userId) =>
+  axios.get(`${apiUrl}/mobiles/users/${userId}`);

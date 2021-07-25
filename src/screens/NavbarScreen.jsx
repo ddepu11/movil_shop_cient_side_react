@@ -1,34 +1,42 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import { BiCart } from 'react-icons/bi';
 import { GiBowTieRibbon, GiHamburgerMenu } from 'react-icons/gi';
 import { useSelector, useDispatch } from 'react-redux';
-import { useAuth0 } from '@auth0/auth0-react';
 import logo from '../assests/logo.svg';
 import { logOutUser } from '../actions/userActions';
 import Button from '../components/Button';
 
 const NavbarScreen = () => {
-  const { logout, isAuthenticated } = useAuth0();
-
   const { localStorageCart } = useSelector((state) => state.cart);
+
   const { hasUserLoggedIn, userInfo, role } = useSelector(
     (state) => state.user
   );
 
+  const { googleAuth } = useSelector((state) => state.signInViaGoogle);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
+  useEffect(() => {
+    googleAuth &&
+      console.log(googleAuth.currentUser.get(), googleAuth.isSignedIn.get());
+  }, [googleAuth]);
+
   const handleLogOut = () => {
-    if (isAuthenticated) {
+    const hasLoggedInViaGoogle = googleAuth.isSignedIn.get();
+
+    if (hasLoggedInViaGoogle) {
+      googleAuth.signOut();
+
       dispatch(logOutUser());
-      logout();
+
       history.push('/');
-      // clear states
     } else if (hasUserLoggedIn) {
-      // clear states
       dispatch(logOutUser());
+
       history.push('/');
     }
   };

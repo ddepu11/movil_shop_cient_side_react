@@ -68,25 +68,30 @@ const authenticateUser = () => async (dispatch) => {
 };
 
 //  check if given email is registered while loggijng in using google??
-const isUserRegisteredWithThisEmail = (email) => async (dispatch) => {
-  dispatch({ type: USER_REGISTER_CHECK_BEGIN });
+const isUserRegisteredWithThisEmail =
+  (email, googleAuth) => async (dispatch) => {
+    dispatch({ type: USER_REGISTER_CHECK_BEGIN });
 
-  try {
-    const { data } = await user.checkIsEmailRegistered(email);
+    try {
+      const { data } = await user.checkIsEmailRegistered(email);
 
-    dispatch({
-      type: USER_REGISTER_CHECK_SUCCESS,
-      payload: data.user,
-    });
-    dispatch(sendNotification('User Logged In Successfully!!!', false));
-  } catch (error) {
-    dispatch({
-      type: USER_REGISTER_CHECK_ERROR,
-      payload: 'User was not registered!!!',
-    });
-    dispatch(sendNotification('User was not registered!!!', true));
-  }
-};
+      dispatch({
+        type: USER_REGISTER_CHECK_SUCCESS,
+        payload: data.user,
+      });
+
+      dispatch(sendNotification('User Logged In Successfully!!!', false));
+    } catch (error) {
+      await googleAuth.signOut();
+
+      dispatch({
+        type: USER_REGISTER_CHECK_ERROR,
+        payload: 'User was not registered!!!',
+      });
+
+      dispatch(sendNotification('User was not registered!!!', true));
+    }
+  };
 
 // Custom User Login
 const customUserSignIn = (email, password) => async (dispatch) => {

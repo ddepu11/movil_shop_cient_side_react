@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
 import { useSelector, useDispatch } from 'react-redux';
 import Notification from './components/Notification';
 import HomeScreen from './screens/HomeScreen';
@@ -14,33 +13,40 @@ import AccountScreen from './screens/account/AccountScreen';
 import MobilesScreen from './screens/mobiles/MobilesScreen';
 import DashboardScreen from './screens/dashboard/DashboardScreen';
 import { authenticateUser } from './actions/userActions';
-import { listAllMobiles } from './actions/mobileActions';
+import { listAllMobiles, listMobileForSeller } from './actions/mobileActions';
 import MobileScreen from './screens/mobile/MobileScreen';
 import CartScreen from './screens/cart/CartScreen';
 import CheckOutScreen from './screens/checkout/CheckOutScreen';
 import OrdersScreen from './screens/orders/OrdersScreen';
 import CircleLoader from './components/CircleLoader';
+import loadGoogleAPILibrary from './actions/signInViaGoogleActions';
 
 const App = () => {
-  const { isLoading } = useAuth0();
-
   const { notificationMessage, danger } = useSelector(
     (state) => state.notification
   );
 
   const dispatch = useDispatch();
 
-  const { hasUserLoggedIn } = useSelector((state) => state.user);
+  const { hasUserLoggedIn, role, id, userLoading } = useSelector(
+    (state) => state.user
+  );
   const { mobileSaved } = useSelector((state) => state.mobile);
 
   useEffect(() => {
-    dispatch(listAllMobiles());
+    // If seller logs in he will only be able to see other sellers mobiles not his
+    dispatch(loadGoogleAPILibrary());
+
+    role === 'SELLER' && dispatch(listMobileForSeller(id));
+
+    role !== 'SELLER' && dispatch(listAllMobiles());
+
     !hasUserLoggedIn && dispatch(authenticateUser());
-  }, [hasUserLoggedIn, dispatch, mobileSaved]);
+  }, [hasUserLoggedIn, dispatch, mobileSaved, role, id]);
 
   return (
     <Wrapper>
-      {isLoading ? (
+      {userLoading ? (
         <CircleLoader
           bgColor="var(--secondary-color)"
           wrapperH="80vh"

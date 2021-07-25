@@ -1,27 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import HeroImg from '../assests/home_hero_img.jpg';
 import Services from '../components/Services';
-import { isUserRegisteredWithThisEmail } from '../actions/userActions';
 import Mobile from '../components/Mobile';
 import CircleLoader from '../components/CircleLoader';
 
 const Home = () => {
-  const { user, isAuthenticated } = useAuth0();
-
-  const { hasUserLoggedIn } = useSelector((state) => state.user);
   const { mobiles, mobileLoading } = useSelector((state) => state.mobile);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (isAuthenticated && !hasUserLoggedIn) {
-      dispatch(isUserRegisteredWithThisEmail(user.email));
-    }
-  }, [user, dispatch, isAuthenticated, hasUserLoggedIn]);
 
   return (
     <Wrapper>

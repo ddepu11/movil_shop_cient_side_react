@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AiOutlineGoogle } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc';
 import FormControl from '../../components/FormControl';
 import Button from '../../components/Button';
 import SignInScreenLogic from './logic/SignInScreenLogic';
@@ -12,10 +12,11 @@ const SignInScreen = () => {
     userLoading,
     handleSubmit,
     handleInput,
-    loginWithRedirect,
     userCredentials,
     emailValidationMessageTag,
     passwordValidationMessageTag,
+    handleLoginViaGoogle,
+    googleAuthLoading,
   } = SignInScreenLogic();
 
   return (
@@ -33,30 +34,40 @@ const SignInScreen = () => {
         <Wrapper className="w-960 flex">
           <div>
             <h2>Sign In in to Movil Shop</h2>
+
             <Button
-              bgColor="var(--tertiary-color)"
               pt="8px"
-              pr="10px"
               pb="8px"
               pl="10px"
+              pr="10px"
               width="100%"
-              borderRadius="5px"
-              fs="1em"
-              handleClick={() => loginWithRedirect()}
-              bSh=""
+              bgColor="var(--light-color)"
+              bSh="rgba(0, 0, 0, 0.24) 0px 3px 8px"
+              color="var(--dark-color)"
+              handleClick={handleLoginViaGoogle}
             >
-              <div className="center flex">
-                <AiOutlineGoogle className="google" />
-                <span>Sign in with Google</span>
+              <div className="google_center flex">
+                {googleAuthLoading ? (
+                  <CircleLoader
+                    bgColor="transparent"
+                    spW="30px"
+                    spH="30px"
+                    cirW="30px"
+                    cirH="30px"
+                  />
+                ) : (
+                  <>
+                    <FcGoogle />
+                    <span>Log in via google</span>
+                  </>
+                )}
               </div>
             </Button>
-
             <div className="or flex">
               <div className="left" />
               <span>Or</span>
               <div className="right" />
             </div>
-
             <form>
               <FormControl
                 inputValue={userCredentials.email}
@@ -96,13 +107,11 @@ const SignInScreen = () => {
                 Log In
               </Button>
             </form>
-
             <div className="or flex">
               <div className="left" />
               <span>Or</span>
               <div className="right" />
             </div>
-
             <Link className="sign-up-btn" to="/sign-up">
               <Button
                 pt="8px"
@@ -138,19 +147,6 @@ const Wrapper = styled.main`
       text-align: center;
     }
 
-    button {
-      .center {
-        .google {
-          font-size: 1.6em;
-          margin-right: 15px;
-        }
-
-        span {
-          font-size: 1.25em;
-        }
-      }
-    }
-
     .or {
       padding: 18px 0 0px;
       color: #555;
@@ -163,6 +159,22 @@ const Wrapper = styled.main`
         border-radius: 5px;
       }
     }
+
+    .google_center {
+      font-size: 1.25em;
+
+      span {
+        margin-left: 20px;
+      }
+    }
+
+    button {
+      transition: all 0.5s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05) translateY(-1px);
+    }
   }
 
   @media screen and (max-width: 450px) {
@@ -172,21 +184,6 @@ const Wrapper = styled.main`
       h2 {
         font-size: 1.7em;
         padding: 8px 0 15px;
-      }
-
-      button {
-        padding: 8px 0px !important;
-
-        .center {
-          .google {
-            font-size: 1.4em;
-            margin-right: 15px;
-          }
-
-          span {
-            font-size: 1.1em;
-          }
-        }
       }
 
       .or {
