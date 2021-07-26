@@ -123,7 +123,7 @@ const CartScreen = () => {
                             <AiFillMinusSquare />
                           </Button>
                         ) : (
-                          <CircleLoader />
+                          <CircleLoader wrapperMargin="0 15px 0 0" />
                         )}
 
                         <span className="quantity"> {quantity}</span>
@@ -147,7 +147,7 @@ const CartScreen = () => {
                             <AiFillPlusSquare />
                           </Button>
                         ) : (
-                          <CircleLoader />
+                          <CircleLoader wrapperMargin="0 0px 0 18px" />
                         )}
                       </div>
                       {!userLoading ? (
@@ -166,7 +166,7 @@ const CartScreen = () => {
                           <RiDeleteBin6Line />
                         </Button>
                       ) : (
-                        <CircleLoader />
+                        <CircleLoader wrapperMargin="0 0px 0 32px" />
                       )}
                     </div>
                   </div>

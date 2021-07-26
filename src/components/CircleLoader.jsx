@@ -9,8 +9,22 @@ const spinTransition = {
   duration: 1,
 };
 
-const CircleLoader = ({ bgColor, wrapperH, spW, spH, cirW, cirH }) => (
-  <Wrapper style={{ height: wrapperH, backgroundColor: bgColor }}>
+const CircleLoader = ({
+  bgColor,
+  wrapperH,
+  spW,
+  spH,
+  cirW,
+  cirH,
+  wrapperMargin,
+}) => (
+  <Wrapper
+    style={{
+      height: wrapperH,
+      backgroundColor: bgColor,
+      margin: wrapperMargin,
+    }}
+  >
     <div className="spinner" style={{ width: spW, height: spH }}>
       <motion.span
         style={{ width: cirW, height: cirH }}
@@ -49,6 +63,7 @@ CircleLoader.propTypes = {
   spH: PropType.string,
   cirW: PropType.string,
   cirH: PropType.string,
+  wrapperMargin: PropType.string,
 };
 
 CircleLoader.defaultProps = {
@@ -58,6 +73,7 @@ CircleLoader.defaultProps = {
   spH: '20px',
   cirW: '20px',
   cirH: '20px',
+  wrapperMargin: 'auto',
 };
 
 export default CircleLoader;

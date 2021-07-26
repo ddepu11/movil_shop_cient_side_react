@@ -46,22 +46,14 @@ const SignInScreen = () => {
               color="var(--dark-color)"
               handleClick={handleLoginViaGoogle}
             >
-              <div className="google_center flex">
-                {googleAuthLoading ? (
-                  <CircleLoader
-                    bgColor="transparent"
-                    spW="30px"
-                    spH="30px"
-                    cirW="30px"
-                    cirH="30px"
-                  />
-                ) : (
-                  <>
-                    <FcGoogle />
-                    <span>Log in via google</span>
-                  </>
-                )}
-              </div>
+              {googleAuthLoading ? (
+                <CircleLoader spH="30px" spW="30px" cirH="30px" cirW="30px" />
+              ) : (
+                <div className="google_center flex">
+                  <FcGoogle />
+                  <span>Log in via google</span>
+                </div>
+              )}
             </Button>
 
             <div className="or flex">
