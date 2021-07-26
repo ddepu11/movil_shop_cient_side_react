@@ -49,7 +49,7 @@ const initialUser = {
   userLoading: false,
   hasUserError: false,
   userSignUpSuccess: false,
-  role: '',
+  role: 'USER',
 };
 
 const user = (userState = initialUser, action) => {

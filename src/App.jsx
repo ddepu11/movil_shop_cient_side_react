@@ -13,7 +13,7 @@ import AccountScreen from './screens/account/AccountScreen';
 import MobilesScreen from './screens/mobiles/MobilesScreen';
 import DashboardScreen from './screens/dashboard/DashboardScreen';
 import { authenticateUser } from './actions/userActions';
-import { listAllMobiles, listMobileForSeller } from './actions/mobileActions';
+import { listAllMobiles } from './actions/mobileActions';
 import MobileScreen from './screens/mobile/MobileScreen';
 import CartScreen from './screens/cart/CartScreen';
 import CheckOutScreen from './screens/checkout/CheckOutScreen';
@@ -27,19 +27,24 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  const { hasUserLoggedIn, role, id } = useSelector((state) => state.user);
+  const { hasUserLoggedIn, role, id, userInfo } = useSelector(
+    (state) => state.user
+  );
+
   const { mobileSaved } = useSelector((state) => state.mobile);
 
   useEffect(() => {
     // If seller logs in he will only be able to see other sellers mobiles not his
+    if (role === 'SELLER') {
+      dispatch(listAllMobiles(userInfo.email));
+    } else {
+      dispatch(listAllMobiles());
+    }
+
     dispatch(loadGoogleAPILibrary());
 
-    role === 'SELLER' && dispatch(listMobileForSeller(id));
-
-    role !== 'SELLER' && dispatch(listAllMobiles());
-
     !hasUserLoggedIn && dispatch(authenticateUser());
-  }, [hasUserLoggedIn, dispatch, mobileSaved, role, id]);
+  }, [hasUserLoggedIn, dispatch, mobileSaved, role, id, userInfo]);
 
   return (
     <Wrapper>

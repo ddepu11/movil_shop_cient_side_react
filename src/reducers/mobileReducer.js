@@ -127,6 +127,7 @@ const mobile = (mobileState = initialState, action) => {
         mobileLoading: false,
         mobileError: true,
       };
+
     default:
       return mobileState;
   }
