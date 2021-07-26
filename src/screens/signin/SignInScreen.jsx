@@ -119,7 +119,6 @@ const SignInScreen = () => {
                 bgColor="var(--medium-dark-color)"
                 bSh=""
                 tr=""
-                handleClick={handleSubmit}
               >
                 Don&apos;t have an account? Sign Up Now !
               </Button>

@@ -46,6 +46,7 @@ import {
 import * as user from '../api/userApi';
 import { sendNotification } from './notificationActions';
 import { clearSellerState } from './sellerActions';
+import { listAllMobiles } from './mobileActions';
 
 // Authenticate User
 const authenticateUser = () => async (dispatch) => {
@@ -81,6 +82,8 @@ const isUserRegisteredWithThisEmail =
       });
 
       dispatch(sendNotification('User Logged In Successfully!!!', false));
+
+      dispatch(listAllMobiles(email));
     } catch (error) {
       await googleAuth.signOut();
 
