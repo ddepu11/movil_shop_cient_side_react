@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import PropType from 'prop-types';
 
 const spinTransition = {
-  loop: Infinity,
+  repeat: Infinity,
   ease: 'linear',
   duration: 1,
 };
