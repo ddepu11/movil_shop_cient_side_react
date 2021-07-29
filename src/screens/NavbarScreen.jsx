@@ -90,8 +90,37 @@ const NavbarScreen = () => {
           </ul>
 
           <ul className="top_right_links flex">
+            {/* Admin Batch Button */}
+            {role === 'ADMIN' && (
+              <li>
+                <Button
+                  pt="4px"
+                  pb="4px"
+                  pl="10px"
+                  pr="10px"
+                  fs="0.9em"
+                  color="var(--dark-color)"
+                  bSh="rgba(0, 0, 0, 0.3) 0px 10px 20px, rgba(0, 0, 0, 0.22) 0px 10px 12px"
+                  bgColor="#ecdf20"
+                  borderRadius="5px"
+                  cursor="auto"
+                >
+                  <GiBowTieRibbon />
+                  <span
+                    style={{
+                      color: 'var(--dark-color)',
+                      marginLeft: '5px',
+                      padding: '0px  5px',
+                    }}
+                  >
+                    You are admin
+                  </span>
+                </Button>
+              </li>
+            )}
+
             {/* Seller Batch Button */}
-            {(userInfo.role === 'SELLER' || role === 'SELLER') && (
+            {role === 'SELLER' && (
               <li>
                 <Button
                   pt="3px"
@@ -120,12 +149,17 @@ const NavbarScreen = () => {
             )}
 
             {/* Dashboard page link */}
-            {(userInfo.role === 'SELLER' ||
-              userInfo.role === 'ADMIN' ||
-              role === 'SELLER' ||
-              role === 'ADMIN') && (
+            {(role === 'SELLER' || role === 'ADMIN') && (
               <li>
-                <Link to="/dashboard/all-mobiles" onClick={closeNavbar}>
+                {/* "/dashboard/all-mobiles" */}
+                <Link
+                  to={
+                    role === 'SELLER'
+                      ? '/dashboard/all-mobiles'
+                      : '/admin-dashboard/mobiles'
+                  }
+                  onClick={closeNavbar}
+                >
                   Dashboard
                 </Link>
               </li>
@@ -192,26 +226,27 @@ const NavbarScreen = () => {
                   </Link>
                 </li>
 
-                <li>
-                  <Link to="/mobiles" onClick={closeNavbar}>
-                    Mobiles
-                  </Link>
-                </li>
-
-                {hasUserLoggedIn && !isUserInfoEmpty && (
+                {role !== 'ADMIN' && (
                   <li>
-                    <Link to="/checkout" onClick={closeNavbar}>
-                      Checkout
+                    <Link to="/mobiles" onClick={closeNavbar}>
+                      Mobiles
                     </Link>
                   </li>
                 )}
 
-                {hasUserLoggedIn && !isUserInfoEmpty && (
-                  <li>
-                    <Link to="/orders" onClick={closeNavbar}>
-                      Orders
-                    </Link>
-                  </li>
+                {hasUserLoggedIn && !isUserInfoEmpty && role !== 'ADMIN' && (
+                  <>
+                    <li>
+                      <Link to="/checkout" onClick={closeNavbar}>
+                        Checkout
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/orders" onClick={closeNavbar}>
+                        Orders
+                      </Link>
+                    </li>
+                  </>
                 )}
 
                 <li>
@@ -220,15 +255,22 @@ const NavbarScreen = () => {
                   </Link>
                 </li>
               </ul>
-              <Link to="/cart" className="cart_container" onClick={closeNavbar}>
-                <span className="cart_count">
-                  {hasUserLoggedIn && !isUserInfoEmpty
-                    ? userInfo.cart.length
-                    : localStorageCart.length}
-                </span>
-                <BiCart className="cart_icon" />
-                Cart
-              </Link>
+
+              {role !== 'ADMIN' && (
+                <Link
+                  to="/cart"
+                  className="cart_container"
+                  onClick={closeNavbar}
+                >
+                  <span className="cart_count">
+                    {hasUserLoggedIn && !isUserInfoEmpty
+                      ? userInfo.cart.length
+                      : localStorageCart.length}
+                  </span>
+                  <BiCart className="cart_icon" />
+                  Cart
+                </Link>
+              )}
             </div>
           </div>
 
@@ -255,6 +297,7 @@ const Wrapper = styled.nav`
 
       .contact_ul {
         justify-content: space-between;
+
         li {
           margin-right: 15px;
         }
@@ -296,8 +339,12 @@ const Wrapper = styled.nav`
           }
 
           ul {
-            justify-content: space-between;
+            justify-content: center;
             width: 70%;
+
+            li {
+              margin-right: 25px;
+            }
           }
 
           .cart_icon {

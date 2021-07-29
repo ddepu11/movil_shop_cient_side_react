@@ -13,9 +13,8 @@ import clearAllSetTimeOut from '../../../utils/clearAllSetTimeOut';
 import validateForm from '../../../utils/validateForm';
 
 const SignInScreenLogic = () => {
-  const { hasUserLoggedIn, userLoading, userSignUpSuccess } = useSelector(
-    (state) => state.user
-  );
+  const { hasUserLoggedIn, userLoading, userSignUpSuccess, userInfo } =
+    useSelector((state) => state.user);
 
   const { googleAuth, googleAuthLoading } = useSelector(
     (state) => state.signInViaGoogle
@@ -38,11 +37,15 @@ const SignInScreenLogic = () => {
   useEffect(() => {
     userSignUpSuccess && dispatch(clearUserSignUpSuccess());
 
-    hasUserLoggedIn && history.push('/account');
+    hasUserLoggedIn &&
+      userInfo.role === 'ADMIN' &&
+      history.push('/admin-dashboard');
+
+    hasUserLoggedIn && userInfo.role !== 'ADMIN' && history.push('/account');
 
     // Clearing all the setTimeouts while unmounting the components
     return () => clearAllSetTimeOut(setTimeOutId);
-  }, [hasUserLoggedIn, userSignUpSuccess, dispatch, history]);
+  }, [hasUserLoggedIn, userSignUpSuccess, dispatch, history, userInfo]);
 
   const handleInput = (e) => {
     const { value, name } = e.target;

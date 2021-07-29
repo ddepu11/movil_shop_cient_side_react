@@ -8,6 +8,7 @@ import cart from './cartReducer';
 import payment from './paymentReducer';
 import orderTotal from './orderTotalReducer';
 import signInViaGoogle from './signInViaGoogleReducer';
+import admin from './adminReducer';
 
 export default combineReducers({
   user,
@@ -19,4 +20,5 @@ export default combineReducers({
   payment,
   orderTotal,
   signInViaGoogle,
+  admin,
 });

@@ -15,6 +15,7 @@ import {
   USER_SIGN_UP_BEGIN,
   USER_SIGN_UP_ERROR,
   USER_SIGN_UP_SUCCESS,
+  USER_AUTHENTICATION_BEGIN,
   USER_AUTHENTICATION_SUCCESS,
   USER_AUTHENTICATION_FAIL,
   USER_UPDATE_BEGIN,
@@ -49,19 +50,26 @@ const initialUser = {
   userLoading: false,
   hasUserError: false,
   userSignUpSuccess: false,
-  role: 'USER',
+  role: '',
 };
 
 const user = (userState = initialUser, action) => {
   switch (action.type) {
+    case USER_AUTHENTICATION_BEGIN:
+      return {
+        ...userState,
+        userLoading: true,
+      };
+
     case USER_AUTHENTICATION_SUCCESS:
       return {
         ...userState,
-        hasUserLoggedIn: true,
         role: action.payload.role,
         id: action.payload.id,
+        hasUserLoggedIn: true,
         userInfo: action.payload.user,
         hasUserError: false,
+        userLoading: false,
       };
 
     case USER_AUTHENTICATION_FAIL:
@@ -69,6 +77,7 @@ const user = (userState = initialUser, action) => {
         ...userState,
         hasUserLoggedIn: false,
         hasUserError: true,
+        userLoading: false,
       };
 
     case USER_REGISTER_CHECK_BEGIN:
@@ -84,6 +93,8 @@ const user = (userState = initialUser, action) => {
         userInfo: action.payload,
         userLoading: false,
         hasUserError: false,
+        role: action.payload.role,
+        id: action.payload._id,
       };
 
     case USER_REGISTER_CHECK_ERROR:

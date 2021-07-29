@@ -41,15 +41,18 @@ import {
   USER_ORDERS_SAVE_BEGIN,
   USER_ORDERS_SAVE_ERROR,
   USER_ORDERS_SAVE_SUCCESS,
+  USER_AUTHENTICATION_BEGIN,
 } from '../constants/userConstants';
 
 import * as user from '../api/userApi';
 import { sendNotification } from './notificationActions';
 import { clearSellerState } from './sellerActions';
-import { listAllMobiles } from './mobileActions';
+import { listUsers } from './adminActions';
 
 // Authenticate User
 const authenticateUser = () => async (dispatch) => {
+  dispatch({ type: USER_AUTHENTICATION_BEGIN });
+
   try {
     const { data } = await user.authenticate();
 
@@ -68,7 +71,7 @@ const authenticateUser = () => async (dispatch) => {
   }
 };
 
-//  check if given email is registered while loggijng in using google??
+//  check if given email is registered while logging in using google??
 const isUserRegisteredWithThisEmail =
   (email, googleAuth) => async (dispatch) => {
     dispatch({ type: USER_REGISTER_CHECK_BEGIN });
@@ -83,7 +86,7 @@ const isUserRegisteredWithThisEmail =
 
       dispatch(sendNotification('User Logged In Successfully!!!', false));
 
-      dispatch(listAllMobiles(email));
+      data.user.role === 'ADMIN' && dispatch(listUsers());
     } catch (error) {
       await googleAuth.signOut();
 
@@ -105,7 +108,10 @@ const customUserSignIn = (email, password) => async (dispatch) => {
 
     // Handle this
     dispatch({ type: USER_SIGN_IN_SUCCESS, payload: data.user });
+
     dispatch(sendNotification(data.msg, false));
+
+    data.user.role === 'ADMIN' && dispatch(listUsers());
   } catch (err) {
     const { msg } = err.response.data;
     dispatch({ type: USER_SIGN_IN_ERROR });

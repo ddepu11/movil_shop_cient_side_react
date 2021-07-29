@@ -25,6 +25,7 @@ const DashboardScreen = () => {
   return (
     <>
       <Hero title="dashboard" />
+
       <Wrapper className="w-960">
         <DashboardHeaderScreen />
         <DashboardMainScreen />

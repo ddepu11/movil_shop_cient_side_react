@@ -19,6 +19,7 @@ import CartScreen from './screens/cart/CartScreen';
 import CheckOutScreen from './screens/checkout/CheckOutScreen';
 import OrdersScreen from './screens/orders/OrdersScreen';
 import loadGoogleAPILibrary from './actions/signInViaGoogleActions';
+import AdminDashboardScreen from './screens/admin_dashboard/AdminDashboardScreen';
 
 const App = () => {
   const { notificationMessage, danger } = useSelector(
@@ -35,13 +36,14 @@ const App = () => {
 
   useEffect(() => {
     // If seller logs in he will only be able to see other sellers mobiles not his
+
     if (role === 'SELLER') {
       dispatch(listAllMobiles(userInfo.email));
-    } else {
+    } else if (role !== 'ADMIN' && role !== 'SELLER') {
       dispatch(listAllMobiles());
     }
 
-    dispatch(loadGoogleAPILibrary());
+    !hasUserLoggedIn && dispatch(loadGoogleAPILibrary());
 
     !hasUserLoggedIn && dispatch(authenticateUser());
   }, [hasUserLoggedIn, dispatch, mobileSaved, role, id, userInfo]);
@@ -98,8 +100,13 @@ const App = () => {
           <Route path="/checkout">
             <CheckOutScreen />
           </Route>
+
           <Route path="/orders">
             <OrdersScreen />
+          </Route>
+
+          <Route path="/admin-dashboard">
+            <AdminDashboardScreen />
           </Route>
         </Switch>
         <FooterScreen />

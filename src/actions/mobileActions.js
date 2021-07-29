@@ -77,7 +77,11 @@ export const listAllMobiles = (sellerEmail) => async (dispatch) => {
       dispatch(sendNotification('Sorry could not fetch mobiles!', true));
     }
   } catch (err) {
-    const { msg } = err.response.data;
+    let msg = err.message;
+
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
 
     dispatch({ type: MOBILE_LIST_ERROR });
 
@@ -98,9 +102,14 @@ export const getMobileById = (id) => async (dispatch) => {
       dispatch(sendNotification('Could not get the infomation!', true));
     }
   } catch (err) {
-    const { msg } = err.response.data;
+    let msg = err.message;
+
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
 
     dispatch({ type: MOBILE_GET_ERROR });
+
     dispatch(sendNotification(msg, true));
   }
 };

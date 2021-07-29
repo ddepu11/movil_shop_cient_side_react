@@ -60,7 +60,7 @@ const DashboardAllMobilesScreen = () => {
                 mobileId={_id}
                 handleDeleteMobile={handleDeleteMobile}
                 handlingUpdate={1}
-                usedFor="seller"
+                usedFor="SELLER"
               />
             );
           })}

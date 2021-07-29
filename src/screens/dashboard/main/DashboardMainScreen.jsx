@@ -8,6 +8,7 @@ import NavigationScreen from '../DashboardNavigationScreen';
 const DashboardMainScreen = () => (
   <Wrapper className="card">
     <NavigationScreen />
+
     <Route exact path="/dashboard/all-mobiles">
       <DashboardAllMobilesScreen />
     </Route>

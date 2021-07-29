@@ -314,20 +314,29 @@ const Mobile = ({
 
         <div className="middle">
           {/* Buttons */}
-          {!wannaEdit && (
-            <Button
-              pt="5px"
-              pb="5px"
-              pl="10px"
-              pr="10px"
-              bgColor="var(--tertiary-color)"
-              color="white"
-              handleClick={initiateUpdateProcess}
-              bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
-              fs="0.8em"
-            >
-              Initiate Mobile Update
-            </Button>
+          {usedFor !== 'ADMIN' ? (
+            <>
+              {!wannaEdit && (
+                <Button
+                  pt="5px"
+                  pb="5px"
+                  pl="10px"
+                  pr="10px"
+                  bgColor="var(--tertiary-color)"
+                  color="white"
+                  handleClick={initiateUpdateProcess}
+                  bSh="rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px"
+                  fs="0.8em"
+                >
+                  Initiate Mobile Update
+                </Button>
+              )}
+            </>
+          ) : (
+            <div className="seller flex">
+              <p>Seller:</p>
+              <span>{sellerName}</span>
+            </div>
           )}
         </div>
 
@@ -358,14 +367,37 @@ const Mobile = ({
       </div>
 
       {/* Delete Button */}
-      {usedFor === 'seller' && (
+      {usedFor === 'ADMIN' && (
         <Button
           pt="0px"
           pb="0px"
           pl="0px"
           pr="0px"
-          borderRadius="50%"
-          bgColor="tranparent"
+          borderRadius="0"
+          bgColor="transparent"
+          width="22px"
+          height="22px"
+          color="var(--danger-color)"
+          mr="20px"
+          bSh=""
+          handleClick={() => handleDeleteMobile(mobileId)}
+          fs="1.1em"
+          positionVal="absolute"
+          fromBottom="5px"
+          fromRight="0"
+        >
+          <ImBin2 />
+        </Button>
+      )}
+
+      {usedFor === 'SELLER' && (
+        <Button
+          pt="0px"
+          pb="0px"
+          pl="0px"
+          pr="0px"
+          borderRadius="0"
+          bgColor="transparent"
           width="22px"
           height="22px"
           color="var(--danger-color)"
@@ -550,6 +582,14 @@ const Wrapper0 = styled.div`
       }
     }
 
+    .middle {
+      .seller {
+        p {
+          margin-right: 10px;
+        }
+      }
+    }
+
     .right {
       align-self: flex-start;
       color: #444;
@@ -660,7 +700,7 @@ const Wrapper0 = styled.div`
 
 Mobile.propTypes = {
   pictures: PropTypes.array.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   os: PropTypes.string,
   internalMemory: PropTypes.number,
   ram: PropTypes.string,
@@ -678,6 +718,7 @@ Mobile.propTypes = {
 };
 
 Mobile.defaultProps = {
+  title: 'xyz',
   mobileId: '234857asd87s8d',
   sellerName: 'xyz',
   brand: 'mno',
@@ -686,10 +727,10 @@ Mobile.defaultProps = {
   internalMemory: 16,
   camera: '24',
   battery: '5000',
-  price: '15000',
+  price: 0,
   ram: '8',
   colors: [],
-  userId: '15748sdj',
+  userId: '',
   handleDeleteMobile: () => {},
 };
 
