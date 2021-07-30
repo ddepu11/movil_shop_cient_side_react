@@ -10,8 +10,8 @@ const AdminDashboardMobilesScreen = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(listMobiles());
-  }, [dispatch]);
+    mobiles.length === 0 && dispatch(listMobiles());
+  }, [dispatch, mobiles]);
 
   const handleDelete = (mobileId) => {
     dispatch(deleteMobile(mobileId));

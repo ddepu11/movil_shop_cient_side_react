@@ -2,9 +2,15 @@ import {
   ADMIN_DELETE_MOBILE_BEGIN,
   ADMIN_DELETE_MOBILE_ERROR,
   ADMIN_DELETE_MOBILE_SUCCESS,
+  ADMIN_DELETE_USER_BEGIN,
+  ADMIN_DELETE_USER_ERROR,
+  ADMIN_DELETE_USER_SUCCESS,
   ADMIN_LIST_MOBILE_BEGIN,
   ADMIN_LIST_MOBILE_ERROR,
   ADMIN_LIST_MOBILE_SUCCESS,
+  ADMIN_LIST_SELLER_BEGIN,
+  ADMIN_LIST_SELLER_ERROR,
+  ADMIN_LIST_SELLER_SUCCESS,
   ADMIN_LIST_USERS_BEGIN,
   ADMIN_LIST_USERS_ERROR,
   ADMIN_LIST_USERS_SUCCESS,
@@ -80,6 +86,48 @@ const admin = (state = initialState, action) => {
         ...state,
         adminLoading: false,
         adminError: true,
+      };
+
+    // List Seller
+    case ADMIN_LIST_SELLER_BEGIN:
+      return {
+        ...state,
+        adminLoading: true,
+      };
+
+    case ADMIN_LIST_SELLER_SUCCESS:
+      return {
+        ...state,
+        adminLoading: false,
+        sellers: action.payload,
+      };
+
+    case ADMIN_LIST_SELLER_ERROR:
+      return {
+        ...state,
+        adminLoading: false,
+        adminError: false,
+      };
+
+    // Delete user
+    case ADMIN_DELETE_USER_BEGIN:
+      return {
+        ...state,
+        adminLoading: true,
+      };
+
+    case ADMIN_DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        adminLoading: false,
+        users: state.users.filter((i) => i._id !== action.payload),
+      };
+
+    case ADMIN_DELETE_USER_ERROR:
+      return {
+        ...state,
+        adminError: false,
+        adminLoading: false,
       };
 
     default:
