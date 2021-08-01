@@ -20,8 +20,8 @@ const AdminDashboardSellersScreen = () => {
   useEffect(() => {
     dispatch(listSeller());
 
-    mobiles.length === 0 && dispatch(listMobiles());
-  }, [dispatch, mobiles]);
+    dispatch(listMobiles());
+  }, [dispatch]);
 
   const handleDeleteSeller = (e) => {
     const { value } = e.target.dataset;
