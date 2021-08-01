@@ -54,6 +54,7 @@ const AccountScreen = () => {
 
           <main>
             <FormFieldUpdate
+              htmlFor="firstName"
               heading="First Name:"
               wannaEdit={wannaEdit}
               inputValue={info.firstName}
@@ -65,6 +66,7 @@ const AccountScreen = () => {
             />
 
             <FormFieldUpdate
+              htmlFor="lastName"
               heading="Last Name:"
               wannaEdit={wannaEdit}
               inputValue={info.lastName}
@@ -81,6 +83,7 @@ const AccountScreen = () => {
             </div>
 
             <FormFieldUpdate
+              htmlFor="email"
               heading="Email:"
               wannaEdit={wannaEdit}
               inputValue={info.email}
@@ -92,6 +95,7 @@ const AccountScreen = () => {
             />
 
             <FormFieldUpdate
+              htmlFor="phoneNumber"
               heading="Phone Number:"
               wannaEdit={wannaEdit}
               inputValue={String(info.phoneNumber)}
@@ -103,6 +107,7 @@ const AccountScreen = () => {
             />
 
             <FormFieldUpdate
+              htmlFor="password"
               heading="Password:"
               wannaEdit={wannaEdit}
               inputValue={info.password}
@@ -115,6 +120,7 @@ const AccountScreen = () => {
 
             {wannaEdit && (
               <FormFieldUpdate
+                htmlFor="confirmPassword"
                 heading="Confirm Password:"
                 wannaEdit={wannaEdit}
                 inputValue={info.confirmPassword}
@@ -195,7 +201,7 @@ const Wrapper = styled.main`
 
   main {
     grid-area: m;
-    padding: 5px 15px 20px;
+    padding: 15px 15px 20px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
       rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
       rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
@@ -215,7 +221,7 @@ const Wrapper = styled.main`
         color: #333;
         letter-spacing: 1px;
         display: block;
-        width: 38%;
+        width: 50%;
       }
     }
 

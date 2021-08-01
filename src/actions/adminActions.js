@@ -14,6 +14,9 @@ import {
   ADMIN_DELETE_USER_BEGIN,
   ADMIN_DELETE_USER_ERROR,
   ADMIN_DELETE_USER_SUCCESS,
+  ADMIN_DELETE_SELLER_BEGIN,
+  ADMIN_DELETE_SELLER_ERROR,
+  ADMIN_DELETE_SELLER_SUCCESS,
 } from '../constants/adminConstants';
 import * as admin from '../api/adminApi';
 import { sendNotification } from './notificationActions';
@@ -158,6 +161,32 @@ export const deleteUser = (userId) => async (dispatch) => {
 
     dispatch({ type: ADMIN_DELETE_USER_ERROR });
 
+    dispatch(sendNotification(msg, true));
+  }
+};
+
+export const deleteSeller = (userId) => async (dispatch) => {
+  dispatch({ type: ADMIN_DELETE_SELLER_BEGIN });
+
+  try {
+    const res = await admin.deleteSeller(userId);
+
+    if (res) {
+      dispatch({ type: ADMIN_DELETE_SELLER_SUCCESS, payload: userId });
+      dispatch(sendNotification('Seller deleted!', false));
+    } else {
+      dispatch({ type: ADMIN_DELETE_SELLER_ERROR });
+
+      dispatch(sendNotification('Could not delete seller!', true));
+    }
+  } catch (err) {
+    let msg = err.message;
+
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
+
+    dispatch({ type: ADMIN_DELETE_SELLER_ERROR });
     dispatch(sendNotification(msg, true));
   }
 };

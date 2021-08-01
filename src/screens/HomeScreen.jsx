@@ -47,25 +47,21 @@ const Home = () => {
           ) : (
             mobiles
               .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-              .map((mobile, index) => {
+              .map((item, index) => {
                 const {
-                  _id,
-                  pictures,
-                  title,
-                  price,
                   sellerInfo: { id },
-                } = mobile;
+                } = item;
 
                 if (index < 5) {
                   return (
                     <Mobile
-                      pictures={pictures}
-                      title={title}
-                      price={price}
+                      pictures={item.pictures}
+                      title={item.title}
+                      price={item.price}
                       usedFor="grid"
                       userId={id}
-                      mobileId={_id}
-                      key={_id}
+                      mobileId={item._id}
+                      key={item._id}
                     />
                   );
                 }

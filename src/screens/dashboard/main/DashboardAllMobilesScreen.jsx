@@ -26,44 +26,27 @@ const DashboardAllMobilesScreen = () => {
       <h1 className="heading">All the mobiles you have added</h1>
       <section className="mobiles">
         {sellerMobiles.length !== 0 &&
-          sellerMobiles.map((item) => {
-            const {
-              pictures,
-              title,
-              price,
-              os,
-              internalMemory,
-              processor,
-              battery,
-              camera,
-              ram,
-              brand,
-              _id,
-              colors,
-            } = item;
-
-            return (
-              <Mobile
-                key={_id}
-                pictures={pictures}
-                ram={ram}
-                camera={camera}
-                title={title}
-                price={price}
-                os={os}
-                processor={processor}
-                battery={battery}
-                internalMemory={internalMemory}
-                userId={userInfo._id}
-                brand={brand}
-                colors={colors}
-                mobileId={_id}
-                handleDeleteMobile={handleDeleteMobile}
-                handlingUpdate={1}
-                usedFor="SELLER"
-              />
-            );
-          })}
+          sellerMobiles.map((i) => (
+            <Mobile
+              key={i._id}
+              pictures={i.pictures}
+              ram={i.ram}
+              camera={i.camera}
+              title={i.title}
+              price={i.price}
+              os={i.os}
+              processor={i.processor}
+              battery={i.battery}
+              internalMemory={i.internalMemory}
+              userId={userInfo._id}
+              brand={i.brand}
+              colors={i.colors}
+              mobileId={i._id}
+              handleDeleteMobile={handleDeleteMobile}
+              handlingUpdate={1}
+              usedFor="SELLER"
+            />
+          ))}
       </section>
     </Wrapper>
   );

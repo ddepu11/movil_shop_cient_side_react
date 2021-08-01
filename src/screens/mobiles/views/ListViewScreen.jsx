@@ -14,39 +14,27 @@ const ListViewScreen = () => {
 
   return (
     <Wrapper className="flex">
-      {filteredMobile.map((mobile) => {
+      {filteredMobile.map((item) => {
         const {
-          _id,
-          pictures,
-          ram,
-          camera,
-          title,
-          price,
-          os,
-          processor,
-          battery,
-          internalMemory,
-          brand,
-          colors,
           sellerInfo: { id, name },
-        } = mobile;
+        } = item;
 
         return (
           <Mobile
-            key={_id}
-            mobileId={_id}
-            pictures={pictures}
-            ram={ram}
-            camera={camera}
-            title={title}
-            price={price}
-            os={os}
-            processor={processor}
-            battery={battery}
-            internalMemory={internalMemory}
+            key={item._id}
+            mobileId={item._id}
+            pictures={item.pictures}
+            ram={item.ram}
+            camera={item.camera}
+            title={item.title}
+            price={item.price}
+            os={item.os}
+            processor={item.processor}
+            battery={item.battery}
+            internalMemory={item.internalMemory}
             userId={id}
-            brand={brand}
-            colors={colors}
+            brand={item.brand}
+            colors={item.colors}
             handlingUpdate={0}
             usedFor="list"
             sellerName={name}

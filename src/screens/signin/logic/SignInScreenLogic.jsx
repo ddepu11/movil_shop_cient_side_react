@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { sendNotification } from '../../../actions/notificationActions';
 
 import {
   clearUserSignUpSuccess,
@@ -73,14 +74,19 @@ const SignInScreenLogic = () => {
     }
   };
 
-  const handleLoginViaGoogle = async () => {
-    await googleAuth.signIn();
+  const handleLoginViaGoogle = () => {
+    googleAuth
+      .signIn()
+      .then(() => {
+        const {
+          Ts: { Et },
+        } = googleAuth.currentUser.get();
 
-    const {
-      Ts: { Et },
-    } = googleAuth.currentUser.get();
-
-    dispatch(isUserRegisteredWithThisEmail(Et, googleAuth));
+        dispatch(isUserRegisteredWithThisEmail(Et, googleAuth));
+      })
+      .catch(() => {
+        dispatch(sendNotification('Pop-Up Closed!', true));
+      });
   };
 
   return {

@@ -2,6 +2,9 @@ import {
   ADMIN_DELETE_MOBILE_BEGIN,
   ADMIN_DELETE_MOBILE_ERROR,
   ADMIN_DELETE_MOBILE_SUCCESS,
+  ADMIN_DELETE_SELLER_BEGIN,
+  ADMIN_DELETE_SELLER_ERROR,
+  ADMIN_DELETE_SELLER_SUCCESS,
   ADMIN_DELETE_USER_BEGIN,
   ADMIN_DELETE_USER_ERROR,
   ADMIN_DELETE_USER_SUCCESS,
@@ -120,7 +123,7 @@ const admin = (state = initialState, action) => {
       return {
         ...state,
         adminLoading: false,
-        users: state.users.filter((i) => i._id !== action.payload),
+        users: state.users.filter((item) => item._id !== action.payload),
       };
 
     case ADMIN_DELETE_USER_ERROR:
@@ -128,6 +131,27 @@ const admin = (state = initialState, action) => {
         ...state,
         adminError: false,
         adminLoading: false,
+      };
+
+    // Delete Seller
+    case ADMIN_DELETE_SELLER_BEGIN:
+      return {
+        ...state,
+        adminLoading: true,
+      };
+
+    case ADMIN_DELETE_SELLER_SUCCESS:
+      return {
+        ...state,
+        adminLoading: false,
+        sellers: state.sellers.filter((item) => item._id !== action.payload),
+      };
+
+    case ADMIN_DELETE_SELLER_ERROR:
+      return {
+        ...state,
+        adminLoading: false,
+        adminError: true,
       };
 
     default:

@@ -125,6 +125,7 @@ const Mobile = ({
       <Wrapper1 className="w-960">
         <h1 className="heading">Update {title} Info </h1>
         <FormFieldUpdate
+          htmlFor="title"
           heading="Title"
           wannaEdit={wannaEdit}
           inputValue={mobileInfo.title}
@@ -135,6 +136,7 @@ const Mobile = ({
         />
 
         <FormFieldUpdate
+          htmlFor="price"
           heading="Price"
           wannaEdit={wannaEdit}
           inputValue={mobileInfo.price}
@@ -145,6 +147,7 @@ const Mobile = ({
         />
 
         <FormFieldUpdate
+          htmlFor="brand"
           heading="Brand"
           wannaEdit={wannaEdit}
           inputValue={mobileInfo.brand}
@@ -155,6 +158,7 @@ const Mobile = ({
         />
 
         <FormFieldUpdate
+          htmlFor="os"
           heading="Operating System"
           wannaEdit={wannaEdit}
           inputValue={mobileInfo.os}
@@ -165,6 +169,7 @@ const Mobile = ({
         />
 
         <FormFieldUpdate
+          htmlFor="internalMemory"
           heading="Internal Memory (GB)"
           wannaEdit={wannaEdit}
           inputValue={mobileInfo.internalMemory}
@@ -175,6 +180,7 @@ const Mobile = ({
         />
 
         <FormFieldUpdate
+          htmlFor="ram"
           heading="Ram (GB)"
           wannaEdit={wannaEdit}
           inputValue={mobileInfo.ram}
@@ -185,6 +191,7 @@ const Mobile = ({
         />
 
         <FormFieldUpdate
+          htmlFor="camera"
           heading="Camera (MP)"
           wannaEdit={wannaEdit}
           inputValue={mobileInfo.camera}
@@ -195,6 +202,7 @@ const Mobile = ({
         />
 
         <FormFieldUpdate
+          htmlFor="processor"
           heading="Processor (GHz)"
           wannaEdit={wannaEdit}
           inputValue={mobileInfo.processor}
@@ -205,6 +213,7 @@ const Mobile = ({
         />
 
         <FormFieldUpdate
+          htmlFor="battery"
           heading="Battery"
           wannaEdit={wannaEdit}
           inputValue={mobileInfo.battery}

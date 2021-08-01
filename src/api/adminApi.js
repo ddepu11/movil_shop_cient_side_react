@@ -12,3 +12,6 @@ export const listSellers = () => axios.get(`${apiUrl}/users/role=SELLER`);
 
 export const deleteUser = (userId) =>
   axios.delete(`${apiUrl}/users/${userId}/role=USER`);
+
+export const deleteSeller = (userId) =>
+  axios.delete(`${apiUrl}/users/${userId}/role=SELLER`);

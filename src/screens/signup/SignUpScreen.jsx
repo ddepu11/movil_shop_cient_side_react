@@ -140,7 +140,7 @@ const SignUpScreen = () => {
             id="phone_number"
             placeholder="Enter your phone number"
             refObj={phoneNumberValidationMessageTag}
-            type="text"
+            type="tel"
             name="phoneNumber"
             label="Phone Number"
             inputW="65%"

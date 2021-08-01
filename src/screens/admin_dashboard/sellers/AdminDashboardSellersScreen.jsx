@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import CircleLoader from '../../../components/CircleLoader';
 import apiUrl from '../../../api/apiUrl';
 import Button from '../../../components/Button';
-import { listSeller, listMobiles } from '../../../actions/adminActions';
+import {
+  listSeller,
+  listMobiles,
+  deleteSeller,
+} from '../../../actions/adminActions';
 
 const AdminDashboardSellersScreen = () => {
   const { mobiles, sellers, adminLoading } = useSelector(
@@ -18,6 +22,12 @@ const AdminDashboardSellersScreen = () => {
 
     mobiles.length === 0 && dispatch(listMobiles());
   }, [dispatch, mobiles]);
+
+  const handleDeleteSeller = (e) => {
+    const { value } = e.target.dataset;
+
+    dispatch(deleteSeller(value));
+  };
 
   if (adminLoading) {
     return (
@@ -102,6 +112,8 @@ const AdminDashboardSellersScreen = () => {
                   pr="20px"
                   bgColor="var(--danger-color)"
                   fs="0.8em"
+                  dataVal={i._id}
+                  handleClick={handleDeleteSeller}
                 >
                   Remove
                 </Button>
