@@ -116,7 +116,11 @@ export const createAnOrder = (orderDetails, cart) => async (dispatch) => {
       dispatch({ type: PAYMENT_RAZORPAY_CREATE_AN_ORDER_ERROR });
     }
   } catch (err) {
-    const { msg } = err.response.data;
+    let msg = err.message;
+
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
 
     dispatch({ type: PAYMENT_RAZORPAY_CREATE_AN_ORDER_ERROR });
 

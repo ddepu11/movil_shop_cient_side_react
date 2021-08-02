@@ -113,7 +113,12 @@ const customUserSignIn = (email, password) => async (dispatch) => {
 
     data.user.role === 'ADMIN' && dispatch(listUsers());
   } catch (err) {
-    const { msg } = err.response.data;
+    let msg = err.message;
+
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
+
     dispatch({ type: USER_SIGN_IN_ERROR });
     dispatch(sendNotification(msg, true));
   }
@@ -134,7 +139,11 @@ const signUpUser = (userCredentials) => async (dispatch) => {
       dispatch(sendNotification(data.msg, false));
     }
   } catch (err) {
-    const { msg } = err.response.data;
+    let msg = err.message;
+
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
 
     dispatch({ type: USER_SIGN_UP_ERROR, payload: msg });
     dispatch(sendNotification(msg, true));
@@ -176,7 +185,12 @@ const logOutUser = () => async (dispatch) => {
 
     dispatch(clearSellerState());
   } catch (err) {
-    const { msg } = err.response.data;
+    let msg = err.message;
+
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
+
     dispatch({ type: USER_LOG_OUT_ERROR, payload: msg });
     dispatch(sendNotification(msg, true));
   }
@@ -195,7 +209,12 @@ const updateUser = (userInfo, _id) => async (dispatch) => {
 
     dispatch(sendNotification('User updated Successfully!!!', false));
   } catch (err) {
-    const { msg } = err.response.data;
+    let msg = err.message;
+
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
+
     dispatch({ type: USER_UPDATE_ERROR, payload: msg });
     dispatch(sendNotification(msg, true));
   }
@@ -218,8 +237,14 @@ const changeDisplayPicture = (formData, _id) => async (dispatch) => {
       sendNotification('You have successfully changed your dp!!!', false)
     );
   } catch (err) {
-    const msg = err.message.response;
+    let msg = err.message;
+
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
+
     dispatch({ type: USER_CHANGE_DP_ERROR, payload: msg });
+
     dispatch(sendNotification(msg, true));
   }
 };
@@ -243,7 +268,11 @@ const addMobileToCart = (userId, mobileInfo) => async (dispatch) => {
       dispatch(sendNotification('Could not add to cart!', true));
     }
   } catch (err) {
-    const { msg } = err.response.data;
+    let msg = err.message;
+
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
 
     dispatch({ type: USER_CART_ADD_MOBILE_ERROR });
 
@@ -275,7 +304,12 @@ const increaseOrDecreaseCartItemQuantity =
         dispatch(sendNotification('Could not increase the quantity!', true));
       }
     } catch (err) {
-      const { msg } = err.response.data;
+      let msg = err.message;
+
+      if (err.response) {
+        msg = err.response.data.msg;
+      }
+
       dispatch({ type: USER_CART_ITEM_INC_DEC_QUANTITY_ERROR });
 
       dispatch(sendNotification(msg, true));
@@ -296,7 +330,11 @@ const deleteCartItem = (userId, cartItemId) => async (dispatch) => {
       dispatch(sendNotification('Could not delete cart item!', true));
     }
   } catch (err) {
-    const { msg } = err.response.data;
+    let msg = err.message;
+
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
     dispatch({ type: USER_CART_ITEM_DELETE_ERROR });
     dispatch(sendNotification(msg, true));
   }
@@ -314,7 +352,11 @@ const emptyUserCart = (userId) => async (dispatch) => {
       dispatch({ type: USER_CART_REMOVE_ALL_ERROR });
     }
   } catch (err) {
-    const { msg } = err.response.data;
+    let msg = err.message;
+
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
 
     dispatch(sendNotification(msg, true));
 
@@ -344,7 +386,11 @@ const saveUserDeliveryAddress =
         dispatch({ type: USER_DELIVERY_ADDRESS_SAVE_ERROR });
       }
     } catch (err) {
-      const { msg } = err.response.data;
+      let msg = err.message;
+
+      if (err.response) {
+        msg = err.response.data.msg;
+      }
 
       dispatch(sendNotification(msg, true));
 
@@ -364,8 +410,14 @@ const saveUserOrders = (userId, cart) => async (dispatch) => {
       dispatch({ type: USER_ORDERS_SAVE_ERROR });
     }
   } catch (err) {
-    const { msg } = err.response.data;
+    let msg = err.message;
+
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
+
     dispatch({ type: USER_ORDERS_SAVE_ERROR });
+
     dispatch(sendNotification(msg, true));
   }
 };

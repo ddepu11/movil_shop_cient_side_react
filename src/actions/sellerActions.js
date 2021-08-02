@@ -29,7 +29,11 @@ export const listMobiles = (sellerId) => async (dispatch) => {
       dispatch(sendNotification('Could not fetch the mobiles!!', true));
     }
   } catch (err) {
-    const { msg } = err.response.data;
+    let msg = err.message;
+
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
 
     dispatch({ type: SELLER_MOBILE_LIST_ERROR });
 
@@ -53,8 +57,11 @@ export const removeMobile = (id) => async (dispatch) => {
       dispatch(sendNotification('Could not removed a mobile!', true));
     }
   } catch (err) {
-    const { msg } = err.response.data;
+    let msg = err.message;
 
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
     dispatch({ type: SELLER_MOBILE_DELETE_ERROR });
 
     dispatch(sendNotification(msg, true));
@@ -84,7 +91,11 @@ export const updateSellerMobile =
         );
       }
     } catch (err) {
-      const { msg } = err.response.data;
+      let msg = err.message;
+
+      if (err.response) {
+        msg = err.response.data.msg;
+      }
 
       dispatch({ type: SELLER_MOBILE_UPDATE_ERROR });
 

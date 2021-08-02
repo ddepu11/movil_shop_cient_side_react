@@ -41,7 +41,11 @@ export const createMobile = (formData, id) => async (dispatch) => {
 
     dispatch(listMobiles(id));
   } catch (err) {
-    const { msg } = err.response.data;
+    let msg = err.message;
+
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
 
     dispatch({ type: MOBILE_CREATE_ERROR });
 
@@ -129,8 +133,11 @@ export const reviewMobile = (id, stars) => async (dispatch) => {
       dispatch(sendNotification('Could not submit a review!!', true));
     }
   } catch (err) {
-    const { msg } = err.response.data;
+    let msg = err.message;
 
+    if (err.response) {
+      msg = err.response.data.msg;
+    }
     dispatch({ type: MOBILE_GIVE_REVIEW_ERROR });
 
     dispatch(sendNotification(msg, true));
@@ -158,7 +165,11 @@ export const updateMobileReview =
         dispatch(sendNotification('Could not update a review!!', true));
       }
     } catch (err) {
-      const { msg } = err.response.data;
+      let msg = err.message;
+
+      if (err.response) {
+        msg = err.response.data.msg;
+      }
 
       dispatch({ type: MOBILE_UPDATE_REVIEW_ERROR });
 
