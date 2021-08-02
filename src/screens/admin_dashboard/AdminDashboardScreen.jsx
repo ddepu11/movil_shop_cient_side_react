@@ -25,7 +25,7 @@ const AdminDashboardScreen = () => (
 );
 
 const Wrapper = styled.main`
-  padding: 10px 10px;
+  padding: 10px 8px;
 `;
 
 export default AdminDashboardScreen;

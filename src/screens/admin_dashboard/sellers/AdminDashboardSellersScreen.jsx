@@ -2,13 +2,12 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import CircleLoader from '../../../components/CircleLoader';
-import apiUrl from '../../../api/apiUrl';
-import Button from '../../../components/Button';
 import {
   listSeller,
   listMobiles,
   deleteSeller,
 } from '../../../actions/adminActions';
+import User from '../../../components/User';
 
 const AdminDashboardSellersScreen = () => {
   const { mobiles, sellers, adminLoading } = useSelector(
@@ -23,7 +22,7 @@ const AdminDashboardSellersScreen = () => {
     dispatch(listMobiles());
   }, [dispatch]);
 
-  const handleDeleteSeller = (e) => {
+  const handleDelete = (e) => {
     const { value } = e.target.dataset;
 
     dispatch(deleteSeller(value));
@@ -52,75 +51,16 @@ const AdminDashboardSellersScreen = () => {
         </div>
       )}
 
-      <div className="sellers">
-        {sellers.length !== 0 &&
-          sellers.map((i) => (
-            <section key={i._id} className="flex">
-              <div className="dp">
-                <img
-                  src={`${apiUrl}/dp/${i.displayPicture}`}
-                  alt={i.firstName}
-                />
-              </div>
-
-              <div className="info">
-                <div className="row flex">
-                  <p>Name:</p>
-                  <span>{`${i.firstName} ${i.lastName}`}</span>
-                </div>
-
-                <div className="row flex">
-                  <p>Email:</p>
-                  <span>{i.email}</span>
-                </div>
-
-                <div className="row flex">
-                  <p>Phone Number:</p>
-                  <span>{i.phoneNumber}</span>
-                </div>
-
-                <div className="row flex">
-                  <p>Gender:</p>
-                  <span>{i.gender}</span>
-                </div>
-
-                <div className="row flex">
-                  <p>Regitered On:</p>
-                  <span>
-                    {' '}
-                    {new Date(i.createdAt).toLocaleDateString('en-IN')}
-                  </span>
-                </div>
-
-                <div className="row flex">
-                  <p>Mobiles:</p>
-                  <span>
-                    {' '}
-                    {
-                      mobiles.filter((m) => m.sellerInfo.email === i.email)
-                        .length
-                    }
-                  </span>
-                </div>
-              </div>
-
-              <div className="delete_btn">
-                <Button
-                  pt="5px"
-                  pb="5px"
-                  pl="20px"
-                  pr="20px"
-                  bgColor="var(--danger-color)"
-                  fs="0.8em"
-                  dataVal={i._id}
-                  handleClick={handleDeleteSeller}
-                >
-                  Remove
-                </Button>
-              </div>
-            </section>
-          ))}
-      </div>
+      {sellers.length !== 0 &&
+        sellers.map((i) => (
+          <User
+            key={i._id}
+            i={i}
+            handleDelete={handleDelete}
+            mobiles={mobiles}
+            isSeller="YES"
+          />
+        ))}
     </Wrapper>
   );
 };
@@ -142,55 +82,6 @@ const Wrapper = styled.main`
     height: 40vh;
     font-size: 1.2em;
     text-transform: capitalize;
-  }
-
-  .sellers {
-    section {
-      padding: 10px 10px;
-      justify-content: space-between;
-      align-items: flex-start;
-      box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
-        rgb(209, 213, 219) 0px 0px 0px 1px inset;
-      margin-bottom: 15px;
-    }
-
-    .dp {
-      width: 200px;
-      height: 200px;
-      align-self: center;
-
-      img {
-        object-fit: cover;
-        border-radius: 50%;
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-    .info {
-      width: 50%;
-
-      .row {
-        justify-content: space-between;
-        align-items: flex-start;
-        padding: 0px 0px 14px;
-      }
-
-      p {
-        font-size: 1.1em;
-      }
-
-      span {
-        margin-left: 10px;
-        font-weight: 600;
-        color: var(--little-dark-color);
-        letter-spacing: 1px;
-      }
-    }
-
-    .delete_btn {
-      padding: 8px 5px 0 0;
-    }
   }
 `;
 
