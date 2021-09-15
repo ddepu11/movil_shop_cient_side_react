@@ -307,6 +307,8 @@ const DashboardAddMobileScreen = () => {
 };
 
 const Wrapper = styled.main`
+  margin-bottom: 25px;
+
   h1 {
     text-align: center;
     font-size: 1.5em;
