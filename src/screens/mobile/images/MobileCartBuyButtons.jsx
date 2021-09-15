@@ -36,6 +36,7 @@ const MobileCartBuyButtons = ({ color }) => {
         pr="30px"
         pl="30px"
         fs="1em"
+        cursor="not-allowed"
       >
         <div className="flex">
           <AiTwotoneThunderbolt fontSize="1.15em" />
