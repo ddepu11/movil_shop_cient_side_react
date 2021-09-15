@@ -53,7 +53,7 @@ const SignInScreenLogic = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e && e.preventDefault();
 
     const { email, password } = userCredentials;
 
@@ -86,6 +86,32 @@ const SignInScreenLogic = () => {
       });
   };
 
+  const loginAsRanomUser = () => {
+    const users = [
+      { email: 'ayush11@gmail.com', password: '111111' },
+      { email: 'abhinav11@gmail.com', password: '111111' },
+    ];
+
+    const randomUser = users[Math.floor(Math.random() * users.length)];
+
+    dispatch(customUserSignIn(randomUser.email, randomUser.password));
+    setUserCredentials({ password: '', email: '' });
+  };
+
+  const loginAsRandomSeller = () => {
+    const users = [
+      { email: 'ddepu11@gmail.com', password: '111111' },
+      { email: 'mohan11@gmail.com', password: '111111' },
+    ];
+
+    const randomUser = users[Math.floor(Math.random() * users.length)];
+
+    dispatch(customUserSignIn(randomUser.email, randomUser.password));
+
+    dispatch(customUserSignIn('', ''));
+    setUserCredentials({ password: '', email: '' });
+  };
+
   return {
     userLoading,
     handleSubmit,
@@ -95,6 +121,8 @@ const SignInScreenLogic = () => {
     passwordValidationMessageTag,
     handleLoginViaGoogle,
     googleAuthLoading,
+    loginAsRanomUser,
+    loginAsRandomSeller,
   };
 };
 

@@ -17,6 +17,8 @@ const SignInScreen = () => {
     passwordValidationMessageTag,
     handleLoginViaGoogle,
     googleAuthLoading,
+    loginAsRanomUser,
+    loginAsRandomSeller,
   } = SignInScreenLogic();
 
   return (
@@ -61,6 +63,7 @@ const SignInScreen = () => {
               <span>Or</span>
               <div className="right" />
             </div>
+
             <form>
               <FormControl
                 inputValue={userCredentials.email}
@@ -99,6 +102,41 @@ const SignInScreen = () => {
               >
                 Log In
               </Button>
+
+              <div className="random_user_admin_login_btns flex">
+                <Button
+                  pt="8px"
+                  pb="8px"
+                  pl="0px"
+                  pr="0px"
+                  mt="12px"
+                  mr="5px"
+                  fs="1em"
+                  width="49%"
+                  bgColor="var(--tertiary-color)"
+                  bSh=""
+                  tr=""
+                  handleClick={loginAsRanomUser}
+                >
+                  Log in as random user
+                </Button>
+
+                <Button
+                  pt="8px"
+                  pb="8px"
+                  pl="0px"
+                  pr="0px"
+                  mt="12px"
+                  fs="1em"
+                  width="49%"
+                  bgColor="var(--little-dark-color)"
+                  bSh=""
+                  tr=""
+                  handleClick={loginAsRandomSeller}
+                >
+                  Log in as random seller
+                </Button>
+              </div>
             </form>
 
             <div className="or flex">
@@ -200,6 +238,14 @@ const Wrapper = styled.main`
         button {
           font-size: 1em !important;
           padding: 9px 10px !important;
+        }
+      }
+
+      .random_user_admin_login_btns {
+        flex-direction: column;
+
+        button {
+          width: 100% !important;
         }
       }
     }
