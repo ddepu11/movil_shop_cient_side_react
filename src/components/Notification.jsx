@@ -7,10 +7,10 @@ import { clearNotification } from '../actions/notificationActions';
 const Notification = ({ msg, color }) => {
   const dispatch = useDispatch();
 
-  const [top, setTop] = useState(`${window.pageYOffset + 180}px`);
+  const [top, setTop] = useState(`${window.pageYOffset + 90}px`);
 
   const respondScroll = () => {
-    setTop(`${window.pageYOffset + 120}px`);
+    setTop(`${window.pageYOffset + 100}px`);
   };
 
   useEffect(() => {
@@ -55,6 +55,22 @@ const Wrapper = styled.div`
 
   h2 {
     font-size: 1.2em;
+  }
+
+  @media screen and (max-width: 700px) {
+    padding: 6px 10px;
+
+    h2 {
+      font-size: 1em;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    padding: 5px;
+
+    h2 {
+      font-size: 0.8em;
+    }
   }
 `;
 
