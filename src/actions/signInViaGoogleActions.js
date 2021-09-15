@@ -15,15 +15,12 @@ const loadAuth2Library = () =>
         .init({
           client_id: clientId,
         })
-        .then(
-          () => {
-            resolve({ googleAuth: window.gapi.auth2.getAuthInstance() });
-          },
-
-          () => {
-            reject(new Error('Could not initialize auth2'));
-          }
-        );
+        .then(() => {
+          resolve({ googleAuth: window.gapi.auth2.getAuthInstance() });
+        })
+        .catch(() => {
+          reject(new Error('Could not initialize auth2'));
+        });
     });
   });
 

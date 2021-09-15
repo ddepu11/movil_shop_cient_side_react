@@ -6,7 +6,6 @@ import { sendNotification } from '../../../actions/notificationActions';
 import {
   clearUserSignUpSuccess,
   customUserSignIn,
-  isUserRegisteredWithThisEmail,
 } from '../../../actions/userActions';
 
 import clearAllSetTimeOut from '../../../utils/clearAllSetTimeOut';
@@ -77,15 +76,13 @@ const SignInScreenLogic = () => {
   const handleLoginViaGoogle = () => {
     googleAuth
       .signIn()
-      .then(() => {
-        const {
-          Ts: { Et },
-        } = googleAuth.currentUser.get();
-
-        dispatch(isUserRegisteredWithThisEmail(Et, googleAuth));
-      })
-      .catch(() => {
-        dispatch(sendNotification('Pop-Up Closed!', true));
+      .then(() => {})
+      .catch((err) => {
+        if (err.error === 'popup_closed_by_user') {
+          dispatch(sendNotification(err.error, true));
+        } else {
+          dispatch(sendNotification(err.message, true));
+        }
       });
   };
 

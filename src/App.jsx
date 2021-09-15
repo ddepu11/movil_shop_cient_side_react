@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { listAllMobiles } from './actions/mobileActions';
-import { authenticateUser } from './actions/userActions';
+import {
+  authenticateUser,
+  isUserRegisteredWithThisEmail,
+} from './actions/userActions';
 import Notification from './components/Notification';
 import HomeScreen from './screens/HomeScreen';
 import NavbarScreen from './screens/NavbarScreen';
@@ -34,6 +37,10 @@ const App = () => {
 
   const { mobileSaved } = useSelector((state) => state.mobile);
 
+  const { googleAuth, googleAuthLoading } = useSelector(
+    (state) => state.signInViaGoogle
+  );
+
   useEffect(() => {
     // If seller logs in he will only be able to see other sellers mobiles not his
 
@@ -47,6 +54,16 @@ const App = () => {
 
     !hasUserLoggedIn && dispatch(authenticateUser());
   }, [hasUserLoggedIn, dispatch, mobileSaved, role, id, userInfo]);
+
+  useEffect(() => {
+    if (!googleAuthLoading && googleAuth) {
+      googleAuth.currentUser.listen((user) => {
+        const userEmail = user.getBasicProfile().getEmail();
+
+        dispatch(isUserRegisteredWithThisEmail(userEmail, googleAuth));
+      });
+    }
+  }, [googleAuth, googleAuthLoading, dispatch]);
 
   return (
     <Wrapper>

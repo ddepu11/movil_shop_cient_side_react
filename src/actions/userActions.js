@@ -92,10 +92,10 @@ const isUserRegisteredWithThisEmail =
 
       dispatch({
         type: USER_REGISTER_CHECK_ERROR,
-        payload: 'User was not registered!!!',
+        payload: `User is not registered!!!`,
       });
 
-      dispatch(sendNotification('User was not registered!!!', true));
+      dispatch(sendNotification('User is not registered!!!', true));
     }
   };
 
