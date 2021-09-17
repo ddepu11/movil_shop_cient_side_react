@@ -19,6 +19,7 @@ const SignInScreen = () => {
     googleAuthLoading,
     loginAsRanomUser,
     loginAsRandomSeller,
+    loginAsAdmin,
   } = SignInScreenLogic();
 
   return (
@@ -88,12 +89,12 @@ const SignInScreen = () => {
               />
 
               <Button
-                pt="8px"
-                pb="8px"
+                pt="7px"
+                pb="7px"
                 pl="0px"
                 pr="0px"
                 mt="12px"
-                fs="1.2em"
+                fs="1.1em"
                 width="100%"
                 bgColor="var(--success-color)"
                 bSh=""
@@ -101,6 +102,22 @@ const SignInScreen = () => {
                 handleClick={handleSubmit}
               >
                 Log In
+              </Button>
+
+              <Button
+                pt="7px"
+                pb="7px"
+                pl="0px"
+                pr="0px"
+                mt="12px"
+                fs="1em"
+                width="100%"
+                bgColor="var(--secondary-color)"
+                bSh=""
+                tr=""
+                handleClick={loginAsAdmin}
+              >
+                Log In as admin
               </Button>
 
               <div className="random_user_admin_login_btns flex">

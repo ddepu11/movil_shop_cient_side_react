@@ -88,10 +88,12 @@ const SignInScreenLogic = () => {
 
   const loginAsRanomUser = () => {
     const users = [
-      { email: 'ayush11@gmail.com', password: '111111' },
       { email: 'abhinav11@gmail.com', password: '111111' },
+      { email: 'ujjwal11@gmail.com', password: '111111' },
+      { email: 'anshuman22@gmail.com', password: '222222' },
+      { email: 'pragatDhillon21@gmail.com', password: '212121' },
+      { email: 'rohan_virdi32@gmail.com', password: '323232' },
     ];
-
     const randomUser = users[Math.floor(Math.random() * users.length)];
 
     dispatch(customUserSignIn(randomUser.email, randomUser.password));
@@ -108,7 +110,12 @@ const SignInScreenLogic = () => {
 
     dispatch(customUserSignIn(randomUser.email, randomUser.password));
 
-    dispatch(customUserSignIn('', ''));
+    setUserCredentials({ password: '', email: '' });
+  };
+
+  const loginAsAdmin = () => {
+    dispatch(customUserSignIn('ayush11@gmail.com', '111111'));
+
     setUserCredentials({ password: '', email: '' });
   };
 
@@ -122,6 +129,7 @@ const SignInScreenLogic = () => {
     handleLoginViaGoogle,
     googleAuthLoading,
     loginAsRanomUser,
+    loginAsAdmin,
     loginAsRandomSeller,
   };
 };
