@@ -31,7 +31,7 @@ const User = ({ i, handleDelete, mobiles, isSeller }) => (
       </div>
 
       <div className="row flex">
-        <p>Regitered On:</p>
+        <p>Registered On:</p>
         <span> {new Date(i.createdAt).toLocaleDateString('en-IN')}</span>
       </div>
 
