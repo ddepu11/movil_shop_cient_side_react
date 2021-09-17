@@ -23,7 +23,7 @@ const logOut = () => axios.get(`${apiUrl}/users/log-out`, {});
 const checkIsEmailRegistered = (email) =>
   axios.post(`${apiUrl}/users/exists`, { email });
 
-const update = (data, _id) => axios.put(`/users/${_id}`, data);
+const update = (data, _id) => axios.put(`${apiUrl}/users/${_id}`, data);
 
 const changeDP = (formData, _id) =>
   axios.put(`${apiUrl}/users/${_id}/dp`, formData, {
