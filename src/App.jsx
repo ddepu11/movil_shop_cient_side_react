@@ -23,6 +23,7 @@ import CheckOutScreen from './screens/checkout/CheckOutScreen';
 import OrdersScreen from './screens/orders/OrdersScreen';
 import loadGoogleAPILibrary from './actions/signInViaGoogleActions';
 import AdminDashboardScreen from './screens/admin_dashboard/AdminDashboardScreen';
+import ErrorScreen from './screens/ErrorScreen';
 
 const App = () => {
   const { notificationMessage, danger } = useSelector(
@@ -124,6 +125,10 @@ const App = () => {
 
           <Route path="/admin-dashboard">
             <AdminDashboardScreen />
+          </Route>
+
+          <Route>
+            <ErrorScreen />
           </Route>
         </Switch>
         <FooterScreen />
