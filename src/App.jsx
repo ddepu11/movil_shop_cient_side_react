@@ -59,12 +59,13 @@ const App = () => {
   useEffect(() => {
     if (!googleAuthLoading && googleAuth) {
       googleAuth.currentUser.listen((user) => {
-        const userEmail = user.getBasicProfile().getEmail();
-
-        dispatch(isUserRegisteredWithThisEmail(userEmail, googleAuth));
+        if (googleAuth.isSignedIn.get()) {
+          const userEmail = user.getBasicProfile().getEmail();
+          dispatch(isUserRegisteredWithThisEmail(userEmail, googleAuth));
+        }
       });
     }
-  }, [googleAuth, googleAuthLoading, dispatch]);
+  }, [googleAuth, googleAuthLoading, dispatch, hasUserLoggedIn]);
 
   return (
     <Wrapper>
