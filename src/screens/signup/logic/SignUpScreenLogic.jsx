@@ -1,5 +1,12 @@
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { sendNotification } from '../../../actions/notificationActions';
+import { storageInstance } from '../../../config/firebase';
+import {
+  USER_SIGN_UP_BEGIN,
+  USER_SIGN_UP_ERROR,
+} from '../../../constants/userConstants';
 import { signUpUser } from '../../../actions/userActions';
 import clearAllSetTimeOut from '../../../utils/clearAllSetTimeOut';
 import validateForm from '../../../utils/validateForm';
@@ -72,16 +79,38 @@ const SignUpScreenLogic = () => {
   };
 
   // Appending signup credentials to formData object
-  const appendDataToFD = (fd) => {
-    const k = Object.keys(signUpCredentials);
-    const v = Object.values(signUpCredentials);
+  // const appendDataToFD = (fd) => {
+  //   const k = Object.keys(signUpCredentials);
+  //   const v = Object.values(signUpCredentials);
 
-    for (let a = 0; a < k.length; a += 1) {
-      fd.append(k[a].toString().trim(), v[a]);
+  //   for (let a = 0; a < k.length; a += 1) {
+  //     fd.append(k[a].toString().trim(), v[a]);
+  //   }
+  // };
+
+  const uploadDp = async () => {
+    const fileName = `DP_${Math.floor(Math.random() * Date.now())}_${dp.name}`;
+
+    const storageRef = ref(
+      storageInstance,
+      `displayPictures/${signUpCredentials.email}/${fileName}`
+    );
+
+    let url = '';
+
+    try {
+      await uploadBytes(storageRef, dp);
+
+      url = await getDownloadURL(storageRef);
+    } catch (err) {
+      dispatch({ type: USER_SIGN_UP_ERROR, payload: err.code });
+      dispatch(sendNotification(err.code, true));
     }
+
+    return { url, fileName };
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const errorFlag = validateForm(
@@ -107,13 +136,21 @@ const SignUpScreenLogic = () => {
       'SIGN_UP'
     );
 
-    const formData = new FormData();
-
-    dp !== '' && formData.append('dp', dp);
-
     if (!errorFlag) {
-      appendDataToFD(formData);
-      dispatch(signUpUser(formData));
+      if (dp !== '') {
+        dispatch({ type: USER_SIGN_UP_BEGIN });
+
+        const { url, fileName } = await uploadDp();
+
+        dispatch(signUpUser({ ...signUpCredentials, dp: { url, fileName } }));
+      } else {
+        dispatch(
+          signUpUser({
+            ...signUpCredentials,
+            dp: { url: '', fileName: null },
+          })
+        );
+      }
     }
   };
 

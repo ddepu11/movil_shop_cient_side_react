@@ -9,12 +9,8 @@ const logIn = (email, password) =>
   axios.post(`${apiUrl}/users/sign-in`, { email, password });
 
 // Signing up with credentials and an image
-const signUp = (formData) =>
-  axios.post(`${apiUrl}/users/sign-up`, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+
+const signUp = (formData) => axios.post(`${apiUrl}/users/sign-up`, formData);
 
 const accountInfo = () => axios.get(`${apiUrl}/users/account-info`);
 
@@ -25,12 +21,13 @@ const checkIsEmailRegistered = (email) =>
 
 const update = (data, _id) => axios.put(`${apiUrl}/users/${_id}`, data);
 
+// {
+//   headers: {
+//     'Content-Type': 'multipart/form-data',
+//   },
+// }
 const changeDP = (formData, _id) =>
-  axios.put(`${apiUrl}/users/${_id}/dp`, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+  axios.put(`${apiUrl}/users/${_id}/dp`, formData);
 
 const addToCart = (userId, mobile) =>
   axios.put(`${apiUrl}/users/${userId}/cart`, mobile);
