@@ -119,7 +119,7 @@ export const getMobileById = (id) => async (dispatch) => {
 };
 
 // mobile ID and Stars
-export const reviewMobile = (id, stars) => async (dispatch) => {
+export const reviewMobile = (id, stars, user) => async (dispatch) => {
   dispatch({ type: MOBILE_GIVE_REVIEW_BEGIN });
 
   try {
@@ -128,6 +128,12 @@ export const reviewMobile = (id, stars) => async (dispatch) => {
     if (res) {
       dispatch({ type: MOBILE_GIVE_REVIEW_SUCCESS, payload: res.data.mobile });
       dispatch(sendNotification('Submitted a review!', false));
+
+      if (user.role === 'SELLER') {
+        dispatch(listAllMobiles(user.email));
+      } else if (user.role !== 'ADMIN' && user.role !== 'SELLER') {
+        dispatch(listAllMobiles());
+      }
     } else {
       dispatch({ type: MOBILE_GIVE_REVIEW_ERROR });
       dispatch(sendNotification('Could not submit a review!!', true));
@@ -146,7 +152,7 @@ export const reviewMobile = (id, stars) => async (dispatch) => {
 
 // mobile ID and Stars and review Id
 export const updateMobileReview =
-  (mobileId, stars, reviewId) => async (dispatch) => {
+  (mobileId, stars, reviewId, user) => async (dispatch) => {
     dispatch({ type: MOBILE_UPDATE_REVIEW_BEGIN });
 
     try {
@@ -159,6 +165,12 @@ export const updateMobileReview =
         });
 
         dispatch(sendNotification('Updated a review!', false));
+
+        if (user.role === 'SELLER') {
+          dispatch(listAllMobiles(user.email));
+        } else if (user.role !== 'ADMIN' && user.role !== 'SELLER') {
+          dispatch(listAllMobiles());
+        }
       } else {
         dispatch({ type: MOBILE_UPDATE_REVIEW_ERROR });
 

@@ -16,7 +16,9 @@ const MobileSubmitReviewScreenLogic = () => {
     mobile: { _id, reviews },
   } = useSelector((state) => state.mobile);
 
-  const { userInfo, hasUserLoggedIn, id } = useSelector((state) => state.user);
+  const { userInfo, hasUserLoggedIn, id, role } = useSelector(
+    (state) => state.user
+  );
 
   // Submitting Mobile Stars
   const [stars, setStars] = useState(0);
@@ -40,7 +42,7 @@ const MobileSubmitReviewScreenLogic = () => {
       history.push('/sign-in');
     } else {
       // mobile ID and Stars
-      dispatch(reviewMobile(_id, stars));
+      dispatch(reviewMobile(_id, stars, { role, email: userInfo.email }));
     }
   };
 
@@ -70,7 +72,12 @@ const MobileSubmitReviewScreenLogic = () => {
     if (oldReview.stars === stars) {
       dispatch(sendNotification("You haven't change the review!!", true));
     } else {
-      dispatch(updateMobileReview(_id, stars, oldReview.reviewId));
+      dispatch(
+        updateMobileReview(_id, stars, oldReview.reviewId, {
+          role,
+          email: userInfo.email,
+        })
+      );
     }
   };
 

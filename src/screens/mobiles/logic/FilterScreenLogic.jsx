@@ -19,6 +19,7 @@ const FilterScreenLogic = (filterBarRef) => {
         colors.push(mobiles[i].colors[j]);
       }
     }
+
     // Gets Colors not repeting any
     colors = [...new Set(colors)];
 
