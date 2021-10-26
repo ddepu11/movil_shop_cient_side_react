@@ -39,13 +39,6 @@ const loadGoogleApiLibrary = () =>
     script.onload = async () => {
       const googleAuth = await loadAuth2Library();
 
-      // .then(() => {
-      //   const googleAuth = window.gapi.auth2.getAuthInstance();
-      //   console.log(googleAuth);
-      // });
-
-      // console.log('Load: ', googleAuth);
-
       resolve({ googleAuth });
     };
 

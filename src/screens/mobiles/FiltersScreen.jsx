@@ -4,6 +4,7 @@ import { AiFillStar, AiOutlineClose } from 'react-icons/ai';
 import PropTypes from 'prop-types';
 import Button from '../../components/Button';
 import FilterScreenLogic from './logic/FilterScreenLogic';
+import formatePrice from '../../utils/formatePrice';
 
 const FiltersScreen = ({
   handleButtons,
@@ -49,8 +50,9 @@ const FiltersScreen = ({
 
           <div className="form-control">
             <h5>Customer Ratings</h5>
+
             <div className="custumer_rating_btns">
-              <Button
+              {/* <Button
                 bgColor="transparent"
                 color="#222"
                 borderRadius="1px"
@@ -63,9 +65,11 @@ const FiltersScreen = ({
               >
                 <div className="flex" style={{ justifyContent: 'flex-start' }}>
                   <span>5</span>&nbsp; <AiFillStar />
+                  &nbsp;
                   <span>and above</span>
                 </div>
-              </Button>
+              </Button> */}
+
               <Button
                 bgColor="transparent"
                 color="#222"
@@ -79,6 +83,7 @@ const FiltersScreen = ({
               >
                 <div className="flex" style={{ justifyContent: 'flex-start' }}>
                   <span>4</span>&nbsp; <AiFillStar />
+                  &nbsp;
                   <span>and above</span>
                 </div>
               </Button>
@@ -95,6 +100,7 @@ const FiltersScreen = ({
               >
                 <div className="flex" style={{ justifyContent: 'flex-start' }}>
                   <span>3</span>&nbsp; <AiFillStar />
+                  &nbsp;
                   <span>and above</span>
                 </div>
               </Button>
@@ -111,6 +117,7 @@ const FiltersScreen = ({
               >
                 <div className="flex" style={{ justifyContent: 'flex-start' }}>
                   <span>2</span>&nbsp; <AiFillStar />
+                  &nbsp;
                   <span>and above</span>
                 </div>
               </Button>
@@ -127,6 +134,7 @@ const FiltersScreen = ({
               >
                 <div className="flex" style={{ justifyContent: 'flex-start' }}>
                   <span>1</span>&nbsp; <AiFillStar />
+                  &nbsp;
                   <span>and above</span>
                 </div>
               </Button>
@@ -135,6 +143,7 @@ const FiltersScreen = ({
 
           <div className="form-control">
             <h5>Price</h5>
+
             <input
               onChange={handleInput}
               className="price_input"
@@ -143,7 +152,7 @@ const FiltersScreen = ({
               max="150000"
               name="price"
             />
-            <p>Range: 0 - {filters.price}</p>
+            <p>Range: 0 - {formatePrice(filters.price)}</p>
           </div>
 
           <div className="form-control">
@@ -212,6 +221,7 @@ const FiltersScreen = ({
             </div>
           </div>
 
+          {/* 
           <div className="form-control">
             <label htmlFor="assured" className="assured">
               MovilShop Assured
@@ -222,7 +232,7 @@ const FiltersScreen = ({
               onChange={handleInput}
               id="assured"
             />
-          </div>
+          </div> */}
 
           <Button
             bgColor="#fa0000e6"
