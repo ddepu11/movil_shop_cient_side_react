@@ -2,13 +2,25 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Loading from '../../components/Loading';
-import UserDefaultPic from '../../assests/user.png';
-import apiUrl from '../../api/apiUrl';
+import femaleDP from '../../assests/femaleDP.png';
+import maleDP from '../../assests/maleDP.png';
 
 const DashboardHeaderScreen = () => {
   const { userInfo } = useSelector((state) => state.user);
 
-  const { displayPicture, firstName, lastName, email, userLoading } = userInfo;
+  const { firstName, lastName, email, userLoading } = userInfo;
+
+  let dp = '';
+
+  if (userInfo.displayPicture) {
+    if (userInfo.displayPicture.url) {
+      dp = userInfo.displayPicture.url;
+    } else if (userInfo.displayPicture.fileName === 'femaleDP.png') {
+      dp = femaleDP;
+    } else {
+      dp = maleDP;
+    }
+  }
 
   if (userLoading) {
     <Loading />;
@@ -17,12 +29,7 @@ const DashboardHeaderScreen = () => {
   return (
     <Wrapper className="flex card">
       <div className="dp">
-        <img
-          src={
-            displayPicture ? `${apiUrl}/dp/${displayPicture}` : UserDefaultPic
-          }
-          alt={firstName}
-        />
+        <img src={dp} alt={firstName} />
       </div>
 
       <div className="info flex">
