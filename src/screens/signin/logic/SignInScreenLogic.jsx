@@ -114,7 +114,7 @@ const SignInScreenLogic = () => {
   };
 
   const loginAsAdmin = () => {
-    dispatch(customUserSignIn('ayush11@gmail.com', '111111'));
+    dispatch(customUserSignIn('aayush11@gmail.com', '111111'));
 
     setUserCredentials({ password: '', email: '' });
   };
