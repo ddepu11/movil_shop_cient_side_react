@@ -1,81 +1,96 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropType from 'prop-types';
-import apiUrl from '../api/apiUrl';
 import Button from './Button';
+import femaleDP from '../assests/femaleDP.png';
+import maleDP from '../assests/maleDP.png';
 
-const User = ({ i, handleDelete, mobiles, isSeller }) => (
-  <Section className="flex">
-    <div className="dp">
-      <img src={`${apiUrl}/dp/${i.displayPicture}`} alt={i.firstName} />
-    </div>
+const User = ({ i, handleDelete, mobiles, isSeller }) => {
+  let dp = '';
 
-    <div className="info">
-      <div className="row flex">
-        <p>Name:</p>
-        <span>{`${i.firstName} ${i.lastName}`}</span>
+  if (i.displayPicture) {
+    if (i.displayPicture.url) {
+      dp = i.displayPicture.url;
+    } else if (i.displayPicture.fileName === 'femaleDP.png') {
+      dp = femaleDP;
+    } else {
+      dp = maleDP;
+    }
+  }
+
+  return (
+    <Section className="flex">
+      <div className="dp">
+        <img src={dp} alt={i.firstName} />
       </div>
 
-      <div className="row flex">
-        <p>Email:</p>
-        <span>{i.email}</span>
-      </div>
-      <div className="row flex">
-        <p>Phone Number:</p>
-        <span>{i.phoneNumber}</span>
-      </div>
-
-      <div className="row flex">
-        <p>Gender:</p>
-        <span>{i.gender}</span>
-      </div>
-
-      <div className="row flex">
-        <p>Registered On:</p>
-        <span> {new Date(i.createdAt).toLocaleDateString('en-IN')}</span>
-      </div>
-
-      {isSeller === 'NO' && (
-        <>
-          <div className="row flex">
-            <p>No of Orders:</p>
-            <span> {i.orders.length}</span>
-          </div>
-
-          <div className="row flex">
-            <p>Cart items:</p>
-            <span> {i.cart.length}</span>
-          </div>
-        </>
-      )}
-
-      {isSeller === 'YES' && (
+      <div className="info">
         <div className="row flex">
-          <p>Mobiles:</p>
-          <span>
-            {' '}
-            {mobiles.filter((item) => item.sellerInfo.id === i._id).length}
-          </span>
+          <p>Name:</p>
+          <span>{`${i.firstName} ${i.lastName}`}</span>
         </div>
-      )}
-    </div>
 
-    <div className="delete_btn">
-      <Button
-        pt="5px"
-        pb="5px"
-        pl="20px"
-        pr="20px"
-        bgColor="var(--danger-color)"
-        fs="0.8em"
-        dataVal={i._id}
-        handleClick={handleDelete}
-      >
-        Remove
-      </Button>
-    </div>
-  </Section>
-);
+        <div className="row flex">
+          <p>Email:</p>
+          <span>{i.email}</span>
+        </div>
+        <div className="row flex">
+          <p>Phone Number:</p>
+          <span>{i.phoneNumber}</span>
+        </div>
+
+        <div className="row flex">
+          <p>Gender:</p>
+          <span>{i.gender}</span>
+        </div>
+
+        <div className="row flex">
+          <p>Registered On:</p>
+          <span> {new Date(i.createdAt).toLocaleDateString('en-IN')}</span>
+        </div>
+
+        {isSeller === 'NO' && (
+          <>
+            <div className="row flex">
+              <p>No of Orders:</p>
+              <span> {i.orders.length}</span>
+            </div>
+
+            <div className="row flex">
+              <p>Cart items:</p>
+              <span> {i.cart.length}</span>
+            </div>
+          </>
+        )}
+
+        {isSeller === 'YES' && (
+          <div className="row flex">
+            <p>Mobiles:</p>
+            <span>
+              {' '}
+              {mobiles.filter((item) => item.sellerInfo.id === i._id).length}
+            </span>
+          </div>
+        )}
+      </div>
+
+      <div className="delete_btn">
+        <Button
+          pt="5px"
+          pb="5px"
+          pl="20px"
+          pr="20px"
+          bgColor="var(--danger-color)"
+          fs="0.8em"
+          dataVal={i._id}
+          handleClick={handleDelete}
+        >
+          Remove
+        </Button>
+      </div>
+    </Section>
+  );
+};
 
 const Section = styled.section`
   padding: 10px 10px;
