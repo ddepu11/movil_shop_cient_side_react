@@ -25,6 +25,7 @@ const MobileCartBuyButtonsLogic = (color) => {
     } else {
       if (!hasUserLoggedIn) {
         const quantity = 1;
+
         dispatch(
           addMobileToLocalStorageCart({
             mobileId,
@@ -51,7 +52,7 @@ const MobileCartBuyButtonsLogic = (color) => {
           ? dispatch(
               addMobileToCart(userId, {
                 mobileId,
-                picture: pictures[0],
+                picture: pictures[0].url,
                 title,
                 color,
                 sellerName: sellerInfo.name,
