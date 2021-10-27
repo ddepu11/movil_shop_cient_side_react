@@ -3,11 +3,9 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import MobileCartBuyButtons from './MobileCartBuyButtons';
 import MobileImagesScreenLogic from './logic/MobileImagesScreenLogic';
-import apiUrl from '../../../api/apiUrl';
 
 const MobileImagesScreen = ({ color }) => {
-  const { handleHover, preview, title, pictures, sellerInfo } =
-    MobileImagesScreenLogic();
+  const { handleHover, preview, title, pictures } = MobileImagesScreenLogic();
 
   return (
     <Wrapper className="flex">
@@ -15,12 +13,8 @@ const MobileImagesScreen = ({ color }) => {
         <div className="left-section flex">
           {pictures &&
             pictures.map((p) => (
-              <div className="small_img" key={p}>
-                <img
-                  onMouseEnter={handleHover}
-                  alt={title}
-                  src={`${apiUrl}/sellers/${sellerInfo.id}/${p}`}
-                />
+              <div className="small_img" key={p._id}>
+                <img onMouseEnter={handleHover} alt={title} src={p.url} />
               </div>
             ))}
         </div>

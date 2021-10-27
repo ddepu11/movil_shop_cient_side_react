@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import apiUrl from '../../../../api/apiUrl';
 
 const MobileImagesScreenLogic = () => {
   const {
@@ -10,8 +9,7 @@ const MobileImagesScreenLogic = () => {
   const [preview, setPreview] = useState('');
 
   useEffect(() => {
-    sellerInfo &&
-      setPreview(`${apiUrl}/sellers/${sellerInfo.id}/${pictures[0]}`);
+    sellerInfo && setPreview(pictures[0].url);
   }, [pictures, sellerInfo]);
 
   const handleHover = (e) => {
