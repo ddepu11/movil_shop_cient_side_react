@@ -1,9 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { ref, deleteObject } from 'firebase/storage';
+import { storageInstance } from '../../../config/firebase';
 import { listUsers, deleteUser } from '../../../actions/adminActions';
 import CircleLoader from '../../../components/CircleLoader';
 import User from '../../../components/User';
+import {
+  ADMIN_DELETE_USER_BEGIN,
+  ADMIN_DELETE_USER_ERROR,
+} from '../../../constants/adminConstants';
+import { sendNotification } from '../../../actions/notificationActions';
 
 const AdminDashboardUsersScreen = () => {
   const dispatch = useDispatch();
@@ -27,10 +34,38 @@ const AdminDashboardUsersScreen = () => {
     );
   }
 
+  const deleteDp = async (userId, userEmail, fileName) => {
+    const userPicRef = ref(
+      storageInstance,
+      `displayPictures/${userEmail}/${fileName}`
+    );
+
+    try {
+      await deleteObject(userPicRef);
+
+      dispatch(deleteUser(userId));
+    } catch (err) {
+      dispatch({ type: ADMIN_DELETE_USER_ERROR });
+
+      dispatch(sendNotification(err.code, true));
+    }
+  };
+
   const handleDelete = (e) => {
     const { value } = e.target.dataset;
 
-    dispatch(deleteUser(value));
+    const {
+      displayPicture: { url, fileName },
+      email,
+    } = users.filter((item) => item._id === value)[0];
+
+    if (url) {
+      dispatch({ type: ADMIN_DELETE_USER_BEGIN });
+
+      deleteDp(value, email, fileName);
+    } else {
+      dispatch(deleteUser(value));
+    }
   };
 
   return (

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import { ref, deleteObject } from 'firebase/storage';
+import { storageInstance } from '../../../config/firebase';
 import CircleLoader from '../../../components/CircleLoader';
 import {
   listSeller,
@@ -8,6 +10,11 @@ import {
   deleteSeller,
 } from '../../../actions/adminActions';
 import User from '../../../components/User';
+import {
+  ADMIN_DELETE_SELLER_BEGIN,
+  ADMIN_DELETE_SELLER_ERROR,
+} from '../../../constants/adminConstants';
+import { sendNotification } from '../../../actions/notificationActions';
 
 const AdminDashboardSellersScreen = () => {
   const { mobiles, sellers, adminLoading } = useSelector(
@@ -22,10 +29,72 @@ const AdminDashboardSellersScreen = () => {
     dispatch(listMobiles());
   }, [dispatch]);
 
+  const deleteSellerMobilePics = (sellerId, sellerEmail) => {
+    const mobilesToDelete = mobiles.filter(
+      (item) => item.sellerInfo.id === sellerId
+    );
+
+    let index = 0;
+
+    mobilesToDelete.forEach((item) => {
+      item.pictures.forEach(async (p) => {
+        const userPicRef = ref(
+          storageInstance,
+          `mobileImages/${sellerEmail}/${p.fileName}`
+        );
+
+        try {
+          await deleteObject(userPicRef);
+        } catch (err) {
+          dispatch({ type: ADMIN_DELETE_SELLER_ERROR });
+          dispatch(sendNotification(err.code, true));
+        }
+      });
+
+      if (mobilesToDelete.length - 1 === index) {
+        dispatch(deleteSeller(sellerId));
+      }
+
+      index += 1;
+    });
+  };
+
+  const deleteDp = async (sellerId, sellerEmail, fileName) => {
+    const userPicRef = ref(
+      storageInstance,
+      `displayPictures/${sellerEmail}/${fileName}`
+    );
+
+    try {
+      await deleteObject(userPicRef);
+
+      deleteSellerMobilePics(sellerId, sellerEmail);
+    } catch (err) {
+      dispatch({ type: ADMIN_DELETE_SELLER_ERROR });
+
+      dispatch(sendNotification(err.code, true));
+    }
+  };
+
   const handleDelete = (e) => {
     const { value } = e.target.dataset;
 
-    dispatch(deleteSeller(value));
+    const {
+      displayPicture: { fileName, url },
+      email,
+    } = sellers.filter((item) => item._id === value)[0];
+
+    deleteDp(value, email, fileName);
+
+    if (url) {
+      dispatch({ type: ADMIN_DELETE_SELLER_BEGIN });
+
+      deleteDp(value, email, fileName);
+    } else {
+      dispatch({ type: ADMIN_DELETE_SELLER_BEGIN });
+
+      deleteSellerMobilePics(value);
+    }
   };
 
   if (adminLoading) {
