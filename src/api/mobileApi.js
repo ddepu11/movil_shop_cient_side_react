@@ -3,12 +3,13 @@ import apiUrl from './apiUrl';
 
 axios.defaults.withCredentials = true;
 
-export const create = (formData) =>
-  axios.post(`${apiUrl}/mobiles`, formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+// {
+//   headers: {
+//     'Content-Type': 'multipart/form-data',
+//   },
+// }
+
+export const create = (formData) => axios.post(`${apiUrl}/mobiles`, formData);
 
 export const listAll = () => axios.get(`${apiUrl}/mobiles`);
 

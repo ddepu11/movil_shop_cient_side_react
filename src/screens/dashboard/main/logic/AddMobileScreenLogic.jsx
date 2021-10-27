@@ -1,17 +1,25 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storageInstance } from '../../../../config/firebase';
 import { createMobile } from '../../../../actions/mobileActions';
 import { sendNotification } from '../../../../actions/notificationActions';
 import clearAllSetTimeOut from '../../../../utils/clearAllSetTimeOut';
 import validateMobileForm from '../../../../utils/validateMobileForm';
 import releaseImageObjectUrl from '../../../../utils/releaseImageObject';
+import {
+  MOBILE_CREATE_BEGIN,
+  MOBILE_CREATE_ERROR,
+} from '../../../../constants/mobileConstants';
 
 const AddMobileScreenLogic = () => {
   const history = useHistory();
 
+  // ,
+
   const {
-    userInfo: { _id, email, firstName, lastName },
+    userInfo: { email, firstName, lastName, _id },
   } = useSelector((state) => state.user);
 
   const { mobileSaved } = useSelector((state) => state.mobile);
@@ -148,7 +156,54 @@ const AddMobileScreenLogic = () => {
     });
   };
 
-  const handleSubmit = () => {
+  const saveMobileInfo = (imagesUrls) => {
+    const { files, previews, ...newMobileInfo } = mobileInfo;
+
+    const finalMobileInfo = {
+      ...newMobileInfo,
+      sellerId: _id,
+      sellerEmail: email,
+      sellerName: `${firstName} ${lastName}`,
+      pictures: imagesUrls,
+    };
+
+    dispatch(createMobile(finalMobileInfo, _id));
+  };
+
+  const uploadImages = async () => {
+    const imagesUrl = [];
+    let index = 0;
+
+    try {
+      mobileInfo.files.forEach(async (f) => {
+        const fileName = `${mobileInfo.title}_${mobileInfo.brand}_${Math.floor(
+          Math.random() * Date.now()
+        )}_${f.name}`;
+
+        const imageRef = ref(
+          storageInstance,
+          `mobileImages/${email}/${fileName}`
+        );
+
+        await uploadBytes(imageRef, f);
+
+        const url = await getDownloadURL(imageRef);
+
+        imagesUrl.push({ url, fileName });
+
+        if (index === mobileInfo.files.length - 1) {
+          saveMobileInfo(imagesUrl);
+        }
+
+        index += 1;
+      });
+    } catch (err) {
+      dispatch({ type: MOBILE_CREATE_ERROR });
+      dispatch(sendNotification(err.code, true));
+    }
+  };
+
+  const handleSubmit = async () => {
     const errorFlag = validateMobileForm(mobileInfo, setTimeOutId, {
       titleMessageRefTag,
       priceMessageRefTag,
@@ -164,29 +219,9 @@ const AddMobileScreenLogic = () => {
     });
 
     if (!errorFlag) {
-      const formData = new FormData();
+      dispatch({ type: MOBILE_CREATE_BEGIN });
 
-      const k = Object.keys(mobileInfo);
-      const v = Object.values(mobileInfo);
-
-      formData.append('sellerId', _id);
-
-      formData.append('sellerEmail', email);
-
-      formData.append('sellerName', `${firstName} ${lastName}`);
-
-      for (let i = 0; i < k.length; i += 1) {
-        // Exculding previews
-        if (k[i] !== 'previews' && k[i] !== 'files') {
-          formData.append(k[i].toString().trim(), v[i]);
-        }
-      }
-
-      mobileInfo.files.forEach((f) => {
-        formData.append(`mobilePics`, f);
-      });
-
-      dispatch(createMobile(formData, _id));
+      await uploadImages();
     }
   };
 
