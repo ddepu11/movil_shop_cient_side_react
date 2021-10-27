@@ -12,7 +12,6 @@ import clearAllSetTimeOut from '../utils/clearAllSetTimeOut';
 import { updateSellerMobile } from '../actions/sellerActions';
 import { sendNotification } from '../actions/notificationActions';
 import formatePrice from '../utils/formatePrice';
-import apiUrl from '../api/apiUrl';
 
 const Mobile = ({
   pictures,
@@ -24,7 +23,6 @@ const Mobile = ({
   processor,
   battery,
   price,
-  userId,
   brand,
   colors,
   mobileId,
@@ -258,7 +256,7 @@ const Mobile = ({
     return (
       <ListView className="flex">
         <div className="mobile_pic">
-          <img src={`${apiUrl}/sellers/${userId}/${pictures[0]}`} alt={title} />
+          <img src={pictures[0].url} alt={title} />
         </div>
 
         <div className="info flex">
@@ -282,7 +280,7 @@ const Mobile = ({
     return (
       <GridView>
         <div className="mobile_pic">
-          <img src={`${apiUrl}/sellers/${userId}/${pictures[0]}`} alt={title} />
+          <img src={pictures[0].url} alt={title} />
         </div>
 
         <div className="info">
@@ -302,7 +300,7 @@ const Mobile = ({
   return (
     <Wrapper0 className="flex">
       <div className="mobile_pic">
-        <img src={`${apiUrl}/sellers/${userId}/${pictures[0]}`} alt={title} />
+        <img src={pictures[0].url} alt={title} />
       </div>
 
       <div className="mobile_info flex">
@@ -717,7 +715,6 @@ Mobile.propTypes = {
   processor: PropTypes.string,
   battery: PropTypes.string,
   price: PropTypes.number,
-  userId: PropTypes.string,
   brand: PropTypes.string,
   colors: PropTypes.array,
   mobileId: PropTypes.string,
@@ -739,7 +736,6 @@ Mobile.defaultProps = {
   price: 0,
   ram: '8',
   colors: [],
-  userId: '',
   handleDeleteMobile: () => {},
 };
 
