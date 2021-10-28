@@ -186,7 +186,7 @@ const CartScreen = () => {
                 <div className="middle-section flex" key={item.mobileId}>
                   <div className="mobile flex">
                     <div className="image">
-                      <img src={item.picture.url} alt={item.title} />
+                      <img src={item.picture} alt={item.title} />
                     </div>
 
                     <div className="info flex">
