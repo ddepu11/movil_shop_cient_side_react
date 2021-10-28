@@ -37,7 +37,6 @@ const AdminDashboardMobilesScreen = () => {
         await deleteObject(mobilePicRef);
 
         if (pictures.length - 1 === index) {
-          console.log('Delete Mobile Doc');
           dispatch(deleteMobile(mobileId));
         }
 
