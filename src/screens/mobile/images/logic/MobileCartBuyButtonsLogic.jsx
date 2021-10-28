@@ -29,7 +29,7 @@ const MobileCartBuyButtonsLogic = (color) => {
         dispatch(
           addMobileToLocalStorageCart({
             mobileId,
-            picture: pictures[0],
+            picture: pictures[0].url,
             title,
             color,
             sellerName: sellerInfo.name,
