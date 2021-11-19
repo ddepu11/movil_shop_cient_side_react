@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../components/Button';
+// import Button from '../components/Button';
 
 const FooterScreen = () => (
   <Wrapper>
@@ -35,7 +35,7 @@ const FooterScreen = () => (
         </div>
       </div>
 
-      <div className="right">
+      {/* <div className="right">
         <label htmlFor="news_letter">Join our news letter</label>
         <input id="news_letter" type="email" placeholder="Enter your email" />
         <Button
@@ -50,7 +50,7 @@ const FooterScreen = () => (
         >
           Join
         </Button>
-      </div>
+      </div> */}
     </div>
 
     <div className="f_bottom">
@@ -78,15 +78,18 @@ const Wrapper = styled.footer`
   .f_upper {
     margin: 0 auto;
     padding: 50px 10px;
-    align-items: flex-start;
-    justify-content: space-between;
     max-width: 1150px;
-    flex-wrap: wrap;
-    gap: 20px 0;
+    /* align-items: flex-start; */
+    /* gap: 20px 0; */
+    /* flex-wrap: wrap; */
+    /* justify-content: space-between; */
 
     .left {
       flex-wrap: wrap;
       gap: 1rem 0.5rem;
+      width: 80%;
+      justify-content: space-between;
+      /* border: 1px solid red; */
 
       .common {
         margin-right: 12px;
