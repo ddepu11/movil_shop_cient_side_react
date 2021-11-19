@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropType from 'prop-types';
 import Button from './Button';
 import femaleDP from '../assests/femaleDP.png';
 import maleDP from '../assests/maleDP.png';
+import Dialog from './Dialog';
 
 const User = ({ i, handleDelete, mobiles, isSeller }) => {
   let dp = '';
@@ -18,8 +19,29 @@ const User = ({ i, handleDelete, mobiles, isSeller }) => {
     }
   }
 
+  // Dialog Handling
+  const [showDialog, setShowDialog] = useState(false);
+
+  const hideDialog = () => setShowDialog(false);
+
+  const showDialogBox = () => setShowDialog(true);
+
+  const confirmDelete = (e) => {
+    handleDelete(e);
+    hideDialog();
+  };
+
   return (
     <Section className="flex">
+      {showDialog && (
+        <Dialog
+          dataValue={i._id}
+          confirm={confirmDelete}
+          deny={hideDialog}
+          whatAreYouDeleting="Do You really want to remove this user?"
+        />
+      )}
+
       <div className="dp">
         <img src={dp} alt={i.firstName} />
       </div>
@@ -82,8 +104,9 @@ const User = ({ i, handleDelete, mobiles, isSeller }) => {
           pr="20px"
           bgColor="var(--danger-color)"
           fs="0.8em"
-          dataVal={i._id}
-          handleClick={handleDelete}
+          // dataVal={i._id}
+          // handleClick={handleDelete}
+          handleClick={showDialogBox}
         >
           Remove
         </Button>
@@ -99,6 +122,7 @@ const Section = styled.section`
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
     rgb(209, 213, 219) 0px 0px 0px 1px inset;
   margin-bottom: 20px;
+  position: relative;
 
   .dp {
     width: 200px;

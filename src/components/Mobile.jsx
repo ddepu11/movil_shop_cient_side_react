@@ -12,6 +12,7 @@ import clearAllSetTimeOut from '../utils/clearAllSetTimeOut';
 import { updateSellerMobile } from '../actions/sellerActions';
 import { sendNotification } from '../actions/notificationActions';
 import formatePrice from '../utils/formatePrice';
+import Dialog from './Dialog';
 
 const Mobile = ({
   pictures,
@@ -68,6 +69,20 @@ const Mobile = ({
   const handleInput = (e) => {
     const { name, value } = e.target;
     setMobileInfo({ ...mobileInfo, [name]: value });
+  };
+
+  // Dialog Handling
+  const [showDialog, setShowDialog] = useState(false);
+
+  const hideDialog = () => setShowDialog(false);
+
+  const showDialogBox = () => setShowDialog(true);
+
+  const confirmDelete = (e) => {
+    const { value } = e.target.dataset;
+
+    handleDeleteMobile(value);
+    hideDialog();
   };
 
   const updateInfo = () => {
@@ -299,6 +314,14 @@ const Mobile = ({
 
   return (
     <Wrapper0 className="flex">
+      {showDialog && (
+        <Dialog
+          dataValue={mobileId}
+          confirm={confirmDelete}
+          deny={hideDialog}
+          whatAreYouDeleting="Do You really want to delete this mobile?"
+        />
+      )}
       <div className="mobile_pic">
         <img src={pictures[0].url} alt={title} />
       </div>
@@ -387,7 +410,7 @@ const Mobile = ({
           color="var(--danger-color)"
           mr="20px"
           bSh=""
-          handleClick={() => handleDeleteMobile(mobileId)}
+          handleClick={showDialogBox}
           fs="1.1em"
           positionVal="absolute"
           fromBottom="5px"
@@ -410,7 +433,7 @@ const Mobile = ({
           color="var(--danger-color)"
           mr="20px"
           bSh=""
-          handleClick={() => handleDeleteMobile(mobileId)}
+          handleClick={showDialogBox}
           fs="1.1em"
           positionVal="absolute"
           fromBottom="5px"

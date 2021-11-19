@@ -24,6 +24,7 @@ const DashboardAllMobilesScreen = () => {
   return (
     <Wrapper>
       <h1 className="heading">All the mobiles you have added</h1>
+
       <section className="mobiles">
         {sellerMobiles.length !== 0 &&
           sellerMobiles.map((i) => (
