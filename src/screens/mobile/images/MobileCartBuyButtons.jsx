@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { FiShoppingCart } from 'react-icons/fi';
-import { AiTwotoneThunderbolt } from 'react-icons/ai';
+// import { AiTwotoneThunderbolt } from 'react-icons/ai';
 import Button from '../../../components/Button';
 import MobileCartBuyButtonsLogic from './logic/MobileCartBuyButtonsLogic';
 
@@ -12,14 +12,16 @@ const MobileCartBuyButtons = ({ color }) => {
   return (
     <Wrapper className="flex">
       <Button
-        bgColor="#e49c00"
+        bgColor="var(--primary-color)"
+        // bgColor="#e49c00"
         color="#ffffff"
         pt="15px"
         pb="15px"
         pr="30px"
         pl="30px"
-        mr="15px"
         fs="1em"
+        // mr="15px"
+        width="100%"
         handleClick={handleAddToCart}
       >
         <div className="flex">
@@ -28,6 +30,7 @@ const MobileCartBuyButtons = ({ color }) => {
         </div>
       </Button>
 
+      {/* 
       <Button
         bgColor="#f14c00"
         color="#fff7f7"
@@ -42,7 +45,7 @@ const MobileCartBuyButtons = ({ color }) => {
           <AiTwotoneThunderbolt fontSize="1.15em" />
           <span>Buy Now</span>
         </div>
-      </Button>
+      </Button> */}
     </Wrapper>
   );
 };
