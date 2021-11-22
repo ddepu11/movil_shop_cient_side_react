@@ -104,22 +104,6 @@ const SignInScreen = () => {
                 Log In
               </Button>
 
-              <Button
-                pt="7px"
-                pb="7px"
-                pl="0px"
-                pr="0px"
-                mt="12px"
-                fs="1em"
-                width="100%"
-                bgColor="var(--secondary-color)"
-                bSh=""
-                tr=""
-                handleClick={loginAsAdmin}
-              >
-                Log In as admin
-              </Button>
-
               <div className="random_user_admin_login_btns flex">
                 <Button
                   pt="8px"
@@ -154,6 +138,22 @@ const SignInScreen = () => {
                   Log in as random seller
                 </Button>
               </div>
+
+              <Button
+                pt="7px"
+                pb="7px"
+                pl="0px"
+                pr="0px"
+                mt="12px"
+                fs="1em"
+                width="100%"
+                bgColor="var(--secondary-color)"
+                bSh=""
+                tr=""
+                handleClick={loginAsAdmin}
+              >
+                Log In as admin
+              </Button>
             </form>
 
             <div className="or flex">
