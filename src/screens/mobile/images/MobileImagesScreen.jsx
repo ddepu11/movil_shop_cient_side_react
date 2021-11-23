@@ -59,6 +59,7 @@ const Wrapper = styled.aside`
 
       .small_img:hover {
         border: 2px solid var(--primary-color);
+        cursor: pointer;
       }
     }
 
