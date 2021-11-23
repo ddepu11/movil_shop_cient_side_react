@@ -286,35 +286,39 @@ const CartScreen = () => {
 
           {!isUserInfoEmpty && userInfo.cart.length !== 0 && (
             <div className="proceed">
-              <Button
-                width="100%"
-                pt="10px"
-                pb="10px"
-                pl="20px"
-                pr="20px"
-                mb="10px"
-                bSh="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px"
-                bgColor="var(--secondary-color)"
-              >
-                <Link to="/checkout">Proceed to checkout</Link>
-              </Button>
+              <Link to="/checkout" className="checkout_link">
+                <Button
+                  width="100%"
+                  pt="10px"
+                  pb="10px"
+                  pl="20px"
+                  pr="20px"
+                  mb="10px"
+                  bSh="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px"
+                  bgColor="var(--secondary-color)"
+                >
+                  Proceed to checkout
+                </Button>
+              </Link>
             </div>
           )}
 
           {localStorageCart.length !== 0 && !hasUserLoggedIn && (
             <div className="proceed">
-              <Button
-                width="100%"
-                pt="10px"
-                pb="10px"
-                pl="20px"
-                pr="20px"
-                mb="10px"
-                bSh="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px"
-                bgColor="var(--secondary-color)"
-              >
-                <Link to="/checkout">Proceed to checkout</Link>
-              </Button>
+              <Link to="/checkout" className="checkout_link">
+                <Button
+                  width="100%"
+                  pt="10px"
+                  pb="10px"
+                  pl="20px"
+                  pr="20px"
+                  mb="10px"
+                  bSh="rgba(0, 0, 0, 0.15) 0px 5px 15px 0px"
+                  bgColor="var(--secondary-color)"
+                >
+                  Proceed to checkout
+                </Button>
+              </Link>
             </div>
           )}
         </div>
@@ -433,7 +437,11 @@ const Wrapper = styled.main`
       width: 50%;
 
       a {
-        color: var(--light-color);
+      }
+      /* color: var(--light-color); */
+
+      .checkout_link {
+        width: 100%;
       }
     }
   }
